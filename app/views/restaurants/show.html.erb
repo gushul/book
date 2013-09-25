@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<img src="/<%= @restaurant.id %>.jpg">
+
+<table>
+<tr>
+  <td>
+     <%= image_tag @image_tag_string %><br/>
+  </td>
+  <td align="left">
+    <p>
+      <b>Owner:</b>
+      <%= @restaurant.owner.owner_name %>
+    </p>
+
+    <p>
+      <b>Name:</b>
+      <%= @restaurant.name %>
+    </p>
+
+    <p>
+      <b>Category:</b>
+      <%= @restaurant.category %>
+    </p>
+
+    <p>
+      <b>Cuisine_tags:</b>
+      <%= join_cuisine_tags(@restaurant) %>
+    </p>
+
+    <p>
+      <b>Price:</b>
+      <%= @restaurant.price %>
+    </p>
+
+    <p>
+      <b>Misc:</b>
+      <%= @restaurant.misc %>
+    </p>
+
+    <p>
+      <b>Lat:</b>
+      <%= @restaurant.lat %>
+    </p>
+
+    <p>
+      <b>Lng:</b>
+      <%= @restaurant.lng %>
+    </p>
+  </td>
+</tr>
+</table>
+
+Available Bookings<br>
+<% @restaurant.inventories.each do |n| %>
+<%= n.date %> <%= n.start_time.hour %>:<%= n.start_time.min %> <%= n.quantity_available %> 
+
+<% if current_user.nil? then %>
+<%= link_to "Login", new_user_session_path %> to Book
+<% else%>
+  <%= link_to 'Book Now', new_reservation_path(:restaurant_id=>@restaurant.id,:day=>n.date.day,:month=>n.date.month,:year=>n.date.year) %>
+<% end %>
+<br>
+<% end %>
+
+<%= current_user.nil? ? 'yes' : 'no' %>
+
+<br>
+
+<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+<%= link_to 'Back', restaurants_path %>

@@ -1,0 +1,19 @@
+<h2>View reward from reservation id: <%= @reward.reservation_id %></h2>
+
+<% unless @reward.blank? %>
+      <table>
+        <tr>
+          <th>Restaurant</th>
+          <th>Points_total</th>
+          <th>Points_pending</th>
+          <th>Description</th>
+        </tr>
+
+        <tr>
+          <td><%= @reward.reservation.restaurant.name %></td>
+          <td><%= @reward.points_total %></td>
+          <td><%= @reward.points_pending %></td>
+          <td><%= @reward.description %></td>
+        </tr>
+      </table>
+    <% end %>

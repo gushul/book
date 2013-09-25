@@ -1,0 +1,20 @@
+<% @restaurant.cuisine_tags.build %>
+<%= simple_form_for([@restaurant], html: { class: "form-horizontal"}) do |f| %>
+  
+  <%= f.input :name, label: "Name" %>
+  <%= f.input :category, label: "Type/Category" %>
+
+  <h3>Cuisines</h3>
+  <%= render :partial => 'cuisine_tags/form',
+             :locals => {:form => f} %>
+
+  <%= f.input :price, label: "Price" %>
+  <%= f.input :lat, label: "Latitude" %>
+  <%= f.input :lng, label: "Longitude" %>
+  <%= f.input :misc, label: "Misc", as: :text, input_html: { rows: "3"} %>
+ 
+  <div class="actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+   
+<% end %> 

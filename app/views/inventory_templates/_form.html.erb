@@ -1,0 +1,14 @@
+<%= simple_form_for([@inventory_template], html: { class: "form-horizontal"}) do |f| %>
+
+  <%= f.association :restaurant, label: "Restaurant" %>
+  <%= f.input :name, label: "Name" %>
+  <%= f.input :quantity_available, label: "Quantity Available" %>
+  <%= f.input :start_time, :minute_step => 15, label: "Start Time" %>
+  <%= f.input :end_time, :minute_step => 15, label: "End Time" %>
+  <%= f.input :primary, label: "Primary" %>
+ 
+  <div class="actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+  
+<% end %>

@@ -1,0 +1,12 @@
+<%= form.fields_for :cuisine_tags do |cuisine_tag_form| %>
+
+  <div class="field">
+    <%= cuisine_tag_form.label :title, 'Cuisine name:' %>
+    <%= cuisine_tag_form.text_field :title %>
+    <% unless cuisine_tag_form.object.nil? || cuisine_tag_form.object.new_record? %>
+        <%= cuisine_tag_form.label :_destroy, 'Remove:' %>
+        <%= cuisine_tag_form.check_box :_destroy %>
+    <% end %>
+  </div>
+  
+<% end %>

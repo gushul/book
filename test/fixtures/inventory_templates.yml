@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  restaurant: 
+  name: MyString
+  start_time: 2013-08-09 20:54:59
+  end_time: 2013-08-09 20:54:59
+  quantity_available: 1
+  primary: false
+
+two:
+  restaurant: 
+  name: MyString
+  start_time: 2013-08-09 20:54:59
+  end_time: 2013-08-09 20:54:59
+  quantity_available: 1
+  primary: false

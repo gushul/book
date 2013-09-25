@@ -1,0 +1,38 @@
+<h1>Listing reservations</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Restaurant</th>
+    <th>Date</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Party size</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reservations.each do |reservation| %>
+  <tr>
+    <td><%= reservation.user.username %></td>
+    <td><%= reservation.restaurant.name %></td>
+    <td><%= reservation.date %></td>
+    <td><%= mtime(reservation.start_time) %></td>
+    <td><%= mtime(reservation.end_time) %></td>
+    <td><%= reservation.party_size %></td>
+    <td><%= reservation.active %></td>
+    <td>
+        <%= link_to 'Show', reservation %><br />
+        <%= link_to 'View Reward', reservation.reward %>
+    </td>
+    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+    <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reservation', new_reservation_path %>

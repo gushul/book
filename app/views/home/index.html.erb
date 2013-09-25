@@ -1,0 +1,146 @@
+<div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h1>Bangkok Restaurant Booking</h1>
+            <p>There will be some info info.</p>
+          </div>
+          <div class="row">
+
+            <p><img src="hh_logo.jpg"></p>
+
+            <%= form_tag("/search", method: "get") do %>
+              <label for="price">Price</label>
+              <%= select_tag "price" , "
+              
+            <option selected=\"selected\">Any</option>
+            <option value=\"1\">&lt;100 thb</option>
+            <option value=\"2\">100-250 thb</option>
+            <option value=\"3\">251-500 thb</option>
+            <option value=\"4\">500+ thb</option>".html_safe, :multiple => true, :include_blank => false%>  
+              
+              
+              
+              <label for="cuisine">Cuisine</label>
+              <%= select_tag "cuisine" , "
+              
+            <option selected=\"selected\">Any</option>
+            <option>American</option>
+            <option>Franchise</option>
+            <option>Chinese</option>
+            <option>Sukiyaki</option>
+            <option>Tea/Coffee</option>
+            <option>Breakfast</option>
+            <option>Hotel</option>
+            <option>Fusion</option>
+            <option>Rooftop</option>
+            <option>Pub/Bar</option>
+            <option>Barbeque</option>
+            <option>Shabu</option>
+            <option>Grill</option>".html_safe, :multiple => true, :include_blank => false%>
+
+              <label for="location">Location</label>
+              <%= select_tag "location" , "
+              
+            <option selected=\"selected\">Any</option>
+            <option>Surawong</option>
+            <option>Thonglor</option>
+            <option>Sukhumvit</option>".html_safe, :multiple => true, :include_blank => false%>
+
+              <%= submit_tag("Search") %>
+            <% end %>
+            <p />
+
+            <% if user_signed_in? or owner_signed_in? %>
+              <% if user_signed_in? %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                <p />
+              
+                <% unless @rewards.empty? %>
+                  <table>
+                    <tr>
+                      <th>Restaurant</th>
+                      <th>Points_total</th>
+                      <th>Points_pending</th>
+                      <th>Description</th>
+                    </tr>
+
+                  <% if @rewards %>
+                  <% @rewards.each do |reward| %>
+                    <tr>
+                      <td><%= reward.reservation.restaurant.name %></td>
+                      <td><%= reward.points_total %></td>
+                      <td><%= reward.points_pending %></td>
+                      <td><%= reward.description %></td>
+                    </tr>
+                  <% end %>
+                  <% end %>
+                  </table>
+                <% end %>
+
+
+
+              <%else%>  
+                <%= link_to "Logout", destroy_owner_session_path, method: :delete %>
+              <% end %>     
+            <% else %>
+              <%= link_to "Login as user", new_user_session_path %><br />
+              <%= link_to "Registration for users", new_user_registration_path %><p />
+
+              <%= link_to "Login as Owner", new_owner_session_path %><br />
+              <%= link_to "Registration for Owners", new_owner_registration_path %>
+            <% end %>   
+
+            <p />
+             <b>Section below editable only by Users</b><br />
+             User sees the reservations he made<br />
+             Owner sees the reservations that belong to him restaurants<br />
+             <%= link_to "Reservations", reservations_path %><p />
+
+
+            <table>
+            <tr>
+            <td><img src="/<%= @restaurant1.id %>.jpg">hello how are you</td>
+            <td><img src="/<%= @restaurant2.id %>.jpg">blah blah blah blah blah blah blah blah blah blah</td>
+            </tr>
+            </table>
+
+            <br><br>
+
+
+
+             <b>Sections below editable only by Restaurant Owners</b><br />
+             <%= link_to "Restaurants", restaurants_path %><br />
+             <%= link_to "Inventories", inventories_path %><br />
+             <%= link_to "Inventory Templates", inventory_templates_path %><br />
+
+
+
+          </div><!--/row-->
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="well sidebar-nav">
+            <ul class="nav">
+              <li>Sidebar</li>
+              <li class="active"><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li>Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li>Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+
+
+
+
