@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+CuisineTag.delete_all
+cuisines = %w[Any American Bar Barbeque Breakfast Chinese French Fusion Grill Hotel Italian Rooftop Pub Shabu Sukiyaki]  
+cuisines.each {|c| CuisineTag.create(title: c)}

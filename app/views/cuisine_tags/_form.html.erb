@@ -2,7 +2,7 @@
 
   <div class="field">
     <%= cuisine_tag_form.label :title, 'Cuisine name:' %>
-    <%= cuisine_tag_form.text_field :title %>
+    <%= cuisine_tag_form.select :title, options_for_select( CuisineTag.where("id > ?", 1).map {|c| [c.title, c.id]}), :include_blank => false%>
     <% unless cuisine_tag_form.object.nil? || cuisine_tag_form.object.new_record? %>
         <%= cuisine_tag_form.label :_destroy, 'Remove:' %>
         <%= cuisine_tag_form.check_box :_destroy %>

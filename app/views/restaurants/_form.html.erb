@@ -4,6 +4,10 @@
   <%= f.input :name, label: "Name" %>
   <%= f.input :category, label: "Type/Category" %>
 
+  <%= f.input :days_in_advance, label: "Days out allow bookings" %>
+  <%= f.input :min_booking_time, label: "Minutes in advance bookings close" %>
+  <%= f.input :res_duration, label: "Duration of each booking" %>
+
   <h3>Cuisines</h3>
   <%= render :partial => 'cuisine_tags/form',
              :locals => {:form => f} %>

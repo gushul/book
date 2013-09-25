@@ -19,7 +19,9 @@ class HomeController < ApplicationController
     @search["cuisine"]  ||= params[:cuisine]
     @search["price"]    ||= params[:price]
     @search["location"] ||= params[:location]
-       
+
+    @search["cuisine"].map! {|c| c=CuisineTag.find(c).title}
+
     if @search["price"][0]!="Any" and 
           @search["cuisine"][0]!="Any" 
       # @restaurants = Restaurant.near(@search, 10).limit(10)

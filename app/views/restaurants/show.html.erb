@@ -24,6 +24,21 @@
     </p>
 
     <p>
+      <b>Days out allow bookings:</b>
+      <%= @restaurant.days_in_advance %>
+    </p>
+
+    <p>
+      <b>Minutes in advance bookings close</b>
+      <%= @restaurant.min_booking_time %>
+    </p>
+
+    <p>
+      <b>Duration of each booking:</b>
+      <%= @restaurant.res_duration %>
+    </p>
+
+    <p>
       <b>Cuisine_tags:</b>
       <%= join_cuisine_tags(@restaurant) %>
     </p>
