@@ -1,6 +1,7 @@
 <h1>Listing reservations</h1>
 
-<table>
+<table  class="table table-striped table-bordered table-hover">
+  <thead>
   <tr>
     <th>User</th>
     <th>Restaurant</th>
@@ -13,6 +14,7 @@
     <th></th>
     <th></th>
   </tr>
+  </thead>
 
 <% @reservations.each do |reservation| %>
   <tr>

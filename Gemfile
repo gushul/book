@@ -36,7 +36,8 @@ group :development, :test do
   # gem 'ruby_parser'
 end
  
-gem 'bootstrap-sass', '~> 2.3.2.1'
+gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootswatch-rails'
 
 group :assets do
   gem 'sass-rails',     '>= 3.2'

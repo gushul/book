@@ -5,20 +5,23 @@
     <%= k %>
   <% end %>
  </p>
+ <p />
 
 <% unless @search_results.blank? %>
   <%= image_tag @image_tag_string %>
-  <table>
-  <tr>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Price</th>
-    <th>Cuisines</th>
-    <th>Misc</th>
-    <th>Lat</th>
-    <th>Lng</th>
-    <th></th>
-  </tr> 
+  <table  class="table table-striped table-bordered table-hover" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Cuisines</th>
+      <th>Misc</th>
+      <th>Lat</th>
+      <th>Lng</th>
+      <th></th>
+    </tr> 
+  </thead>
 
   <% @search_results.each do |restaurant| %>
     <tr>
