@@ -1,5 +1,5 @@
-@import "bootswatch/cerulean/variables";
-// @import "bootswatch/united/variables";
+@import "bootswatch/united/variables";
+// @import "bootswatch/cerulean/variables";
 
 // Then bootstrap itself
 @import "bootstrap";
@@ -8,12 +8,23 @@
 @import "bootstrap-responsive";
 
 // And finally bootswatch style itself
-@import "bootswatch/cerulean/bootswatch";
-// @import "bootswatch/united/bootswatch";
+// @import "bootswatch/cerulean/bootswatch";
+@import "bootswatch/united/bootswatch";
 
 html,
 body {
   height: 100%;
+}
+
+.navbar {
+  .nav > li {
+    line-height: 35px;
+    font-size: 15px;
+  }
+  .brand {
+    padding: 15px 20px 10px;
+    font-size: 25px;
+  }
 }
 
 #wrap {

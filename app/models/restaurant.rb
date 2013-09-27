@@ -2,7 +2,8 @@ class Restaurant < ActiveRecord::Base
   attr_accessible :category, :lat, :lng, :misc, 
                   :name, :owner_id, :price,
                   :cuisine_tags_attributes,
-                  :days_in_advance, :min_booking_time, :res_duration
+                  :days_in_advance, :min_booking_time, :res_duration,
+                  :cuisine_list, :cuisine_tag_ids
 
   validates :name,  :presence => true
   validates :lng,   :presence => true

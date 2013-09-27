@@ -18,6 +18,8 @@ gem 'omniauth'
 gem 'omniauth-facebook' 
 gem 'omniauth-google-oauth2'
 
+# gem 'acts-as-taggable-on'
+
 gem 'mysql'
 
 gem 'figaro'
