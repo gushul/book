@@ -7,8 +7,9 @@
   <%= f.input :min_booking_time, label: "Minutes in advance bookings close" %>
   <%= f.input :res_duration, label: "Duration of each booking" %>
 
-  <h2>Cuisines</h2>
-  <%= f.association :cuisine_tags, :as => :check_boxes, :collection => CuisineTag.where("id >1"), :hint => "Please click all that apply" %>
+  <h4>Cuisines</h4>
+  <%= f.association :cuisine_tags, :as => :check_boxes, :collection => CuisineTag.where("id >1"), :label => "", :item_wrapper_class => 'inline' %>
+  <!-- item_wrapper_class => 'checkbox_container'  -->
 
   <%= f.input :price, label: "Price" %>
   <%= f.input :lat, label: "Latitude" %>
