@@ -41,4 +41,4 @@
 
 <br />
 
-<%= link_to 'New Reservation', new_reservation_path if user_signed_in?%>
+<%= link_to 'New Reservation', new_reservation_path unless owner_signed_in?%>

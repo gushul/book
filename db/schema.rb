@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925125408) do
+ActiveRecord::Schema.define(:version => 20130928163643) do
 
   create_table "cuisine_tags", :force => true do |t|
     t.string   "title"
@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(:version => 20130925125408) do
     t.boolean  "active"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
   end
 
   add_index "reservations", ["restaurant_id"], :name => "index_reservations_on_restaurant_id"

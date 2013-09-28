@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_filter :authenticate_user!, 
-                except: [:index, :show]
+                except: [:index, :show, :new, :create]
   before_filter :check_who_editing,  
                 except: [:index, :show, :new, :create]
   # before_filter :process_reservation,  
@@ -16,10 +16,10 @@ class ReservationsController < ApplicationController
       # current_owner.restaurants.each {|rest| @reservations += rest.reservations}
       current_owner.restaurant.reservations
     else
-      redirect_to root_url, alert: "Please, sign in!" 
+      # redirect_to root_url, alert: "Please, sign in!" 
     end
-  end
-   
+  end   
+
   # GET /reservations/1
   # GET /reservations/1.json
   def show
@@ -52,22 +52,31 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     @reservation = Reservation.new(params[:reservation])
-    @reservation.user_id = current_user.id
+    if user_signed_in?
+      @reservation.user_id = current_user.id
+    end
 
     respond_to do |format|
       if @reservation.save
 
-        # UserMailer.booking_create(current_user, @reservation).deliver
-        # OwnerMailer.booking_create(@reservation).deliver
-
-        Reward.create( user_id: @reservation.user_id, 
+        if user_signed_in?
+          Reward.create( user_id: @reservation.user_id, 
                        reservation_id: @reservation.id, 
                        points_total: 5*@reservation.party_size, 
                        points_pending: 5*@reservation.party_size,    
                        description: "")
-  
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-        format.json { render json: @reservation, status: :created, location: @reservation }
+        end
+        
+        if user_signed_in?
+          format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+          format.json { render json: @reservation, status: :created, location: @reservation }
+        else
+          format.html { redirect_to root_url, notice: 'Reservation was successfully created.' }
+        end
+
+        # UserMailer.booking_create(current_user, @reservation).deliver
+        # OwnerMailer.booking_create(@reservation).deliver
+        
       else
         format.html { render action: "new" }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
@@ -79,7 +88,9 @@ class ReservationsController < ApplicationController
   # PUT /reservations/1.json
   def update
     @reservation = Reservation.find(params[:id])
-    @reservation.user_id = current_user.id
+    if user_signed_in?
+      @reservation.user_id = current_user.id
+    end
 
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])

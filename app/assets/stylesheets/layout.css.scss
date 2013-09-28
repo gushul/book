@@ -10,7 +10,7 @@
 // And finally bootswatch style itself
 // @import "bootswatch/cerulean/bootswatch";
 @import "bootswatch/united/bootswatch";
-
+  
 html,
 body {
   height: 100%;
@@ -27,6 +27,11 @@ body {
   } 
 }
 
+@media (min-width: 767px) {
+  .navbar-inner {
+      border-radius: 0px !important;
+  }
+}
 
 #wrap {
   min-height: 100%;
@@ -119,11 +124,18 @@ body {
 
 form .field, form .actions {
   margin: 12px 0;
-}
-
+} 
+ 
 /*
  * --------------------------------------------------
  */
+
+.field_with_errors {
+  .error {
+    padding-left: 10px;
+    color: red;
+  }
+}
 
  
 // .restaurant_cuisine_tags {

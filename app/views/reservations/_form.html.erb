@@ -1,5 +1,11 @@
 <%= simple_form_for([@reservation], html: { class: "form-horizontal"}) do |f| %>
-
+  
+  <% unless user_signed_in? %>
+    <%= f.input :name,  label: "Name"  %>
+    <%= f.input :email, label: "Email" %>
+    <%= f.input :phone, label: "Phone" %>
+  <% end %>
+  
   <%= f.association :restaurant, label: "Restaurant" %>
   <%= f.input :date, label: "Date" %>
   <%= f.input :start_time, :minute_step => 15, label: "Start Time" %>
