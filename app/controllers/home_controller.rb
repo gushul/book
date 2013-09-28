@@ -2,8 +2,8 @@ class HomeController < ApplicationController
 
   # root route
   def index
-	  @restaurant1 = Restaurant.first(:order => "RAND()")
-	  @restaurant2 = Restaurant.last(:order => "RAND()")
+	  # @restaurant1 = Restaurant.first(:order => "RAND()")
+	  # @restaurant2 = Restaurant.last(:order => "RAND()")
     if user_signed_in?
       @rewards = current_user.rewards
     end
