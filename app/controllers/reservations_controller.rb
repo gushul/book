@@ -84,8 +84,8 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
         
-        UserMailer.booking_update(current_user, @reservation).deliver
-        OwnerMailer.booking_update(@reservation).deliver
+        # UserMailer.booking_update(current_user, @reservation).deliver
+        # OwnerMailer.booking_update(@reservation).deliver
 
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { head :no_content }
@@ -103,8 +103,8 @@ class ReservationsController < ApplicationController
     reservation_to_email_attach = @reservation
     @reservation.destroy
 
-    UserMailer.booking_removed(current_user, reservation_to_email_attach).deliver
-    OwnerMailer.booking_removed(reservation_to_email_attach).deliver
+    # UserMailer.booking_removed(current_user, reservation_to_email_attach).deliver
+    # OwnerMailer.booking_removed(reservation_to_email_attach).deliver
 
     respond_to do |format|
       format.html { redirect_to reservations_url }
