@@ -9,7 +9,8 @@ class Owner < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :owner_name, :phone
   
-  has_many :restaurants
+  # has_many :restaurants
+  has_one :restaurant
 end
 
 

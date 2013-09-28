@@ -1,5 +1,6 @@
 <h1>Listing reservations</h1>
 
+<% unless @reservations.blank? %>
 <table  class="table table-striped table-bordered table-hover">
   <thead>
   <tr>
@@ -34,7 +35,10 @@
   </tr>
 <% end %>
 </table>
+<% else %>
+  <%= "No reservations in your restaurant" if owner_signed_in? %>
+<% end %>
 
 <br />
 
-<%= link_to 'New Reservation', new_reservation_path %>
+<%= link_to 'New Reservation', new_reservation_path if user_signed_in?%>

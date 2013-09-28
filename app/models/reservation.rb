@@ -2,7 +2,7 @@ class Reservation < ActiveRecord::Base
  
   attr_accessible :active, :date, :end_time, :party_size, 
                   :start_time, :user_id, :restaurant_id
- 
+
   validates :user_id,       :presence => true
   validates :restaurant_id, :presence => true
   validates :date,          :presence => true

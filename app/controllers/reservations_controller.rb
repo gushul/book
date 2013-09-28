@@ -13,7 +13,8 @@ class ReservationsController < ApplicationController
       @reservations = current_user.reservations
     elsif owner_signed_in?
       @reservations = []
-      current_owner.restaurants.each {|rest| @reservations += rest.reservations}
+      # current_owner.restaurants.each {|rest| @reservations += rest.reservations}
+      current_owner.restaurant.reservations
     else
       redirect_to root_url, alert: "Please, sign in!" 
     end
