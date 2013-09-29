@@ -4,6 +4,12 @@ class Restaurant < ActiveRecord::Base
                   :cuisine_tags_attributes,
                   :days_in_advance, :min_booking_time, :res_duration,
                   :cuisine_list, :cuisine_tag_ids
+
+  PARKING = [ "Yes", "No", "Valet" ]
+  DRINKS  -= [ "Alcohol", "Wine". "Cocktails", "Beer" ]
+  MISC    = [ "Child Friendly", "Casual Dress", "Formal Dress", "Large Groups" ]
+  PAYMENT = [ "Mastercard", "American Express", "Visa" ]
+  MEALS   = [ "Breakfast", "Lunch", "Dinner", "Late Night" ]
  
   validates :name,  :presence => true
   validates :lng,   :presence => true

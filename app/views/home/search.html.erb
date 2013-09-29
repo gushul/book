@@ -17,8 +17,6 @@
       <th>Price</th>
       <th>Cuisines</th>
       <th>Misc</th>
-      <th>Lat</th>
-      <th>Lng</th>
       <th></th>
     </tr> 
   </thead>
@@ -27,11 +25,9 @@
     <tr>
       <td><%= restaurant.name %></td>
       <td><%= restaurant.category %></td>
-      <td><%= restaurant.price %></td>
+      <td><%= price_to_dollars_symb(restaurant.price) %></td>
       <td><%= join_cuisine_tags(restaurant) %></td>
       <td><%= restaurant.misc %></td>
-      <td><%= restaurant.lat %></td>
-      <td><%= restaurant.lng %></td>
       <td><%= link_to 'Show', restaurant %></td>
     </tr>
   <% end %>

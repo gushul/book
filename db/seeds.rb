@@ -1,7 +1,7 @@
 #encoding: utf-8 
 
 CuisineTag.delete_all
-cuisines = %w[Any American Bar Barbeque Breakfast Chinese French Fusion Grill Hotel Italian Rooftop Pub Shabu Sukiyaki Tea/Coffee]  
+cuisines = %w[Any American Bar Barbeque Breakfast Chinese French Fusion Grill Hotel Italian Japanese Rooftop Pub Shabu Sukiyaki Tea/Coffee Tai]  
 cuisines.each {|c| CuisineTag.create(title: c)}
 
 User.delete_all
