@@ -2,9 +2,6 @@
 
 <table>
 <tr>
-  <td>
-     <%= image_tag @image_tag_string %><br/>
-  </td>
   <td align="left">
     <p>
       <b>Owner:</b>
@@ -12,7 +9,7 @@
     </p>
 
     <p>
-      <b>Name:</b>
+      <b><%= t("restaurant.name") %>:</b>
       <%= @restaurant.name %>
     </p>
 

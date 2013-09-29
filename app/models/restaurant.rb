@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Restaurant < ActiveRecord::Base
   attr_accessible :category, :lat, :lng, :misc, 
                   :name, :owner_id, :price,
@@ -18,7 +19,7 @@ class Restaurant < ActiveRecord::Base
 
   validates :days_in_advance,  :presence => true, 
                 :numericality => { 
-                  :greater_than_or_equal_to => 1, 
+                  :greater_than_or_equal_to => 0, 
                   :less_than_or_equal_to => 180  }
   validates :min_booking_time, :presence => true,
                 :numericality => { 
