@@ -6,7 +6,7 @@ class Restaurant < ActiveRecord::Base
                   :cuisine_list, :cuisine_tag_ids
 
   PARKING = [ "Yes", "No", "Valet" ]
-  DRINKS  -= [ "Alcohol", "Wine". "Cocktails", "Beer" ]
+  DRINKS  = [ "Alcohol", "Wine", "Cocktails", "Beer" ]
   MISC    = [ "Child Friendly", "Casual Dress", "Formal Dress", "Large Groups" ]
   PAYMENT = [ "Mastercard", "American Express", "Visa" ]
   MEALS   = [ "Breakfast", "Lunch", "Dinner", "Late Night" ]
