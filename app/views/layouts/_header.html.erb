@@ -36,8 +36,9 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_owner.owner_name %><b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><%= link_to "My Restaurant", current_owner.restaurant %></li>
-                    <li><%= link_to "My Inventories", my_inventories_path(current_owner.restaurant.inventories) %></li>
-                    <li><%= link_to "My Inventory Templates", my_inventory_templates_path(current_owner.restaurant.inventories) %></li>
+                    <li><%= link_to "My Inventories", my_inventories_path
+                     %></li>
+                    <li><%= link_to "My Inventory Templates", my_inventory_templates_path %></li>
                     <li><%= link_to "Edit account details", edit_owner_registration_path %></li>
                     <li><%= link_to "Logout", destroy_owner_session_path, method: :delete %></li>
                   </ul>
