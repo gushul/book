@@ -25,12 +25,12 @@
 
     <p>
       <b>Minutes in advance bookings close</b>
-      <%= @restaurant.min_booking_time %>
+      <%= t("restaurant.min_booking_time.#{@restaurant.min_booking_time}") %>
     </p>
 
     <p>
       <b>Duration of each booking:</b>
-      <%= @restaurant.res_duration %>
+      <%= t("restaurant.res_duration.#{@restaurant.res_duration}") %>
     </p>
 
     <p>
