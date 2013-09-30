@@ -4,10 +4,10 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Category</th>
+    <!-- <th>Category</th> -->
     <th>Price</th>
     <th>Cuisines</th>
-    <th>Misc</th>
+    <!-- <th>Misc</th> -->
     <th></th>
     <!--<th></th>-->
     <!--<th></th>-->
@@ -19,10 +19,10 @@
     <!-- TODO: use special gem for picture attaching  -->
     <!-- <td><img src="/<%= restaurant.id %>.jpg"></td> -->
     <td><%= restaurant.name %></td>
-    <td><%= restaurant.category %></td>
+    <!-- <td><%= restaurant.category %></td> -->
     <td><%= price_to_dollars_symb(restaurant.price) %></td>
     <td><%= join_cuisine_tags(restaurant) %></td>
-    <td><%= restaurant.misc %></td>
+    <!-- <td><%= restaurant.misc %></td> -->
     <td><%= link_to 'Show', restaurant %></td>
     <!-- <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td> -->
     <!-- <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->

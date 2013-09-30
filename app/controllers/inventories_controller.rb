@@ -4,13 +4,17 @@ class InventoriesController < ApplicationController
 
   # GET /inventories
   # GET /inventories.json
-  def index 
+  def index  
     @inventories = Inventory.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @inventories }
     end
+  end
+
+  def my  
+    @inventories = current_owner.restaurant.inventories
   end
 
   # GET /inventories/1
@@ -44,6 +48,7 @@ class InventoriesController < ApplicationController
   # POST /inventories.json
   def create
     @inventory = Inventory.new(params[:inventory])
+    @inventory.restaurant_id = current_owner.restaurant.id
 
     respond_to do |format|
       if @inventory.save
@@ -60,6 +65,7 @@ class InventoriesController < ApplicationController
   # PUT /inventories/1.json
   def update
     @inventory = Inventory.find(params[:id])
+    @inventory.restaurant_id = current_owner.restaurant.id
 
     respond_to do |format|
       if @inventory.update_attributes(params[:inventory])

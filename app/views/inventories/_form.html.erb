@@ -1,6 +1,6 @@
 <%= simple_form_for([@inventory], html: { class: "form-horizontal"}) do |f| %>
 
-  <%= f.association :restaurant, label: "Restaurant" %>
+  <!-- <%= f.association :restaurant, label: "Restaurant" %> -->
   <%= f.input :date, as: :date, start_year: Date.today.year,
               end_year: Date.today.year+1, 
               order: [:day, :month, :year], label: "Date" %>

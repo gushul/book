@@ -12,6 +12,10 @@ class InventoryTemplatesController < ApplicationController
       format.json { render json: @inventory_templates }
     end
   end
+
+  def my  
+    @inventory_templates = current_owner.restaurant.inventory_templates
+  end
   
   # GET /inventory_templates/1
   # GET /inventory_templates/1.json
@@ -44,6 +48,7 @@ class InventoryTemplatesController < ApplicationController
   # POST /inventory_templates.json
   def create
     @inventory_template = InventoryTemplate.new(params[:inventory_template])
+    @inventory_template.restaurant_id = current_owner.restaurant.id
 
     respond_to do |format|
       if @inventory_template.save
@@ -60,6 +65,7 @@ class InventoryTemplatesController < ApplicationController
   # PUT /inventory_templates/1.json
   def update
     @inventory_template = InventoryTemplate.find(params[:id])
+    @inventory_template.restaurant_id = current_owner.restaurant.id
 
     respond_to do |format|
       if @inventory_template.update_attributes(params[:inventory_template])

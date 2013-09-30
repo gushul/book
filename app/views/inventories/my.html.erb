@@ -1,10 +1,9 @@
-<h1>Listing inventories</h1>
+<h1><%= @inventories.first.restaurant.name %> inventories</h1>
 
 <% unless @inventories.blank? %>
   <table  class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-          <th>Restaurant</th>
           <th>Date</th>
           <th>Start time</th>
           <th>End time</th>
@@ -16,7 +15,6 @@
     </thead>
     <% @inventories.each do |inventory| %>
       <tr>
-        <td><%= inventory.restaurant.name %></td>
         <td><%= inventory.date %></td>
         <td><%= mtime(inventory.start_time) %></td>
         <td><%= mtime(inventory.end_time) %></td>
@@ -33,4 +31,4 @@
 
 <br />
 
-<%= link_to 'New Inventory', new_inventory_path if owner_signed_in?  %>
+<%= link_to 'New Inventory', new_inventory_path %>

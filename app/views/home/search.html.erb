@@ -13,10 +13,10 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Category</th>
+      <!-- <th>Category</th> -->
       <th>Price</th>
       <th>Cuisines</th>
-      <th>Misc</th>
+      <!-- <th>Misc</th> -->
       <th></th>
     </tr> 
   </thead>
@@ -24,10 +24,10 @@
   <% @search_results.each do |restaurant| %>
     <tr>
       <td><%= restaurant.name %></td>
-      <td><%= restaurant.category %></td>
+      <!-- <td><%= restaurant.category %></td> -->
       <td><%= price_to_dollars_symb(restaurant.price) %></td>
       <td><%= join_cuisine_tags(restaurant) %></td>
-      <td><%= restaurant.misc %></td>
+      <!-- <td><%= restaurant.misc %></td> -->
       <td><%= link_to 'Show', restaurant %></td>
     </tr>
   <% end %>
