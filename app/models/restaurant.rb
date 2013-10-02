@@ -2,9 +2,9 @@
 class Restaurant < ActiveRecord::Base
   attr_accessible :category, :lat, :lng, :misc, 
                   :name, :owner_id, :price,
-                  :cuisine_tags_attributes,
+                  :restaurant_tags_attributes,
                   :days_in_advance, :min_booking_time, :res_duration,
-                  :cuisine_list, :cuisine_tag_ids
+                  :cuisine_list, :restaurant_tag_ids
 
   PARKING = [ "Yes", "No", "Valet" ]
   DRINKS  = [ "Alcohol", "Wine", "Cocktails", "Beer" ]
@@ -37,9 +37,9 @@ class Restaurant < ActiveRecord::Base
   has_many :reservations
   has_many :inventories
   has_many :inventory_templates
-  has_and_belongs_to_many :cuisine_tags
+  has_and_belongs_to_many :restaurant_tags
 
-  accepts_nested_attributes_for :cuisine_tags, :allow_destroy => :true,
+  accepts_nested_attributes_for :restaurant_tags, :allow_destroy => :true,
           :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
      
   belongs_to :owner

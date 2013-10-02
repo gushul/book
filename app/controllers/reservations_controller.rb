@@ -123,19 +123,19 @@ class ReservationsController < ApplicationController
     end
   end
 
-  private 
+private 
 
-    def check_who_editing
-      @reservation = Reservation.find(params[:id])
-      unless @reservation.user == current_user
-        respond_to do |format|
-          format.html { 
-            redirect_to @reservation, 
-            alert: "It's not yours reservation!" }
-          format.json { head :no_content, 
-            status: :unprocessable_entity  }
-        end
+  def check_who_editing
+    @reservation = Reservation.find(params[:id])
+    unless @reservation.user == current_user
+      respond_to do |format|
+        format.html { 
+          redirect_to @reservation, 
+          alert: "It's not yours reservation!" }
+        format.json { head :no_content, 
+          status: :unprocessable_entity  }
       end
     end
+  end
 
 end

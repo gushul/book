@@ -11,7 +11,7 @@
           <th>Quantity available</th>
           <th></th>
           <th></th>
-          <th></th>
+          <th></th> 
         </tr>
     </thead>
     <% @inventories.each do |inventory| %>
@@ -22,8 +22,8 @@
         <td><%= mtime(inventory.end_time) %></td>
         <td><%= inventory.quantity_available %></td>
         <td><%= link_to 'Show', inventory %></td>
-        <td><%= link_to 'Edit', edit_inventory_path(inventory) %></td>
-        <td><%= link_to 'Destroy', inventory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_inventory_path(inventory) if inventory.restaurant.owner == current_owner %></td>
+        <td><%= link_to 'Destroy', inventory, method: :delete, data: { confirm: 'Are you sure?' } if inventory.restaurant.owner == current_owner %></td>
       </tr>
     <% end %>
   </table>

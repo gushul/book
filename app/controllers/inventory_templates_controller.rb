@@ -1,6 +1,8 @@
 class InventoryTemplatesController < ApplicationController
   before_filter :authenticate_owner!, 
                 except: [:index, :show]
+  before_filter :check_who_editing,  
+                except: [:index, :show, :new, :create]
    
   # GET /inventory_templates
   # GET /inventory_templates.json
@@ -48,7 +50,7 @@ class InventoryTemplatesController < ApplicationController
   # POST /inventory_templates.json
   def create
     @inventory_template = InventoryTemplate.new(params[:inventory_template])
-    @inventory_template.restaurant_id = current_owner.restaurant.id
+    @inventory_template.restaurant = current_owner.restaurant
 
     respond_to do |format|
       if @inventory_template.save
@@ -65,7 +67,7 @@ class InventoryTemplatesController < ApplicationController
   # PUT /inventory_templates/1.json
   def update
     @inventory_template = InventoryTemplate.find(params[:id])
-    @inventory_template.restaurant_id = current_owner.restaurant.id
+    @inventory_template.restaurant = current_owner.restaurant
 
     respond_to do |format|
       if @inventory_template.update_attributes(params[:inventory_template])
@@ -89,5 +91,20 @@ class InventoryTemplatesController < ApplicationController
       format.json { head :no_content }
     end
   end 
+
+private 
+
+  def check_who_editing
+    @inventory_template = InventoryTemplate.find(params[:id])
+    unless @inventory_template.restaurant.owner == current_owner
+      respond_to do |format|
+        format.html { 
+          redirect_to @inventory_template, 
+          alert: "It's not yours inventory template!" }
+        format.json { head :no_content, 
+          status: :unprocessable_entity  }
+      end
+    end
+  end
 
 end

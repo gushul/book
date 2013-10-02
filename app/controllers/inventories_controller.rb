@@ -1,6 +1,8 @@
 class InventoriesController < ApplicationController
   before_filter :authenticate_owner!, 
                 except: [:index, :show]
+  before_filter :check_who_editing,  
+                except: [:index, :show, :new, :create]
 
   # GET /inventories
   # GET /inventories.json
@@ -48,7 +50,7 @@ class InventoriesController < ApplicationController
   # POST /inventories.json
   def create
     @inventory = Inventory.new(params[:inventory])
-    @inventory.restaurant_id = current_owner.restaurant.id
+    @inventory.restaurant = current_owner.restaurant
 
     respond_to do |format|
       if @inventory.save
@@ -65,7 +67,7 @@ class InventoriesController < ApplicationController
   # PUT /inventories/1.json
   def update
     @inventory = Inventory.find(params[:id])
-    @inventory.restaurant_id = current_owner.restaurant.id
+    @inventory.restaurant = current_owner.restaurant
 
     respond_to do |format|
       if @inventory.update_attributes(params[:inventory])
@@ -89,4 +91,20 @@ class InventoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private 
+
+  def check_who_editing
+    @inventory = Inventory.find(params[:id])
+    unless @inventory.restaurant.owner == current_owner
+      respond_to do |format|
+        format.html { 
+          redirect_to @inventory, 
+          alert: "It's not yours inventory!" }
+        format.json { head :no_content, 
+          status: :unprocessable_entity  }
+      end
+    end
+  end
+
 end

@@ -7,8 +7,8 @@
   <%= f.input :min_booking_time, collection: [:"0", :"15", :"30", :"45", :"60", :"90", :"120", :"180", :"1440"], priority: [ :"15" ], include_blank: false ,label: "Minutes in advance bookings close" %>
   <%= f.input :res_duration, collection: [:"30", :"45", :"60", :"75", :"90", :"105"], priority: [ :"30" ], include_blank: false, label: "Duration of each booking" %>
 
-  <h4>Cuisines</h4>
-  <%= f.association :cuisine_tags, :as => :check_boxes, :collection => CuisineTag.where("id >1"), :label => "", :item_wrapper_class => 'inline' %>
+  <h4>Restaurant tags</h4>
+  <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where("title != ?", "Any"), :label => "", :item_wrapper_class => 'inline' %>
   <!-- item_wrapper_class => 'checkbox_container'  -->
 
   <%= f.input :price, label: "Price" %>

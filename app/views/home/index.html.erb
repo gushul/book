@@ -35,7 +35,7 @@
             
           <div class="span3">
             <label for="cuisine">Cuisine</label>
-            <%= select_tag "cuisine", options_for_select( CuisineTag.all.map {|c| [c.title, c.id]}, :selected => 1), :multiple => true %>
+            <%= select_tag "cuisine", options_for_select( RestaurantTag.where("title LIKE ?", "Cuisine:%").map {|c| [c.title.slice(8..c.title.length) , c.id]}, :selected => 1), :multiple => true %>
           </div>
 
           <div class="span3">

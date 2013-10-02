@@ -5,8 +5,8 @@
   <tr>
     <th>Name</th>
     <!-- <th>Category</th> -->
-    <th>Price</th>
-    <th>Cuisines</th>
+    <!-- <th>Price</th> -->
+    <th>Restaurant tags</th>
     <!-- <th>Misc</th> -->
     <th></th>
     <!--<th></th>-->
@@ -20,8 +20,8 @@
     <!-- <td><img src="/<%= restaurant.id %>.jpg"></td> -->
     <td><%= restaurant.name %></td>
     <!-- <td><%= restaurant.category %></td> -->
-    <td><%= price_to_dollars_symb(restaurant.price) %></td>
-    <td><%= join_cuisine_tags(restaurant) %></td>
+    <!-- <td><%= price_to_dollars_symb(restaurant.price) %></td> -->
+    <td><%= join_restaurant_tags(restaurant) %></td>
     <!-- <td><%= restaurant.misc %></td> -->
     <td><%= link_to 'Show', restaurant %></td>
     <!-- <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td> -->

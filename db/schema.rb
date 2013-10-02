@@ -11,18 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130928163643) do
-
-  create_table "cuisine_tags", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "cuisine_tags_restaurants", :id => false, :force => true do |t|
-    t.integer "cuisine_tag_id"
-    t.integer "restaurant_id"
-  end
+ActiveRecord::Schema.define(:version => 20131001183549) do
 
   create_table "inventories", :force => true do |t|
     t.integer  "restaurant_id"
@@ -86,6 +75,17 @@ ActiveRecord::Schema.define(:version => 20130928163643) do
 
   add_index "reservations", ["restaurant_id"], :name => "index_reservations_on_restaurant_id"
   add_index "reservations", ["user_id"], :name => "index_reservations_on_user_id"
+
+  create_table "restaurant_tags", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "restaurant_tags_restaurants", :id => false, :force => true do |t|
+    t.integer "restaurant_tag_id"
+    t.integer "restaurant_id"
+  end
 
   create_table "restaurants", :force => true do |t|
     t.string   "name"
