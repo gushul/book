@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     @search["location"] ||= params[:location]
 
     if @search["cuisine"].class == Array
-      @search["cuisine"].map! {|c| c=CuisineTag.find(c).title} 
+      @search["cuisine"].map! {|c| c=RestaurantTag.find(c).title} 
     else
       @search["cuisine"] = ["Any"]
     end

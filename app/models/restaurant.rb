@@ -63,11 +63,11 @@ class Restaurant < ActiveRecord::Base
       if cuisine.class == Array
         case cuisine.length
           when 2
-            joins(:cuisine_tags).where('cuisine_tags.title LIKE ? or cuisine_tags.title LIKE ?', "%#{cuisine[0]}%", "%#{cuisine[1]}%")
+            joins(:restaurant_tags).where('restaurant_tags.title LIKE ? or restaurant_tags.title LIKE ?', "%#{cuisine[0]}%", "%#{cuisine[1]}%")
           when 3
-            joins(:cuisine_tags).where('cuisine_tags.title LIKE ? or cuisine_tags.title LIKE ? or cuisine_tags.title LIKE ?', "%#{cuisine[0]}%", "%#{cuisine[1]}%", "%#{cuisine[2]}%")
+            joins(:restaurant_tags).where('restaurant_tags.title LIKE ? or restaurant_tags.title LIKE ? or restaurant_tags.title LIKE ?', "%#{cuisine[0]}%", "%#{cuisine[1]}%", "%#{cuisine[2]}%")
           else
-            joins(:cuisine_tags).where('cuisine_tags.title LIKE ?', "%#{cuisine[0]}%")
+            joins(:restaurant_tags).where('restaurant_tags.title LIKE ?', "%#{cuisine[0]}%")
         end
       else
         # where('cuisine LIKE ?', "%#{cuisine}%")

@@ -1,8 +1,9 @@
 <h1>Search Results</h1>
 <p>You seached for 
-  <% @search.each do|k,v| %>
+  <% @search.each do |k,v| %>
     <%= v %> 
     <%= k %>
+    <%= ", " unless k == "location" %>
   <% end %>
  </p>
  <p />
