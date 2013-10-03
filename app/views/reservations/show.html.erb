@@ -2,7 +2,13 @@
 
 <p>
   <b>User:</b>
-  <%= @reservation.user.username %>
+  <% if @reservation.user %>
+    <%= @reservation.user.username  %>
+  <% else %>
+    <%= "#{@reservation.name} /" %> 
+    <%= "#{@reservation.phone} /" %> 
+    <%= @reservation.email %>
+  <% end %>
 </p>
 
 <p>

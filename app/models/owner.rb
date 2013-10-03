@@ -8,9 +8,10 @@ class Owner < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :owner_name, :phone
-  
+
   # has_many :restaurants
   has_one :restaurant
+  has_many :reservations
 end
 
 

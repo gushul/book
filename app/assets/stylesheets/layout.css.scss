@@ -33,6 +33,63 @@ body {
   }
 }
 
+//==================== Theme edits =========================
+//==========================================================
+// rgb(190, 30, 45),
+.navbar-inverse .navbar-inner {
+  background-color: #802c59;
+  background-image: -moz-linear-gradient(top, #BE1E2D, #850000);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#BE1E2D), to(#850000));
+  background-image: -webkit-linear-gradient(top, #BE1E2D, #850000);
+  background-image: -o-linear-gradient(top, #BE1E2D, #850000);
+  background-image: linear-gradient(to bottom, #BE1E2D, #850000);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF862E5E', endColorstr='#FF772953', GradientType=0);
+  border-color: #642246;
+}
+
+.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
+  color: white;
+  background-color: #D64545;
+}
+
+.navbar-inverse .nav > li > a:focus, .navbar-inverse .nav > li > a:hover {
+  background-color: #D64545;
+  color: white;
+}
+
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: #D64545;
+  color: white;
+}
+
+.nav-list > .active > a, .nav-list > .active > a:hover, .nav-list > .active > a:focus {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  background-color: #BE1E2D;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+  text-decoration: none;
+  color: white;
+  background-color: #d34413;
+  background-image: -moz-linear-gradient(top, #FF0505, #c64012);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FF0505), to(#c64012));
+  background-image: -webkit-linear-gradient(top, #FF0505, #c64012);
+  background-image: -o-linear-gradient(top, #FF0505, #c64012);
+  background-image: linear-gradient(to bottom, #FF0505, #c64012);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFDD4814', endColorstr='#FFC64012', GradientType=0);
+}
+
+// a:hover, a:focus {
+//   color: #D64545;
+//   text-decoration: underline;
+// }
+
+//==================== Theme edits END =====================
+//==========================================================
+
 #wrap {
   min-height: 100%;
   height: auto !important;

@@ -1,10 +1,12 @@
-<h1>Listing reservations</h1>
+<h1>My reservations</h1>
 
 <% unless @reservations.blank? %>
 <table  class="table table-striped table-bordered table-hover">
   <thead>
   <tr>
-    <th>User</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
     <th>Restaurant</th>
     <th>Date</th>
     <th>Start time</th>
@@ -19,15 +21,9 @@
 
 <% @reservations.each do |reservation| %>
   <tr>
-    <td>
-      <% if reservation.user %>
-          <%= reservation.user.username  %>
-      <% else %>
-        <%= "#{reservation.name} /" %> 
-        <%= "#{reservation.phone} /" %> 
-        <%= reservation.email %>
-      <% end %>
-    </td>
+    <td><%= reservation.name %></td>
+    <td><%= reservation.phone %></td>
+    <td><%= reservation.email %></td>
     <td><%= reservation.restaurant.name %></td>
     <td><%= reservation.date %></td>
     <td><%= mtime(reservation.start_time) %></td>
@@ -36,7 +32,7 @@
     <td><%= reservation.active %></td>
     <td>
         <%= link_to 'Show', reservation %><br />
-        <%= link_to 'View Reward', reservation.reward %>
+        <!-- <%= link_to 'View Reward', reservation.reward %> -->
     </td>
     <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
     <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -44,7 +40,7 @@
 <% end %>
 </table>
 <% else %>
-  <%= "No reservations in your restaurant" if owner_signed_in? %>
+  You have no reservations yet
 <% end %>
 
 <br />

@@ -1,8 +1,11 @@
 class ReservationsController < ApplicationController
-  before_filter :authenticate_user!, 
-                except: [:index, :show, :new, :create]
+  # before_filter :authenticate_user!,  #!!!!!!!!!!!!!!!!!!!!
+  #               except: [:index, :show, :new, :create, :my]
+  # before_filter :authenticate_user_or_owner,  #!!!!!!!!!!!!!!!!!!!!
+  #               except: [:index, :show, :new, :create, :my]
   before_filter :check_who_editing,  
-                except: [:index, :show, :new, :create]
+                except: [:index, :show, :new, :create, :my]
+  before_filter :check_for_unreg_users
   # before_filter :process_reservation,  
   #               only: [:create, :update, :delete]
 
@@ -14,10 +17,16 @@ class ReservationsController < ApplicationController
     elsif owner_signed_in?
       @reservations = []
       # current_owner.restaurants.each {|rest| @reservations += rest.reservations}
-      current_owner.restaurant.reservations
-    else
-      # redirect_to root_url, alert: "Please, sign in!" 
+      if current_owner.restaurant.blank?
+        @reservations = []
+      else
+        @reservations = current_owner.restaurant.reservations
+      end
     end
+  end   
+
+  def my
+    @reservations = current_owner.reservations
   end   
 
   # GET /reservations/1
@@ -54,6 +63,9 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(params[:reservation])
     if user_signed_in?
       @reservation.user_id = current_user.id
+    elsif owner_signed_in?
+      @reservation.owner_id = current_owner.id
+      @reservation.restaurant = current_owner.restaurant
     end
 
     respond_to do |format|
@@ -90,6 +102,9 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     if user_signed_in?
       @reservation.user_id = current_user.id
+   elsif owner_signed_in?
+      @reservation.owner_id = current_owner.id
+      @reservation.restaurant = current_owner.restaurant
     end
 
     respond_to do |format|
@@ -125,9 +140,23 @@ class ReservationsController < ApplicationController
 
 private 
 
+  def check_for_unreg_users
+    unless owner_signed_in? or user_signed_in?
+      redirect_to root_url, notice: "Sign in for viewing this section" 
+    end
+  end
+
   def check_who_editing
     @reservation = Reservation.find(params[:id])
-    unless @reservation.user == current_user
+    if @reservation.user != current_user
+      respond_to do |format|
+        format.html { 
+          redirect_to @reservation, 
+          alert: "It's not yours reservation!" }
+        format.json { head :no_content, 
+          status: :unprocessable_entity  }
+      end
+    elsif @reservation.owner != current_owner
       respond_to do |format|
         format.html { 
           redirect_to @reservation, 

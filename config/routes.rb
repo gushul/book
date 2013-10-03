@@ -15,7 +15,10 @@ AuthApp::Application.routes.draw do
     get 'my' => "inventory_templates#my", :on => :collection, :as => :my
   end
 
-  resources :reservations
+  resources :reservations do
+    get 'my' => "reservations#my", :on => :collection, :as => :my
+  end
+  
   resources :restaurants
   resources :rewards
    

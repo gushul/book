@@ -2,7 +2,7 @@ class InventoriesController < ApplicationController
   before_filter :authenticate_owner!, 
                 except: [:index, :show]
   before_filter :check_who_editing,  
-                except: [:index, :show, :new, :create]
+                except: [:index, :show, :new, :create, :my]
 
   # GET /inventories
   # GET /inventories.json

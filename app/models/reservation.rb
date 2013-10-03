@@ -1,7 +1,7 @@
 class Reservation < ActiveRecord::Base
  
   attr_accessible :active, :date, :end_time, :party_size, 
-                  :start_time, :user_id, :restaurant_id,
+                  :start_time, :user_id, :owner_id, :restaurant_id,
                   :name, :email, :phone
 
   # validates :user_id,       :presence => true
@@ -16,6 +16,7 @@ class Reservation < ActiveRecord::Base
       :greater_than => 0 }
 
   belongs_to :user
+  belongs_to :owner
   belongs_to :restaurant
 
   has_one :reward

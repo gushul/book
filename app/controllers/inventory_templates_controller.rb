@@ -2,7 +2,7 @@ class InventoryTemplatesController < ApplicationController
   before_filter :authenticate_owner!, 
                 except: [:index, :show]
   before_filter :check_who_editing,  
-                except: [:index, :show, :new, :create]
+                except: [:index, :show, :new, :create, :my]
    
   # GET /inventory_templates
   # GET /inventory_templates.json
