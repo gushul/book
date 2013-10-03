@@ -119,7 +119,8 @@ body {
 }
 
 .container .credit {
-  margin: 20px 0;
+  float: left;
+  margin: 20px 20px;
 }
 
 .footer-links{
@@ -233,4 +234,10 @@ form .field, form .actions {
 
 #set_locale {
   width: 100px;
+}
+
+.footer_logo_icon {
+  float: left;
+  padding-top: 20px;
+  padding-left: 20px;
 }
