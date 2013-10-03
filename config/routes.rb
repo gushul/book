@@ -1,8 +1,8 @@
 AuthApp::Application.routes.draw do
 
-  root :to => "home#index"  
+  root :to => "home#index"
   # get "home/index"
-  get 'search', to: 'home#search'
+  get 'search', to: 'home#search', as: 'search'
 
   resources :inventories do 
     get 'my' => "inventories#my", :on => :collection, :as => :my

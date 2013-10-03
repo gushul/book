@@ -3,6 +3,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  brand_text: "Bangkok Restaurant Booking"
+  home: "Home"
+  restaurants: "Restaurants"
+  reservations: "Reservations"
+  inventories: "Inventories"
+  inventory_templates: "Inventory templates"
+
   restaurant: 
     min_booking_time:
       "0":   "0"

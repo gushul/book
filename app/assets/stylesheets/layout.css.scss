@@ -214,11 +214,23 @@ form .field, form .actions {
 //  }
 
 .soc_links {
-  text-align: center;
+  // text-align: center;
   padding-top: 20px;
   padding-left: 20px;
+  float: left;
 }
 
 .soc_link {
   padding-left: 20px;
+}
+
+.locale {
+  float: left;
+  // margin: -0.25em 0.1em;
+   padding-top: 20px;
+  padding-left: 20px;
+}
+
+#set_locale {
+  width: 100px;
 }

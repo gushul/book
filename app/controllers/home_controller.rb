@@ -2,10 +2,16 @@ class HomeController < ApplicationController
 
   # root route
   def index
-	  # @restaurant1 = Restaurant.first(:order => "RAND()")
-	  # @restaurant2 = Restaurant.last(:order => "RAND()")
-    if user_signed_in?
-      @rewards = current_user.rewards
+     if params[:set_locale]
+      redirect_to root_path(locale: params[:set_locale])
+    elsif 
+        
+  	  # @restaurant1 = Restaurant.first(:order => "RAND()")
+  	  # @restaurant2 = Restaurant.last(:order => "RAND()")
+      if user_signed_in?
+        @rewards = current_user.rewards
+      end
+
     end
   end
 

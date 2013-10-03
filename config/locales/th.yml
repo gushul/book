@@ -2,6 +2,8 @@
 # localization file for Thai
 
 th:
+  brand_text: "Bangkok Restaurant Booking on TAI"
+
   restaurant: 
     name: "Name in tai"
 
