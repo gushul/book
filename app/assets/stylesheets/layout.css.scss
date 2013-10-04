@@ -247,3 +247,12 @@ form .field, form .actions {
 }
 
 
+.fn-gantt .navigate {
+  .nav-zoomIn, .nav-zoomOut, .nav-page-back, .page-number, .nav-page-next {
+    display: none;
+  }
+}
+
+.fn-gantt .navigate .page-number span {
+  color: #DDD important;
+}

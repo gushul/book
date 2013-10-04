@@ -5,6 +5,7 @@ class Reservation < ActiveRecord::Base
                   :name, :email, :phone
 
   # validates :user_id,       :presence => true
+  # validates user/owner id presence
   validates :restaurant_id, :presence => true
   validates :date,          :presence => true
   validates :start_time,    :presence => true

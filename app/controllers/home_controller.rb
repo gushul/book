@@ -58,7 +58,11 @@ class HomeController < ApplicationController
       @image_tag_string << '&sensor=false'
     end
 
+  end
 
+
+  def calendar
+    
   end
 
 end   

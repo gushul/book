@@ -1,0 +1,68 @@
+<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
+<link rel="stylesheet" href="assets/style.css" />
+<link rel="stylesheet" href="http://taitems.github.com/UX-Lab/core/css/prettify.css" />
+
+
+<h1>Calendar</h1>
+<h3>just a temporary stub</h3>
+
+<div class="gantt"></div>
+
+
+<script src="assets/jquery.fn.gantt.js"></script>
+<script src="assets/moment.min.js"></script>
+<script src="http://taitems.github.com/UX-Lab/core/js/prettify.js"></script>
+<script>
+
+$(function() {
+
+  "use strict";
+
+  $(".gantt").gantt({
+    source: [{
+      name: "Restaurant 1",
+      desc: "some description",
+      values: [{
+        from: "/Date(1320192000000)/",
+        to: "/Date(1322401600000)/",
+        label: "Available", 
+        customClass: "ganttRed"
+      }]
+    },{
+      name: "Restaurant 2",
+      desc: "some description",
+      values: [{
+        from: "/Date(1323802400000)/",
+        to: "/Date(1325685200000)/",
+        label: "Available", 
+        customClass: "ganttGreen"
+      }]
+    }],
+    navigate: "scroll",
+    maxScale: "hours",
+    itemsPerPage: 10,
+    onItemClick: function(data) {
+      alert("Item clicked - show some details");
+    },
+    onAddClick: function(dt, rowId) {
+      alert("Empty space clicked - add an item!");
+    },
+    onRender: function() {
+      if (window.console && typeof console.log === "function") {
+        console.log("chart rendered");
+      }
+    }
+  });
+
+  $(".gantt").popover({
+    selector: ".bar",
+    title: "I'm a popover",
+    content: "And I'm the content of said popover.",
+    trigger: "hover"
+  });
+
+  prettyPrint();
+
+});
+
+</script>

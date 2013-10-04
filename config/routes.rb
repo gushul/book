@@ -3,6 +3,7 @@ AuthApp::Application.routes.draw do
   root :to => "home#index"
   # get "home/index"
   get 'search', to: 'home#search', as: 'search'
+  get 'calendar', to: 'home#calendar', as: 'calendar'
 
   resources :inventories do 
     get 'my' => "inventories#my", :on => :collection, :as => :my
