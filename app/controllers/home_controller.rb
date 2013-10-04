@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     @search["price"]    ||= params[:price]
     @search["location"] ||= params[:location]
 
-    if @search["cuisine"][0].to_i == 100
+    if RestaurantTag.find(@search["cuisine"][0].to_i).title == "Cuisine:Any" 
       @search["cuisine"] = "Any"
     end
 

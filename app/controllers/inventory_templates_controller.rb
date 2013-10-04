@@ -35,6 +35,8 @@ class InventoryTemplatesController < ApplicationController
   def new
     @inventory_template = InventoryTemplate.new
 
+    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @inventory_template }
@@ -52,15 +54,50 @@ class InventoryTemplatesController < ApplicationController
     @inventory_template = InventoryTemplate.new(params[:inventory_template])
     @inventory_template.restaurant = current_owner.restaurant
 
-    respond_to do |format|
-      if @inventory_template.save
-        format.html { redirect_to @inventory_template, notice: 'Inventory template was successfully created.' }
-        format.json { render json: @inventory_template, status: :created, location: @inventory_template }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @inventory_template.errors, status: :unprocessable_entity }
+    @intervals = []
+    24.times do |h| 
+      4.times do |m| 
+        if h<10 and m!=0
+          @intervals << "0#{h}:#{m*15}" 
+        elsif h<10 and m==0
+          @intervals << "0#{h}:00" 
+        elsif h>=10 and m!=0
+          @intervals << "#{h}:#{m*15}" 
+        elsif h>=10 and m==0
+          @intervals << "#{h}:0#{m*15}" 
+        else
+          @intervals << "#{h}:#{m*15}" 
+        end
       end
     end
+    @intervals << "24:00"
+
+    @intervals.each do |interval| 
+      quan = params[:inventory_template][:quantity_available]["#{@intervals.index(interval)}".to_s]
+      unless interval == "24:00" or quan.to_i == 0
+        @inventory_template = InventoryTemplate.new(name: params[:inventory_template][:name])
+        @inventory_template.restaurant = current_owner.restaurant
+        @inventory_template.primary = params[:inventory_template][:primary]
+        
+        @inventory_template.start_time = interval
+        @inventory_template.end_time = @intervals[@intervals.index(interval)+1]
+        @inventory_template.quantity_available = quan
+
+        @inventory_template.save
+      end 
+    end 
+
+    redirect_to inventory_templates_path
+
+    # respond_to do |format|
+    #   if @inventory_template.save
+    #     format.html { redirect_to @inventory_template, notice: 'Inventory template was successfully created.' }
+    #     format.json { render json: @inventory_template, status: :created, location: @inventory_template }
+    #   else
+    #     format.html { render action: "new" }
+    #     format.json { render json: @inventory_template.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PUT /inventory_templates/1
