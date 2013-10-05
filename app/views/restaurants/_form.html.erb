@@ -14,7 +14,7 @@
   <%= f.input :price, label: "Price" %>
   <%= f.input :lat, label: "Latitude" %>
   <%= f.input :lng, label: "Longitude" %>
-  <%= f.input :misc, label: "Misc", as: :text, input_html: { rows: "3"} %>
+  <%= f.input :misc, label: "Misc", as: :text, input_html: { rows: "15", class: "text_area_for_misc"} %>
  
   <div class="actions">
     <%= f.button :submit, class: "btn btn-primary" %>

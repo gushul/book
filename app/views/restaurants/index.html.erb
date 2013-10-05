@@ -7,7 +7,7 @@
     <!-- <th>Category</th> -->
     <!-- <th>Price</th> -->
     <th>Restaurant tags</th>
-    <!-- <th>Misc</th> -->
+    <th>Misc</th>
     <th></th>
     <!--<th></th>-->
     <!--<th></th>-->
@@ -22,7 +22,7 @@
     <!-- <td><%= restaurant.category %></td> -->
     <!-- <td><%= price_to_dollars_symb(restaurant.price) %></td> -->
     <td><%= join_restaurant_tags(restaurant) %></td>
-    <!-- <td><%= restaurant.misc %></td> -->
+    <td><%= truncate(restaurant.misc, length: 100, omission: '... (continued)') %></td>
     <td><%= link_to 'Show', restaurant %></td>
     <!-- <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td> -->
     <!-- <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
