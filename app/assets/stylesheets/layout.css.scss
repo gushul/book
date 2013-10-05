@@ -22,10 +22,25 @@ body {
     font-size: 15px;
   }
   .brand {
-    padding: 15px 20px 10px;
+    padding: 15px 20px 0px;
     font-size: 25px;
+    // background: url("/assets/logo_icon_transp_100x100.png") no-repeat left center;
+    // height: 20px;
+    // width: 100px;
   } 
+
+  .brand_icon {
+    padding: 2px 20px 0px;
+    // background: url("/assets/logo_icon_transp_100x100.png") no-repeat left center;
+    height: 55px;
+    width: 55px;
+  } 
+   .btn-navbar {
+    margin-top: 13px;
+  }
 }
+
+
 
 @media (min-width: 767px) {
   .navbar-inner {
@@ -89,6 +104,12 @@ body {
 
 //==================== Theme edits END =====================
 //==========================================================
+
+.brand_icon {
+  margin-top: -4px;
+  vertical-align: middle;
+}
+
 
 #wrap {
   min-height: 100%;
