@@ -7,23 +7,33 @@
   <table  class="table table-striped table-bordered table-hover" style="width:200px;">
     <thead>
       <tr>
-        <th>Time</th>
-        <th style="width:80px;">Quantity available</th>
+        <th></th>
+        <th>:00</th>
+        <th>:15</th>
+        <th>:30</th>
+        <th>:45</th>
       </tr>
       </thead>
-    <% get_intervals.each do |interval|  %>
-      <% unless interval == "24:00" %>
+    <% get_intervals.each_with_index do |interval, index| %>
+      <% if index%4 == 0 and interval != "24:00" %> 
         <tr>
-          <td><%= interval %> - <%= @intervals[@intervals.index(interval)+1] %></td>
+          <td style="font-weight:bold;"><%= interval.slice(0..1) %></td>
           <td>
             <%= f.input "quantity_available[#{@intervals.index(interval)}]" , label: false, :input_html => { :value => '0', class: 'inventory_template_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <%= f.input "quantity_available[#{@intervals.index(interval)+1}]" , label: false, :input_html => { :value => '0', class: 'inventory_template_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <%= f.input "quantity_available[#{@intervals.index(interval)+2}]" , label: false, :input_html => { :value => '0', class: 'inventory_template_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <%= f.input "quantity_available[#{@intervals.index(interval)+3}]" , label: false, :input_html => { :value => '0', class: 'inventory_template_quantity_available' }, as: :integer %>
           </td>
         </tr>
       <% end %>
     <% end %>
   </table>
-  <!-- <%= f.input :start_time, :minute_step => 15, label: "Start Time" %> -->
-  <!-- <%= f.input :end_time, :minute_step => 15, label: "End Time" %> -->
 
   <%= f.input :primary, label: "Primary" %>
  
