@@ -23,6 +23,11 @@ class ReservationsController < ApplicationController
         @reservations = current_owner.restaurant.reservations
       end
     end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @reservations }
+    end
   end   
 
   def my
@@ -45,6 +50,10 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     @reservation.restaurant_id = params[:restaurant_id]
+
+    if owner_signed_in? and not current_owner.restaurant.blank?
+      @duration = current_owner.restaurant.res_duration
+    end 
 
     respond_to do |format|
       format.html # new.html.erb

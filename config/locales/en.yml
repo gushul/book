@@ -3,7 +3,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  brand_text: "Bangkok Restaurant Booking"
+  brand_text: "Hungry Hub"
   home: "Home"
   restaurants: "Restaurants"
   reservations: "Reservations"
