@@ -6,11 +6,14 @@ gem 'jquery-rails'
 gem 'atomic', '1.1.12'
 
 gem 'simple_form'
-# gem 'formtastic',          github: 'justinfrench/formtastic'
 # gem 'haml'
-# gem 'rmagick', '2.13.2'
-# gem 'carrierwave'
-# gem 'kaminari'
+gem 'rmagick', '2.13.2'
+gem 'carrierwave'
+gem 'figaro'
+gem "geocoder"
+gem 'kaminari'
+# gem 'acts-as-taggable-on'
+gem 'mysql'
 
 gem 'devise'
 gem 'cancan'
@@ -18,12 +21,6 @@ gem 'omniauth'
 gem 'omniauth-facebook' 
 gem 'omniauth-google-oauth2'
 
-# gem 'acts-as-taggable-on'
-
-gem 'mysql'
-
-gem 'figaro'
-gem "geocoder"
 
 group :production do
   gem 'pg', '~> 0.14.1'

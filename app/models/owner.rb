@@ -10,8 +10,8 @@ class Owner < ActiveRecord::Base
                   :owner_name, :phone
 
   # has_many :restaurants
-  has_one :restaurant
-  has_many :reservations
+  has_one  :restaurant
+  has_many :reservations, :dependent => :destroy
 end
 
 

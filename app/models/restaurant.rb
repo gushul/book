@@ -34,9 +34,9 @@ class Restaurant < ActiveRecord::Base
                 :greater_than_or_equal_to => 1, 
                 :less_than_or_equal_to => 5  }
 
-  has_many :reservations
-  has_many :inventories
-  has_many :inventory_templates
+  has_many :reservations,        :dependent => :destroy
+  has_many :inventories,         :dependent => :destroy
+  has_many :inventory_templates, :dependent => :destroy
   has_and_belongs_to_many :restaurant_tags
 
   accepts_nested_attributes_for :restaurant_tags, :allow_destroy => :true,
