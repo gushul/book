@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+
 <table>
 <tr>
+  <td style="width:560px">
+    <%= image_tag(@image_tag_string) %>
+  </td>
   <td align="left">
     <p>
       <b>Owner:</b>
@@ -58,6 +62,7 @@
       <%= @restaurant.lng %>
     </p>
   </td>
+ 
 </tr>
 </table>
 

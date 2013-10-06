@@ -2,17 +2,24 @@ class HomeController < ApplicationController
 
   # root route
   def index
-     if params[:set_locale]
+    if params[:set_locale]
       redirect_to root_path(locale: params[:set_locale])
     elsif 
-        
   	  # @restaurant1 = Restaurant.first(:order => "RAND()")
   	  # @restaurant2 = Restaurant.last(:order => "RAND()")
       if user_signed_in?
         @rewards = current_user.rewards
       end
-
     end
+
+    @restaurants = []
+    arr = []
+    # when will be many restaurants need to limit records and rnd offset 
+    rnd = rand(Restaurant.count-2)
+    Restaurant.offset(rnd).limit(50).each {|r| arr << r.id }
+    arr = arr.sample(3)
+    arr.each {|id| @restaurants <<  Restaurant.find(id) }
+
   end
 
   # GET /search/:search_term
