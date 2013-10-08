@@ -2,6 +2,7 @@ class HomeController < ApplicationController
 
   # root route
   def index
+    @active_home = "active"
     if params[:set_locale]
       redirect_to root_path(locale: params[:set_locale])
     elsif 
