@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(:version => 20131006160851) do
   create_table "photos", :force => true do |t|
     t.string   "title"
     t.string   "picture"
-    t.string   "restaurant_id"
-    t.string   "is_cover"
+    t.integer  "restaurant_id"
+    t.boolean  "is_cover"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end

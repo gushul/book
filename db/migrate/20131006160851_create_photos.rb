@@ -3,8 +3,8 @@ class CreatePhotos < ActiveRecord::Migration
     create_table :photos do |t|
       t.string  :title
       t.string  :picture
-      t.string  :restaurant_id
-      t.string  :is_cover
+      t.integer :restaurant_id
+      t.boolean :is_cover
 
       t.timestamps
     end
