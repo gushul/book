@@ -18,8 +18,9 @@ AuthApp::Application.routes.draw do
 
   resources :reservations do
     get 'my' => "reservations#my", :on => :collection, :as => :my
+    
   end
-  
+
   resources :restaurants
   resources :rewards
    

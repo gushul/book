@@ -2,71 +2,86 @@
 
 
 <table>
-<tr>
-  <td style="width:560px">
-    <%= image_tag(@image_tag_string) %>
-  </td>
-  <td align="left">
-    <p>
-      <b>Owner:</b>
-      <%= @restaurant.owner.owner_name %>
-    </p>
+  <tr>
+    <td style="width:560px">
+      <%= image_tag(@image_tag_string) %>
+    </td>
+    <td align="left">
+      <p>
+        <b>Owner:</b>
+        <%= @restaurant.owner.owner_name %>
+      </p>
 
-    <p>
-      <b><%= t("restaurant.name") %>:</b>
-      <%= @restaurant.name %>
-    </p>
+      <p>
+        <b><%= t("restaurant.name") %>:</b>
+        <%= @restaurant.name %>
+      </p>
 
-    <p>
-      <b>Category:</b>
-      <%= @restaurant.category %>
-    </p>
+      <p>
+        <b>Category:</b>
+        <%= @restaurant.category %>
+      </p>
 
-    <p>
-      <b>Days out allow bookings:</b>
-      <%= @restaurant.days_in_advance %>
-    </p>
+      <p>
+        <b>Days out allow bookings:</b>
+        <%= @restaurant.days_in_advance %>
+      </p>
 
-    <p>
-      <b>Minutes in advance bookings close</b>
-      <%= t("restaurant.min_booking_time.#{@restaurant.min_booking_time}") %>
-    </p>
+      <p>
+        <b>Minutes in advance bookings close</b>
+        <%= t("restaurant.min_booking_time.#{@restaurant.min_booking_time}") %>
+      </p>
 
-    <p>
-      <b>Duration of each booking:</b>
-      <%= t("restaurant.res_duration.#{@restaurant.res_duration}") %>
-    </p>
+      <p>
+        <b>Duration of each booking:</b>
+        <%= t("restaurant.res_duration.#{@restaurant.res_duration}") %>
+      </p>
 
-    <p>
-      <b>Restaurant tags:</b>
-      <%= join_restaurant_tags(@restaurant) %>
-    </p>
+      <p>
+        <b>Restaurant tags:</b>
+        <%= join_restaurant_tags(@restaurant) %>
+      </p>
 
-    <p>
-      <b>Price:</b>
-      <%= price_to_dollars_symb(@restaurant.price) %>
-    </p>
+      <p>
+        <b>Price:</b>
+        <%= price_to_dollars_symb(@restaurant.price) %>
+      </p>
 
-    <p>
-      <b>Misc:</b>
-      <%= @restaurant.misc %>
-    </p>
+      <p>
+        <b>Misc:</b>
+        <%= @restaurant.misc %>
+      </p>
 
-    <p>
-      <b>Lat:</b>
-      <%= @restaurant.lat %>
-    </p>
+      <p>
+        <b>Lat:</b>
+        <%= @restaurant.lat %>
+      </p>
 
-    <p>
-      <b>Lng:</b>
-      <%= @restaurant.lng %>
-    </p>
-  </td>
- 
-</tr>
+      <p>
+        <b>Lng:</b>
+        <%= @restaurant.lng %>
+      </p>
+    </td>
+   
+  </tr>
+
+  <tr>
+
+    <td colspan="2">
+      <b>Photos:</b>
+      <% unless @restaurant.photos.blank? %>
+        <% @restaurant.photos.each do |pic| %>
+            <%= image_tag pic.picture.url(:v100x100) %>
+        <% end %>
+        <% else %>
+          None
+      <% end %>
+    </td>
+  </tr>
+
 </table>
 
-Available Bookings<br>
+<p />Available Bookings<br>
 <% @restaurant.inventories.each do |n| %>
 <%= n.date %> <%= n.start_time.hour %>:<%= n.start_time.min %> <%= n.quantity_available %> 
 

@@ -282,3 +282,18 @@ form .field, form .actions {
   width: 700px;
   max-width: 700px;
 }
+
+.restaurants_mini {
+  text-align: justify;
+  
+  h3 {
+    text-align: center;
+  }
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
