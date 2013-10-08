@@ -4,11 +4,13 @@
 
 en:
   brand_text: "Hungry Hub"
-  home: "Home"
-  restaurants: "Restaurants"
+  home: "Homepage"
+  restaurants: "Browse Restaurants"
   reservations: "Reservations"
   inventories: "Inventories"
   inventory_templates: "Inventory templates"
+  cuisines: "Cuisines"
+  price: "Price"
 
   restaurant: 
     min_booking_time:
