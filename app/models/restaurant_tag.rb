@@ -1,3 +1,4 @@
+# encoding: utf-8
 class RestaurantTag < ActiveRecord::Base
   attr_accessible :restaurant_id, :title
 

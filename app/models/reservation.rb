@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Reservation < ActiveRecord::Base
  
   attr_accessible :active, :date, :end_time, :party_size, 

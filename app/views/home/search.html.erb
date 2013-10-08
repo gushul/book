@@ -19,19 +19,19 @@
       <!-- <th>Price</th> -->
       <th>Restaurant tags</th>
       <th>Misc</th>
-      <th></th>
+      <!-- <th></th> -->
     </tr> 
   </thead>
 
   <% @search_results.each do |restaurant| %>
     <tr>
       <td><%= image_tag restaurant.photos.first.picture.url(:v100x100) if restaurant.photos.first %></td>
-      <td><%= restaurant.name %></td>
+      <td><%= link_to "#{restaurant.name}", restaurant %></td>
       <!-- <td><%= restaurant.category %></td> -->
       <!-- <td><%= price_to_dollars_symb(restaurant.price) %></td> -->
       <td><%= join_restaurant_tags(restaurant) %></td>
       <td><%= truncate(restaurant.misc, length: 50, omission: '... (continued)') %></td>
-      <td><%= link_to 'Show', restaurant %></td>
+      <!-- <td><%= link_to 'Show', restaurant %></td> -->
     </tr>
   <% end %>
 </table>  

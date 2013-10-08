@@ -86,7 +86,7 @@ GEM
     mime-types (1.25)
     multi_json (1.8.0)
     multipart-post (1.2.0)
-    mysql (2.9.1)
+    mysql2 (0.3.13)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -187,7 +187,7 @@ DEPENDENCIES
   geocoder
   jquery-rails
   kaminari
-  mysql
+  mysql2
   omniauth
   omniauth-facebook
   omniauth-google-oauth2

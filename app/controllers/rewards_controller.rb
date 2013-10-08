@@ -1,3 +1,4 @@
+# encoding: utf-8
 class RewardsController < ApplicationController
   # before_filter :authenticate_owner!
   
@@ -5,7 +6,7 @@ class RewardsController < ApplicationController
   # GET /rewards.json
   def index
     if user_signed_in?
-      @rewards = current_user.reservations
+      @rewards = current_user.rewards
     end
 
     respond_to do |format|

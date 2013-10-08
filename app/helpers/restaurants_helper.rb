@@ -1,3 +1,4 @@
+# encoding: utf-8
 module RestaurantsHelper
 
   def join_restaurant_tags(restaurant)

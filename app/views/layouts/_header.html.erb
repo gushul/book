@@ -20,9 +20,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=  t("cuisines") %><b class="caret"></b></a>
             <ul class="dropdown-menu">
+              <!-- TODO: refactor link/routes -->
               <% RestaurantTag.where("title LIKE ?", "Cuisine:%").each do |c| %>
                 <li>
-                  <!-- TODO: refactor link/routes -->
                   <%= link_to "#{c.title.slice(8..c.title.length)}", "search?utf8=✓&price%5B%5D=Any&cuisine%5B%5D=#{c.id}&location%5B%5D=Any&commit=Search" unless c.title.slice(8..c.title.length) == "Any" %>
                 </li>
               <% end %> 
@@ -32,16 +32,16 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=  t("price") %><b class="caret"></b></a>
             <ul class="dropdown-menu">
+              <!-- TODO: refactor link/routes -->
               <% RestaurantTag.where("title LIKE ?", "Price:%").each do |c| %>
                 <li>
-                  <!-- TODO: refactor link/routes -->
                   <%= link_to "#{c.title.slice(6..c.title.length)}", "search?utf8=✓&price%5B%5D=#{c.title.slice(6..c.title.length).length}&cuisine%5B%5D=1&location%5B%5D=Any&commit=Search" %>
                 </li>
               <% end %> 
             </ul>
           </li>
 
-          <%= nav_link t("reservations"), reservations_path if owner_signed_in? or user_signed_in?%>
+         
         </ul>
         <!-- <form class="navbar-search pull-left" action="">
           <input type="text" class="search-query span2" placeholder="Search">
@@ -54,6 +54,18 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.username %><b class="caret"></b></a>
                   <ul class="dropdown-menu">
+                    <li><%= link_to t("reservations"), reservations_path %></li>
+                    <li><%= link_to t("rewards"), rewards_path %></li>
+
+                    <li class="dropdown-submenu">
+                      <a href="#">My Favorite Restaurants</a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to "#{Restaurant.first.name}", Restaurant.first %></li>
+                        <li><%= link_to "#{Restaurant.last.name}", Restaurant.last %></li>
+
+                      </ul>
+                    </li>
+                    <li class="divider"></li>
                     <li><%= link_to "Edit account details", edit_user_registration_path %></li>
                     <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
                   </ul>
@@ -67,8 +79,10 @@
                     <li><%= link_to "My Inventories", my_inventories_path unless current_owner.restaurant.blank?
                      %></li>
                     <li><%= link_to "My Inventory Templates", my_inventory_templates_path unless current_owner.restaurant.blank? %></li>
+                     <li><%= link_to t("reservations"), reservations_path %></li>
                      <li><%= link_to t("inventories"), inventories_path %></li>
-                    <li><%= link_to t("Inventory_templates"), inventory_templates_path %></li>
+                    <li><%= link_to t("inventory_templates"), inventory_templates_path %></li>
+                    <li class="divider"></li>
                     <li><%= link_to "Edit account details", edit_owner_registration_path %></li>
                     <li><%= link_to "Logout", destroy_owner_session_path, method: :delete %></li>
                   </ul>

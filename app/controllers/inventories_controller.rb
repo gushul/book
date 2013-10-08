@@ -1,3 +1,4 @@
+# encoding: utf-8
 class InventoriesController < ApplicationController
   before_filter :authenticate_owner!#, 
                 #except: [:index, :show]

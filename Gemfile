@@ -13,7 +13,7 @@ gem 'figaro'
 gem "geocoder"
 gem 'kaminari'
 # gem 'acts-as-taggable-on'
-gem 'mysql'
+gem 'mysql2'
 
 gem 'devise'
 gem 'cancan'

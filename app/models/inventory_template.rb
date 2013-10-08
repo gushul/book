@@ -1,3 +1,4 @@
+# encoding: utf-8
 class InventoryTemplate < ActiveRecord::Base
   attr_accessible :start_time, :end_time, :name, :primary, 
                   :quantity_available, :restaurant_id

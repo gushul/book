@@ -21,8 +21,8 @@ AuthApp::Application.routes.draw do
     
   end
 
-  resources :restaurants
   resources :rewards
+  resources :restaurants
    
   devise_for :owners
   devise_for :users, controllers: { 

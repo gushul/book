@@ -1,3 +1,4 @@
+# encoding: utf-8
 module ApplicationHelper
 
   def nav_link(link_text, link_path)
