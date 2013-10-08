@@ -30,8 +30,8 @@
   <%= f.simple_fields_for :photos, @restaurant.photos.build do |img|  %>
 
     <%= img.input :picture, :label => "Picture", :as => :file %>
-    <%= img.input :title,    label: "Title" %>
-    <%= img.input :is_cover, label: "Cover?", as: :select, include_blank: false, :selected => false %>
+    <%#= img.input :title,    label: "Title" %>
+    <%#= img.input :is_cover, label: "Cover?", as: :select, include_blank: false, :selected => false %>
     <%#= img.input :restaurant_id, :as => :hidden%>
   <% end %>
 
