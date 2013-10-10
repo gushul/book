@@ -1,10 +1,6 @@
 <h1>Search Results</h1>
 <p>You seached for 
-  <% @search.each do |k,v| %>
-    <%= v %> 
-    <%= k %>
-    <%= ", " unless k == "location" %>
-  <% end %>
+    <%= @search_terms.join(", ") %> 
  </p>
  <p />
 
@@ -28,7 +24,6 @@
       <td><%= image_tag restaurant.photos.first.picture.url(:v100x100) if restaurant.photos.first %></td>
       <td><%= link_to "#{restaurant.name}", restaurant %></td>
       <!-- <td><%= restaurant.category %></td> -->
-      <!-- <td><%= price_to_dollars_symb(restaurant.price) %></td> -->
       <td><%= join_restaurant_tags(restaurant) %></td>
       <td><%= truncate(restaurant.misc, length: 50, omission: '... (continued)') %></td>
       <!-- <td><%= link_to 'Show', restaurant %></td> -->

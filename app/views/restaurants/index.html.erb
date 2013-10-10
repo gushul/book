@@ -20,7 +20,6 @@
     <td><%= image_tag restaurant.photos.first.picture.url(:v100x100) if restaurant.photos.first %></td>
     <td><%= link_to "#{restaurant.name}", restaurant %></td>
     <!-- <td><%= restaurant.category %></td> -->
-    <!-- <td><%= price_to_dollars_symb(restaurant.price) %></td> -->
     <td><%= join_restaurant_tags(restaurant) %></td>
     <td><%= truncate(restaurant.misc, length: 100, omission: '... (continued)') %></td>
     <!-- <td><%= link_to 'Show', restaurant %></td> -->

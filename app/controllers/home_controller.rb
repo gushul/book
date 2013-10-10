@@ -25,40 +25,16 @@ class HomeController < ApplicationController
   end
 
   # GET /search/:search_term
-  # todo: refactor
   def search
-    @search = Hash.new
-    @search["cuisine"]  = "Any" unless params[:cuisine].present?
-    @search["price"]    = "Any" unless params[:price].present?
-    @search["location"] = "Any" unless params[:location].present?
-    @search["cuisine"]  ||= params[:cuisine]
-    @search["price"]    ||= params[:price]
-    @search["location"] ||= params[:location]
-
-    unless @search["cuisine"][0].to_i == 0
-      if RestaurantTag.find(@search["cuisine"][0].to_i).title == "Cuisine:Any" 
-        @search["cuisine"] = "Any"
+    @search_terms = []
+    unless params[:tags].blank?
+      @search_results = Restaurant.by_tags(params[:tags])
+      params[:tags].each do |t|
+        @search_terms << RestaurantTag.find(t).title
       end
-    end
-
-    if @search["cuisine"].class == Array
-      @search["cuisine"].map! {|c| c=RestaurantTag.find(c).title} 
     else
-      @search["cuisine"] = ["Any"]
-    end
-
-    if @search["price"][0]!="Any" and 
-          @search["cuisine"][0]!="Any" 
-      # @restaurants = Restaurant.near(@search, 10).limit(10)
-      @search_results = Restaurant.with_cuisine(@search["cuisine"]).with_price(@search["price"])
-    elsif @search["cuisine"][0]=="Any" and 
-            @search["price"][0]!="Any" 
-      @search_results = Restaurant.with_price(@search["price"])
-    elsif @search["cuisine"][0]!="Any" and 
-            @search["price"][0]=="Any" 
-      @search_results = Restaurant.with_cuisine(@search["cuisine"])
-    else 
       @search_results = Restaurant.all
+      @search_terms << "All restaurants"
     end
 
     unless @search_results.blank?

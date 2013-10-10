@@ -23,7 +23,7 @@
               <!-- TODO: refactor link/routes -->
               <% RestaurantTag.where("title LIKE ?", "Cuisine:%").each do |c| %>
                 <li>
-                  <%= link_to "#{c.title.slice(8..c.title.length)}", "search?utf8=✓&price%5B%5D=Any&cuisine%5B%5D=#{c.id}&location%5B%5D=Any&commit=Search" unless c.title.slice(8..c.title.length) == "Any" %>
+                  <%= link_to "#{c.title.slice(8..c.title.length)}", "search?utf8=✓&tags%5B%5D=#{c.id}&commit=Search" unless c.title.slice(8..c.title.length) == "Any" %>
                 </li>
               <% end %> 
             </ul>
@@ -35,7 +35,7 @@
               <!-- TODO: refactor link/routes. Error if Any id!=1 -->
               <% RestaurantTag.where("title LIKE ?", "Price:%").each do |c| %>
                 <li>
-                  <%= link_to "#{c.title.slice(6..c.title.length)}", "search?utf8=✓&price%5B%5D=#{c.title.slice(6..c.title.length).length}&cuisine%5B%5D=1&location%5B%5D=Any&commit=Search" %>
+                  <%= link_to "#{c.title.slice(6..c.title.length)}", "search?utf8=✓&tags%5B%5D=#{c.id}&commit=Search" %>
                 </li>
               <% end %> 
             </ul>

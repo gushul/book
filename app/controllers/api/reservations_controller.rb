@@ -1,7 +1,7 @@
 # TODO: rework 
 class Api::ReservationsController < ApplicationController
 
-  
+
   # def index
   #   @reservations = Reservation.all
   #   render json: @reservations 
@@ -70,7 +70,7 @@ class Api::ReservationsController < ApplicationController
           format.json { render json: @reservation.errors, status: :unprocessable_entity }
         end
       end
-
+ 
     end
 
   end
