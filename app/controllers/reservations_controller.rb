@@ -132,6 +132,16 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def toggle
+    @reservation = Reservation.find(params[:id])
+    @reservation.toggle!(:active)
+
+    respond_to do |format|
+      format.html { redirect_to reservations_path, notice: "Reservation in #{@reservation.restaurant.name} at #{@reservation.date} now #{@reservation.active} ." }
+      format.js
+    end
+  end
+
   # DELETE /reservations/1
   # DELETE /reservations/1.json
   def destroy

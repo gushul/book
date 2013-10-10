@@ -1,3 +1,16 @@
+<script type="text/javascript">
+// $("btn").observe('click', function(){
+//         new Ajax.Request(url, {
+//                                  method: 'get',
+//                                  parameters: { "key": 'value' },
+//                                  onSuccess: function(res){
+//                                     // handle the result
+//                                  }
+//                              });
+//     });
+
+</script> 
+
 <h1>Listing reservations</h1>
 
 <% unless @reservations.blank? %>
@@ -11,6 +24,7 @@
     <th>End time</th>
     <th>Party size</th>
     <th>Active</th>
+    <th>Edit Active</th>
     <th></th>
     <th></th>
     <th></th>
@@ -34,6 +48,9 @@
     <td><%= mtime(reservation.end_time) %></td>
     <td><%= reservation.party_size %></td>
     <td><%= reservation.active %></td>
+    <td>
+      <%= link_to "Switch to #{bool_to_activity(oppsite_bool(reservation.active))}", toggle_reservation_url(reservation), :method => :put, :class => "btn"%>
+    </td>
     <td>
         <%= link_to 'Show', reservation %><br />
         <%= link_to 'View Reward', reservation.reward %>
