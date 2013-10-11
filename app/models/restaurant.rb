@@ -6,7 +6,7 @@ class Restaurant < ActiveRecord::Base
                   :restaurant_tags_attributes,
                   :days_in_advance, :min_booking_time, :res_duration,
                   :cuisine_list, :restaurant_tag_ids,
-                  :photos_attributes
+                  :photos_attributes, :largest_table
  
   validates :name,  :presence => true
   validates :lng,   :presence => true

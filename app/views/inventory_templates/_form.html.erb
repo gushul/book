@@ -12,6 +12,7 @@
         <th>:15</th>
         <th>:30</th>
         <th>:45</th>
+        <th></th>
       </tr>
       </thead>
     <% get_intervals.each_with_index do |interval, index| %>
@@ -29,6 +30,9 @@
           </td>
           <td>
             <%= f.input "quantity_available[#{@intervals.index(interval)+3}]" , label: false, :input_html => { :value => '0', class: 'inventory_template_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <%= link_to "Default (10)", "#", :id => "#{@intervals.index(interval)}", remote: true, :class => "btn btn-mini btn-success btn-it-def it_def_quantity[#{@intervals.index(interval)}]"%>
           </td>
         </tr>
       <% end %>

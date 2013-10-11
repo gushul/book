@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131009174547) do
+ActiveRecord::Schema.define(:version => 20131011133458) do
 
   create_table "inventories", :force => true do |t|
     t.integer  "restaurant_id"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20131009174547) do
     t.integer  "days_in_advance"
     t.integer  "min_booking_time"
     t.integer  "res_duration"
+    t.text     "largest_table"
   end
 
   create_table "rewards", :force => true do |t|
