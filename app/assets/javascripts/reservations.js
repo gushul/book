@@ -1,3 +1,10 @@
+jQuery(function() {
+  // $('#reservation_date').datepicker({
+  //   dateFormat: 'yy-mm-dd'
+  // });
+ 
+});
+
 $('select').change(auto_set_end_time);
 
 function auto_set_end_time(dur, isOwner){

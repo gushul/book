@@ -22,6 +22,8 @@ class ReservationsController < ApplicationController
         @reservations = []
       else
         @reservations = current_owner.restaurant.reservations
+        @reservations_by_date = @reservations.group_by(&:date)
+        @date = params[:date] ? Date.parse(params[:date]) : Date.today
       end
     end
 

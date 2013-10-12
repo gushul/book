@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require bootstrap
+//= require jquery.bxslider.min
 //= require_tree .

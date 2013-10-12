@@ -1,15 +1,3 @@
-<script type="text/javascript">
-  // $('select').change(auto_set_end_time);
-
-  // function auto_set_end_time(){
-  //   var h = $("#reservation_start_time_4i").val();
-  //   var m = $("#reservation_start_time_5i").val();
-  //   // alert(h + " " + m);
-  //   $("#reservation_end_time_4i").val(h);
-  //   $("#reservation_end_time_5i").val(m);
-  // };
-</script>
-
 <%= simple_form_for([@reservation], html: { class: "form-horizontal"}) do |f| %>
   
   <% unless user_signed_in? %>
@@ -19,7 +7,7 @@
   <% end %>
   
   <%= f.association :restaurant, label: "Restaurant" unless owner_signed_in?%>
-  <%= f.input :date, label: "Date" %>
+  <%= f.input :date, label: "Date" %> <!-- , :as => :string %> -->
   <%= f.input :start_time, :minute_step => 15, label: "Start Time", :input_html => { class: "start_time", :onchange => "auto_set_end_time(#{ @duration.to_json }, #{ owner_signed_in? })" }  %>
   <%= f.input :end_time, :minute_step => 15, label: "End Time" %>
   <%= f.input :party_size, label: "Party Size" %>
