@@ -1,22 +1,24 @@
 <h1>Listing reservations</h1>
 
-<!-- <div id="reservations">
-  <h2 id="month">
-    <%= link_to "<", date: @date.prev_month %>
-    <%= @date.strftime("%B %Y") %>
-    <%= link_to ">", date: @date.next_month %>
-  </h2>
-  <%= calendar @date do |date| %>
-    <%= date.day %>
-    <% if @reservations_by_date[date] %>
-      <ul>
-        <% @reservations_by_date[date].each do |reservation| %>
-          <li><%= link_to "#{mtime(reservation.start_time)}-#{mtime(reservation.end_time)} - #{reservation.party_size}", reservation %></li> 
-        <% end %>
-      </ul>
+<% if owner_signed_in? %>
+  <div id="reservations">
+    <h2 id="month">
+      <%= link_to "<", date: @date.prev_month %>
+      <%= @date.strftime("%B %Y") %>
+      <%= link_to ">", date: @date.next_month %>
+    </h2>
+    <%= calendar @date do |date| %>
+      <%= date.day %>
+      <% if @reservations_by_date[date] %>
+        <ul>
+          <% @reservations_by_date[date].each do |reservation| %>
+            <li><%= link_to "#{mtime(reservation.start_time)}-#{mtime(reservation.end_time)} - #{reservation.party_size}", reservation %></li> 
+          <% end %>
+        </ul>
+      <% end %>
     <% end %>
-  <% end %>
-</div> -->
+  </div>
+<% end %>
 
 <p />
 
