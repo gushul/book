@@ -29,13 +29,13 @@ class ReservationsController < ApplicationController
 
         @quantity = []
         4.times {|i| @quantity[i] = []}
-        Owner.first.restaurant.inventory_templates.each do |it|
+        current_owner.restaurant.inventory_templates.each do |it|
           m = it.start_time.strftime("%M").to_i
           m == 0 ? 0 : m = m/15
           h = it.start_time.strftime("%H").to_i
           @quantity[m][h] = it.quantity_available
         end
-        Owner.first.restaurant.reservations.each do |r|
+        @reservations.each do |r|
           if r.date == @date
             m1 = r.start_time.strftime("%M").to_i
             m1 == 0 ? 0 : m1 = m1/15
