@@ -1,6 +1,7 @@
 <h1>Listing reservations</h1>
 
-<% if owner_signed_in? %>
+<% @cal == false %>
+<% if owner_signed_in? and @cal == true %>
   <div id="reservations">
     <h2 id="month">
       <%= link_to "<", date: @date.prev_month %>
