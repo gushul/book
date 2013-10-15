@@ -4,7 +4,8 @@ $(function() {
       event.preventDefault();
       var id = parseInt($(this).attr('id'));
       for (var i = id; i < id+4; i++) {
-        $("#inventory_template_quantity_available\\["+i+"\\]").val(10)
+        var qnt =  $("#default").val();
+        $("#inventory_template_quantity_available\\["+i+"\\]").val(qnt)
       }
     })  
   }
