@@ -76,6 +76,7 @@ class InventoryTemplatesController < ApplicationController
     @intervals.each do |interval| 
       quan = params[:inventory_template][:quantity_available]["#{@intervals.index(interval)}".to_s]
       unless interval == "24:00" or quan.to_i == 0
+        
         @inventory_template = InventoryTemplate.new(name: params[:inventory_template][:name])
         @inventory_template.restaurant = current_owner.restaurant
         @inventory_template.primary = params[:inventory_template][:primary]

@@ -37,6 +37,8 @@ Owner.create(email: "owner5@mail.com", password: "secret12", owner_name: "5th sa
 puts "*** Owners created ***"
 
 Restaurant.delete_all
+Inventory.delete_all
+InventoryTemplate.delete_all
 Photo.delete_all
 Restaurant.create(name: "COCA Surawong", category: "Chinese, Sukiyaki/Shabu", misc: "ซ.อนุมานราชธน ถ.สุรวงศ์ Suriyawong , Bang Rak , Bangkok", lat: 13.7282012786, lng: 100.5301216487, owner_id: Owner.first.id, days_in_advance: 90, min_booking_time: 30, res_duration: 30)
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Chinese")
