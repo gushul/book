@@ -48,6 +48,43 @@ Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Price:$")
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Parking:Yes")
 Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_5.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
 
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 10:15:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:15:00", end_time: "2000-01-01 10:30:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:30:00", end_time: "2000-01-01 10:45:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:45:00", end_time: "2000-01-01 11:00:00", quantity_available: 10, primary: true )
+
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:00:00", end_time: "2000-01-01 11:15:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:15:00", end_time: "2000-01-01 11:30:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:30:00", end_time: "2000-01-01 11:45:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:45:00", end_time: "2000-01-01 12:00:00", quantity_available: 10, primary: true )
+
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:00:00", end_time: "2000-01-01 12:15:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:15:00", end_time: "2000-01-01 12:30:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:30:00", end_time: "2000-01-01 12:45:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:45:00", end_time: "2000-01-01 13:00:00", quantity_available: 10, primary: true )
+
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:00:00", end_time: "2000-01-01 13:15:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:15:00", end_time: "2000-01-01 13:30:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:30:00", end_time: "2000-01-01 13:45:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:45:00", end_time: "2000-01-01 14:00:00", quantity_available: 10, primary: true )
+
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 14:15:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:15:00", end_time: "2000-01-01 14:30:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:30:00", end_time: "2000-01-01 14:45:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:45:00", end_time: "2000-01-01 15:00:00", quantity_available: 10, primary: true )
+
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:00:00", end_time: "2000-01-01 15:15:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:15:00", end_time: "2000-01-01 15:30:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:30:00", end_time: "2000-01-01 15:45:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:45:00", end_time: "2000-01-01 16:00:00", quantity_available: 10, primary: true )
+
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:15:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:15:00", end_time: "2000-01-01 16:30:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:30:00", end_time: "2000-01-01 16:45:00", quantity_available: 10, primary: true )
+InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:45:00", end_time: "2000-01-01 17:00:00", quantity_available: 10, primary: true )
+
+
+
 Restaurant.create(name: "Roast Coffee & Eatery", category: "American, Tea/Coffee, Breakfast", misc: "2/F, Seenspace, Thonglor Soi 13, Bangkok, 10110 (2nd floor Seen Space Thong Lor) Seenspace Thonglor , คลองเตยเหนือ , วัฒนา , กรุงเทพมหานคร 10110", lat: 13.7339240000, lng: 100.5808190000, owner_id: Owner.find_by_email("owner2@mail.com").id, days_in_advance: 20, min_booking_time: 15, res_duration: 15)
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:American")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Tea/Coffee")

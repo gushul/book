@@ -3,32 +3,33 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #reservations .calendar {
   border-collapse: collapse;
-  width: 85%;
-  margin: auto;
+  // width: 35%;
+  width: 400px;
+  // margin: auto;
 
   td, th {
     font-family: "Lucida Grande", arial, helvetica, sans-serif;
     font-size: 10px;
-    padding: 6px;
+    // padding: 6px;
     border: 1px solid #999;
+    text-align: center;
   }
 
   th {
     background: #DDD;
     color: #666;
-    text-align: center;
     width: 14.2857142857143%;
   }
 
   td {
     background: #FFF;
     color: #777;
-    height: 60px;
+    height: 20px;
     vertical-align: top;
     font-size: 16px;
   }
 
-  .notmonth, .notmonth a { color: #CCC; }
+  .notmonth, .notmonth a { color: #CCC;  }
   .today { background-color: #D7F2FF; }
 
   .free_much    {  background-color: #0F0; }
@@ -37,9 +38,9 @@
 }
 
 #reservations #month {
-  margin: 0;
-  padding-bottom: 10px;
-  text-align: center;
+  // margin: 0;
+  // padding-bottom: 10px;
+  // text-align: center;
   font-size: 22px;
   a {
     text-decoration: none;
@@ -50,5 +51,5 @@
 
 #reservations ul {
   font-size: 11px;
-  padding-left: 20px;
+  padding-left: 10px;
 }
