@@ -17,9 +17,11 @@ class HomeController < ApplicationController
     @restaurants = []
     arr = []
     # when will be many restaurants need to limit records and rnd offset 
-    rnd = rand(Restaurant.count-2)
+    # rnd = rand(Restaurant.count-2)
+    rnd = rand(0)
     Restaurant.offset(rnd).limit(50).each {|r| arr << r.id }
-    arr = arr.sample(3)
+    # arr = arr.sample(3)
+    arr = arr.sample(Restaurant.count)
     arr.each {|id| @restaurants <<  Restaurant.find(id) }
 
   end

@@ -30,8 +30,9 @@ puts "*** Tags created ***"
 Owner.delete_all
 Owner.create(email: "owner1@mail.com", password: "secret12", owner_name: "COCA Surawong owner")
 Owner.create(email: "owner2@mail.com", password: "secret12", owner_name: "Roast Coffee & Eatery owner")
-Owner.create(email: "owner3@mail.com", password: "secret12", owner_name: "Akiyoshi Sukhumvit 53")
-Owner.create(email: "owner4@mail.com", password: "secret12", owner_name: "Akiyoshi Sukhumvit 53")
+Owner.create(email: "owner3@mail.com", password: "secret12", owner_name: "Akiyoshi Sukhumvit 53 owner")
+Owner.create(email: "owner4@mail.com", password: "secret12", owner_name: "Bangkok Burger Co. Thonglor 10 owner")
+Owner.create(email: "owner5@mail.com", password: "secret12", owner_name: "5th sample owner")
 # ==================================================================
 puts "*** Owners created ***"
 
@@ -63,7 +64,7 @@ Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Drinking:Alcohol
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Drinking:Cocktails")
 Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_3.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
 
-Restaurant.create(name: "Bangkok Burger Co. Thonglor 10", category: "Franchise, American", misc: "ทองหล่อ 10, กรุงเทพมหานคร (ตึก Opus เข้าซอยทองหล่อ 10 จากทางซอยทองหล่อ 50 เมตรอยู่ซ้ายมือ) กรุงเทพมหานคร 10110", lat: 13.7331740000, lng: 100.5822730000, owner_id: Owner.find_by_email("owner4@mail.com").id,  days_in_advance: 10, min_booking_time: 60, res_duration: 75)
+Restaurant.create(name: "Bangkok Burger", category: "Franchise, American", misc: "ทองหล่อ 10, กรุงเทพมหานคร (ตึก Opus เข้าซอยทองหล่อ 10 จากทางซอยทองหล่อ 50 เมตรอยู่ซ้ายมือ) กรุงเทพมหานคร 10110", lat: 13.7331740000, lng: 100.5822730000, owner_id: Owner.find_by_email("owner4@mail.com").id,  days_in_advance: 10, min_booking_time: 60, res_duration: 75)
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Franchise")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:American")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Price:$$$")
@@ -71,6 +72,19 @@ Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Meals:Breakfast"
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Meals:Dinner")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Payment:Visa")
 Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_4.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
+
+Restaurant.create(name: "Above Eleven Rooftop", category: "Hotel, Fusion, Pub/Bar, Rooftop", misc: "38/8 สุขุมวิท 11 (ชั้น 33 โรงแรม Fraser Suites ซอยสุขุมวิท 11 นานา เข้าซอยแล้วเลี้ยวซ้าย ทางจะบังคับเลี้ยวขวา โรงแรมอยู่ขวามือ) คลองตันเหนือ , วัฒนา , กรุงเทพมหานคร", lat: 13.7479730000, lng: 100.5564750000, owner_id: Owner.find_by_email("owner5@mail.com").id,  days_in_advance: 10, min_booking_time: 90, res_duration: 75)
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Rooftop")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Fusion")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Pub")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Price:$$$$")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Meals:Breakfast")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Meals:Lunch")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Meals:Dinner")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Payment:Visa")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Payment:Mastercard")
+Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Payment:American Express")
+Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_1.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
 # ==================================================================
 puts "*** Restaurants created with tags and photos ***"
 

@@ -41,7 +41,16 @@
             </ul>
           </li>
 
-         
+          <% if owner_signed_in? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=  "My Report" %><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li class="disabled"><%= link_to "Link 1", "#" %></li>
+              <li class="disabled"><%= link_to "Link 2", "#" %></li>
+            </ul>
+          </li>
+          <% end %> 
+
         </ul>
         <!-- <form class="navbar-search pull-left" action="">
           <input type="text" class="search-query span2" placeholder="Search">
@@ -82,6 +91,8 @@
                      <li><%= link_to t("reservations"), reservations_path %></li>
                     <li><%= link_to t("inventories"), inventories_path %></li>
                     <li><%= link_to t("inventory_templates"), inventory_templates_path %></li>
+
+
                     <li class="divider"></li>
                     <li><%= link_to "Edit account details", edit_owner_registration_path %></li>
                     <li><%= link_to "Logout", destroy_owner_session_path, method: :delete %></li>
