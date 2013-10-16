@@ -4,7 +4,7 @@
 #reservations .calendar {
   border-collapse: collapse;
   // width: 35%;
-  width: 400px;
+  width: 350px;
   // margin: auto;
 
   td, th {
@@ -31,6 +31,7 @@
 
   .notmonth, .notmonth a { color: #CCC;  }
   .today { background-color: #D7F2FF; }
+  .full  { background-color: #F00; }
 
   .free_much    {  background-color: #0F0; }
   .free_mediate {  background-color: #FF0; }

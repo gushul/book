@@ -26,6 +26,37 @@ class RestaurantsController < ApplicationController
     @image_tag_string << "&markers=icon:http://tinyurl.com/pgdsbxb%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
     @image_tag_string << '&sensor=false&zoom=15'
 
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @quantity = []
+    4.times {|i| @quantity[i] = []}
+    @restaurant.inventory_templates.each do |it|
+      m = it.start_time.strftime("%M").to_i
+      m == 0 ? 0 : m = m/15
+      h = it.start_time.strftime("%H").to_i
+      @quantity[m][h] = it.quantity_available
+    end
+    @restaurant.reservations.each do |r|
+      if r.date == @date
+        m1 = r.start_time.strftime("%M").to_i
+        m1 == 0 ? 0 : m1 = m1/15
+        m2 = r.end_time.strftime("%M").to_i
+        m2 == 0 ? 0 : m2 = m2/15
+        h1 = r.start_time.strftime("%H").to_i
+        h2 = r.end_time.strftime("%H").to_i
+        if h1 == h2 and (m2 - m1) > 0
+          (m2 - m1).times {|t| @quantity[m1+t][h1] -= r.party_size }
+        elsif h1 != h2
+          (h2 - h1 + 1).times do |th| 
+            unless th == h2 - h1
+              4.times {|tm| @quantity[m1 + tm][h1 + th] -= r.party_size }
+            else
+              (m2 - m1).times {|tm| @quantity[m1 + tm][h1 + th] -= r.party_size }
+            end
+          end
+        end
+      end
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @restaurant }

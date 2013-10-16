@@ -84,6 +84,12 @@ class ReservationsController < ApplicationController
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
+    unless params[:start_time].blank?
+      @reservation.start_time = params[:start_time]
+      @reservation.end_time   = params[:start_time]
+      @reservation.date = params[:date]
+    end
+
     @reservation.restaurant_id = params[:restaurant_id]
 
     if owner_signed_in? and not current_owner.restaurant.blank?
