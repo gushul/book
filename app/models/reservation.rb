@@ -4,7 +4,8 @@ class Reservation < ActiveRecord::Base
   attr_accessible :active, :date, :end_time, :party_size, 
                   :start_time, :user_id, :owner_id, :restaurant_id,
                   :name, :email, :phone,
-                  :no_show, :arrived, :table
+                  :no_show, :arrived, :table,
+                  :special_request
 
   # validates :user_id,       :presence => true
   # validates user/owner id presence

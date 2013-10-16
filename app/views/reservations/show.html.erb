@@ -41,6 +41,11 @@
   <%= @reservation.active %>
 </p>
 
+<p>
+  <b>Special Request:</b>
+  <%= @reservation.special_request %>
+</p>
+
 
 <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
 <%= link_to 'Back', reservations_path %>

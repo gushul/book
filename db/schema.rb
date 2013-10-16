@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131016154233) do
+ActiveRecord::Schema.define(:version => 20131016180023) do
 
   create_table "inventories", :force => true do |t|
     t.integer  "restaurant_id"
@@ -75,15 +75,16 @@ ActiveRecord::Schema.define(:version => 20131016154233) do
     t.time     "end_time"
     t.integer  "party_size"
     t.boolean  "active"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "name"
     t.string   "email"
     t.string   "phone"
     t.integer  "owner_id"
-    t.boolean  "no_show",       :default => false, :null => false
-    t.boolean  "arrived",       :default => false, :null => false
+    t.boolean  "no_show",         :default => false, :null => false
+    t.boolean  "arrived",         :default => false, :null => false
     t.text     "table"
+    t.text     "special_request"
   end
 
   add_index "reservations", ["restaurant_id"], :name => "index_reservations_on_restaurant_id"

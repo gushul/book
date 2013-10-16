@@ -13,6 +13,8 @@
   <%= f.input :party_size, label: "Party Size" %>
   <%= f.input :active, label: "active" %>
  
+  <%= f.input :special_request, label: "Special Request", as: :text, input_html: { rows: "15", class: "text_area_for_misc"} %>
+
   <div class="actions">
     <%= f.button :submit, class: "btn btn-primary" %>
   </div>
