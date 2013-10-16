@@ -41,16 +41,6 @@
             </ul>
           </li>
 
-          <% if owner_signed_in? %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=  "My Report" %><b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li class="disabled"><%= link_to "Link 1", "#" %></li>
-              <li class="disabled"><%= link_to "Link 2", "#" %></li>
-            </ul>
-          </li>
-          <% end %> 
-
         </ul>
         <!-- <form class="navbar-search pull-left" action="">
           <input type="text" class="search-query span2" placeholder="Search">
@@ -65,7 +55,6 @@
                   <ul class="dropdown-menu">
                     <li><%= link_to t("reservations"), reservations_path %></li>
                     <li><%= link_to t("rewards"), rewards_path %></li>
-
                     <li class="dropdown-submenu">
                       <a href="#">My Favorite Restaurants</a>
                       <ul class="dropdown-menu">
@@ -74,6 +63,7 @@
 
                       </ul>
                     </li>
+
                     <li class="divider"></li>
                     <li><%= link_to "Edit account details", edit_user_registration_path %></li>
                     <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
@@ -91,7 +81,14 @@
                      <li><%= link_to t("reservations"), reservations_path %></li>
                     <li><%= link_to t("inventories"), inventories_path %></li>
                     <li><%= link_to t("inventory_templates"), my_inventory_templates_path unless current_owner.restaurant.blank? %></li>
+                    <li class="dropdown-submenu">
+                      <a href="#">My Report</a>
+                      <ul class="dropdown-menu">
+                        <li class="disabled"><%= link_to "Link 1", "#" %></li>
+                        <li class="disabled"><%= link_to "Link 2", "#" %></li>
 
+                      </ul>
+                    </li>
 
                     <li class="divider"></li>
                     <li><%= link_to "Edit account details", edit_owner_registration_path %></li>
