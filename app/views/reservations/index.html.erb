@@ -74,20 +74,9 @@
       <%= link_to ">", date: @date.next_month %>
     </h3>
     <%= calendar @date do |date| %>
-      <% if date.day == @day %>
-        <div class="today">
+      <%= content_tag :div, :class => ('today' if (date == @date) ) do %>
+        <%= link_to date.day, date: date %>
       <% end %>
-        <%= link_to date.day, date: (@date + date.day - @day ) %>
-      <% if date.day == @day %>
-        </div>
-      <% end %>
-      <!-- <%# if @reservations_by_date[date] %>
-        <ul>
-          <%# @reservations_by_date[date].each do |reservation| %>
-            <li><%#= link_to "#{mtime(reservation.start_time)}-#{mtime(reservation.end_time)} - #{reservation.party_size}", reservation %></li> 
-          <%# end %>
-        </ul>
-      <%# end %> -->
     <% end %>
   </div>
 

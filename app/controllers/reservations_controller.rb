@@ -25,7 +25,6 @@ class ReservationsController < ApplicationController
 
         # @reservations_by_date = @reservations.group_by(&:date)
         @date = params[:date] ? Date.parse(params[:date]) : Date.today
-        @day = @date.day
 
         @quantity = []
         4.times {|i| @quantity[i] = []}
