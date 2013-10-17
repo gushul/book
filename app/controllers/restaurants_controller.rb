@@ -7,7 +7,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
-#    @restaurants = current_owner.restaurants
+    # @restaurants = current_owner.restaurants
 
     respond_to do |format|
       format.html # index.html.erb

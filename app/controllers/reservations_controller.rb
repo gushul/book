@@ -26,6 +26,9 @@ class ReservationsController < ApplicationController
         # @reservations_by_date = @reservations.group_by(&:date)
         @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
+        DateTime.parse('2000-01-01 11:00:00 UTC').to_time
+        @selectable_time = [["2000-01-01 00:00:00 UTC","00:00"], ["2000-01-01 00:15:00 UTC", "00:15"] ]
+ 
         @quantity = []
         4.times {|i| @quantity[i] = []}
         current_owner.restaurant.inventory_templates.each do |it|
@@ -164,7 +167,7 @@ class ReservationsController < ApplicationController
         # OwnerMailer.booking_update(@reservation).deliver
 
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @reservation }
       else
         format.html { render action: "edit" }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }

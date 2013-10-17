@@ -10,11 +10,16 @@
     <th>Start time</th>
     <th>End time</th>
     <th>Party size</th>
+    <th width="100px">Table</th>
     <!-- <th>Active</th> -->
     <!-- <th>Edit Active</th> -->
-    <th>No Show</th>
-    <th>Party Arrived</th>
-    <th>Remove</th>
+    <% if owner_signed_in? %>
+      <th>No Show</th>
+      <th>Party Arrived</th>
+      <th>Remove</th>
+    <% else %>
+      <th></th>
+    <% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -34,19 +39,45 @@
     </td>
     <td><%= reservation.restaurant.name %></td>
     <td><%= reservation.date %></td>
-    <td><%= mtime(reservation.start_time) %></td>
+    <td>
+    <% if owner_signed_in? %>
+      <%= best_in_place reservation, :start_time, :type => :date, :display_as => :format_time %>
+      <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
+    <% else %>
+      <%= mtime(reservation.start_time) %>
+    <% end %> 
+    </td>
     <td><%= mtime(reservation.end_time) %></td>
-    <td><%= reservation.party_size %></td>
+    <td>
+      <%= content_tag :div, :class => 'bip_reservation_party_size' do %>
+        <%= best_in_place reservation, :party_size %>
+      <% end %>
+    </td>
+    <td>
+    <% if owner_signed_in? %>
+        <%= content_tag :div, :class => 'bip_reservation_table' do %>
+          <%= best_in_place reservation, :table, :type => :textarea, :display_with => :truncate, :helper_options => { :length => 80 }, :class => "bip_reservation_table" %>
+        <% end %>
+    <% else %>
+        <%= truncate(reservation.table, length: 100, omission: '...') %>
+    <% end %> 
+    </td>
     <!-- <td><%= reservation.active %></td> -->
-    <td>
-      <%= link_to "#{bool_to_activity(reservation.no_show)}", toggle_reservation_url(reservation, :arg => "no_show"), :method => :put, :class => "btn"%>
-    </td>
-    <td>
-      <%= link_to "#{bool_to_activity(reservation.arrived)}", toggle_reservation_url(reservation, :arg => "arrived"), :method => :put, :class => "btn"%>
-    </td>
-    <td>
-      <%= link_to "#{bool_to_activity(reservation.active)}", toggle_reservation_url(reservation, :arg => "active"), :method => :put, :class => "btn"%>
-    </td>
+    <% if owner_signed_in? %>
+      <td>
+        <%= link_to "#{bool_to_activity(reservation.no_show)}", toggle_reservation_url(reservation, :arg => "no_show"), :method => :put, :class => "btn"%>
+      </td>
+      <td>
+        <%= link_to "#{bool_to_activity(reservation.arrived)}", toggle_reservation_url(reservation, :arg => "arrived"), :method => :put, :class => "btn"%>
+      </td>
+      <td>
+        <%= link_to "#{bool_to_activity(reservation.active)}", toggle_reservation_url(reservation, :arg => "active"), :method => :put, :class => "btn"%>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to "Switch to #{bool_to_activity(oppsite_bool(reservation.active))}", toggle_reservation_url(reservation, :arg => "active"), :method => :put, :class => "btn"%>
+      </td>
+    <% end %>
     <td>
         <%= link_to 'Show', reservation %><br />
         <%= link_to 'View Reward', reservation.reward %>

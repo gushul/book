@@ -11,9 +11,10 @@
   <%= f.input :start_time, :minute_step => 15, label: "Start Time", :input_html => { class: "start_time", :onchange => "auto_set_end_time(#{ @duration.to_json }, #{ owner_signed_in? })" }  %>
   <%= f.input :end_time, :minute_step => 15, label: "End Time" %>
   <%= f.input :party_size, label: "Party Size" %>
+  <%= f.input :table, label: "Table", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
   <%= f.input :active, label: "active" %>
  
-  <%= f.input :special_request, label: "Special Request", as: :text, input_html: { rows: "15", class: "text_area_for_misc"} %>
+  <%= f.input :special_request, label: "Special Request", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn btn-primary" %>

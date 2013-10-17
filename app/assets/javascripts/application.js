@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bxslider_min
+//= require best_in_place
 //= require_tree .

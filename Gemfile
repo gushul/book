@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'atomic', '1.1.12'
 
 gem 'simple_form'
+gem 'best_in_place'
 # gem 'haml'
 gem 'rmagick', '2.13.2'
 gem 'carrierwave'

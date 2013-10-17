@@ -1,8 +1,13 @@
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+});
+
 jQuery(function() {
   // $('#reservation_date').datepicker({
   //   dateFormat: 'yy-mm-dd'
   // });
- 
+  $.datepicker.setDefaults({ dateFormat: 'dd M (D)' });
 });
 
 $('select').change(auto_set_end_time);
