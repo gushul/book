@@ -160,4 +160,15 @@
       <% end %>
   </table>
 
+<div class="input integer reservation_party_size">
+  <label class="integer" for="reservation_party_size">Party Size</label>
+  <input class="numeric integer" id="reservation_party_size" min="1" name="reservation[party_size]" step="1" value="1" type="number">
+</div>
+
+<div class="input text optional reservation_special_request">
+  <label class="text optional" for="reservation_special_request">Special Request</label>
+  <textarea class="text optional text_area_for_misc" cols="40" id="reservation_special_request" name="reservation[special_request]" rows="5"></textarea>
+</div>
+
+
 <%# end %>
