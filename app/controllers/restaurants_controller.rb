@@ -128,8 +128,6 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
     @restaurant.owner_id = current_owner.id
 
-
-
     respond_to do |format|
       if @restaurant.update_attributes(params[:restaurant])
         format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
