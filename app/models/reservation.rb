@@ -25,6 +25,8 @@ class Reservation < ActiveRecord::Base
 
   has_one :reward
 
+  scope :active, -> { where active: true }
+
 private
   
   def format_time

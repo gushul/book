@@ -135,13 +135,13 @@ User.create(email: "user2@mail.com", password: "secret12", username: "sample use
 puts "*** Users created ***"
 
 Reservation.delete_all
-Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.first.id, date: "2013-11-00", start_time: "2000-01-01 13:00:00", end_time: "2000-01-01 13:30:00", party_size: 2, active: true )
-Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.first.id, date: "2013-11-01", start_time: "2000-01-01 11:00:00", end_time: "2000-01-01 12:30:00", party_size: 2, active: false )
+Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.first.id, date: DateTime.now.to_date, start_time: "2000-01-01 13:30:00", end_time: "2000-01-01 15:00:00", party_size: 10, active: true )
+Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.first.id, date: DateTime.now.tomorrow.to_date, start_time: "2000-01-01 11:00:00", end_time: "2000-01-01 12:30:00", party_size: 10, active: false )
 Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.last.id, date: "2013-11-01", start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:45:00", party_size: 4, active: true )
 Reservation.create(user_id: User.last.id, restaurant_id: Restaurant.last.id, date: "2013-11-02", start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 14:30:00", party_size: 3, active: true )
 Reservation.create(user_id: User.last.id, restaurant_id: Restaurant.last.id, date: "2013-11-12", start_time: "2000-01-01 15:00:00", end_time: "2000-01-01 15:30:00", party_size: 1, active: true )
 
-Reservation.create(restaurant_id: Restaurant.first.id, date: "2013-10-08", start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:30:00", party_size: 4, active: false, name: "Sample-Name1", email: "mail_1@mail.com", phone: "+646654646", owner_id: Restaurant.first.owner.id)
+Reservation.create(restaurant_id: Restaurant.first.id, date: DateTime.now.to_date, start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:30:00", party_size: 10, active: false, name: "Sample-Name1", email: "mail_1@mail.com", phone: "+646654646", owner_id: Restaurant.first.owner.id)
 Reservation.create(restaurant_id: Restaurant.last.id, date: "2013-10-09", start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:30:00", party_size: 2, active: true, name: "Sample-Name2", email: "mail_2@mail.com", phone: "+646622246", owner_id: Restaurant.last.owner.id)
 # ==================================================================
 puts "*** Reservations created ***"

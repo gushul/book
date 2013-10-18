@@ -62,7 +62,7 @@ class InventoriesController < ApplicationController
         format.json { render json: @inventory.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end   
 
   # PUT /inventories/1
   # PUT /inventories/1.json
