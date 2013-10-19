@@ -14,11 +14,12 @@ class RestaurantsController < ApplicationController
       format.json { render json: @restaurants }
     end
   end
-
+     
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
     @restaurant = Restaurant.find(params[:id])
+    @reservation = Reservation.new
     @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=550x300"
     # @image_tag_string << "&center=#{@restaurant.lat}%2C#{@restaurant.lng}"
     # @image_tag_string << "&markers=icon:http://tinyurl.com/o39bbb3%7C#{@restaurant.lat}%2C#{@restaurant.lng}"

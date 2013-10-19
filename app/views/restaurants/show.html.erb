@@ -143,7 +143,8 @@
                   <% i = "0"+ i.to_s if i < 10  %>
                   <% j = row*15  %>
                   <% j = "0"+ j.to_s if j == 0  %>
-                  <%= link_to "#{i}:#{j}", new_reservation_path(:start_time => "#{i}:#{j}", :date => @date ), :method => :get, :class => "btn btn-small" %>
+                  <%#= link_to "#{i}:#{j}", new_reservation_path(:start_time => "#{i}:#{j}", :date => @date ), :method => :get, :class => "btn btn-small" %>
+                  <%= link_to "#{i}:#{j}", "#", :class => "btn btn-small btn-time" %>
                 <%# else %>
                   <%#= @quantity[row][i] %>
                 <% end %>
@@ -158,25 +159,42 @@
     <% end %>
 </table>
 
-<span class="input-xxlarge uneditable-input">non-editable Text field</span>
+<% if user_signed_in? or owner_signed_in? %>
+  <span class="input-xxlarge uneditable-input">non-editable Text field</span>
+  <%#= render 'reservations/form_on_restaurant' %>
 
-<div class="input integer reservation_party_size">
-  <label class="integer" for="reservation_party_size">Party Size</label>
-  <input class="numeric integer" id="reservation_party_size" min="1" name="reservation[party_size]" step="1" value="1" type="number">
+  <%= simple_form_for([@reservation], html: { class: "form-horizontal"}) do |f| %>
+    
+    <% unless user_signed_in? %>
+      <%= f.input :name,  label: "Name",  :required => :true %>
+      <%= f.input :email, label: "Email", :required => :true %>
+      <%= f.input :phone, label: "Phone", :required => :true %>
+    <% end %>
+
+    <%= f.label "Start Time" %>
+    <%= f.select :start_time, @intervals %>
+    <%= f.label "End Time" %>
+    <%= f.select :end_time, @intervals %>
+    <%= f.input :date, :as => :hidden, input_html: { value: @date} %>
+
+    <%= f.input :party_size, label: "Party Size" %>
+
+    <% unless user_signed_in? %>
+      <%= f.input :table, label: "Table", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
+    <% end %>
+
+    <%#= f.input :active, label: "active" %>
+   
+    <%= f.input :special_request, label: "Special Request", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
+
+    <div class="actions">
+      <%= f.submit "Book Now" , class: "btn btn-primary" %>
+    </div>
+   
+  <% end %>
+<% end %>
+
+
 </div>
 
-<div class="input text optional reservation_special_request">
-  <label class="text optional" for="reservation_special_request">Special Request</label>
-  <textarea class="text optional text_area_for_misc" cols="40" id="reservation_special_request" name="reservation[special_request]" rows="5"></textarea>
-</div>
-
-<%# if owner_signed_in? %>
-<!--   <div class="input string required reservation_name"><label class="string required" for="reservation_name"><abbr title="required">*</abbr> Name</label><input class="string required" id="reservation_name" maxlength="255" name="reservation[name]" required="required" size="50" type="text"></div>
-
-  <div class="input email required reservation_email"><label class="email required" for="reservation_email"><abbr title="required">*</abbr> Email</label><input class="string email required" id="reservation_email" maxlength="255" name="reservation[email]" required="required" size="50" type="email"></div>
-
-  <div class="input tel required reservation_phone"><label class="tel required" for="reservation_phone"><abbr title="required">*</abbr> Phone</label><input class="string tel required" id="reservation_phone" maxlength="255" name="reservation[phone]" required="required" size="50" type="tel"></div> -->
-<%# end %>
-
-<%#= link_to "Book Now", new_reservation_path, :class => "btn btn-success" %>
 

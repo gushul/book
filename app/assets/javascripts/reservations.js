@@ -7,7 +7,7 @@ jQuery(function() {
   // $('#reservation_date').datepicker({
   //   dateFormat: 'yy-mm-dd'
   // });
-  $.datepicker.setDefaults({ dateFormat: 'dd M (D)' });
+  // $.datepicker.setDefaults({ dateFormat: 'dd M (D)' });
 });
 
 $('select').change(auto_set_end_time);
