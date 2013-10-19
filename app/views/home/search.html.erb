@@ -11,8 +11,6 @@
     <tr>
       <th></th>
       <th>Name</th>
-      <!-- <th>Category</th> -->
-      <!-- <th>Price</th> -->
       <th>Restaurant tags</th>
       <th>Misc</th>
       <!-- <th></th> -->
@@ -23,7 +21,6 @@
     <tr>
       <td><%= image_tag restaurant.photos.first.picture.url(:v100x100) if restaurant.photos.first %></td>
       <td><%= link_to "#{restaurant.name}", restaurant %></td>
-      <!-- <td><%= restaurant.category %></td> -->
       <td><%= join_restaurant_tags(restaurant) %></td>
       <td><%= truncate(restaurant.misc, length: 50, omission: '... (continued)') %></td>
       <!-- <td><%= link_to 'Show', restaurant %></td> -->

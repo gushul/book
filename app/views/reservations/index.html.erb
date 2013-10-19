@@ -40,14 +40,19 @@
     <td><%= reservation.restaurant.name %></td>
     <td><%= reservation.date %></td>
     <td>
-    <% if owner_signed_in? %>
-      <%= best_in_place reservation, :start_time, :type => :date, :display_as => :format_time %>
-      <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
-    <% else %>
-      <%= mtime(reservation.start_time) %>
-    <% end %> 
+      <% if owner_signed_in? %>
+        <%= best_in_place reservation, :start_time, :type => :date, :display_as => :format_time %>
+        <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
+      <% else %>
+        <%= mtime(reservation.start_time) %>
+      <% end %> 
     </td>
-    <td><%= mtime(reservation.end_time) %></td>
+    <td>
+      <% if owner_signed_in? %>
+        <%= best_in_place reservation, :end_time, :type => :date, :display_with => Proc.new { |f| f.strftime("%H:%M") } %>
+      <% else %>
+        <%= mtime(reservation.end_time) %></td>
+      <% end %> 
     <td>
       <%= content_tag :div, :class => 'bip_reservation_party_size' do %>
         <%= best_in_place reservation, :party_size %>

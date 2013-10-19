@@ -57,37 +57,37 @@ class InventoryTemplatesController < ApplicationController
       end
     end
 
-    @reservations.active.each do |r|
-      if r.date == @date
-        m1 = r.start_time.strftime("%M").to_i
-        m1 == 0 ? 0 : m1 = m1/15
-        m2 = r.end_time.strftime("%M").to_i
-        m2 == 0 ? 0 : m2 = m2/15
-        h1 = r.start_time.strftime("%H").to_i
-        h2 = r.end_time.strftime("%H").to_i
-        if h1 == h2 and (m2 - m1) > 0
-          (m2 - m1).times {|t| @quantity[m1+t][h1] -= r.party_size }
-        elsif h1 != h2 and m1 == 0
-          (h2 - h1 + 1).times do |th| 
-            unless th == h2 - h1
-              4.times {|tm| @quantity[m1 + tm][h1 + th] -= r.party_size }
-            else
-              (m2 - m1).times {|tm| @quantity[m1 + tm][h1 + th] -= r.party_size }
-            end
-          end
-        elsif h1 != h2 and m1 > 0
-          (h2 - h1 + 1).times do |th| 
-            if th == 0
-              (m1..3).each {|tm| @quantity[tm][h1 + th] -= r.party_size }
-            elsif th > 0 and th < (h2 - h1)
-              (0..3).each {|tm| @quantity[tm][h1 + th] -= r.party_size }
-            else
-              (0..m2-1).each {|tm| @quantity[tm][h1 + th] -= r.party_size }
-            end
-          end
-        end
-      end
-    end
+    # @reservations.active.each do |r|
+    #   if r.date == @date
+    #     m1 = r.start_time.strftime("%M").to_i
+    #     m1 == 0 ? 0 : m1 = m1/15
+    #     m2 = r.end_time.strftime("%M").to_i
+    #     m2 == 0 ? 0 : m2 = m2/15
+    #     h1 = r.start_time.strftime("%H").to_i
+    #     h2 = r.end_time.strftime("%H").to_i
+    #     if h1 == h2 and (m2 - m1) > 0
+    #       (m2 - m1).times {|t| @quantity[m1+t][h1] -= r.party_size }
+    #     elsif h1 != h2 and m1 == 0
+    #       (h2 - h1 + 1).times do |th| 
+    #         unless th == h2 - h1
+    #           4.times {|tm| @quantity[m1 + tm][h1 + th] -= r.party_size }
+    #         else
+    #           (m2 - m1).times {|tm| @quantity[m1 + tm][h1 + th] -= r.party_size }
+    #         end
+    #       end
+    #     elsif h1 != h2 and m1 > 0
+    #       (h2 - h1 + 1).times do |th| 
+    #         if th == 0
+    #           (m1..3).each {|tm| @quantity[tm][h1 + th] -= r.party_size }
+    #         elsif th > 0 and th < (h2 - h1)
+    #           (0..3).each {|tm| @quantity[tm][h1 + th] -= r.party_size }
+    #         else
+    #           (0..m2-1).each {|tm| @quantity[tm][h1 + th] -= r.party_size }
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
 
   end
   

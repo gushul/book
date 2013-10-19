@@ -243,19 +243,19 @@ private
 
   def check_who_editing
     @reservation = Reservation.find(params[:id])
-    if @reservation.user != current_user
+    if @reservation.user != current_user and @reservation.restaurant.owner != current_owner
       respond_to do |format|
         format.html { 
           redirect_to @reservation, 
-          alert: "It's not yours reservation!" }
+          alert: "It's not yours reservation 1!" }
         format.json { head :no_content, 
           status: :unprocessable_entity  }
       end
-    elsif @reservation.owner != current_owner
+    elsif @reservation.owner != current_owner and @reservation.restaurant.owner != current_owner
       respond_to do |format|
         format.html { 
           redirect_to @reservation, 
-          alert: "It's not yours reservation!" }
+          alert: "It's not yours reservation 2!" }
         format.json { head :no_content, 
           status: :unprocessable_entity  }
       end
