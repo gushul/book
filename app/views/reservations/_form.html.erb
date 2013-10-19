@@ -8,10 +8,16 @@
   
   <%= f.association :restaurant, label: "Restaurant" unless owner_signed_in?%>
   <%= f.input :date, label: "Date" %> <!-- , :as => :string %> -->
-  <%= f.input :start_time, :minute_step => 15, label: "Start Time", :input_html => { class: "start_time", :onchange => "auto_set_end_time(#{ @duration.to_json }, #{ owner_signed_in? })" }  %>
-  <%= f.input :end_time, :minute_step => 15, label: "End Time" %>
-  <%= f.input :party_size, label: "Party Size" %>
+  <%#= f.input :start_time, :minute_step => 15, label: "Start Time", :input_html => { class: "start_time", :onchange => "auto_set_end_time(#{ @duration.to_json }, #{ owner_signed_in? })" }  %>
+  <%#= f.input :end_time %>
   
+  <%= f.label "Start Time" %>
+  <%= f.select :start_time, @intervals %>
+  <%= f.label "End Time" %>
+  <%= f.select :end_time, @intervals %>
+
+  <%= f.input :party_size, label: "Party Size" %>
+
   <% unless user_signed_in? %>
     <%= f.input :table, label: "Table", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
   <% end %>

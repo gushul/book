@@ -58,7 +58,19 @@
 
 .bip_reservation_party_size {
   input[type="text"]:focus {
-    width: 45px;
+    width: 35px;
+  }
+}
+
+.bip_reservation_start_time {
+  input[type="text"]:focus {
+    width: 35px;
+  }
+}
+
+.bip_reservation_end_time  {
+  input[type="text"]:focus {
+    width: 35px;
   }
 }
 

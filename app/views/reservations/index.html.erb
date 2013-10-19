@@ -41,15 +41,19 @@
     <td><%= reservation.date %></td>
     <td>
       <% if owner_signed_in? %>
-        <%= best_in_place reservation, :start_time, :type => :date, :display_as => :format_time %>
-        <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
+        <%= content_tag :div, :class => 'bip_reservation_start_time' do %>
+          <%= best_in_place reservation, :start_time %>
+          <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
+        <% end %> 
       <% else %>
         <%= mtime(reservation.start_time) %>
       <% end %> 
     </td>
     <td>
       <% if owner_signed_in? %>
-        <%= best_in_place reservation, :end_time, :type => :date, :display_with => Proc.new { |f| f.strftime("%H:%M") } %>
+        <%= content_tag :div, :class => 'bip_reservation_end_time' do %>
+          <%= best_in_place reservation, :end_time %>
+        <% end %> 
       <% else %>
         <%= mtime(reservation.end_time) %></td>
       <% end %> 
