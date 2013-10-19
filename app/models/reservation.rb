@@ -46,10 +46,6 @@ class Reservation < ActiveRecord::Base
 
 private
 
-  def format_time
-    self.start_time.strftime('%H:%M')
-  end
-  
   def unreg_user_validation
     return unless user_id.blank?
 
