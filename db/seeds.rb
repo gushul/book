@@ -40,7 +40,7 @@ Restaurant.delete_all
 Inventory.delete_all
 InventoryTemplate.delete_all
 Photo.delete_all
-Restaurant.create(name: "COCA Surawong", category: "Chinese, Sukiyaki/Shabu", misc: "ซ.อนุมานราชธน ถ.สุรวงศ์ Suriyawong , Bang Rak , Bangkok", lat: 13.7282012786, lng: 100.5301216487, owner_id: Owner.first.id, days_in_advance: 90, min_booking_time: 30, res_duration: 30, largest_table: 5 )
+Restaurant.create(name: "COCA Surawong", misc: "ซ.อนุมานราชธน ถ.สุรวงศ์ Suriyawong , Bang Rak , Bangkok", lat: 13.7282012786, lng: 100.5301216487, owner_id: Owner.first.id, days_in_advance: 90, min_booking_time: 30, res_duration: 30, largest_table: 5 )
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Chinese")
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Shabu")
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Sukiyaki")
@@ -86,7 +86,7 @@ InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start
 Inventory.create(date: DateTime.now.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00", restaurant_id: Restaurant.first.id)
 Inventory.create(date: DateTime.now.tomorrow.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00",restaurant_id: Restaurant.first.id)
 
-Restaurant.create(name: "Roast Coffee & Eatery", category: "American, Tea/Coffee, Breakfast", misc: "2/F, Seenspace, Thonglor Soi 13, Bangkok, 10110 (2nd floor Seen Space Thong Lor) Seenspace Thonglor , คลองเตยเหนือ , วัฒนา , กรุงเทพมหานคร 10110", lat: 13.7339240000, lng: 100.5808190000, owner_id: Owner.find_by_email("owner2@mail.com").id, days_in_advance: 20, min_booking_time: 15, res_duration: 15, largest_table: 5 )
+Restaurant.create(name: "Roast Coffee & Eatery", misc: "2/F, Seenspace, Thonglor Soi 13, Bangkok, 10110 (2nd floor Seen Space Thong Lor) Seenspace Thonglor , คลองเตยเหนือ , วัฒนา , กรุงเทพมหานคร 10110", lat: 13.7339240000, lng: 100.5808190000, owner_id: Owner.find_by_email("owner2@mail.com").id, days_in_advance: 20, min_booking_time: 15, res_duration: 15, largest_table: 5 )
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:American")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Tea/Coffee")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Breakfast")
@@ -94,7 +94,7 @@ Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Price:$$")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Parking:No")
 Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_2.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
 
-Restaurant.create(name: "Akiyoshi Sukhumvit 53", category: "Barbeque/Grill, Sukiyaki/Shabu", misc: "สุขุมวิท 53, เขต วัฒนา, กรุงเทพมหานคร (อยู่ใกล้ ทองหล่อ ซ.5) Khlong Toei Nuea , Vadhana , Bangkok 10110", lat: 13.7309640000, lng: 100.5777670000, owner_id: Owner.find_by_email("owner3@mail.com").id,  days_in_advance: 20, min_booking_time: 45, res_duration: 45, largest_table: 5 )
+Restaurant.create(name: "Akiyoshi Sukhumvit 53", misc: "สุขุมวิท 53, เขต วัฒนา, กรุงเทพมหานคร (อยู่ใกล้ ทองหล่อ ซ.5) Khlong Toei Nuea , Vadhana , Bangkok 10110", lat: 13.7309640000, lng: 100.5777670000, owner_id: Owner.find_by_email("owner3@mail.com").id,  days_in_advance: 20, min_booking_time: 45, res_duration: 45, largest_table: 5 )
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Barbeque")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Grill")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Sukiyaki")
@@ -104,7 +104,7 @@ Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Drinking:Alcohol
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Drinking:Cocktails")
 Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_3.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
 
-Restaurant.create(name: "Bangkok Burger", category: "Franchise, American", misc: "ทองหล่อ 10, กรุงเทพมหานคร (ตึก Opus เข้าซอยทองหล่อ 10 จากทางซอยทองหล่อ 50 เมตรอยู่ซ้ายมือ) กรุงเทพมหานคร 10110", lat: 13.7331740000, lng: 100.5822730000, owner_id: Owner.find_by_email("owner4@mail.com").id,  days_in_advance: 10, min_booking_time: 60, res_duration: 75, largest_table: 5 )
+Restaurant.create(name: "Bangkok Burger", misc: "ทองหล่อ 10, กรุงเทพมหานคร (ตึก Opus เข้าซอยทองหล่อ 10 จากทางซอยทองหล่อ 50 เมตรอยู่ซ้ายมือ) กรุงเทพมหานคร 10110", lat: 13.7331740000, lng: 100.5822730000, owner_id: Owner.find_by_email("owner4@mail.com").id,  days_in_advance: 10, min_booking_time: 60, res_duration: 75, largest_table: 5 )
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Franchise")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:American")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Price:$$$")
@@ -113,7 +113,7 @@ Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Meals:Dinner")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Payment:Visa")
 Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_4.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
 
-Restaurant.create(name: "Above Eleven Rooftop", category: "Hotel, Fusion, Pub/Bar, Rooftop", misc: "38/8 สุขุมวิท 11 (ชั้น 33 โรงแรม Fraser Suites ซอยสุขุมวิท 11 นานา เข้าซอยแล้วเลี้ยวซ้าย ทางจะบังคับเลี้ยวขวา โรงแรมอยู่ขวามือ) คลองตันเหนือ , วัฒนา , กรุงเทพมหานคร", lat: 13.7479730000, lng: 100.5564750000, owner_id: Owner.find_by_email("owner5@mail.com").id,  days_in_advance: 10, min_booking_time: 90, res_duration: 75, largest_table: 5 )
+Restaurant.create(name: "Above Eleven Rooftop",  misc: "38/8 สุขุมวิท 11 (ชั้น 33 โรงแรม Fraser Suites ซอยสุขุมวิท 11 นานา เข้าซอยแล้วเลี้ยวซ้าย ทางจะบังคับเลี้ยวขวา โรงแรมอยู่ขวามือ) คลองตันเหนือ , วัฒนา , กรุงเทพมหานคร", lat: 13.7479730000, lng: 100.5564750000, owner_id: Owner.find_by_email("owner5@mail.com").id,  days_in_advance: 10, min_booking_time: 90, res_duration: 75, largest_table: 5 )
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Rooftop")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Fusion")
 Restaurant.last.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Pub")

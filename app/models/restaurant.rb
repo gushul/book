@@ -1,11 +1,11 @@
 # encoding: utf-8
 class Restaurant < ActiveRecord::Base
 
-  attr_accessible :category, :lat, :lng, :misc, 
-                  :name, :owner_id, :price,
+  attr_accessible :lat, :lng, :misc, 
+                  :name, :owner_id,
                   :restaurant_tags_attributes,
                   :days_in_advance, :min_booking_time, :res_duration,
-                  :cuisine_list, :restaurant_tag_ids,
+                  :restaurant_tag_ids,
                   :photos_attributes, :largest_table
  
   validates :name,  :presence => true
