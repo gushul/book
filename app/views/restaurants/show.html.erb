@@ -164,7 +164,7 @@
   <%#= render 'reservations/form_on_restaurant' %>
 
   <%= simple_form_for([@reservation], html: { class: "form-horizontal"}) do |f| %>
-    
+
     <% unless user_signed_in? %>
       <%= f.input :name,  label: "Name",  :required => :true %>
       <%= f.input :email, label: "Email", :required => :true %>

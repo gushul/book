@@ -1,17 +1,15 @@
 # TODO: rework 
 class Api::ReservationsController < ApplicationController
 
+  # GET /reservations.json
+  def index
+    render json: "Incorect request. Please, use POST request with login/pass instead of GET" 
+  end
 
-  # def index
-  #   @reservations = Reservation.all
-  #   render json: @reservations 
-  # end
-
-  # def show
-  #   # @reservation = Reservation.where("user_id = ?",params[:id])
-  #   @reservation = Reservation.find(params[:id])
-  #   render json: @reservation 
-  # end
+  # GET /reservations/1.json
+  def show
+    render json: "Incorect request. Please, use POST request with login/pass instead of GET to view the particular reservation"  
+  end
 
   # POST /reservations.json
   def create
