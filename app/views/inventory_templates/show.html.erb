@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Restaurant:</b>
-  <%= @inventory_template.restaurant.name %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @inventory_template.name %>
+  <b>Inventory Template Group</b>
+  <%= @inventory_template.inventory_template_group.name %>
 </p>
 
 <p>
@@ -24,12 +19,6 @@
   <b>Quantity available:</b>
   <%= @inventory_template.quantity_available %>
 </p>
-
-<p>
-  <b>Primary:</b>
-  <%= @inventory_template.primary %>
-</p>
-
 
 <%= link_to 'Edit', edit_inventory_template_path(@inventory_template) %> |
 <%= link_to 'Back', inventory_templates_path %>

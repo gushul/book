@@ -29,6 +29,10 @@ AuthApp::Application.routes.draw do
     get 'my' => "inventory_templates#my", :on => :collection, :as => :my
   end
 
+  resources :inventory_template_groups do
+    get 'my' => "inventory_template_groups#my", :on => :collection, :as => :my
+  end
+
   resources :reservations do
     get 'my' => "reservations#my", :on => :collection, :as => :my
     put :toggle, :on => :member

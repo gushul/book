@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131019054621) do
+ActiveRecord::Schema.define(:version => 20131025085405) do
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "inventories", :force => true do |t|
     t.integer  "restaurant_id"
@@ -25,18 +41,24 @@ ActiveRecord::Schema.define(:version => 20131019054621) do
 
   add_index "inventories", ["restaurant_id"], :name => "index_inventories_on_restaurant_id"
 
-  create_table "inventory_templates", :force => true do |t|
-    t.integer  "restaurant_id"
+  create_table "inventory_template_groups", :force => true do |t|
     t.string   "name"
+    t.boolean  "primary"
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "inventory_template_groups", ["restaurant_id"], :name => "index_inventory_template_groups_on_restaurant_id"
+
+  create_table "inventory_templates", :force => true do |t|
     t.time     "start_time"
     t.time     "end_time"
     t.integer  "quantity_available"
-    t.boolean  "primary"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "inventory_template_group_id"
   end
-
-  add_index "inventory_templates", ["restaurant_id"], :name => "index_inventory_templates_on_restaurant_id"
 
   create_table "owners", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -113,6 +135,13 @@ ActiveRecord::Schema.define(:version => 20131019054621) do
     t.integer  "min_booking_time"
     t.integer  "res_duration"
     t.integer  "largest_table"
+    t.integer  "mon"
+    t.integer  "tue"
+    t.integer  "wed"
+    t.integer  "thu"
+    t.integer  "fri"
+    t.integer  "sat"
+    t.integer  "sun"
   end
 
   create_table "rewards", :force => true do |t|

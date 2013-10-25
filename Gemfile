@@ -22,6 +22,9 @@ gem 'omniauth'
 gem 'omniauth-facebook' 
 gem 'omniauth-google-oauth2'
 
+gem 'delayed_job_active_record'
+# gem 'resque'
+# gem 'resque', "~> 2.0.0.pre.1", github: "resque/resque"
 
 group :production do
   gem 'pg', '~> 0.14.1'

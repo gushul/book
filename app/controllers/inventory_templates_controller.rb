@@ -17,9 +17,14 @@ class InventoryTemplatesController < ApplicationController
   end
 
   def my  
-    @inventory_templates = current_owner.restaurant.inventory_templates
+    @inventory_templates = []
+    current_owner.restaurant.inventory_template_groups.each do |itg|
+      itg.inventory_templates.each do |it|
+        @inventory_templates << it
+      end
+    end 
 
-     @reservations = current_owner.restaurant.reservations
+    @reservations = current_owner.restaurant.reservations
 
     # @reservations_by_date = @reservations.group_by(&:date)
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
@@ -107,8 +112,6 @@ class InventoryTemplatesController < ApplicationController
   def new
     @inventory_template = InventoryTemplate.new
 
-    
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @inventory_template }
@@ -124,7 +127,7 @@ class InventoryTemplatesController < ApplicationController
   # POST /inventory_templates.json
   def create
     @inventory_template = InventoryTemplate.new(params[:inventory_template])
-    @inventory_template.restaurant = current_owner.restaurant
+    # @inventory_template.restaurant = current_owner.restaurant
 
     @intervals = []
     24.times do |h| 
@@ -148,9 +151,10 @@ class InventoryTemplatesController < ApplicationController
       quan = params[:inventory_template][:quantity_available]["#{@intervals.index(interval)}".to_s]
       unless interval == "24:00" or quan.to_i == 0
         
-        @inventory_template = InventoryTemplate.new(name: params[:inventory_template][:name])
-        @inventory_template.restaurant = current_owner.restaurant
-        @inventory_template.primary = params[:inventory_template][:primary]
+        @inventory_template = InventoryTemplate.new(inventory_template_group_id: params[:inventory_template][:inventory_template_group_id])
+        # @inventory_template = InventoryTemplate.new(name: params[:inventory_template][:name])
+        # @inventory_template.restaurant = current_owner.restaurant
+        # @inventory_template.primary = params[:inventory_template][:primary]
         
         @inventory_template.start_time = interval
         @inventory_template.end_time = @intervals[@intervals.index(interval)+1]
@@ -177,7 +181,7 @@ class InventoryTemplatesController < ApplicationController
   # PUT /inventory_templates/1.json
   def update
     @inventory_template = InventoryTemplate.find(params[:id])
-    @inventory_template.restaurant = current_owner.restaurant
+    # @inventory_template.restaurant = current_owner.restaurant
 
     respond_to do |format|
       if @inventory_template.update_attributes(params[:inventory_template])
@@ -205,16 +209,16 @@ class InventoryTemplatesController < ApplicationController
 private 
 
   def check_who_editing
-    @inventory_template = InventoryTemplate.find(params[:id])
-    unless @inventory_template.restaurant.owner == current_owner
-      respond_to do |format|
-        format.html { 
-          redirect_to @inventory_template, 
-          alert: "It's not yours inventory template!" }
-        format.json { head :no_content, 
-          status: :unprocessable_entity  }
-      end
-    end
+    # @inventory_template = InventoryTemplate.find(params[:id])
+    # unless @inventory_template.restaurant.owner == current_owner
+    #   respond_to do |format|
+    #     format.html { 
+    #       redirect_to @inventory_template, 
+    #       alert: "It's not yours inventory template!" }
+    #     format.json { head :no_content, 
+    #       status: :unprocessable_entity  }
+    #   end
+    # end
   end
 
 end

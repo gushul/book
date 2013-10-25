@@ -6,7 +6,8 @@ class Restaurant < ActiveRecord::Base
                   :restaurant_tags_attributes,
                   :days_in_advance, :min_booking_time, :res_duration,
                   :restaurant_tag_ids,
-                  :photos_attributes, :largest_table
+                  :photos_attributes, :largest_table,
+                  :mon, :tue, :wed, :thu, :fri, :sat, :sun
  
   validates :name,  :presence => true
   validates :lng,   :presence => true
@@ -37,7 +38,7 @@ class Restaurant < ActiveRecord::Base
   has_many :photos,              :dependent => :destroy
   has_many :reservations,        :dependent => :destroy
   has_many :inventories,         :dependent => :destroy
-  has_many :inventory_templates, :dependent => :destroy
+  has_many :inventory_template_groups, :dependent => :destroy
   has_and_belongs_to_many :restaurant_tags
 
   accepts_nested_attributes_for :restaurant_tags, :allow_destroy => :true,

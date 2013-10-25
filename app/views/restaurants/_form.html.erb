@@ -16,6 +16,15 @@
   <h4>Restaurant tags</h4>
   <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where("title != ?", "Any"), :label => "", :item_wrapper_class => 'inline' %>
   <!-- item_wrapper_class => 'checkbox_container'  -->
+
+  <h4>Schedule</h4>
+  <%= f.input :mon, :collection => InventoryTemplateGroup.all %>
+  <%= f.input :tue, :collection => InventoryTemplateGroup.all %>
+  <%= f.input :wed, :collection => InventoryTemplateGroup.all %>
+  <%= f.input :thu, :collection => InventoryTemplateGroup.all %>
+  <%= f.input :fri, :collection => InventoryTemplateGroup.all %>
+  <%= f.input :sat, :collection => InventoryTemplateGroup.all %>
+  <%= f.input :sun, :collection => InventoryTemplateGroup.all %>
   
   <h4>Photos</h4>
     <% unless @restaurant.photos.blank? %>

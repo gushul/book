@@ -81,6 +81,7 @@
                      <li><%= link_to t("reservations"), reservations_path %></li>
                     <li><%= link_to t("inventories"), inventories_path %></li>
                     <li><%= link_to t("inventory_templates"), my_inventory_templates_path unless current_owner.restaurant.blank? %></li>
+                    <li><%= link_to "Inventory Template Groups", inventory_template_groups_path unless current_owner.restaurant.blank? %></li>
                     <li class="dropdown-submenu">
                       <a href="#">My Report</a>
                       <ul class="dropdown-menu">

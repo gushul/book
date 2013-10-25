@@ -4,13 +4,11 @@
   <table  class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
-      <th>Inventory Template Group</th>
-      <!-- <th>Restaurant</th> -->
-      <!-- <th>Name</th> -->
+      <th>Name</th>
       <th>Start time</th>
       <th>End time</th>
       <th>Quantity available</th>
-      <!-- <th>Primary</th> -->
+      <th>Primary</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,13 +16,11 @@
     </thead>
     <% @inventory_templates.each do |inventory_template| %>
       <tr>
-        <td><%= inventory_template.inventory_template_group.name %></td>
-        <!-- <td><%#= inventory_template.restaurant.name %></td> -->
-        <!-- <td><%#= inventory_template.name %></td> -->
+        <td><%= inventory_template.name %></td>
         <td><%= mtime(inventory_template.start_time) %></td>
         <td><%= mtime(inventory_template.end_time) %></td>
         <td><%= inventory_template.quantity_available %></td>
-        <!-- <td><%#= inventory_template.primary %></td> -->
+        <td><%= inventory_template.primary %></td>
         <td><%= link_to 'Show', inventory_template %></td>
         <td><%= link_to 'Edit', edit_inventory_template_path(inventory_template) %></td>
         <td><%= link_to 'Destroy', inventory_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
