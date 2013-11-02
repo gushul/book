@@ -45,6 +45,7 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
+    chronic (0.10.2)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -89,6 +90,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -150,6 +152,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.5)
     rmagick (2.13.2)
     sass (3.2.10)
     sass-rails (3.2.6)
@@ -166,6 +169,9 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.8)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
@@ -179,6 +185,9 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.8.4)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -195,6 +204,7 @@ DEPENDENCIES
   database_cleaner
   delayed_job_active_record
   devise
+  execjs
   figaro
   geocoder
   jquery-rails
@@ -212,4 +222,6 @@ DEPENDENCIES
   sass-rails (>= 3.2)
   simple_form
   sqlite3
+  therubyracer
   uglifier (>= 1.0.3)
+  whenever

@@ -49,40 +49,51 @@ Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Price:$")
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Parking:Yes")
 Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_restaurant_seed_5.png"), is_cover: true, restaurant_id: Restaurant.last.id) 
 
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 10:15:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:15:00", end_time: "2000-01-01 10:30:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:30:00", end_time: "2000-01-01 10:45:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 10:45:00", end_time: "2000-01-01 11:00:00", quantity_available: 10, primary: true )
+InventoryTemplateGroup.create(name: "Main", restaurant: Restaurant.first, primary: true )
+InventoryTemplateGroup.create(name: "Weekends", restaurant: Restaurant.first, primary: true )
 
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:00:00", end_time: "2000-01-01 11:15:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:15:00", end_time: "2000-01-01 11:30:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:30:00", end_time: "2000-01-01 11:45:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 11:45:00", end_time: "2000-01-01 12:00:00", quantity_available: 10, primary: true )
+Restaurant.first.update_attributes(mon: InventoryTemplateGroup.first.id,
+                                   tue: InventoryTemplateGroup.first.id,
+                                   wed: InventoryTemplateGroup.first.id,
+                                   thu: InventoryTemplateGroup.first.id,
+                                   fri: InventoryTemplateGroup.first.id,
+                                   sat: InventoryTemplateGroup.last.id,
+                                   sun: InventoryTemplateGroup.last.id)
 
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:00:00", end_time: "2000-01-01 12:15:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:15:00", end_time: "2000-01-01 12:30:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:30:00", end_time: "2000-01-01 12:45:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 12:45:00", end_time: "2000-01-01 13:00:00", quantity_available: 10, primary: true )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 10:15:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 10:15:00", end_time: "2000-01-01 10:30:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 10:30:00", end_time: "2000-01-01 10:45:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 10:45:00", end_time: "2000-01-01 11:00:00", quantity_available: 10 )
 
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:00:00", end_time: "2000-01-01 13:15:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:15:00", end_time: "2000-01-01 13:30:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:30:00", end_time: "2000-01-01 13:45:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 13:45:00", end_time: "2000-01-01 14:00:00", quantity_available: 10, primary: true )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 11:00:00", end_time: "2000-01-01 11:15:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 11:15:00", end_time: "2000-01-01 11:30:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 11:30:00", end_time: "2000-01-01 11:45:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 11:45:00", end_time: "2000-01-01 12:00:00", quantity_available: 10 )
 
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 14:15:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:15:00", end_time: "2000-01-01 14:30:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:30:00", end_time: "2000-01-01 14:45:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 14:45:00", end_time: "2000-01-01 15:00:00", quantity_available: 10, primary: true )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 12:00:00", end_time: "2000-01-01 12:15:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 12:15:00", end_time: "2000-01-01 12:30:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 12:30:00", end_time: "2000-01-01 12:45:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 12:45:00", end_time: "2000-01-01 13:00:00", quantity_available: 10 )
 
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:00:00", end_time: "2000-01-01 15:15:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:15:00", end_time: "2000-01-01 15:30:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:30:00", end_time: "2000-01-01 15:45:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 15:45:00", end_time: "2000-01-01 16:00:00", quantity_available: 10, primary: true )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 13:00:00", end_time: "2000-01-01 13:15:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 13:15:00", end_time: "2000-01-01 13:30:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 13:30:00", end_time: "2000-01-01 13:45:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 13:45:00", end_time: "2000-01-01 14:00:00", quantity_available: 10 )
 
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:15:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:15:00", end_time: "2000-01-01 16:30:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:30:00", end_time: "2000-01-01 16:45:00", quantity_available: 10, primary: true )
-# InventoryTemplate.create(name: "Main", restaurant_id: Restaurant.first.id, start_time: "2000-01-01 16:45:00", end_time: "2000-01-01 17:00:00", quantity_available: 10, primary: true )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 14:15:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 14:15:00", end_time: "2000-01-01 14:30:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 14:30:00", end_time: "2000-01-01 14:45:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 14:45:00", end_time: "2000-01-01 15:00:00", quantity_available: 10 )
+
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 15:00:00", end_time: "2000-01-01 15:15:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 15:15:00", end_time: "2000-01-01 15:30:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 15:30:00", end_time: "2000-01-01 15:45:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 15:45:00", end_time: "2000-01-01 16:00:00", quantity_available: 10 )
+
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:15:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 16:15:00", end_time: "2000-01-01 16:30:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 16:30:00", end_time: "2000-01-01 16:45:00", quantity_available: 10 )
+InventoryTemplate.create( inventory_template_group_id: InventoryTemplateGroup.first.id, start_time: "2000-01-01 16:45:00", end_time: "2000-01-01 17:00:00", quantity_available: 10 )
 
 Inventory.create(date: DateTime.now.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00", restaurant_id: Restaurant.first.id)
 Inventory.create(date: DateTime.now.tomorrow.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00",restaurant_id: Restaurant.first.id)

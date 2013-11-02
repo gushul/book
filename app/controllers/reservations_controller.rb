@@ -7,6 +7,8 @@ class ReservationsController < ApplicationController
   before_filter :check_who_editing,  
                 except: [:index, :show, :new, :create, :my]
   before_filter :check_for_unreg_users
+  before_filter :intervals_construct,  
+                only: [:new, :create, :edit, :update]
   # before_filter :process_reservation,  
   #               only: [:create, :update, :delete]
 
@@ -120,24 +122,6 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
 
-    @intervals = []
-      24.times do |h| 
-        4.times do |m| 
-            if h<10 and m!=0
-              @intervals << "0#{h}:#{m*15}" 
-            elsif h<10 and m==0
-              @intervals << "0#{h}:00" 
-            elsif h>=10 and m!=0
-              @intervals << "#{h}:#{m*15}" 
-            elsif h>=10 and m==0
-              @intervals << "#{h}:0#{m*15}" 
-            else
-              @intervals << "#{h}:#{m*15}" 
-            end
-        end
-      end
-    @intervals << "24:00"
-
     unless params[:start_time].blank?
       @reservation.start_time = params[:start_time]
       @reservation.end_time   = params[:start_time]
@@ -159,24 +143,6 @@ class ReservationsController < ApplicationController
   # GET /reservations/1/edit
   def edit
     @reservation = Reservation.find(params[:id])
-
-    @intervals = []
-      24.times do |h| 
-        4.times do |m| 
-            if h<10 and m!=0
-              @intervals << "0#{h}:#{m*15}" 
-            elsif h<10 and m==0
-              @intervals << "0#{h}:00" 
-            elsif h>=10 and m!=0
-              @intervals << "#{h}:#{m*15}" 
-            elsif h>=10 and m==0
-              @intervals << "#{h}:0#{m*15}" 
-            else
-              @intervals << "#{h}:#{m*15}" 
-            end
-        end
-      end
-    @intervals << "24:00"
   end
 
   # POST /reservations
@@ -189,6 +155,8 @@ class ReservationsController < ApplicationController
       @reservation.owner_id = current_owner.id
       @reservation.restaurant = current_owner.restaurant
     end
+
+    
 
     respond_to do |format|
       if @reservation.save
@@ -210,11 +178,12 @@ class ReservationsController < ApplicationController
 
         # UserMailer.booking_create(current_user, @reservation).deliver
         # OwnerMailer.booking_create(@reservation).deliver
-        
       else
         format.html { render action: "new" }
+        # format.html { redirect_to new_reservation_path(reservation: params[:reservation]) }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
+
     end
   end
 
@@ -271,6 +240,26 @@ class ReservationsController < ApplicationController
   end
 
 private 
+
+  def intervals_construct
+    @intervals = []
+      24.times do |h| 
+        4.times do |m| 
+            if h<10 and m!=0
+              @intervals << "0#{h}:#{m*15}" 
+            elsif h<10 and m==0
+              @intervals << "0#{h}:00" 
+            elsif h>=10 and m!=0
+              @intervals << "#{h}:#{m*15}" 
+            elsif h>=10 and m==0
+              @intervals << "#{h}:0#{m*15}" 
+            else
+              @intervals << "#{h}:#{m*15}" 
+            end
+        end
+      end
+    @intervals << "24:00"
+  end
 
   def check_for_unreg_users
     unless owner_signed_in? or user_signed_in?

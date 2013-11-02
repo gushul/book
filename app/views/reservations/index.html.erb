@@ -46,7 +46,7 @@
           <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
         <% end %> 
       <% else %>
-        <%= mtime(reservation.start_time) %>
+        <%= reservation.start_time %>
       <% end %> 
     </td>
     <td>
@@ -55,7 +55,7 @@
           <%= best_in_place reservation, :end_time %>
         <% end %> 
       <% else %>
-        <%= mtime(reservation.end_time) %></td>
+        <%= reservation.end_time %></td>
       <% end %> 
     <td>
       <%= content_tag :div, :class => 'bip_reservation_party_size' do %>

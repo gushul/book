@@ -16,6 +16,7 @@ class Reservation < ActiveRecord::Base
   validates :end_time,      :presence => true
   validates :party_size,    :presence => true
   validate  :unreg_user_validation            
+  validate  :party_size_available_validation
 
   validates :party_size, :numericality => { 
       :greater_than => 0 }
@@ -45,6 +46,28 @@ class Reservation < ActiveRecord::Base
   end
 
 private
+
+  def party_size_available_validation
+    unless is_avilabale_reservation
+      self.errors.add(:party_size, "Please, check restaurant page for available date/time and places.")
+    end
+  end
+
+  # TODO
+  def is_avilabale_reservation
+    Restaurant.find(restaurant_id).inventories.each do |inv| 
+      if inv.date == date
+        if inv.start_time.strftime('%H:%M') <= start_time && 
+           inv.end_time.strftime('%H:%M') >= end_time
+          if inv.quantity_available >= party_size
+            return true
+          end
+        end
+        return false
+      end
+    end 
+    false
+  end
 
   def unreg_user_validation
     return unless user_id.blank?

@@ -52,6 +52,30 @@ class Restaurant < ActiveRecord::Base
     ids.collect {|i| joins(:restaurant_tags).where('restaurant_tags.id = ?', i ) }.flatten
   }
 
+  def self.generate_schedule
+    puts "-------CRON----------"
+    puts "-----------------   #{Restaurant.all.length}"
+
+    Restaurant.all.each do |r|
+      puts r.days_in_advance
+      puts 
+      # Inventory.create(date: DateTime.now.to_date, 
+      #                  quantity_available: 10, 
+      #                  start_time: "2000-01-01 10:00:00", 
+      #                  end_time: "2000-01-01 17:00:00", 
+      #                  restaurant_id: Restaurant.first.id)
+
+      # unless r.inventory_template_groups.blank?
+        # r.inventory_template_groups.each do |itg|
+        #   # unless itg.inventory_templates.blank?
+        #     inv_templ = itg.innventory_templates
+        #   # end
+        # end
+      # end
+    end
+
+  end
+
 # private
 
 #   def cover_controll

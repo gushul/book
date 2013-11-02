@@ -22,9 +22,15 @@ gem 'omniauth'
 gem 'omniauth-facebook' 
 gem 'omniauth-google-oauth2'
 
+gem 'whenever'
 gem 'delayed_job_active_record'
+# gem 'thinking-sphinx'
+# gem 'ts-delayed-delta', '~> 2.0.0'
 # gem 'resque'
 # gem 'resque', "~> 2.0.0.pre.1", github: "resque/resque"
+
+gem 'execjs'
+gem 'therubyracer'
 
 group :production do
   gem 'pg', '~> 0.14.1'
