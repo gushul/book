@@ -5,6 +5,10 @@ AuthApp::Application.routes.draw do
     resources :reservations
     resources :rewards #, :only => [:create]
     resources :restaurants
+
+    namespace :owner do
+      resources :reservations
+    end
   end 
 
   root :to => "home#index"
