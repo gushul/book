@@ -1,5 +1,15 @@
 AuthApp::Application.routes.draw do
 
+  root :to => "home#index"
+  # get "home/index"
+  get 'search', to: 'home#search', as: 'search'
+  get 'calendar', to: 'home#calendar', as: 'calendar'
+  
+  devise_for :owners
+  devise_for :users, controllers: { 
+    omniauth_callbacks: "omniauth_callbacks" 
+  }
+
   namespace :api do
     devise_for(:users, :controllers => {
      # :sessions => "api/sessions", 
@@ -14,17 +24,6 @@ AuthApp::Application.routes.draw do
       resources :reservations
     end
   end 
-
-  root :to => "home#index"
-  # get "home/index"
-  get 'search', to: 'home#search', as: 'search'
-  get 'calendar', to: 'home#calendar', as: 'calendar'
-
-  devise_for :owners
-  devise_for :users, controllers: { 
-    omniauth_callbacks: "omniauth_callbacks" 
-  }
-  
 
   resources :inventories do 
     get 'my' => "inventories#my", :on => :collection, :as => :my

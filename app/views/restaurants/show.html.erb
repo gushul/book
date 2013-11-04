@@ -1,6 +1,7 @@
 <!-- # encoding: utf-8 -->
-<!-- <p id="notice"><%#= notice %></p> -->
-
+<script>
+    var res_duration = "<%= @restaurant.res_duration %>";
+</script>
 
 <table>
   <tr>
@@ -160,24 +161,29 @@
 </table>
 
 <% if user_signed_in? or owner_signed_in? %>
-  <span class="input-xxlarge uneditable-input">non-editable Text field</span>
+  <span id="time_selected" class="input-xxlarge uneditable-input">Choose start-time. End-time is automatically processed. </span>
   <%#= render 'reservations/form_on_restaurant' %>
-
+  
   <%= simple_form_for([@reservation], html: { class: "form-horizontal"}) do |f| %>
+
+    <div class="hide_element">
+      <%#= f.label "Start Time" %>
+      <%= f.select :start_time, @intervals %>
+      <%#= f.label "End Time" %>
+      <%= f.select :end_time, @intervals %>
+    </div>
+
+    <%= f.input :date, :as => :hidden, input_html: { value: @date} %>
+    <%= f.input :restaurant_id, :as => :hidden, input_html: { value: @restaurant.id } %>
+    <%= f.input :active, :as => :hidden, :input_html => { value: 1 }, label: "active" %>
+
+    <%= f.input :party_size, label: "Party Size" %>
 
     <% unless user_signed_in? %>
       <%= f.input :name,  label: "Name",  :required => :true %>
       <%= f.input :email, label: "Email", :required => :true %>
       <%= f.input :phone, label: "Phone", :required => :true %>
     <% end %>
-
-    <%= f.label "Start Time" %>
-    <%= f.select :start_time, @intervals %>
-    <%= f.label "End Time" %>
-    <%= f.select :end_time, @intervals %>
-    <%= f.input :date, :as => :hidden, input_html: { value: @date} %>
-
-    <%= f.input :party_size, label: "Party Size" %>
 
     <% unless user_signed_in? %>
       <%= f.input :table, label: "Table", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
@@ -188,7 +194,7 @@
     <%= f.input :special_request, label: "Special Request", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
 
     <div class="actions">
-      <%= f.submit "Book Now" , class: "btn btn-primary" %>
+      <%= f.submit "Make Booking" , class: "btn btn-primary" %>
     </div>
    
   <% end %>

@@ -55,15 +55,15 @@ class RestaurantsController < ApplicationController
     @restaurant.reservations.active.each do |r|
       if r.date == @date
         m1 = r.start_time.slice(3..5).to_i
-        p m1
+        # p m1
         m1 == 0 ? 0 : m1 = m1/15
         m2 = r.end_time.slice(3..5).to_i
-        p m2
+        # p m2
         m2 == 0 ? 0 : m2 = m2/15
         h1 = r.start_time.slice(0..2).to_i
-        p h1
+        # p h1
         h2 = r.end_time.slice(0..2).to_i
-        p h2
+        # p h2
         if h1 == h2 and (m2 - m1) > 0
           (m2 - m1).times {|t| @quantity[m1+t][h1] -= r.party_size }
         elsif h1 != h2 and m1 == 0

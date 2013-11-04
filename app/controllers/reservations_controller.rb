@@ -156,8 +156,6 @@ class ReservationsController < ApplicationController
       @reservation.restaurant = current_owner.restaurant
     end
 
-    
-
     respond_to do |format|
       if @reservation.save
 
