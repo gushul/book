@@ -54,24 +54,50 @@ class Restaurant < ActiveRecord::Base
 
   def self.generate_schedule
     puts "-------CRON----------"
-    puts "-----------------   #{Restaurant.all.length}"
 
+    @intervals = []
+      24.times do |h| 
+        4.times do |m| 
+            if h<10 and m!=0
+              @intervals << "0#{h}:#{m*15}" 
+            elsif h<10 and m==0
+              @intervals << "0#{h}:00" 
+            elsif h>=10 and m!=0
+              @intervals << "#{h}:#{m*15}" 
+            elsif h>=10 and m==0
+              @intervals << "#{h}:0#{m*15}" 
+            else
+              @intervals << "#{h}:#{m*15}" 
+            end
+        end
+      end
+    @intervals << "24:00"
+
+    # итерация по ресторанам
+    # находим
+    #
+    #
+    #
+    #
     Restaurant.all.each do |r|
+      puts "//////////////////////"
+      puts r.inventory_template_groups.count
       puts r.days_in_advance
-      puts 
       # Inventory.create(date: DateTime.now.to_date, 
       #                  quantity_available: 10, 
       #                  start_time: "2000-01-01 10:00:00", 
       #                  end_time: "2000-01-01 17:00:00", 
       #                  restaurant_id: Restaurant.first.id)
 
-      # unless r.inventory_template_groups.blank?
-        # r.inventory_template_groups.each do |itg|
-        #   # unless itg.inventory_templates.blank?
-        #     inv_templ = itg.innventory_templates
-        #   # end
-        # end
-      # end
+      
+      unless r.inventory_template_groups.blank?
+        r.inventory_template_groups.each do |itg|
+          # unless itg.inventory_templates.blank?
+            inv_templ = itg.inventory_templates
+
+          # end
+        end
+      end
     end
 
   end

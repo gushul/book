@@ -22,8 +22,8 @@
 # set :environment, :development
 # set :output, '~/GIT/1/booking-master-with-clear-bs3/tmp/whenever.log'
 
-# # every 1.day, :at => '3:00 am' do
+# equal to 3:00 a.m at Bangkok time (UTC+7)
+every 1.day, :at => Time.zone.parse('20:00 pm').utc do
 # every 1.minute do
-#   # command "echo 'one' && echo 'two'"
-#   runner "Restaurant.generate_schedule"
-# end
+  runner "Restaurant.generate_schedule"
+end
