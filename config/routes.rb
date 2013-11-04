@@ -1,7 +1,11 @@
 AuthApp::Application.routes.draw do
 
   namespace :api do
-    # devise_for(:users, :controllers => { :sessions => "api/sessions", :registrations => "api/registrations"})
+    devise_for(:users, :controllers => {
+     # :sessions => "api/sessions", 
+     :registrations => "api/registrations"
+     })
+    
     resources :reservations
     resources :rewards #, :only => [:create]
     resources :restaurants

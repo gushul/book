@@ -10,7 +10,7 @@ class Api::Owner::ReservationsController < ApplicationController
   def show
     render json: "Incorect request. Please, use POST request with login/pass instead of GET to view the particular reservation"  
   end
-
+ 
   # POST /reservations.json
   def create
     u = Owner.where("email = ?", params[:owner][:email] ).first

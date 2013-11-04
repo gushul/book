@@ -1,16 +1,18 @@
 class Api::RegistrationsController < ApplicationController
- 
-  # respond_to :json
-  # def create
- 
-  #   user = User.new(params[:user])
-  #   if user.save
-  #     render json: user.as_json(auth_token: user.authentication_token, email: user.email), status: :created
-  #     return
-  #   else
-  #     warden.custom_failure!
-  #     render json: user.errors, status: :unprocessable_entity
-  #   end
-  # end
+  skip_before_filter :verify_authenticity_token, :only => :create
+  
+  respond_to :json
+
+  # POST /registrations.json
+  def create
+    user = User.new(params[:user])
+    if user.save
+      render json: user.as_json(auth_token: user.authentication_token, email: user.email), status: :created
+      return
+    else
+      warden.custom_failure!
+      render json: user.errors, status: :unprocessable_entity
+    end
+  end
  
 end
