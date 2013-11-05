@@ -11,7 +11,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :provider, :uid,
                   :username, :phone
-   
+
+  validates :phone, :presence => true
+  validate  :phone_number_validation, :if => "phone?"  
+
+  before_create :username_setup
+
   has_many :reservations, :dependent => :destroy
   has_many :rewards,      :dependent => :destroy
  
@@ -30,5 +35,24 @@ class User < ActiveRecord::Base
       end
     end
   end 
+
+private
+
+  def phone_number_validation
+    unless check_phone_number
+      self.errors.add(:phone, "Incorrect phone number format")
+    end
+  end
+
+  def username_setup
+    self.username = self.email if self.username.blank?
+  end
+
+  def check_phone_number
+    if phone.length == 10 and phone[0,1].to_i == 0
+      return true
+    end
+    false
+  end
 
 end  
