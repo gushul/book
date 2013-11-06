@@ -84,19 +84,23 @@ private
           format.json { render json: "Provide correct login/pass for this action", 
                       status: :unprocessable_entity }
         end
-      elsif params[:reservation].blank? or 
-            params[:reservation][:active].blank?     or params[:reservation][:date].blank?         or 
-            params[:reservation][:party_size].blank? or params[:reservation][:start_time].blank?   or 
-            params[:reservation][:end_time].blank?   or params[:reservation][:restaurant_id].blank?
-        respond_to do |format|
-          format.json { render json: "Provide correct reservation data for this action", 
-                      status: :unprocessable_entity }
-        end
-      elsif params[:reservation].length > 6 or params[:user].length > 2
-        respond_to do |format|
-          format.json { render json: "Provide ONLY needed parameters parameters for this action", 
-                      status: :unprocessable_entity }
-        end
+      # elsif params[:reservation].blank? or 
+      #       params[:reservation][:active].blank?     or params[:reservation][:date].blank?         or 
+      #       params[:reservation][:party_size].blank? or params[:reservation][:start_time].blank?   or 
+      #       params[:reservation][:end_time].blank?   or params[:reservation][:restaurant_id].blank?
+      #   respond_to do |format|
+      #     format.json { render json: "Provide correct reservation data for this action", 
+      #                 status: :unprocessable_entity }
+      #   end
+      # elsif params[:reservation].length > 6 or params[:user].length > 2
+      #   respond_to do |format|
+      #     format.json { render json: "Provide ONLY needed parameters parameters for this action", 
+      #                 status: :unprocessable_entity }
+      #   end
+      # elsif JSON.is_json?(params)
+      #   respond_to do |format|
+      #     format.json { render json: "Provide CORRECT json parameters for this action", status: :unprocessable_entity }
+      #   end
       end
 
   end 
