@@ -1,5 +1,6 @@
 # TODO: rework 
 class Api::ReservationsController < ApplicationController
+  before_filter :check_params, only: [:create, :update]
 
   # GET /reservations.json
   def index
@@ -73,4 +74,34 @@ class Api::ReservationsController < ApplicationController
 
   end
 
+private
+
+  def check_params
+
+      if params[:user].blank? or params[:user][:email].blank? or
+         params[:user][:password].blank?
+        respond_to do |format|
+          format.json { render json: "Provide correct login/pass for this action", 
+                      status: :unprocessable_entity }
+        end
+      elsif params[:reservation].blank? or 
+            params[:reservation][:active].blank?     or params[:reservation][:date].blank?         or 
+            params[:reservation][:party_size].blank? or params[:reservation][:start_time].blank?   or 
+            params[:reservation][:end_time].blank?   or params[:reservation][:restaurant_id].blank?
+        respond_to do |format|
+          format.json { render json: "Provide correct reservation data for this action", 
+                      status: :unprocessable_entity }
+        end
+      elsif params[:reservation].length > 6 or params[:user].length > 2
+        respond_to do |format|
+          format.json { render json: "Provide ONLY needed parameters parameters for this action", 
+                      status: :unprocessable_entity }
+        end
+      end
+
+  end 
+
 end
+
+# 
+# curl -X POST -H "Content-Type: application/json" -d '{ "user":{"email":"user1@mail.com","password":"secret12"}, "reservation":{"restaurant_id":1, "date": "2013-11-5 20:00:00", "start_time": "2013-11-5 11:00:00", "end_time": "2013-10-20 12:00:00", "party_size":13, "active": false } }' http://localhost:3000/api/reservations.json
