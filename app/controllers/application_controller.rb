@@ -3,7 +3,17 @@ class ApplicationController < ActionController::Base
   before_filter :set_i18n_locale_from_params
   protect_from_forgery
 
+  rescue_from Exception, :with => :error_render_method
+
 protected
+
+  def error_render_method
+    respond_to do |type|
+      # type.html { render :template => "errors/error_404", :status => 404 }
+      type.all  { render :nothing => true, :status => 404 }
+    end
+    true
+  end
 
   def set_i18n_locale_from_params
     if params[:locale]

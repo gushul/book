@@ -16,7 +16,11 @@ AuthApp::Application.routes.draw do
      :registrations => "api/registrations"
      })
     
-    resources :reservations
+    # resources :reservations, :only => [:update]
+    post "/reservations"        => "reservations#index"
+    post "/reservations/create" => "reservations#create"
+    post "/reservations/update" => "reservations#update"
+
     resources :rewards #, :only => [:create]
     resources :restaurants
 
