@@ -104,11 +104,11 @@ class Restaurant < ActiveRecord::Base
           unless r.inventory_template_groups.blank?
             it = r.inventory_template_groups.first.inventory_templates
             it.each do |inv|
-              Inventory.create(date: d.to_s, 
-                               quantity_available: inv.quantity_available, 
-                               start_time: inv.start_time, 
-                               end_time: inv.end_time, 
-                               restaurant_id: Restaurant.first.id)
+              # Inventory.create(date: d.to_s, 
+              #                  quantity_available: inv.quantity_available, 
+              #                  start_time: inv.start_time, 
+              #                  end_time: inv.end_time, 
+              #                  restaurant_id: Restaurant.first.id)
               created_count += 1
             end
           end
