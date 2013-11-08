@@ -41,7 +41,7 @@ Inventory.delete_all
 InventoryTemplate.delete_all
 InventoryTemplateGroup.delete_all
 Photo.delete_all
-Restaurant.create(name: "COCA Surawong", misc: "ซ.อนุมานราชธน ถ.สุรวงศ์ Suriyawong , Bang Rak , Bangkok", lat: 13.7282012786, lng: 100.5301216487, owner_id: Owner.first.id, days_in_advance: 90, min_booking_time: 30, res_duration: 30, largest_table: 5 )
+Restaurant.create(name: "COCA Surawong", misc: "ซ.อนุมานราชธน ถ.สุรวงศ์ Suriyawong , Bang Rak , Bangkok", lat: 13.7282012786, lng: 100.5301216487, owner_id: Owner.first.id, days_in_advance: 1, min_booking_time: 30, res_duration: 30, largest_table: 5 )
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Chinese")
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Shabu")
 Restaurant.first.restaurant_tags << RestaurantTag.find_by_title("Cuisine:Sukiyaki")
@@ -141,8 +141,8 @@ Photo.create(title: "sample_thumbnail", picture: File.open("app/assets/images/_r
 puts "*** Restaurants created with tags and photos ***"
 
 User.delete_all
-User.create(email: "user1@mail.com", password: "secret12", username: "sample user 1")
-User.create(email: "user2@mail.com", password: "secret12", username: "sample user 2")
+User.create(email: "user1@mail.com", password: "secret12", username: "sample user 1", phone: "0123456789")
+User.create(email: "user2@mail.com", password: "secret12", username: "sample user 2", phone: "0123456789")
 # ==================================================================
 puts "*** Users created ***"
 

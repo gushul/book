@@ -3,7 +3,7 @@ AuthApp::Application.routes.draw do
   root :to => "home#index"
   # get "home/index"
   get 'search', to: 'home#search', as: 'search'
-  get 'calendar', to: 'home#calendar', as: 'calendar'
+  # get 'calendar', to: 'home#calendar', as: 'calendar'
   
   devise_for :owners
   devise_for :users, controllers: { 

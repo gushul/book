@@ -79,26 +79,54 @@ class Restaurant < ActiveRecord::Base
     #
     #
     #
-    Restaurant.all.each do |r|
-      puts "//////////////////////"
-      puts r.inventory_template_groups.count
-      puts r.days_in_advance
-      # Inventory.create(date: DateTime.now.to_date, 
-      #                  quantity_available: 10, 
-      #                  start_time: "2000-01-01 10:00:00", 
-      #                  end_time: "2000-01-01 17:00:00", 
-      #                  restaurant_id: Restaurant.first.id)
-
+    # Restaurant.all.each do |r|
+    r = Restaurant.first
+      # puts r.inventory_template_groups.count
       
-      unless r.inventory_template_groups.blank?
-        r.inventory_template_groups.each do |itg|
-          # unless itg.inventory_templates.blank?
-            inv_templ = itg.inventory_templates
+      # count of needed days
+      # inv_cnt_have = r.inventories.where("date >= ?", Date.today).count
+      created_count = 0
+      inv_cnt_have = r.inventories.where("date >= ?", Date.today).group(:date).length
+      cnt = r.days_in_advance - inv_cnt_have
+      
+      puts r.days_in_advance
+      puts cnt 
+      puts "<<<<<<<<<<"
 
-          # end
+      if cnt >= 0 
+        # end_date = Date.today + r.days_in_advance.days
+        end_date = DateTime.now.to_date + r.days_in_advance.days
+        start_date = end_date - cnt
+        period = 1
+        dates = start_date.step(end_date, period).map.each_cons(1).to_a
+
+        dates.each do |d|
+          unless r.inventory_template_groups.blank?
+            it = r.inventory_template_groups.first.inventory_templates
+            it.each do |inv|
+              Inventory.create(date: d.to_s, 
+                               quantity_available: inv.quantity_available, 
+                               start_time: inv.start_time, 
+                               end_time: inv.end_time, 
+                               restaurant_id: Restaurant.first.id)
+              created_count += 1
+            end
+          end
         end
       end
-    end
+      p "#{created_count} inventories created"
+
+      # dates
+
+      # unless r.inventory_template_groups.blank?
+      #   r.inventory_template_groups.each do |itg|
+      #     # unless itg.inventory_templates.blank?
+      #       inv_templ = itg.inventory_templates
+      #       p inv_templ
+      #     # end
+      #   end
+      # end
+    # end
 
   end
 

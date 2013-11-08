@@ -83,19 +83,21 @@
 
 </table>
 
-<p />Available Bookings<br>
-<% @restaurant.inventories.each do |n| %>
-<%= n.date %> <%= n.start_time.hour %>:<%= n.start_time.min %> <%= n.quantity_available %> 
+<!-- <p />Available Bookings<br> -->
+<%# @restaurant.inventories.each do |n| %>
+<%#= n.date %> <%#= n.start_time.hour %> 
+<!-- : -->
+<%#= n.start_time.min %> <%#= n.quantity_available %> 
 
-<% if current_user.nil? then %>
-<%= link_to "Login", new_user_session_path %> to Book
-<% else%>
-  <%= link_to 'Book Now', new_reservation_path(:restaurant_id=>@restaurant.id,:day=>n.date.day,:month=>n.date.month,:year=>n.date.year) %>
-<% end %>
+<%# if current_user.nil? then %>
+  <%#= link_to "Login", new_user_session_path %> <!-- to Book -->
+<%# else%>
+  <%#= link_to 'Book Now', new_reservation_path(:restaurant_id=>@restaurant.id,:day=>n.date.day,:month=>n.date.month,:year=>n.date.year) %>
+<%# end %>
 <br>
-<% end %>
+<%# end %>
 
-<%= current_user.nil? ? 'yes' : 'no' %>
+<%#= current_user.nil? ? 'yes' : 'no' %>
 
 <br>
 

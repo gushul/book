@@ -9,7 +9,8 @@ protected
 
   def error_render_method
     respond_to do |type|
-      # type.html { render :template => "errors/error_404", :status => 404 }
+      # type.html { render :template => "404", :status => 404 }
+      type.html { render file: "public/404", formats: :html, status: 404 }
       type.all  { render :nothing => true, :status => 404 }
     end
     true

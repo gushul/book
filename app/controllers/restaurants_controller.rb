@@ -43,6 +43,7 @@ class RestaurantsController < ApplicationController
         elsif h1 != h2
           (h2 - h1 + 1).times do |th| 
             unless th == h2 - h1
+              p @quantity
               4.times {|tm| @quantity[m1 + tm][h1 + th] = inv.quantity_available }
             else
               (m2 - m1).times {|tm| @quantity[m1 + tm][h1 + th] = inv.quantity_available }
