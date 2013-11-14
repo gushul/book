@@ -73,12 +73,6 @@ class Restaurant < ActiveRecord::Base
       end
     @intervals << "24:00"
 
-    # итерация по ресторанам
-    # находим
-    #
-    #
-    #
-    #
     Restaurant.all.each do |r|
     # r = Restaurant.first
       # puts r.inventory_template_groups.count
@@ -86,7 +80,7 @@ class Restaurant < ActiveRecord::Base
       # count of needed days
       # inv_cnt_have = r.inventories.where("date >= ?", Date.today).count
       created_count = 0
-      inv_cnt_have = r.inventories.where("date >= ?", Date.today).group(:date).length
+      inv_cnt_have = r.inventories.unscoped.where("date >= ?", Date.today).group(:date).length
       cnt = r.days_in_advance - inv_cnt_have
       
       puts "*************"

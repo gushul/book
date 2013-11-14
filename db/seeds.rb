@@ -143,6 +143,7 @@ puts "*** Restaurants created with tags and photos ***"
 User.delete_all
 User.create(email: "user1@mail.com", password: "secret12", username: "sample user 1", phone: "0123456789")
 User.create(email: "user2@mail.com", password: "secret12", username: "sample user 2", phone: "0123456789")
+User.create(email: "waqar@mail.com", password: "secret12", username: "waqar's user", phone: "0123456789")
 # ==================================================================
 puts "*** Users created ***"
 
