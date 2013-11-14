@@ -30,6 +30,7 @@ class RestaurantsController < ApplicationController
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @quantity = []
     4.times {|i| @quantity[i] = []}
+
     @restaurant.inventories.each do |inv|
       if inv.date == @date
         m1 = inv.start_time.strftime("%M").to_i
@@ -43,14 +44,20 @@ class RestaurantsController < ApplicationController
         elsif h1 != h2
           (h2 - h1 + 1).times do |th| 
             unless th == h2 - h1
-              p @quantity
-              4.times {|tm| @quantity[m1 + tm][h1 + th] = inv.quantity_available }
+              # p h2
+              # below fix for multiple inventories in the same day
+              if (m2-m1 == 1 && h1 == h2) || (m2 == 0 && h1 + 1 == h2)
+                @quantity[m1][h1 + th] = inv.quantity_available
+              else
+                4.times {|tm| @quantity[m1 + tm][h1 + th] = inv.quantity_available }
+              end
             else
               (m2 - m1).times {|tm| @quantity[m1 + tm][h1 + th] = inv.quantity_available }
             end
           end
         end
       end
+
     end
 
     @restaurant.reservations.active.each do |r|

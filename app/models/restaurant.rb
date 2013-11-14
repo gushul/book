@@ -79,8 +79,8 @@ class Restaurant < ActiveRecord::Base
     #
     #
     #
-    # Restaurant.all.each do |r|
-    r = Restaurant.first
+    Restaurant.all.each do |r|
+    # r = Restaurant.first
       # puts r.inventory_template_groups.count
       
       # count of needed days
@@ -89,9 +89,11 @@ class Restaurant < ActiveRecord::Base
       inv_cnt_have = r.inventories.where("date >= ?", Date.today).group(:date).length
       cnt = r.days_in_advance - inv_cnt_have
       
-      puts r.days_in_advance
-      puts cnt 
-      puts "<<<<<<<<<<"
+      puts "*************"
+      puts "#{r.name}"
+      # puts "#{r.days_in_advance}: r.days_in_advance"
+      # puts "#{cnt}: r.days_in_advance - inv_cnt_have"
+      # puts "*************"
 
       if cnt >= 0 
         # end_date = Date.today + r.days_in_advance.days
@@ -104,30 +106,18 @@ class Restaurant < ActiveRecord::Base
           unless r.inventory_template_groups.blank?
             it = r.inventory_template_groups.first.inventory_templates
             it.each do |inv|
-              # Inventory.create(date: d.to_s, 
-              #                  quantity_available: inv.quantity_available, 
-              #                  start_time: inv.start_time, 
-              #                  end_time: inv.end_time, 
-              #                  restaurant_id: Restaurant.first.id)
+              Inventory.create(date: d.to_s, 
+                               quantity_available: inv.quantity_available, 
+                               start_time: inv.start_time, 
+                               end_time: inv.end_time, 
+                               restaurant_id: Restaurant.first.id)
               created_count += 1
             end
           end
         end
       end
-      p "#{created_count} inventories created"
-
-      # dates
-
-      # unless r.inventory_template_groups.blank?
-      #   r.inventory_template_groups.each do |itg|
-      #     # unless itg.inventory_templates.blank?
-      #       inv_templ = itg.inventory_templates
-      #       p inv_templ
-      #     # end
-      #   end
-      # end
-    # end
-
+      puts "#{created_count} inventories created"
+    end
   end
 
 # private
