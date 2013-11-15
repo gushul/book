@@ -10,16 +10,18 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :provider, :uid,
-                  :username, :phone
+                  :username, :phone, :verify_code, :verified
 
   validates :phone, :presence => true
   validate  :phone_number_validation, :if => "phone?"  
 
   before_create :username_setup
+  before_create :set_verify_code
+  after_create  :send_verification_code_via_email
 
   has_many :reservations, :dependent => :destroy
   has_many :rewards,      :dependent => :destroy
- 
+
   def self.facebook(auth)
     if user = User.find_by_email(auth.info.email)
       user.provider = auth.provider
@@ -37,6 +39,16 @@ class User < ActiveRecord::Base
   end 
 
 private
+
+  def send_verification_code_via_email
+    unless self.phone.to_i == "0123456789".to_i
+      UserMailer.registration_confirmation(self.email, self.verify_code).deliver
+    end
+  end
+
+  def set_verify_code
+     self.verify_code = rand(10 ** 5).to_i
+  end
 
   def phone_number_validation
     unless check_phone_number

@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   add_template_helper(ReservationsHelper)
-  default :from => "notifications@restaurant-booking.com"
+  default :from => "notifications@hungryhub.com"
 
   def booking_create(user, reservation)
     @user = user
@@ -21,6 +21,12 @@ class UserMailer < ActionMailer::Base
     @reservation = reservation
     mail( to: @user.email, 
           subject: "Reservation deleted (#{@reservation.restaurant.name} restaurant)")
+  end
+
+  def registration_confirmation(email, code)
+    @code = code
+    mail( to: email, 
+          subject: "Your verification code")
   end
 
 end

@@ -4,8 +4,10 @@ AuthApp::Application.routes.draw do
   # get "home/index"
   get 'search', to: 'home#search', as: 'search'
   # get 'calendar', to: 'home#calendar', as: 'calendar'
-  
+
   devise_for :owners
+  get  'verification', to: 'verifications#index', as: 'verification'
+  post 'verification', to: 'verifications#create'
   devise_for :users, controllers: { 
     omniauth_callbacks: "omniauth_callbacks" 
   }
@@ -15,6 +17,7 @@ AuthApp::Application.routes.draw do
      # :sessions => "api/sessions", 
      :registrations => "api/registrations"
      })
+    post '/verification', to: 'verifications#create'
     
     # resources :reservations, :only => [:update]
     post "/reservations"        => "reservations#index"
