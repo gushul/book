@@ -9,7 +9,7 @@ class Api::VerificationsController < ApplicationController
     @code = params[:user][:verify_code]
 
     respond_to do |format|
-      if @user.verify_code == @code.to_i
+      if @user.verify_code.to_i == @code.to_i
         @user.update_attributes(verified: true)
         format.json { render json: "Verified successfully", 
                              status: 200 }

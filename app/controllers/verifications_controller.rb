@@ -17,7 +17,7 @@ class VerificationsController < ApplicationController
     @code = params[:verify_code]
 
     respond_to do |format|
-      if current_user.verify_code == @code.to_i
+      if current_user.verify_code.to_i == @code.to_i
         current_user.update_attributes(verified: true)
         format.html { redirect_to root_url, notice: 'You\'re successfully verified your account.' }
         # format.json { render json: @restaurant, status: :created, location: @restaurant }
