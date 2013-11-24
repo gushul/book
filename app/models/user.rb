@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
                   :remember_me, :provider, :uid,
                   :username, :phone, :verify_code, :verified
 
-  validates :phone, :presence => true
+  validates :phone, :presence => true, :uniqueness => true
   validate  :phone_number_validation, :if => "phone?"  
 
   before_create :username_setup
@@ -42,7 +42,7 @@ private
 
   def send_verification_code_via_email
     unless self.phone.to_i == "0123456789".to_i
-      UserMailer.registration_confirmation(self.email, self.verify_code).deliver
+      # UserMailer.registration_confirmation(self.email, self.verify_code).deliver
     end
   end
 

@@ -16,7 +16,7 @@ class Reservation < ActiveRecord::Base
   validates :end_time,      :presence => true
   validates :party_size,    :presence => true
   validate  :unreg_user_validation            
-  # validate  :party_size_available_validation
+  validate  :party_size_available_validation
 
   validates :party_size, :numericality => { 
       :greater_than => 0 }
@@ -44,6 +44,7 @@ class Reservation < ActiveRecord::Base
   def end_time=(value) 
     self[:end_time] = Time.zone.parse(value.to_s).utc 
   end
+
 
 private
 

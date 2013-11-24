@@ -6,11 +6,41 @@ class Api::ReservationsController < ApplicationController
 
   # POST /reservations
   def index
-    render json: @user.reservations, status: 200 
+    @reservations = @user.reservations
+    @reservations_json = []
+    @reservations.each do |r|
+      r = r.as_json
+      %w{arrived email no_show owner_id}.each {|k| r.delete(k)}
+      @reservations_json << r
+    end
+    render json: @reservations_json, status: 200 
   end
 
   # POST /reservations/create
   def create
+
+    begin
+      @restaurant = Restaurant.find(params[:reservation][:restaurant_id])
+    rescue
+      render json: "{\"reservation\":{\"restaurant_id\":[\"Invalid Restaurant ID\"]}}", status: :unprocessable_entity 
+      return
+    end
+
+    begin
+      found = false
+      @restaurant.inventories.each do |inv|
+        if inv.date == params[:reservation][:date]
+          found = true
+        end
+      end
+      unless found
+        raise "No inventory"
+      end
+    rescue
+      render json: "{\"reservation\":{\"date\":[\"No Inventory in this day\"]}}", status: :unprocessable_entity
+      return
+    end
+
     @reservation = Reservation.new(params[:reservation])
     @reservation.user_id = @user.id
 

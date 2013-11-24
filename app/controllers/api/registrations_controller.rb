@@ -7,7 +7,11 @@ class Api::RegistrationsController < ApplicationController
   def create
     user = User.new(params[:user])
     if user.save
-      render json: user.as_json(auth_token: user.authentication_token, email: user.email), status: :created
+      user = user.as_json(auth_token: user.authentication_token, email: user.email)
+     %w{uid provider verify_code 
+        updated_at created_at}.each {|k| user.delete(k)}
+      user[:password] = params[:user][:password]
+      render json: user, status: :created
        # render :status => 200, :json => resource
       return
     else
