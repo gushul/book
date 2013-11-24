@@ -28,8 +28,10 @@ class Api::ReservationsController < ApplicationController
 
     begin
       found = false
+      date = params[:reservation][:date].to_date
+      p @restaurant
       @restaurant.inventories.each do |inv|
-        if inv.date == params[:reservation][:date]
+        if inv.date.year == date.year && inv.date.month == date.month && inv.date.day == date.day
           found = true
         end
       end
