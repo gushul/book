@@ -1,6 +1,7 @@
 # TODO: rework 
 class Api::ReservationsController < ApplicationController
-  
+  skip_before_filter  :verify_authenticity_token
+
   before_filter :check_user_auth_params
   before_filter :check_reservations_params, only: [:create, :update]
 
@@ -22,14 +23,13 @@ class Api::ReservationsController < ApplicationController
     begin
       @restaurant = Restaurant.find(params[:reservation][:restaurant_id])
     rescue
-      render json: "{\"reservation\":{\"restaurant_id\":[\"Invalid Restaurant ID\"]}}", status: :unprocessable_entity 
+      render json: "{\"reservation\":{\"restaurant_id\":[\"Invalid Restaurant ID\"]}}", status: 400 
       return
     end
 
     begin
       found = false
       date = params[:reservation][:date].to_date
-      p @restaurant
       @restaurant.inventories.each do |inv|
         if inv.date.year == date.year && inv.date.month == date.month && inv.date.day == date.day
           found = true
@@ -39,20 +39,21 @@ class Api::ReservationsController < ApplicationController
         raise "No inventory"
       end
     rescue
-      render json: "{\"reservation\":{\"date\":[\"No Inventory in this day\"]}}", status: :unprocessable_entity
+      render json: "{\"reservation\":{\"date\":[\"No Inventory in this day\"]}}", status: 400
       return
     end
 
     @reservation = Reservation.new(params[:reservation])
-    @reservation.user_id = @user.id
+    @reservation.user_id = @use
+    # r.id
 
     respond_to do |format|
       if @reservation.save 
         Reward.create( user_id: @reservation.user_id, 
-                     reservation_id: @reservation.id, 
-                     points_total: 5*@reservation.party_size, 
-                     points_pending: 5*@reservation.party_size,    
-                     description: "")
+                       reservation_id: @reservation.id, 
+                       points_total: 5*@reservation.party_size, 
+                       points_pending: 5*@reservation.party_size,    
+                       description: "")
         
         format.json { render json: @reservation, status: 200 }
 
