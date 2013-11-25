@@ -44,8 +44,7 @@ class Api::ReservationsController < ApplicationController
     end
 
     @reservation = Reservation.new(params[:reservation])
-    @reservation.user_id = @use
-    # r.id
+    @reservation.user_id = @user.id
 
     respond_to do |format|
       if @reservation.save 
