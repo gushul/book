@@ -41,8 +41,8 @@ class User < ActiveRecord::Base
 private
 
   def send_verification_code_via_email
-    unless self.phone.to_i == "0123456789".to_i
-      # UserMailer.registration_confirmation(self.email, self.verify_code).deliver
+    unless ['development'].include?(Rails.env)
+      UserMailer.registration_confirmation(self.email, self.verify_code).deliver
     end
   end
 

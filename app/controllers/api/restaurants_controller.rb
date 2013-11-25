@@ -9,7 +9,6 @@ class Api::RestaurantsController < ApplicationController
       r.restaurant_tags.each do |t|
         r[:tags] << t.title
       end
-
     end
     @restaurants_json = []
     @restaurants.each do |r|
