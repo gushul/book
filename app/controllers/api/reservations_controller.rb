@@ -1,4 +1,4 @@
-# TODO: rework 
+# TODO: before_filters rewiew 
 class Api::ReservationsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
@@ -14,52 +14,21 @@ class Api::ReservationsController < ApplicationController
       %w{arrived email no_show owner_id}.each {|k| r.delete(k)}
       @reservations_json << r
     end
+
     render json: @reservations_json, status: 200 
   end
 
   # POST /reservations/create
   def create
-
-    begin
-      @restaurant = Restaurant.find(params[:reservation][:restaurant_id])
-    rescue
-      render json: "{\"reservation\":{\"restaurant_id\":[\"Invalid Restaurant ID\"]}}", status: 400 
-      return
-    end
-
-    begin
-      found = false
-      date = params[:reservation][:date].to_date
-      @restaurant.inventories.each do |inv|
-        if inv.date.year == date.year && inv.date.month == date.month && inv.date.day == date.day
-          found = true
-        end
-      end
-      unless found
-        raise "No inventory"
-      end
-    rescue
-      render json: "{\"reservation\":{\"date\":[\"No Inventory in this day\"]}}", status: 400
-      return
-    end
-
     @reservation = Reservation.new(params[:reservation])
     @reservation.user_id = @user.id
 
     respond_to do |format|
       if @reservation.save 
-        Reward.create( user_id: @reservation.user_id, 
-                       reservation_id: @reservation.id, 
-                       points_total: 5*@reservation.party_size, 
-                       points_pending: 5*@reservation.party_size,    
-                       description: "")
-        
         format.json { render json: @reservation, status: 200 }
-
-        # UserMailer.booking_create(current_user, @reservation).deliver
-        # OwnerMailer.booking_create(@reservation).deliver
       else
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        format.json { render json: @reservation.errors, 
+                           status: :unprocessable_entity }
       end
     end
   end
@@ -71,13 +40,10 @@ class Api::ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
-        
         format.json { render json: @reservation, status: 200 }
-
-        # UserMailer.booking_create(current_user, @reservation).deliver
-        # OwnerMailer.booking_create(@reservation).deliver
       else
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        format.json { render json: @reservation.errors, 
+                           status: :unprocessable_entity }
       end
     end
   end
@@ -85,51 +51,49 @@ class Api::ReservationsController < ApplicationController
 private
 
   def check_user_auth_params
-
-      if params[:user].blank? or params[:user][:email].blank? or
-         params[:user][:password].blank?
-        respond_to do |format|
-          format.json { render json: "Provide CORRECT login/pass parameters for this action", 
-                      status: 403 }
-        end
-      elsif params[:user].length > 2
-        respond_to do |format|
-          format.json { render json: "Provide ONLY needed parameters for this action", 
-                      status: 400 }
-        end
-      else 
-        @user = User.where("email = ?", params[:user][:email] ).first
-        if @user.nil? or !@user.valid_password?(params[:user][:password])
-          respond_to do |format|
-            format.json { render json: "Incorect login/pass", 
-                      status: 403 }
-          end
-        end
+    error = false
+    if params[:user].blank? or
+          %w{email password}.map {|el| params[:user].has_key?(el) }.include?(false) or
+          params[:user].values.any?(&:blank?)
+      error   = true
+      message = "Provide CORRECT login/pass parameters for this action"
+      status  = 403
+    elsif params[:user].length > 2
+      error   = true
+      message = "Provide ONLY needed parameters for this action"
+      status  = 400
+    else 
+      # will be used in create and update
+      @user = User.where("email = ?", params[:user][:email] ).first
+      if @user.nil? or !@user.valid_password?(params[:user][:password])
+        error   = true
+        message = "Incorect login/pass"
+        status  = 403
       end
+    end
 
+    if error
+      render json: message, status: status 
+    end
   end
 
   def check_reservations_params
-
+      error = false
       if params[:reservation].blank? or 
-            params[:reservation][:active].blank?     or params[:reservation][:date].blank?         or 
-            params[:reservation][:party_size].blank? or params[:reservation][:start_time].blank?   or 
-            params[:reservation][:end_time].blank?   or params[:reservation][:restaurant_id].blank?
-        respond_to do |format|
-          format.json { render json: "Provide CORRECT reservation parameters data for this action", 
-                      status: 400 }
-        end
-      elsif params[:reservation].length > 7 or params.length > 6
-        respond_to do |format|
-          format.json { render json: "Provide ONLY needed parameters for this action", 
-                      status: 400 }
-        end
-      # elsif JSON.is_json?(params)
-      #   respond_to do |format|
-      #     format.json { render json: "Provide CORRECT json parameters for this action", status: :unprocessable_entity }
-      #   end
+            %w{restaurant_id date party_size start_time end_time active}.map {|el| params[:reservation].has_key?(el) }.include?(false) or
+            params[:reservation].values.any?(&:blank?)
+        error   = true
+        message = "Provide CORRECT reservation parameters data for this action"
+        status  = 400   
+      # elsif params[:reservation].length > 6 or params.length > 6
+      #   error   = true
+      #   message = "Provide ONLY needed parameters for this action"
+      #   status  = 400  
       end
 
+      if error
+        render json: message, status: status 
+      end
   end 
 
 end

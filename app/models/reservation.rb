@@ -15,11 +15,17 @@ class Reservation < ActiveRecord::Base
   validates :start_time,    :presence => true
   validates :end_time,      :presence => true
   validates :party_size,    :presence => true
+
   validate  :unreg_user_validation            
+  validate  :restaurant_id_validation            
+  validate  :date_validation, :if => :is_restaurant_id_real?
   # validate  :party_size_available_validation
 
   validates :party_size, :numericality => { 
       :greater_than => 0 }
+
+  after_create :create_reward
+  after_update :update_reward
 
   belongs_to :user
   belongs_to :owner
@@ -85,6 +91,60 @@ private
       self.errors.add(:phone, "Fill phone field")
     end
 
+  end
+
+  def restaurant_id_validation
+    unless is_restaurant_id_real?
+      self.errors.add(:restaurant_id, "Provide correct Restaurant ID")
+    end
+  end
+
+  def is_restaurant_id_real?
+    begin
+      Restaurant.find(restaurant_id)
+      return true
+    rescue
+      return false
+    end
+    false
+  end
+
+  def date_validation
+    unless is_date_valid?
+      self.errors.add(:date, "Check inventory for picked day.")
+    end
+  end
+
+  def is_date_valid?
+    found = false
+    begin
+      Restaurant.find(restaurant_id).inventories.each do |inv|
+        if inv.date.year == date.year && inv.date.month == date.month && inv.date.day == date.day
+          found = true
+        end
+      end
+    rescue
+      return false
+    end
+    found
+  end
+
+  def create_reward
+    Reward.create( user_id: user_id, 
+                   reservation_id: id, 
+                   points_total: 5*party_size, 
+                   points_pending: 5*party_size,    
+                   description: "")
+    # UserMailer.booking_create(current_user, @reservation).deliver
+    # OwnerMailer.booking_create(@reservation).deliver
+  end
+
+  def update_reward
+    reward = Reward.where(:reservation_id => id).first
+    reward.update_attributes( points_total: 5*party_size, 
+                              points_pending: 5*party_size )
+    # UserMailer.booking_update(current_user, @reservation).deliver
+    # OwnerMailer.booking_update(@reservation).deliver
   end
   
 end
