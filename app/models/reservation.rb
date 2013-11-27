@@ -55,13 +55,13 @@ class Reservation < ActiveRecord::Base
 private
 
   def party_size_available_validation
-    unless is_avilabale_reservation
+    unless is_avilabale_reservation?
       self.errors.add(:party_size, "Please, check restaurant page for available date/time and places.")
     end
   end
 
   # TODO
-  def is_avilabale_reservation
+  def is_avilabale_reservation?
     Restaurant.find(restaurant_id).inventories.each do |inv| 
       if inv.date == date
         if inv.start_time.strftime('%H:%M') <= start_time && 
