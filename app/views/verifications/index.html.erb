@@ -1,0 +1,9 @@
+<h2>Verification Page</h2>
+
+<h3>Please, enter code, that you received in email</h3>
+
+<%= form_tag("/verification", method: "post") do %>
+  <%= text_field_tag(:verify_code) %>
+  <br/>
+  <%= submit_tag "Submit", :class => "btn" %>
+<% end %>

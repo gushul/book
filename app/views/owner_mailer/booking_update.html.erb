@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Updated reservation to your <%= @reservation.restaurant.name %> restaurant.</h1>
+    <p>
+      Person <%= @reservation.user.username %><br/>
+      Date <%= @reservation.date %><br/>
+      Start time <%= mtime(@reservation.start_time) %><br/>
+      End time <%= mtime(@reservation.end_time) %><br/>
+      Party size<%= @reservation.party_size %><br/>
+      Active <%= @reservation.active %>
+    </p>
+    <p>Thanks for using our service!</p>
+  </body>
+</html>
+
+

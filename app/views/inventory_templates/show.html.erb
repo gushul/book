@@ -1,0 +1,24 @@
+<!-- <p id="notice"><%#= notice %></p> -->
+
+<p>
+  <b>Inventory Template Group</b>
+  <%= @inventory_template.inventory_template_group.name %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= mtime(@inventory_template.start_time) %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= mtime(@inventory_template.end_time) %>
+</p>
+
+<p>
+  <b>Quantity available:</b>
+  <%= @inventory_template.quantity_available %>
+</p>
+
+<%= link_to 'Edit', edit_inventory_template_path(@inventory_template) %> |
+<%= link_to 'Back', inventory_templates_path %>

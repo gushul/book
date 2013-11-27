@@ -1,0 +1,12 @@
+<%= form.fields_for :restaurant_tags do |restaurant_tag_form| %>
+
+  <div class="field">
+    <%= restaurant_tag_form.label :title, "Restaurant-tag name:" %>
+    <%= restaurant_tag_form.select :title, options_for_select( RestaurantTag.where("id > ?", 0 ).map {|c| [c.title, c.id]}), :include_blank => false%>
+    <% unless restaurant_tag_form.object.nil? || restaurant_tag_form.object.new_record? %>
+        <%= restaurant_tag_form.label :_destroy, 'Remove:' %>
+        <%= restaurant_tag_form.check_box :_destroy %>
+    <% end %>
+  </div>
+  
+<% end %>

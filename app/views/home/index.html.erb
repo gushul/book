@@ -1,0 +1,182 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= image_tag("logo.png") %>
+
+   <!--  <div class="well sidebar-nav" style="margin-top:20px;">
+      <ul class="nav nav-list">
+        <li class="nav-header">Sidebar</li>
+        <li class="active"><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li class="nav-header">Sidebar</li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div> --><!--/.well -->
+  </div><!--/span-->
+  <div class="span9">
+
+  <div class="bx-wrapper" style="max-width: 100%;">
+  <!--   <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 220px;"> -->
+        <ul class="bxslider" style="width: auto; position: relative; padding: 0; margin: 0;">
+          <li><%= link_to image_tag("hillside.jpg"), "#" %></li>
+          <li><%= link_to image_tag("houses.jpg"), "#" %></li>
+          <li><%= image_tag("picto.png") %></li>
+        </ul>
+    <!-- </div> -->
+  </div>  
+
+    <!-- <div class="hero-unit">
+      <h1>Bangkok Restaurant Booking!</h1>
+      <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+      <p>
+        <a href="#" class="btn btn-primary btn-large">Learn more »</a>
+        <%#= link_to "Calendar", calendar_path , :class => "btn btn-info btn-large"%>
+      </p>
+    </div> -->
+
+    <div class="row-fluid" style="padding-bottom: 30px;">
+
+      <%= form_tag("/search", method: "get") do %>
+
+      <table class="table table-striped table-bordered table-hover">
+
+        <tr>
+          <td>
+            <b>Cuisine:</b>
+          </td>
+          <td>
+            <% RestaurantTag.where("title LIKE ?", "Cuisine:%").each do |cuisine| %>
+              <%= check_box_tag 'tags[]', cuisine.id %>
+              <%= h cuisine.title.slice(8..cuisine.title.length) -%>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr> 
+          <td>
+            <b>Stars:</b>
+          </td>
+          <td>
+          <% RestaurantTag.where("title LIKE ?", "Star:%").each do |star| %>
+            <%= check_box_tag 'tags[]', star.id %>
+            <%= h star.title.slice(5..star.title.length) -%>
+          <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <b>Price:</b>
+          </td>
+          <td>
+            <% RestaurantTag.where("title LIKE ?", "Price:%").each do |price| %>
+              <%= check_box_tag 'tags[]', price.id %>
+              <%= h price.title.slice(6..price.title.length) %>
+            <% end %>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>
+            <b>Meals:</b>
+          </td>
+          <td>
+          <% RestaurantTag.where("title LIKE ?", "Meals:%").each do |meal| %>
+            <%= check_box_tag 'tags[]', meal.id %>
+            <%= h meal.title.slice(6..meal.title.length) -%>
+          <% end %>
+          </td> 
+        </tr>
+
+        <tr>
+          <td>
+            <b>Drinking:</b>
+          </td>
+          <td>
+            <% RestaurantTag.where("title LIKE ?", "Drinking:%").each do |drink| %>
+              <%= check_box_tag 'tags[]', drink.id %>
+              <%= h drink.title.slice(9..drink.title.length) -%>
+            <% end %>
+          </td> 
+        </tr>
+
+
+        <tr> 
+          <td>
+            <b>Parking:</b>
+          </td>
+          <td>
+          <% RestaurantTag.where("title LIKE ?", "Parking:%").each do |p| %>
+            <%= check_box_tag 'tags[]', p.id %>
+            <%= h p.title.slice(8..p.title.length) -%>
+          <% end %>
+          </td>
+         </tr>
+
+       
+
+         <tr>
+          <td>
+            <b>Payment:</b>
+          </td>
+          <td>
+          <% RestaurantTag.where("title LIKE ?", "Payment:%").each do |pay| %>
+            <%#= label_tag "payment[#{pay.id}]" do %>
+              <%#= check_box_tag "payment[#{pay.id}]", pay.id %>
+              <%#= h pay.title.slice(8..pay.title.length) -%>
+            <%# end %>
+            <%= check_box_tag 'tags[]', pay.id %>
+            <%= h pay.title.slice(8..pay.title.length) -%>
+          <% end %>
+          </td>
+        </tr>
+
+        <tr>  
+          <td>
+            <b>Misc:</b>
+          </td>
+          <td>
+          <% RestaurantTag.where("title LIKE ?", "Misc:%").each do |misc| %>
+            <%= check_box_tag 'tags[]', misc.id %>
+            <%= h misc.title.slice(5..misc.title.length) -%>
+          <% end %>
+          </td>
+         </tr>
+
+         <tr>  
+          <td>
+          </td>
+          <td>
+            <%= submit_tag "Search", :class => 'btn btn-success btn-large' %>
+          </td>
+         </tr>
+
+      </table>
+
+      <% end %>
+    </div><!--/row-->
+
+      <% @restaurants.each_with_index do |restaurant, index| %>
+      <%#= content_tag(:div, :class => "row-fluid") %>
+        <% if (index+1)%4==0 or index == 0 %>
+          <div class="row-fluid">
+        <% end %>
+      
+          <div class="span4 restaurants_mini">
+            <h4><%= restaurant.name %></h4>
+            <p><%= image_tag restaurant.photos.first.picture.url(:v280x160) if restaurant.photos.first %> </p>
+            <p><%= truncate(restaurant.misc, length: 200, omission: '... (continued)') %> </p>
+            <p><%= link_to 'Show', restaurant, class: "btn" %></p>
+            <!-- <p><a class="btn" href="#">View details »</a></p> -->
+          </div><!--/span-->
+
+        <% if (index+1)%3==0 and index != 0 %>
+          </div> <!--  /row-fluid -->
+        <% end %>
+      <% end %>
+    </div><!--/row-->
+
+  </div><!--/span-->
+</div>

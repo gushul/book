@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <% if @reservation.user %>
+    <%= @reservation.user.username  %>
+  <% else %>
+    <%= "#{@reservation.name} /" %> 
+    <%= "#{@reservation.phone} /" %> 
+    <%= @reservation.email %>
+  <% end %>
+</p>
+
+<p>
+  <b>Restaurant:</b>
+  <%= @reservation.restaurant.name %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @reservation.date %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @reservation.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @reservation.end_time %>
+</p>
+
+<p>
+  <b>Party size:</b>
+  <%= @reservation.party_size %>
+</p>
+
+<p>
+  <b>Table:</b>
+  <%= @reservation.table %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @reservation.active %>
+</p>
+
+<p>
+  <b>Special Request:</b>
+  <%= @reservation.special_request %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+<%= link_to 'Back', reservations_path %>

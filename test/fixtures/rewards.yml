@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  points_total: 1
+  points_pending: 1
+  description: MyText
+
+two:
+  points_total: 1
+  points_pending: 1
+  description: MyText

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Restaurant:</b>
+  <%= @inventory_template_group.restaurant.name %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @inventory_template_group.name %>
+</p>
+
+<p>
+  <b>Primary:</b>
+  <%= @inventory_template_group.primary %>
+</p>
+
+
+<%= link_to 'Edit', edit_inventory_template_group_path(@inventory_template_group) %> |
+<%= link_to 'Back', inventory_template_groups_path %>

@@ -1,0 +1,23 @@
+# encoding: utf-8
+# localization file for Thai
+
+th:
+  brand_text: "Hungry Hub on TAI"
+
+  restaurant: 
+    name: "Name in tai"
+
+  activerecord:
+    models:
+      restaurant: "Restaurant in tai"
+
+    attributes:
+      restaurant:
+        name: "Name in tai"
+        misc: " in tai"
+        owner_id: " in tai"
+        lat: "Latitude in tai"
+        lng: "Longitude in tai"
+        days_in_advance: " in tai"
+        min_booking_time: " in tai"
+        res_duration: " in tai"

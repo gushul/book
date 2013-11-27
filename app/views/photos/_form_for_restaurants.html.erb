@@ -1,0 +1,7 @@
+<%= simple_fields_for(:photos, html: { class: "form-horizontal"}) do |img| %>
+
+  <%= img.input :title,    label: "Title"%>
+  <%= img.input :picture, :label => "Picture", :as => :file,  :required => :true  %>
+  <%= img.input :is_cover, label: "Cover?", as: :select, include_blank: false,    :selected => false %>
+
+<% end %>
