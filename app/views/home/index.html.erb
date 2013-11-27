@@ -52,6 +52,18 @@
             <% end %>
           </td>
         </tr>
+	
+        <tr> 
+          <td>
+            <b>Location:</b>
+          </td>
+          <td>
+          <% RestaurantTag.where("title LIKE ?", "Location:%").each do |location| %>
+            <%= check_box_tag 'tags[]', location.id %>
+            <%= h location.title.slice(9..location.title.length) -%>
+          <% end %>
+          </td>
+        </tr>
 
         <tr> 
           <td>
