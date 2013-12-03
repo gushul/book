@@ -44,13 +44,15 @@ group :development, :test do
   gem 'pry-rails'
   # gem 'ruby_parser'
 end
- 
-gem 'bootstrap-sass', '~> 2.3.2.2'
-gem 'bootswatch-rails'
+
+# gem 'bootstrap-sass-rails'
+# gem 'bootstrap-sass', '~> 2.3.2.2'
+# gem 'bootswatch-rails'
 
 group :assets do
   gem 'sass-rails',     '>= 3.2'
-
+  gem 'less-rails'
+  
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   

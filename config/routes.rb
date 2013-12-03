@@ -1,7 +1,8 @@
 AuthApp::Application.routes.draw do
 
-  root :to => "home#index"
-  # get "home/index"
+  # root :to => "home#index"
+  root :to => "home#landing"
+  get "home/index"
   get 'search', to: 'home#search', as: 'search'
   # get 'calendar', to: 'home#calendar', as: 'calendar'
 

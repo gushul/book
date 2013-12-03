@@ -1,0 +1,125 @@
+<h3>Featured Restaurants</h3>
+<!-- NAV TABS -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#new" data-toggle="tab">NEW</a></li>
+  <li><a href="#popular" data-toggle="tab">MOST POPULAR</a></li>
+  <li><a href="#reco" data-toggle="tab">RECOMMENDATION</a></li>
+</ul><!-- /.nav-tabs -->
+
+<!-- TAB PANES -->
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="new">
+    <ul class="media-list">
+      
+      <% @restaurants.each_with_index do |restaurant, index| %>
+      <li class="media">
+        <a class="pull-left" href="#"><%= image_tag restaurant.photos.first.picture.url(:v280x160) if restaurant.photos.first %> </a>
+        <div class="media-body">
+          <div class="col-sm-12 col-lg-8">
+            <h4 class="media-heading"><%= restaurant.name %></h4>
+            <p><%= restaurant.misc %></p>
+            <br>
+            <p>
+              <% unless restaurant.star_format == 0 %>
+                <% restaurant.star_format.times do |s| %>
+                  <i class="glyphicon glyphicon-star"></i>
+                <% end %>
+              <% else %>
+                Not received any star rank
+              <% end %>
+            </p>
+            <p><%= restaurant.prices_format %></p><br>
+            <p>
+              <i class="glyphicon glyphicon-tag"></i> 
+              <%= restaurant.cuisines_format %>
+            </p>
+          </div>
+          <div class="col-sm-12 col-lg-4">
+            <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary btn-sm", :method => :get %>
+          </div>
+        </div>
+      </li><!-- News 1 -->
+      <hr>
+      <% end %>
+
+    </ul>
+  </div>
+  <!-- /.NEW -->
+  <div class="tab-pane fade" id="popular">
+    <ul class="media-list">
+      
+      <% @restaurants.each_with_index do |restaurant, index| %>
+      <li class="media">
+        <a class="pull-left" href="#"><%= image_tag restaurant.photos.first.picture.url(:v280x160) if restaurant.photos.first %> </a>
+        <div class="media-body">
+          <div class="col-sm-12 col-lg-8">
+            <h4 class="media-heading"><%= restaurant.name %></h4>
+            <p><%= restaurant.misc %></p>
+            <br>
+            <p>
+              <% unless restaurant.star_format == 0 %>
+                <% restaurant.star_format.times do |s| %>
+                  <i class="glyphicon glyphicon-star"></i>
+                <% end %>
+              <% else %>
+                Not received any star rank
+              <% end %>
+            </p>
+            <p><%= restaurant.prices_format %></p><br>
+            <p>
+              <i class="glyphicon glyphicon-tag"></i> 
+              <%= restaurant.cuisines_format %>
+            </p>
+          </div>
+          <div class="col-sm-12 col-lg-4">
+            <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary btn-sm", :method => :get %>
+          </div>
+        </div>
+      </li><!-- News 1 -->
+      <hr>
+      <% end %>
+
+    </ul>
+  </div>
+  <!-- /.MOST POPULAR -->
+  <div class="tab-pane fade" id="reco">
+    <ul class="media-list">
+      
+      
+      <% @restaurants.each_with_index do |restaurant, index| %>
+      <li class="media">
+        <a class="pull-left" href="#"><%= image_tag restaurant.photos.first.picture.url(:v280x160) if restaurant.photos.first %> </a>
+        <div class="media-body">
+          <div class="col-sm-12 col-lg-8">
+            <h4 class="media-heading"><%= restaurant.name %></h4>
+            <p><%= restaurant.misc %></p>
+            <br>
+            <p>
+              <% unless restaurant.star_format == 0 %>
+                <% restaurant.star_format.times do |s| %>
+                  <i class="glyphicon glyphicon-star"></i>
+                <% end %>
+              <% else %>
+                Not received any star rank
+              <% end %>
+            </p>
+            <p><%= restaurant.prices_format %></p><br>
+            <p>
+              <i class="glyphicon glyphicon-tag"></i> 
+              <%= restaurant.cuisines_format %>
+            </p>
+          </div>
+          <div class="col-sm-12 col-lg-4">
+            <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary btn-sm", :method => :get %>
+          </div>
+        </div>
+      </li><!-- News 1 -->
+      <hr>
+      <% end %>
+
+    </ul>
+  </div>
+  <!-- /.RECOMMENDATION -->
+</div>
+<!-- /.tab-content -->
+

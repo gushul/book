@@ -114,6 +114,30 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
+  def prices_format
+    tag = restaurant_tags.where("title LIKE ?", "Price:%")
+    unless tag.blank?
+      return tag.map {|r| r.title.slice(6..r.title.length) }.join(", ") 
+    end
+    "No yet assigned any price rank"
+  end
+
+  def cuisines_format
+    tag = restaurant_tags.where("title LIKE ?", "Cuisine:%")
+    unless tag.blank?
+      return tag.map {|r| r.title.slice(8..r.title.length) }.join(", ")
+    end
+    "No yet assigned any cuisine"
+  end
+
+  def star_format
+    tag = restaurant_tags.where("title LIKE ?", "Star:%").first
+    unless tag.blank?
+      return tag.title.slice(5..tag.title.length).to_i
+    end
+    0
+  end
+
 # private
 
 #   def cover_controll

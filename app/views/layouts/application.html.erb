@@ -6,22 +6,246 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Restaurant Booking</title>
+  <title>HungryHub</title>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
+   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <![endif]-->
 </head> 
 <body> 
   
   <!-- Wrap all page content here -->
-  <div id="wrap">
+  <!-- <div id="wrap"> -->
   
-    <%= render :partial => "layouts/header" %>
+    <%#= render :partial => "layouts/header" %>
 
-    <div class="container-fluid">
-      <% if flash[:notice] -%>
+    <!-- <div class="container-fluid"> -->
+
+    <div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+    <nav class="navbar background-black padding-left-10 padding-right-10 padding-bottom-1 padding-top-1 navbar-default" role="navigation">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span></button> 
+          <%= link_to root_path do %>
+            <%= image_tag("../assets/logo.jpg", class: "navbar-logo") %>
+          <% end %>
+      </div>
+      
+      <div class="collapse navbar-collapse color-white" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <%= link_to t("restaurants"), restaurants_path %>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control">
+          </div> 
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav margin-right-30 login">
+            <li>
+              <% unless owner_signed_in? %>
+                <% unless user_signed_in? %>
+                  <%= link_to "LOG IN", new_user_session_path, :class => "btn border-white-2" %>
+                <% else %>
+                  <%= link_to current_user.username, edit_user_registration_path, :class => "btn border-white-2"  %>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+          
+          <ul class="nav navbar-nav margin-right-10 signup">
+            <li>
+              <% unless owner_signed_in? %>
+                <% unless user_signed_in? %>
+                  <%= link_to "SIGN UP", new_user_registration_path, :class => "btn background-red" %>
+                <% else %>
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => "btn background-red" %>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+          
+          <li class="dropdown">
+          <% unless owner_signed_in? %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            FOR YOUR BUSINESS<strong class="caret"></strong></a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to "Login as Owner", new_owner_session_path %>
+              </li>
+              <li>
+               <%= link_to "Registration for Owners", new_owner_registration_path %>
+              </li>
+              <li>
+                <a href="#">Another action</a>
+              </li>
+            </ul>
+          <% else %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <%= current_owner.owner_name %><strong class="caret"></strong></a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to "My Restaurant", current_owner.restaurant.blank? ? new_restaurant_path  : edit_restaurant_path(current_owner.restaurant)  %>
+              </li>
+               <li><%= link_to t("reservations"), reservations_path %></li>
+              <li><%= link_to t("inventories"), inventories_path %></li>
+              <li><%= link_to t("inventory_templates"), my_inventory_templates_path unless current_owner.restaurant.blank? %></li>
+              <li><%= link_to "Inventory Template Groups", inventory_template_groups_path unless current_owner.restaurant.blank? %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Edit account details", edit_owner_registration_path %></li>
+              <li><%= link_to "Logout", destroy_owner_session_path, method: :delete %></li>
+            </ul>
+          <% end %>
+          </li>
+        </ul>
+      </div>
+      
+    </nav>
+
+    <% if @home && true %>
+    <div class="background-img-container">
+      <img alt="" src="assets/carousel-3.jpg">
+    </div>
+    <% end %>
+
+    </div>
+    </div>
+
+    <div class="row clearfix">
+    <div class="col-md-4 column background-black margin-left-11 fix-height-300 negative-margin-top-350 opacity-8 border-radious-10 color-white">
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+      <div class="reservation-container">
+        <div class="title">
+          <h4>Make a free restaurant reservation</h4>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <div class="row clearfix">
+          <div class="col-md-6 column">
+            <div class="location">
+              <a href="#" class="btn background-red location" type="button">By location and cuisine</a>
+            </div>
+          </div>
+          <div class="col-md-6 column">
+            <div class="name">
+              <span class="label">By Restaurant Name</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix margin-top-10">
+      <div class="col-md-12 column">
+      <form role="form">
+        <div class="form-group float-left width-90 .padding-top-1">
+          <input type="text" class="form-control width-80 float-left">
+          <button type="submit" class="btn btn-default width-20">Submit</button>
+        </div> 
+      </form>
+      </div>
+    </div>
+    <div class="row clearfix margin-top-10">
+      <div class="col-md-12 column">
+        <div class="row clearfix">
+    <div class="col-md-4 column">
+    <div class="btn-group">
+       <button class="btn btn-default">Date</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#">29/11/2013</a>
+        </li>
+        <li class="disabled">
+          <a href="#">Another action</a>
+        </li>
+        <li class="divider">
+        </li>
+        <li>
+          <a href="#">Something else here</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div class="col-md-4 column">
+    <div class="btn-group">
+       <button class="btn btn-default">time</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#">7.00 a.m</a>
+        </li>
+        <li class="disabled">
+          <a href="#">Another action</a>
+        </li>
+        <li class="divider">
+        </li>
+        <li>
+          <a href="#">Something else here</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div class="col-md-4 column">
+    <div class="btn-group">
+       <button class="btn btn-default">people</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#">2 people</a>
+        </li>
+        <li class="disabled">
+          <a href="#">Another action</a>
+        </li>
+        <li class="divider">
+        </li>
+        <li>
+          <a href="#">Something else here</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    </div>
+
+      </div>
+      <div class="row clearfix margin-top-20">
+    <div class="col-md-8 column">
+    <div class="label_find">
+              <span class="label">not ready to reserve? See all bangkok restaurant</span>
+            </div>
+    </div>
+    <div class="col-md-4 column">
+            <div class="location">
+              <a href="#" class="btn background-red location" type="button">Find</a>
+            </div>
+          </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    <div class="col-md-4 column">
+    </div>
+    <div class="col-md-4 column">
+    </div>
+    </div>
+    <div class="row clearfix">
+    <div class="col-md-8 column">
+
+     <% if flash[:notice] -%>
         <div id="flash_notice"><%= flash[:notice] %></div>
       <% elsif flash[:alert] -%>
         <div id="flash_alert"><%= flash[:alert] %></div>
@@ -32,9 +256,74 @@
       <%= yield %>
     </div>
 
-  </div>
+  <% if @home && true %>
+    <div class="col-md-4 column">
 
-  <%= render :partial => "layouts/footer" %>
+    <h3>What is Hungry Hub?</h3>
+    <img src="http://placehold.it/360x280">
+    <h3>Mobile Application</h3>
+    <img src="http://placehold.it/360x88">
+    <h3>Ad Banners</h3>
+    <img src="http://placehold.it/360x280">
+    <h3>Facebook</h3>
+    <img src="http://placehold.it/360x280">
+
+    </div>
+  <% end %>
+    </div>
+    
+     
+
+<div class="row clearfix">
+  <div class="col-md-12 column footer">
+    <nav class="navbar  padding-left-10 padding-right-10 padding-bottom-1 padding-top-1 " role="navigation">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span></button> 
+      </div>
+      
+      <div class="collapse navbar-collapse color-white" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About us</a>
+          </li>
+          <li>
+            <a href="#">how it works</a>
+          </li>
+          <li>
+            <a href="#">Features</a>
+          </li>
+          <li>
+            <a href="#">Careers</a>
+          </li>
+        </ul>
+      </div>
+      
+    </nav>
+    <hr/>
+    <div class="row clearfix bottom">
+      <div class="col-md-2 column">
+      <span class="label label-default">@2013 All rights Reserved</span> 
+      </div>
+      <div class="col-md-6 column">
+        <span class="label label-default">Appservation Co, Ltd. soi chula payathai road bangkok 10330, Thailand<br></span>
+      </div>
+      <div class="col-md-4 column">
+      </div>
+    </div> 
+  </div>
+</div>
+    <!-- </div> -->
+
+  <!-- </div> -->
+
+  <%#= render :partial => "layouts/footer" %>
 
 </body>
 </html>
