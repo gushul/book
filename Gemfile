@@ -16,11 +16,15 @@ gem 'kaminari'
 # gem 'acts-as-taggable-on'
 gem 'mysql2'
 
+gem 'thin'
+
 gem 'devise'
 gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook' 
 gem 'omniauth-google-oauth2'
+
+gem 'faker', '1.0.1'
 
 gem 'whenever'
 gem 'delayed_job_active_record'
@@ -38,11 +42,20 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'database_cleaner'
   gem 'rack-livereload'
   gem 'awesome_print'
   gem 'pry-rails'
   # gem 'ruby_parser'
+  gem 'factory_girl'
+  gem 'rspec-rails', '2.11.0'
+  gem 'guard-rspec', '1.2.1'
+  gem 'guard-spork', '1.2.0'
+  gem 'spork', '0.9.2'
+end
+
+group :test do
+  gem 'factory_girl_rails', '4.1.0'
+  gem 'database_cleaner'
 end
 
 # gem 'bootstrap-sass-rails'
