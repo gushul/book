@@ -1,11 +1,13 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Api::RestaurantsController do
-  
+
   before :each do
       request.env["HTTP_ACCEPT"] = 'application/json'
   end
-  
+
   it 'get list of restaurants' do
     get :index
 
