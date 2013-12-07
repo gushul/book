@@ -29,15 +29,16 @@ AuthApp::Application.routes.draw do
     resources :restaurants
 
     namespace :owner do
-      resources :reservations
+      post "/reservations"         => "reservations#index"
+      post "/reservation"          => "reservations#show"
+      post "/reservations/create"  => "reservations#create"
+      post "/reservations/update"  => "reservations#update"
+      post "/reservations/delete"  => "reservations#delete"
     end
   end 
 
   resources :inventories do 
     get 'my' => "inventories#my", :on => :collection, :as => :my
-    # collection do
-    #   get 'my'
-    # end
   end
 
   resources :inventory_templates do

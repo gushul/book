@@ -83,7 +83,7 @@ private
             %w{restaurant_id date party_size start_time end_time active}.map {|el| params[:reservation].has_key?(el) }.include?(false) or
             params[:reservation].values.any?(&:blank?)
         error   = true
-        message = "Provide CORRECT reservation parameters data for this action"
+        message = "Provide EVERY & CORRECT reservation parameters data for this action"
         status  = 400   
       # elsif params[:reservation].length > 6 or params.length > 6
       #   error   = true
