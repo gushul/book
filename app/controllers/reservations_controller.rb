@@ -1,16 +1,10 @@
 # encoding: utf-8
 class ReservationsController < ApplicationController
-  # before_filter :authenticate_user!,  #!!!!!!!!!!!!!!!!!!!!
-  #               except: [:index, :show, :new, :create, :my]
-  # before_filter :authenticate_user_or_owner,  #!!!!!!!!!!!!!!!!!!!!
-  #               except: [:index, :show, :new, :create, :my]
   before_filter :check_who_editing,  
                 except: [:index, :show, :new, :create, :my]
   before_filter :check_for_unreg_users
   before_filter :intervals_construct,  
                 only: [:new, :create, :edit, :update]
-  # before_filter :process_reservation,  
-  #               only: [:create, :update, :delete]
 
   # GET /reservations
   # GET /reservations.json
@@ -159,9 +153,7 @@ class ReservationsController < ApplicationController
     reservation_to_email_attach = @reservation
     @reservation.destroy
 
-    # UserMailer.booking_removed(current_user, reservation_to_email_attach).deliver
-    # OwnerMailer.booking_removed(reservation_to_email_attach).deliver
-
+   
     respond_to do |format|
       format.html { redirect_to reservations_url }
       format.json { head :no_content }

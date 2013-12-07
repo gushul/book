@@ -64,7 +64,7 @@ private
       status  = 400
     else 
       # will be used in create and update
-      @user = User.where("email = ?", params[:user][:email] ).first
+      @user = User.where(:email => params[:user][:email] ).first
       if @user.nil? or !@user.valid_password?(params[:user][:password])
         error   = true
         message = "Incorect login/pass"
