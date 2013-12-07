@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe Api::Owner::ReservationsController do
  
- it 'get list of owner reservations' do
+  before :each do
+      request.env["HTTP_ACCEPT"] = 'application/json'
+  end
+  
+  it 'get list of owner reservations' do
     post :create, 
          :owner => {:email => "owner1@mail.com", :password => "secret12" }
     
