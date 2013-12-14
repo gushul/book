@@ -8,7 +8,7 @@ class Api::Owner::ReservationsController < ApplicationController
 
   # POST /reservations.json
   def index
-    @reservations = @owner.reservations
+    @reservations = @owner.restaurant.reservations
     @reservations_json = []
     @reservations.each do |r|
       r = r.as_json
