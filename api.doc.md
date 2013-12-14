@@ -54,6 +54,12 @@ Show an individual restaurant
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/api/restaurants/1
 
+### Inventories
+
+Listing future inventories of owners restaurant
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/inventories
+
 ### Rewards
 
 Reward history

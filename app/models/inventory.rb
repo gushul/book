@@ -10,5 +10,7 @@ class Inventory < ActiveRecord::Base
   validates :quantity_available, :presence => true,
       :numericality => { :greater_than_or_equal_to => 1 }
 
+  scope :future, -> { where("date >= ?", DateTime.now.to_date) }
+
   belongs_to :restaurant
 end

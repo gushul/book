@@ -29,6 +29,8 @@ AuthApp::Application.routes.draw do
     resources :restaurants
 
     namespace :owner do
+      post "/inventories"          => "inventories#index"
+
       post "/reservations"         => "reservations#index"
       post "/reservation"          => "reservations#show"
       post "/reservations/create"  => "reservations#create"
