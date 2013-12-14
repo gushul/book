@@ -30,6 +30,8 @@ AuthApp::Application.routes.draw do
 
     namespace :owner do
       post "/inventories"          => "inventories#index"
+      
+      post "/customers_info"       => "customer_informations#index"
 
       post "/reservations"         => "reservations#index"
       post "/reservation"          => "reservations#show"
