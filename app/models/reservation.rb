@@ -119,6 +119,7 @@ private
   end
 
   def is_date_valid?
+    return true unless owner_id.blank?  # not check available status for owners reservations
     found = false
     begin
       Restaurant.find(restaurant_id).inventories.each do |inv|
