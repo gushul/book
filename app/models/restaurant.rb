@@ -114,12 +114,12 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
-  def prices_format
-    tag = restaurant_tags.where("title LIKE ?", "Price:%")
+  def price_format
+    tag = restaurant_tags.where("title LIKE ?", "Price:%").first
     unless tag.blank?
-      return tag.map {|r| r.title.slice(6..r.title.length) }.join(", ") 
+      return tag.title.slice(6..tag.title.length).length
     end
-    "No yet assigned any price rank"
+    0
   end
 
   def cuisines_format

@@ -1,11 +1,10 @@
-jQuery ->
-  $(".bxslider").bxSlider
-    mode: "fade"
-    auto: true
-    # autoControls: true,
-    pause: 4000
-
-  # $(".bxslider").mouseover ->
-  #   $(".bx-wrapper .bx-controls-direction").css("display","inline");
-  # $(".bxslider").mouseout ->
-  #   $(".bx-wrapper .bx-controls-direction").css("display","none");
+$ ->
+  $("button#login").click ->
+    $(".screenfade").show()
+    $(".model-login").show()
+    $(".screenfade").animate(
+      opacity: 0.5
+    , 1000).delay 1000
+    $(".model-login").animate(
+      opacity: 1.0
+    , 1000).delay 1000
