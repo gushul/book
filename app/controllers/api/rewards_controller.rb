@@ -11,7 +11,8 @@ class Api::RewardsController < ApplicationController
   def create
     u = User.where("email = ?", params[:user][:email] ).first
     if u.nil? or !u.valid_password?(params[:user][:password])
-      render json: "Incorect login/pass", status: :unprocessable_entity
+#      render json: "Incorect login/pass", status: :unprocessable_entity
+      render json: 'ERR:Incorrect Login/Password', status: :400
     else
       @rewards = u.rewards
       render json: @rewards

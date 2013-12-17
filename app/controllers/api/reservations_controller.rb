@@ -56,24 +56,24 @@ private
           %w{email password}.map {|el| params[:user].has_key?(el) }.include?(false) or
           params[:user].values.any?(&:blank?)
       error   = true
-      message = "Provide CORRECT login/pass parameters for this action"
+      message = "ERR:Incorrect Login/Password for Action"
       status  = 403
     elsif params[:user].length > 2
       error   = true
-      message = "Provide ONLY needed parameters for this action"
+      message = "ERR:Invalid Request"
       status  = 400
     else 
       # will be used in create and update
       @user = User.where(:email => params[:user][:email] ).first
       if @user.nil? or !@user.valid_password?(params[:user][:password])
         error   = true
-        message = "Incorect login/pass"
+        message = "ERR:Incorrect Login/Password"
         status  = 403
       end
     end
 
     if error
-      render json: message, status: status 
+      render text: message, status: status 
     end
   end
 
@@ -83,7 +83,7 @@ private
             %w{restaurant_id date party_size start_time end_time active}.map {|el| params[:reservation].has_key?(el) }.include?(false) or
             params[:reservation].values.any?(&:blank?)
         error   = true
-        message = "Provide EVERY & CORRECT reservation parameters data for this action"
+        message = "ERR:Invalid Reservation Parameters"
         status  = 400   
       # elsif params[:reservation].length > 6 or params.length > 6
       #   error   = true
@@ -92,7 +92,7 @@ private
       end
 
       if error
-        render json: message, status: status 
+        render text: message, status: status 
       end
   end 
 

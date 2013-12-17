@@ -33,7 +33,8 @@ class Api::RestaurantsController < ApplicationController
            owner_id updated_at created_at}.each {|k| @restaurant.delete(k)}
     rescue 
       @restaurant = "{\"id\":[\"Invalid Restaurant ID\"]}"
-      render json: @restaurant, status: :unprocessable_entity
+#      render json: @restaurant, status: :unprocessable_entity
+      render text: 'ERR:Invalid Restaurant ID', status: 400
       return
     end
     render json: @restaurant
