@@ -1,3 +1,5 @@
+ <!-- footer -->
+            <div class="col-md-12 column footer">
             <div class="container">
             <nav class="navbar  padding-left-10 padding-right-10 padding-bottom-1 padding-top-1 " role="navigation">
               <div class="navbar-header">
@@ -11,19 +13,19 @@
               <div class="collapse navbar-collapse color-white" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li>
-                    <a href="#">Home</a>
+                    <%= link_to "Home", "#" %>
                   </li>
                   <li>
-                    <a href="#">About us</a>
+                    <%= link_to "About us", "#" %>
                   </li>
                   <li>
-                    <a href="#">how it works</a>
+                    <%= link_to "how it works", "#" %>
                   </li>
                   <li>
-                    <a href="#">Features</a>
+                    <%= link_to "Features", "#" %>
                   </li>
                   <li>
-                    <a href="#">Careers</a>
+                    <%= link_to "Careers", "#" %>
                   </li>
                 </ul>
               </div>
@@ -49,8 +51,10 @@
                 <a href="#" target="_blank"></a>
                 </div>
               <div class="language">
-                <a href="#" class="rblack">EN</a> / <a href="#" class="rblack">TH</a>
+                <%= link_to "EN", root_url(set_locale: "en") , class: "rblack" %> /
+                <%= link_to "TH", root_url(set_locale: "th")  , class: "rblack" %>
               </div>
               </div>
             </div> 
             </div>
+          </div><!-- /footer -->

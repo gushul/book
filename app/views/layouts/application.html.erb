@@ -19,19 +19,35 @@
 </head> 
 <body> 
     
-<%#= render :partial => "layouts/header" %>
 
- <% if flash[:notice] -%>
-    <div id="flash_notice"><%= flash[:notice] %></div>
-  <% elsif flash[:alert] -%>
-    <div id="flash_alert"><%= flash[:alert] %></div>
-  <% elsif flash[:error] -%>
-    <div id="flash_error"><%= flash[:error] %></div>
-  <% end %>
+<div class="wrapper">
+  <div class="box">
+    <div class="row row-offcanvas row-offcanvas-left">
+                   
+      <!-- main right col -->
+      <div class="column col-sm-12 col-xs-12" id="main">
+        <%= render :partial => "layouts/header" %>
 
-  <%= yield %>
+        <div class="topContent position-relative">
+          <% if flash[:notice] -%>
+          <div id="flash_notice"><%= flash[:notice] %></div>
+          <% elsif flash[:alert] -%>
+          <div id="flash_alert"><%= flash[:alert] %></div>
+          <% elsif flash[:error] -%>
+          <div id="flash_error"><%= flash[:error] %></div>
+          <% end %>
+          
+          <%= yield %>
+        </div>
 
-<%#= render :partial => "layouts/footer" %>
+        <%= render :partial => "layouts/footer" %>
+      </div>
+      <!-- /main -->
+
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>

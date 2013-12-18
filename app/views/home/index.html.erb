@@ -1,132 +1,39 @@
-<div class="wrapper">
-    <div class="box">
-        <div class="row row-offcanvas row-offcanvas-left">
-                             
-            <!-- main right col -->
-            <div class="column col-sm-12 col-xs-12" id="main">
-                
-                <!-- top nav -->
-                <div class="navbar navbar-black navbar-static-top">
-          <div class="container">
-                    <div class="navbar-header">
-                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle</span>
-                        <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                      </button>
-                      <a href="../home/index.html" class="navbar-brand logo">b</a>
-                    </div>
-
-                    <nav class="collapse navbar-collapse" role="navigation">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-            <a href="#" class="dropdown-toggle lblack" style="font-size:16px;" data-toggle="dropdown">RESTAURANTS</a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Home Layout 1</a></li>
-              <li><a href="#">Home Layout 2</a></li>
-              <li><a href="#">Home Layout 3</a></li>
-              <li><%= link_to t("restaurants"), restaurants_path %></li>
-            </ul>
-            </li>
-            <!-- /.RESTAURANTS -->
-          </ul>
-                    <form class="navbar-form navbar-left" action="../search/search.html" method="get">
-                        <div class="input-group input-group-sm">
-                          <input class="form-control llitalic" placeholder="Search by restaurants, location or cuisine" name="srch-term" id="srch-term" type="text">
-                          <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                          </div>
-                        </div>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-            <li>
-            <!-- <button type="button" id="login" class="btn btn-default login navbar-btn navbar-right lblack">LOG IN</button> -->
-            <% unless owner_signed_in? %>
-              <% unless user_signed_in? %>
-                <%= button_to "LOG IN", new_user_session_path, :class => "btn btn-default login navbar-btn navbar-right lblack", :id => "login", :method => :get %>
-              <% else %>
-                <%= button_to current_user.username, edit_user_registration_path, :class => "btn btn-default login navbar-btn navbar-right lblack", :method => :get   %>
-              <% end %>
-            <% end %>
-
-            </li>
-
-            <li>
-            <!-- <button type="button" class="btn btn-default signup navbar-btn navbar-right lblack">SIGN UP</button> -->
-              <% unless owner_signed_in? %>
-                <% unless user_signed_in? %>
-                  <%= button_to "SIGN UP", new_user_registration_path, :class => "btn btn-default signup navbar-btn navbar-right lblack", :method => :get %>
-                <% else %>
-                  <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-default signup navbar-btn navbar-right lblack", :method => :get %>
-                <% end %>
-              <% end %>
-            </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle lblack" data-toggle="dropdown">For Your Business <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="">More</a></li>
-                          <li><a href="">More</a></li>
-                          <% unless owner_signed_in? %>
-                           <li>
-                              <%= link_to "Login as Owner", new_owner_session_path %>
-                            </li>
-                            <li>
-                             <%= link_to "Registration for Owners", new_owner_registration_path %>
-                            </li>
-                          <% else %>
-                            <li>
-                              <%= link_to "My Restaurant", current_owner.restaurant.blank? ? new_restaurant_path  : edit_restaurant_path(current_owner.restaurant)  %>
-                            </li>
-                             <li><%= link_to t("reservations"), reservations_path %></li>
-                            <li><%= link_to t("inventories"), inventories_path %></li>
-                            <li><%= link_to t("inventory_templates"), my_inventory_templates_path unless current_owner.restaurant.blank? %></li>
-                            <li><%= link_to "Inventory Template Groups", inventory_template_groups_path unless current_owner.restaurant.blank? %></li>
-                            <li><%= link_to "Edit account details",  edit_owner_registration_path %></li>
-                            <li><%= link_to "Logout", destroy_owner_session_path, method: :delete %></li>
-                          <% end %>
-
-                        </ul>
-                      </li>
-                    </ul>
-                    </nav>
-          </div>
-                </div>
-                <!-- /top nav -->
-<div class="topContent position-relative">
 <div id="myCarousel">
-    <!-- CAROUSEL -->
-    <div id="carousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel" data-slide-to="0" class=""></li>
-        <li class="" data-target="#carousel" data-slide-to="1"></li>
-        <li class="active" data-target="#carousel" data-slide-to="2"></li>
-      </ol>
+  <!-- CAROUSEL -->
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel" data-slide-to="0" class=""></li>
+      <li class="" data-target="#carousel" data-slide-to="1"></li>
+      <li class="active" data-target="#carousel" data-slide-to="2"></li>
+    </ol>
 
-      <!-- Wrapper for slides -->
-      <section class="carousel-inner">
-        <div class="item">
-          <%= image_tag("/assets/carousel-1.jpg") %>
-        </div>
-        <div class="item">
-          <%= image_tag("/assets/carousel-2.jpg") %>
-        </div>
-        <div class="item active">
-          <%= image_tag("/assets/carousel-3.jpg") %>
-        </div>
-      </section><!-- /.carousel inner -->
+    <!-- Wrapper for slides -->
+    <section class="carousel-inner">
+      <div class="item">
+        <%= image_tag("/assets/carousel-1.jpg") %>
+      </div>
+      <div class="item">
+        <%= image_tag("/assets/carousel-2.jpg") %>
+      </div>
+      <div class="item active">
+        <%= image_tag("/assets/carousel-3.jpg") %>
+      </div>
+    </section><!-- /.carousel inner -->
 
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel" data-slide="prev">
-        <span class="icon-prev"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel" data-slide="next">
-        <span class="icon-next"></span>
-      </a>
-    </div>
-    <!-- /.carousel -->
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel" data-slide="prev">
+      <span class="icon-prev"></span>
+    </a>
+
+    <a class="right carousel-control" href="#carousel" data-slide="next">
+      <span class="icon-next"></span>
+    </a>
+
+  </div>
+  <!-- /.carousel -->
 </div>
+
 <div class="container margin-bottom0">
 <div id="advanceSearchBox" class="clearfix position-absolute black-trans90 radius10">
             <div class="clearfix">
@@ -182,8 +89,17 @@
               </select>
               </div>
             </div>
-            <div class="info white"><h6 class="rregular">Not ready to reserve? See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
-            <div><input class="btn btn-default lblack" value="FIND TABLE" type="submit"></div>
+            <div class="info white">
+              <h6 class="rregular">Not ready to reserve? See all Bangkok restaurants</h6>
+              <!-- <i class="glyphicon glyphicon-circle-arrow-right"></i> -->
+              <div style="padding-top:10px; float: left;">
+                <%= link_to "", restaurants_path , class: "glyphicon glyphicon-circle-arrow-right" %>
+              </div>
+
+            </div>
+            <div>
+              <input class="btn btn-default lblack" value="FIND TABLE" type="submit">
+            </div>
                     </form>
         </div>
               <div class="tab-pane fade" id="byName">
@@ -204,7 +120,7 @@
               <input id="timepicker2" name="timepicker" type="text">
               <i class="glyphicon glyphicon-chevron-down"></i>
               </div>
-              
+
               <div class="people"><i class="glyphicon glyphicon-user"></i>
               <select class="selectpicker" name="people">
                 <option value="1" selected="selected">1</option>
@@ -225,8 +141,13 @@
               </select>
               </div>
             </div>
-            <div class="info white"><h6>Not ready to reserve? See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
-            <div><input class="btn btn-default" value="FIND TABLE" type="submit"></div>
+            <div class="info white">
+              <h6>Not ready to reserve? See all Bangkok restaurants</h6>
+              <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            </div>
+            <div>
+              <input class="btn btn-default" value="FIND TABLE" type="submit">
+            </div>
                     </form>
         </div>
       </div>
@@ -250,7 +171,7 @@
         <div class="tab-pane fade in active" id="new">
                 <ul class="media-list">
 
-                  <% @restaurants.each_with_index do |restaurant, index| %>
+      <% @restaurants.each_with_index do |restaurant, index| %>
       <li class="media">
         <a class="pull-left" href="#"><%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144" if restaurant.photos.first %> </a>
         <div class="media-body">
@@ -402,88 +323,3 @@
                        </div><!--/row-->
         
                     </div><!-- /col-9 -->
-        </div><!-- /content -->
-
-          <!-- footer -->
-            <div class="col-md-12 column footer">
-            <div class="container">
-            <nav class="navbar  padding-left-10 padding-right-10 padding-bottom-1 padding-top-1 " role="navigation">
-              <div class="navbar-header">
-                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span></button> 
-              </div>
-              
-              <div class="collapse navbar-collapse color-white" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li>
-                    <%= link_to "Home", "#" %>
-                  </li>
-                  <li>
-                    <%= link_to "About us", "#" %>
-                  </li>
-                  <li>
-                    <%= link_to "how it works", "#" %>
-                  </li>
-                  <li>
-                    <%= link_to "Features", "#" %>
-                  </li>
-                  <li>
-                    <%= link_to "Careers", "#" %>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-            <div class="row clearfix bottom">
-              <div class="pull-left">
-              <span class="label label-default">@2013 All rights Reserved</span> 
-              </div>
-              <div class="text">
-                <span class="label">Appservation Co, Ltd. soi chula payathai road bangkok 10330, Thailand<br></span>
-              </div>
-              <div class="pull-right">
-                <div class="icon icon-tw">
-                <a href="#" target="_blank"></a>
-                </div>
-                <div class="icon icon-fb">
-                <a href="#" target="_blank"></a>
-                </div>
-                <div class="icon icon-rss">
-                <a href="#" target="_blank"></a>
-                </div>
-                <div class="icon icon-in">
-                <a href="#" target="_blank"></a>
-                </div>
-              <div class="language">
-                <a href="#" class="rblack">EN</a> / <a href="#" class="rblack">TH</a>
-              </div>
-              </div>
-            </div> 
-            </div>
-          </div><!-- /footer -->
-            </div>
-            <!-- /main -->
-          
-        </div>
-    </div>
-</div>
-
-
-
-<div class="screenfade"></div>
-<div class="model-login">
-<div class="pull-right"><i class="glyphicon glyphicon-remove" onclick=" $('.model-login').hide();$('.screenfade').hide();"></i></div>
-<h2 class="rbold">Please log in</h2>
-<div class="error rregular"><span class="rbold">Sorry!</span>You must log in before making a reservation.</div>
-<form method="post" action="#">
-<div class="email"><span class="rbold">Email Address :</span><input type="text" name="email"/></div>
-<div class="password"><span class="rbold">Password :</span><input type="text" name="password"/></div>
-<button class="btn">facebook</button>
-<div class="rregular">Don't have an account? <span class="red">Please sign up here</span></div>
-
-<hr/>
-<div class="pull-right"><input type="submit" class="btn lblack" value="LogIn" /></div>
-</form>
-</div>

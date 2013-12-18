@@ -1,0 +1,22 @@
+#flash_notice, #flash_error, #flash_alert {
+  padding: 10px 10px;
+  margin: 10px 10px;
+  z-index: 999;
+  position: fixed;
+  width: 50%;
+  
+  border-radius: 5px 5px 5px 5px;
+  -webkit-box-shadow: 0px 0px 68px 10px #FFFFFF;
+     -moz-box-shadow: 0px 0px 68px 10px #FFFFFF;
+          box-shadow: 0px 0px 68px 10px #FFFFFF;
+}
+
+#flash_notice {
+  border: solid 1px #6C6;
+  background-color: rgba(57, 255, 48, 0.85);
+}
+
+#flash_error, #flash_alert {
+  border: solid 1px #C66;
+  background-color: rgba(255, 81, 48, 0.85);
+}

@@ -1,3 +1,5 @@
+ <!-- top nav -->
+                <div class="navbar navbar-black navbar-static-top">
           <div class="container">
                     <div class="navbar-header">
                       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
@@ -6,13 +8,19 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                       </button>
-                      <a href="../home/index.html" class="navbar-brand logo">hungry hub</a>
+                      <%= link_to "b", root_path , class: "navbar-brand logo" %>
                     </div>
 
                     <nav class="collapse navbar-collapse" role="navigation">
           <ul class="nav navbar-nav">
             <li class="dropdown">
-            <a href="#" class="dropdown-toggle lblack">RESTAURANTS</a>
+            <a href="#" class="dropdown-toggle lblack" style="font-size:16px;" data-toggle="dropdown">RESTAURANTS</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Home Layout 1</a></li>
+              <li><a href="#">Home Layout 2</a></li>
+              <li><a href="#">Home Layout 3</a></li>
+              <li><%= link_to t("restaurants"), restaurants_path %></li>
+            </ul>
             </li>
             <!-- /.RESTAURANTS -->
           </ul>
@@ -25,16 +33,55 @@
                         </div>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-            <li><button type="button" id="login" class="btn btn-default login navbar-btn navbar-right lblack action">LOG IN</button></li>
-            <li><button type="button" id="signup" class="btn btn-default signup navbar-btn navbar-right lblack action">SIGN UP</button></li>
-            <li class="ownerUnlog"><a href="#" class="dropdown-toggle lblack action" id="ownerlogin" data-toggle="dropdown">For Your Business <b class="caret"></b></a></l>
-                      <li class="ownerLoged dropdown" style="display:none;">
-                        <a href="#" class="dropdown-toggle lblack" data-toggle="dropdown">THE GARRET SECRET BISTRO<b class="caret"></b></a>
+            <li>
+            <!-- <button type="button" id="login" class="btn btn-default login navbar-btn navbar-right lblack">LOG IN</button> -->
+            <% unless owner_signed_in? %>
+              <% unless user_signed_in? %>
+                <%= button_to "LOG IN", new_user_session_path, :class => "btn btn-default login navbar-btn navbar-right lblack", :id => "login", :method => :get %>
+              <% else %>
+                <%= button_to current_user.username, edit_user_registration_path, :class => "btn btn-default login navbar-btn navbar-right lblack", :method => :get   %>
+              <% end %>
+            <% end %>
+
+            </li>
+
+            <li>
+            <!-- <button type="button" class="btn btn-default signup navbar-btn navbar-right lblack">SIGN UP</button> -->
+              <% unless owner_signed_in? %>
+                <% unless user_signed_in? %>
+                  <%= button_to "SIGN UP", new_user_registration_path, :class => "btn btn-default signup navbar-btn navbar-right lblack", :method => :get %>
+                <% else %>
+                  <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-default signup navbar-btn navbar-right lblack", :method => :get %>
+                <% end %>
+              <% end %>
+            </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle lblack" data-toggle="dropdown">For Your Business <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="../owner/index.html">Setting</a></li>
-                          <li><a href="../home/index.html">Log out</a></li>
+                          <!-- <li><a href="">More</a></li> -->
+                          <% unless owner_signed_in? %>
+                           <li>
+                              <%= link_to "Login as Owner", new_owner_session_path %>
+                            </li>
+                            <li>
+                             <%= link_to "Registration for Owners", new_owner_registration_path %>
+                            </li>
+                          <% else %>
+                            <li>
+                              <%= link_to "My Restaurant", current_owner.restaurant.blank? ? new_restaurant_path  : edit_restaurant_path(current_owner.restaurant)  %>
+                            </li>
+                             <li><%= link_to t("reservations"), reservations_path %></li>
+                            <li><%= link_to t("inventories"), inventories_path %></li>
+                            <li><%= link_to t("inventory_templates"), my_inventory_templates_path unless current_owner.restaurant.blank? %></li>
+                            <li><%= link_to "Inventory Template Groups", inventory_template_groups_path unless current_owner.restaurant.blank? %></li>
+                            <li><%= link_to "Edit account details",  edit_owner_registration_path %></li>
+                            <li><%= link_to "Logout", destroy_owner_session_path, method: :delete %></li>
+                          <% end %>
+
                         </ul>
                       </li>
                     </ul>
                     </nav>
           </div>
+                </div>
+                <!-- /top nav -->
