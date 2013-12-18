@@ -1,20 +1,4 @@
-  <div class="topContent container">
-
-     <div class="row">
-      <div class="col-sm-12"><h2 class="rlight"><i class="glyphicon glyphicon-cog" style="font-size:24px;margin-right:10px;"></i>Setting</h2></div> 
-     
-      <%= render :partial => "owners/menu" %>
-
-                          <!-- main col right -->
-                       <div class="col-sm-8 col-sm-8">
-                            <div class="storyContent setting">
-                <div class="header">
-                  <h3 class="rmedium">Inventory Template Groups</h3>
-                </div>
-                <div class="content">
-
-
-          <!-- <h1>Listing inventory Template Groups</h1> -->
+<h1>Listing inventory Template Groups</h1>
 
 <% unless @inventory_template_groups.blank? %>
   <table  class="table table-striped table-bordered table-hover">
@@ -47,13 +31,3 @@
 
 <%= link_to 'New Inventory Template Group', new_inventory_template_group_path if owner_signed_in?  %>
 
-
-
-
-                </div>
-              </div>
-              </div>
-                       </div><!--/row-->
-        
-                    </div><!-- /col-9 -->
-        </div><!-- /content -->
