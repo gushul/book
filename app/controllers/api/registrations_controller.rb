@@ -17,7 +17,7 @@ class Api::RegistrationsController < ApplicationController
     else
       warden.custom_failure!
 #      render json: user.errors, status: :unprocessable_entity
-      render text: "ERR:#{user.errors.to_s}", status: :400      
+      render text: "ERR:#{user.errors.to_s}", status: 400      
     end
   end
 

@@ -1,4 +1,5 @@
 $ ->
+  
   $("button#login").click ->
     $(".screenfade").show()
     $(".model-login").show()
@@ -8,3 +9,10 @@ $ ->
     $(".model-login").animate(
       opacity: 1.0
     , 1000).delay 1000
+
+  $('#datepicker').datepicker()
+  $('#datepicker2').datepicker()
+  
+  $('#timepicker').timepicker()
+  $('#timepicker2').timepicker()
+

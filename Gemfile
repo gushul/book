@@ -59,7 +59,7 @@ group :test do
 end
 
 # gem 'bootstrap-sass-rails'
-# gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootstrap-sass', '~> 3.0.3.0'
 # gem 'bootswatch-rails'
 
 group :assets do
