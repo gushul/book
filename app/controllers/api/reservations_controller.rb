@@ -27,8 +27,11 @@ class Api::ReservationsController < ApplicationController
       if @reservation.save 
         format.json { render json: @reservation, status: 200 }
       else
-        format.json { render json: @reservation.errors, 
-                           status: :unprocessable_entity }
+        format.json {
+#				render json: @reservation.errors, 
+#				status: :unprocessable_entity
+				render text: "ERR:#{reservation.errors.to_s}", status: 400
+			}
       end
     end
   end
@@ -42,8 +45,12 @@ class Api::ReservationsController < ApplicationController
       if @reservation.update_attributes(params[:reservation])
         format.json { render json: @reservation, status: 200 }
       else
-        format.json { render json: @reservation.errors, 
-                           status: :unprocessable_entity }
+        format.json { 
+	
+			#render json: @reservation.errors, 
+			#status: :unprocessable_entity 
+			render text: "ERR:#{reservation.errors.to_s}", status: 400
+			}
       end
     end
   end
