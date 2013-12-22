@@ -30,7 +30,7 @@ class Api::ReservationsController < ApplicationController
         format.json {
 #				render json: @reservation.errors, 
 #				status: :unprocessable_entity
-				render text: "ERR:#{reservation.errors.to_s}", status: 400
+				render text: "ERR:#{@reservation.errors.to_s}", status: 400
 			}
       end
     end
@@ -49,7 +49,7 @@ class Api::ReservationsController < ApplicationController
 	
 			#render json: @reservation.errors, 
 			#status: :unprocessable_entity 
-			render text: "ERR:#{reservation.errors.to_s}", status: 400
+			render text: "ERR:#{@reservation.errors.to_s}", status: 400
 			}
       end
     end
