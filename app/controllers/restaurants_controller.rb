@@ -20,12 +20,12 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     @reservation = Reservation.new
-    @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=550x300"
+    @image_tag_string = "/assets/slideshow-rest.jpg"
     # @image_tag_string << "&center=#{@restaurant.lat}%2C#{@restaurant.lng}"
     # @image_tag_string << "&markers=icon:http://tinyurl.com/o39bbb3%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
     # @image_tag_string << "&markers=icon:http://tinyurl.com/oyoepzu%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
-    @image_tag_string << "&markers=icon:http://tinyurl.com/pgdsbxb%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
-    @image_tag_string << '&sensor=false&zoom=15'
+    #@image_tag_string << "&markers=icon:http://tinyurl.com/pgdsbxb%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
+    #@image_tag_string << '&sensor=false&zoom=15'
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @quantity = []
