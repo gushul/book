@@ -28,7 +28,7 @@
       <div class="column col-sm-12 col-xs-12" id="main">
         <%= render :partial => "layouts/header" %>
 
-        <div class="topContent position-relative">
+        <div class="flash_container">
           <% if flash[:notice] -%>
           <div id="flash_notice"><%= flash[:notice] %></div>
           <% elsif flash[:alert] -%>
@@ -36,8 +36,9 @@
           <% elsif flash[:error] -%>
           <div id="flash_error"><%= flash[:error] %></div>
           <% end %>
-          
-          <%= yield %>
+        </div>
+        <%= yield %>
+        <div class="topContent position-relative">
         </div>
 
         <%= render :partial => "layouts/footer" %>

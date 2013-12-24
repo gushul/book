@@ -1,0 +1,168 @@
+<div class="screenfade"></div>
+
+<div class="model model-login">
+<div class="header">
+<i class="glyphicon glyphicon-remove" onclick="closeModel('login');"></i>
+<h4 class="lbold">Log In</h4></div>
+<div class="content">
+<button class="btn facebook">Facebook</button>
+<h4 class="rregular">OR Log In With Email Address</h4>
+<div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again</div>
+<form method="get" action="">
+<input type="hidden" name="check" value="false"/>
+<script type="text/javascript">
+  if(getParameterByName('check') == "true"){
+    $(".model-login input[name='check']").attr("value","true");
+  }
+</script>
+<div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email" value="user" /></div>
+<div class="password"><input class="rregular" type="password" placeholder="Password" name="password" value="user" /></div>
+<div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
+</form>
+<h5 class="rregular">For got your password?</h5>
+</div>
+</div>
+
+
+
+
+<div class="model model-signup">
+<div class="header">
+<i class="glyphicon glyphicon-remove" onclick="closeModel('signup');"></i>
+<h4 class="lbold">Sign Up</h4></div>
+<div class="content">
+<button class="btn facebook">Sign up with Facebook</button>
+<h4 class="rregular">OR Sign In With Email Address</h4>
+<form method="get" action="">
+<div class="name"><input class="rregular" type="text" placeholder="Your name" name="name"/></div>
+<div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email"/></div>
+<div class="phone"><input class="rregular" type="text" placeholder="Phone" name="phone"/></div>
+<div class="password"><input class="rregular" type="password" placeholder="Password" name="password"/></div>
+<div class="password"><input class="rregular" type="text" placeholder="Confirm Password" name="confirmpassword"/></div>
+<div class="submit"><input type="submit" class="btn lblack" value="Sign up" /></div>
+</form>
+<h5 class="rregular">By registration, you are agreeing to out Term of Service</h5>
+</div>
+</div>
+
+
+
+<div class="model model-ownerlogin">
+<div class="header">
+<i class="glyphicon glyphicon-remove" onclick="closeModel('ownerlogin');"></i>
+<h4 class="lbold">Restaurant Owner Log In</h4></div>
+<div class="content">
+<div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again</div>
+<form method="get" action="">
+<div class="email"><input class="rregular" type="text" placeholder="Email Address" name="owneremail" value="admin" /></div>
+<div class="password"><input class="rregular" type="password" placeholder="Password" name="ownerpassword" value="admin" /></div>
+<div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
+</form>
+<h5 class="rregular">For got your password?</h5>
+</div>
+</div>
+
+
+
+
+<div class="model model-check">
+  <div class="header">
+  <i class="glyphicon glyphicon-remove" onclick="closeModel('check');"></i>
+  <h4 class="lbold">Check Availability</h4></div>
+  <div class="content">
+  <form method="get" action=""><input type="hidden" name="check" value="true"/>
+    <input type="hidden" name="srch-term" />
+    <input type="hidden" name="srch-location" />
+    <input type="hidden" name="srch-restaurant" />
+    <script type="text/javascript">
+      $(".model-check input[name='srch-term']").attr("value",getParameterByName("srch-term"));
+      $(".model-check input[name='srch-location']").attr("value",getParameterByName('srch-location'));
+      $(".model-check input[name='srch-restaurant']").attr("value",getParameterByName('srch-restaurant'));
+    </script>
+              <div class="advanceSearch">
+                <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Oh sorry! </span>&nbsp;&nbsp;We don't have a table for you. Try it again!</div>
+                <div class="date"><div class="title">Selected Date:</div>
+                <div class="text">
+                <i class="glyphicon glyphicon-calendar"></i>
+                <input type="text" id="datepicker" name="datepicker" class="rregular">
+                <i class="glyphicon glyphicon-chevron-down"></i>
+                <script type="text/javascript">
+                  $('#datepicker').datepicker();
+                </script>
+                </div>
+                </div>
+                <div class="time"><div class="title">Requested Time:</div>
+                <div class="text">
+                <i class="glyphicon glyphicon-time"></i>
+                <input type="text" id="timepicker" name="timepicker" class="rregular">
+                <i class="glyphicon glyphicon-chevron-down"></i>
+                 <script type="text/javascript">
+                  $('#timepicker').timepicker();
+                </script>
+                </div>
+                </div>
+                <div class="people"><div class="title">Amount:</div>
+                <div class="text">
+                <i class="glyphicon glyphicon-user"></i>
+                <select class="selectpicker" name="people" class="rregular">
+                  <option value="1" selected="selected">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                </select>
+                </div>
+                </div>
+              </div>
+
+              <h4 class="rbold">You are making a reservation for <span class="pink">The Garret Secret Bistro</span>.</h4>
+  <h5 class="rregular">Special requests are not guaranteed and are subject to availability and restaurant discretion.</h5>
+  <hr/>
+  <div class="submit"><input type="submit" class="btn lblack" value="Check Now" /></div>
+  </form>
+  </div>
+</div>
+
+<div class="model model-reservation">
+  <div class="header">
+  <i class="glyphicon glyphicon-remove" onclick="closeModel('reservation');"></i>
+  <h4 class="lbold">Make this reservation</h4></div>
+  <div class="content">
+  <form method="get" action="#">
+    <input type="hidden" name="srch-term" />
+    <input type="hidden" name="srch-location" />
+    <input type="hidden" name="srch-restaurant" />
+    <input type="hidden" name="check" value=""/>
+    <script type="text/javascript">
+      $(".model-reservation input[name='srch-term']").attr("value",getParameterByName('srch-term'));
+      $(".model-reservation input[name='srch-location']").attr("value",getParameterByName('srch-location'));
+      $(".model-reservation input[name='srch-restaurant']").attr("value",getParameterByName('srch-restaurant'));
+      
+    </script>
+    <div class="green rregular" style="color:#48874a;padding:15px 10px;background:#e0f0d9;border-radius:5px;"><span class="rbold">Well done! </span>&nbsp;&nbsp;We have a table for you.</div>
+    <div class="name"><input class="rregular" type="text" placeholder="Your name" name="name"/></div>
+    <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email"/></div>
+    <div class="phone"><input class="rregular" type="text" placeholder="Phone" name="phone"/></div>
+    <div class="phone"><textarea class="rregular" type="text" placeholder="Special Requests" name="special"></textarea></div>
+
+  <h5 class="rregular" style="text-align:left;">You are making a reservation for <span class="pink">2 people</span>.</h5>
+  <h5 class="rregular" style="text-align:left;">at <span class="pink">The Garret Secret Bistro</span>.</h5>
+  <h5 class="rregular" style="text-align:left;">on <span class="pink">October 31 2013, 6:15 PM</span>.</h5> 
+  <hr/>
+  <div class="submit">
+  <button class="btn lblack" onclick="window.history.back();">PREVIOUS</button>
+  <input type="submit" class="btn lblack" value="BOOK NOW" />
+  </div>
+  </form>
+  </div>
+</div>
