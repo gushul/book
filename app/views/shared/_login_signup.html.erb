@@ -8,18 +8,20 @@
     <div class="content">
       <button class="btn facebook">Facebook</button>
       <h4 class="rregular">OR Log In With Email Address</h4>
-      <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again</div>
-      <form method="get" action="">
-        <input type="hidden" name="check" value="false"/>
-        <script type="text/javascript">
-          if(getParameterByName('check') == "true"){
-            $(".model-login input[name='check']").attr("value","true");
-          }
-        </script>
-        <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email" value="user" /></div>
-        <div class="password"><input class="rregular" type="password" placeholder="Password" name="password" value="user" /></div>
-        <div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
-      </form>
+      <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again
+      </div>
+
+      <%= form_tag user_session_path do %>
+        <div class="email">
+          <%= text_field_tag 'email','', :class=> "rregular", :placeholder=>"Email Address" %>
+        </div>
+        <div class="password">
+          <%= password_field_tag 'password', '', :class=> "rregular", :placeholder=>"Password" %>
+        </div>
+        <div class="submit">
+        <%= submit_tag 'LogIn', :class=> "btn lblack" %>
+        </div>
+      <% end %>
       <h5 class="rregular">For got your password?</h5>
     </div>
   </div>
@@ -32,14 +34,26 @@
     <div class="content">
       <button class="btn facebook">Sign up with Facebook</button>
       <h4 class="rregular">OR Sign In With Email Address</h4>
-      <form method="get" action="">
-        <div class="name"><input class="rregular" type="text" placeholder="Your name" name="name"/></div>
-        <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email"/></div>
-        <div class="phone"><input class="rregular" type="text" placeholder="Phone" name="phone"/></div>
-        <div class="password"><input class="rregular" type="password" placeholder="Password" name="password"/></div>
-        <div class="password"><input class="rregular" type="text" placeholder="Confirm Password" name="confirmpassword"/></div>
-        <div class="submit"><input type="submit" class="btn lblack" value="Sign up" /></div>
-      </form>
+      <%= form_tag user_registration_path do %>
+        <div class="name">
+          <%= text_field_tag 'name','', :class=> "rregular", :placeholder=>"Your name" %>
+        </div>
+        <div class="email">
+          <%= text_field_tag 'email','', :class=> "rregular", :placeholder=>"Email Address" %>
+        </div>
+        <div class="phone">
+          <%= text_field_tag 'phone', '', :class=> "rregular", :placeholder=>"Phone" %>
+        </div>
+        <div class="password">
+          <%= password_field_tag 'password', '', :class=> "rregular", :placeholder=>"Password" %>
+        </div>
+        <div class="password">
+          <%= password_field_tag 'confirmpassword', '', :class=> "rregular", :placeholder=>"Confirm Password" %>
+        </div>
+        <div class="submit">
+          <%= submit_tag 'Sign up', :class=> "btn lblack" %>
+        </div>
+      <% end %>
       <h5 class="rregular">By registration, you are agreeing to out Term of Service</h5>
     </div>
   </div>
