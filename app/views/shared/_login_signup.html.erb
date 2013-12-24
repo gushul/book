@@ -1,67 +1,69 @@
 <div class="screenfade"></div>
+<% unless user_signed_in? %>
+  <div class="model model-login">
+    <div class="header">
+      <i class="glyphicon glyphicon-remove" onclick="closeModel('login');"></i>
+      <h4 class="lbold">Log In</h4>
+    </div>
+    <div class="content">
+      <button class="btn facebook">Facebook</button>
+      <h4 class="rregular">OR Log In With Email Address</h4>
+      <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again</div>
+      <form method="get" action="">
+        <input type="hidden" name="check" value="false"/>
+        <script type="text/javascript">
+          if(getParameterByName('check') == "true"){
+            $(".model-login input[name='check']").attr("value","true");
+          }
+        </script>
+        <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email" value="user" /></div>
+        <div class="password"><input class="rregular" type="password" placeholder="Password" name="password" value="user" /></div>
+        <div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
+      </form>
+      <h5 class="rregular">For got your password?</h5>
+    </div>
+  </div>
 
-<div class="model model-login">
-<div class="header">
-<i class="glyphicon glyphicon-remove" onclick="closeModel('login');"></i>
-<h4 class="lbold">Log In</h4></div>
-<div class="content">
-<button class="btn facebook">Facebook</button>
-<h4 class="rregular">OR Log In With Email Address</h4>
-<div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again</div>
-<form method="get" action="">
-<input type="hidden" name="check" value="false"/>
-<script type="text/javascript">
-  if(getParameterByName('check') == "true"){
-    $(".model-login input[name='check']").attr("value","true");
-  }
-</script>
-<div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email" value="user" /></div>
-<div class="password"><input class="rregular" type="password" placeholder="Password" name="password" value="user" /></div>
-<div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
-</form>
-<h5 class="rregular">For got your password?</h5>
-</div>
-</div>
+  <div class="model model-signup">
+    <div class="header">
+      <i class="glyphicon glyphicon-remove" onclick="closeModel('signup');"></i>
+      <h4 class="lbold">Sign Up</h4>
+    </div>
+    <div class="content">
+      <button class="btn facebook">Sign up with Facebook</button>
+      <h4 class="rregular">OR Sign In With Email Address</h4>
+      <form method="get" action="">
+        <div class="name"><input class="rregular" type="text" placeholder="Your name" name="name"/></div>
+        <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email"/></div>
+        <div class="phone"><input class="rregular" type="text" placeholder="Phone" name="phone"/></div>
+        <div class="password"><input class="rregular" type="password" placeholder="Password" name="password"/></div>
+        <div class="password"><input class="rregular" type="text" placeholder="Confirm Password" name="confirmpassword"/></div>
+        <div class="submit"><input type="submit" class="btn lblack" value="Sign up" /></div>
+      </form>
+      <h5 class="rregular">By registration, you are agreeing to out Term of Service</h5>
+    </div>
+  </div>
+<% end %>
 
-
-
-
-<div class="model model-signup">
-<div class="header">
-<i class="glyphicon glyphicon-remove" onclick="closeModel('signup');"></i>
-<h4 class="lbold">Sign Up</h4></div>
-<div class="content">
-<button class="btn facebook">Sign up with Facebook</button>
-<h4 class="rregular">OR Sign In With Email Address</h4>
-<form method="get" action="">
-<div class="name"><input class="rregular" type="text" placeholder="Your name" name="name"/></div>
-<div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email"/></div>
-<div class="phone"><input class="rregular" type="text" placeholder="Phone" name="phone"/></div>
-<div class="password"><input class="rregular" type="password" placeholder="Password" name="password"/></div>
-<div class="password"><input class="rregular" type="text" placeholder="Confirm Password" name="confirmpassword"/></div>
-<div class="submit"><input type="submit" class="btn lblack" value="Sign up" /></div>
-</form>
-<h5 class="rregular">By registration, you are agreeing to out Term of Service</h5>
-</div>
-</div>
-
-
-
-<div class="model model-ownerlogin">
-<div class="header">
-<i class="glyphicon glyphicon-remove" onclick="closeModel('ownerlogin');"></i>
-<h4 class="lbold">Restaurant Owner Log In</h4></div>
-<div class="content">
-<div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again</div>
-<form method="get" action="">
-<div class="email"><input class="rregular" type="text" placeholder="Email Address" name="owneremail" value="admin" /></div>
-<div class="password"><input class="rregular" type="password" placeholder="Password" name="ownerpassword" value="admin" /></div>
-<div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
-</form>
-<h5 class="rregular">For got your password?</h5>
-</div>
-</div>
-
+<% unless owner_signed_in? %>
+  <div class="model model-ownerlogin">
+    <div class="header">
+      <i class="glyphicon glyphicon-remove" onclick="closeModel('ownerlogin');"></i>
+      <h4 class="lbold">Restaurant Owner Log In</h4>
+    </div>
+    <div class="content">
+      <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;">
+        <span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again
+      </div>
+      <form method="get" action="">
+        <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="owneremail" value="admin" /></div>
+        <div class="password"><input class="rregular" type="password" placeholder="Password" name="ownerpassword" value="admin" /></div>
+        <div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
+      </form>
+      <h5 class="rregular">For got your password?</h5>
+    </div>
+  </div>
+<% end %>
 
 
 

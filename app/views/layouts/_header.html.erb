@@ -14,7 +14,7 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a class="dropdown-toggle lblack" href="#">RESTAURANTS</a>
-        </li><!-- /.RESTAURANTS -->
+        </li>
       </ul>
       <form method="get" action="../search/search.html" class="navbar-form navbar-left">
           <div class="input-group input-group-sm">
@@ -24,24 +24,44 @@
             </div>
           </div>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><button class="btn btn-default login navbar-btn navbar-right lblack action" id="login" type="button">LOG IN</button></li>
-        <li><button class="btn btn-default signup navbar-btn navbar-right lblack action" id="signup" type="button">SIGN UP</button></li>
-        <li class="ownerUnlog"><a data-toggle="dropdown" id="ownerlogin" class="dropdown-toggle lblack action" href="#">For Your Business <b class="caret"></b></a>
-        </li><li style="display:none;" class="ownerLoged dropdown">
-          <a data-toggle="dropdown" class="dropdown-toggle lblack" href="#">THE GARRET SECRET BISTRO<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="../owner/index.html"><i style="margin-right:5px;" class="glyphicon glyphicon-cog"></i>SETTING</a></li>
-            <li><a onclick="$.removeCookie('owner');" href="../home/index.html"><i style="margin-right:5px;" class="glyphicon glyphicon-off"></i>LOG OUT</a></li>
-          </ul>
-        </li>
-        <li style="display:none;" class="userLoged dropdown">
-          <a data-toggle="dropdown" class="dropdown-toggle lblack" href="#">Welcome User<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a onclick="$.removeCookie('user');" href="../home/index.html">Log out</a></li>
-          </ul>
-        </li>
-      </ul>
+      
+        <ul class="nav navbar-nav navbar-right">
+          <% unless user_signed_in? %> 
+            <li>
+              <button class="btn btn-default login navbar-btn navbar-right lblack action" id="login" type="button">LOG IN</button>
+            </li>
+            <li>
+              <button class="btn btn-default signup navbar-btn navbar-right lblack action" id="signup" type="button">SIGN UP</button>
+            </li>
+          <% end %>
+          <% unless owner_signed_in? %>
+            <li class="ownerUnlog">
+              <a data-toggle="dropdown" id="ownerlogin" class="dropdown-toggle lblack action" href="#">For Your Business <b class="caret"></b>
+              </a>
+            </li>
+          <% end %>
+          <% if owner_signed_in? %>
+            <li class="ownerLoged dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle lblack" href="#">THE GARRET SECRET BISTRO<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="../owner/index.html"><i style="margin-right:5px;" class="glyphicon glyphicon-cog"></i>SETTING</a></li>
+                <li>
+                  <%= link_to "<i style='margin-right:5px;' class='glyphicon glyphicon-off'></i>LOG OUT".html_safe, destroy_owner_session_path, :method => :delete %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li class="userLoged dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle lblack" href="#">Welcome User<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
     </nav>
   </div>
 </div>
