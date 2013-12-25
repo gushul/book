@@ -1,0 +1,13 @@
+<div class="col-sm-12 col-lg-4">
+  <div class="settingMenu">
+    <ul>
+      <li><%= link_to "Dashboard", owner_dashboards_path, :class=> (active_tab == 'dashboard' ? 'active' : ''), :id => "dashboard" %></li>
+      <li><%= link_to "My Restaurant", "#", :id => "my_restaurant" %></li>
+      <li><%= link_to "Reservation", "#", :id => "reservation" %></li>
+      <li><%= link_to "Inventories", inventories_path, :class=> (active_tab == 'inventories' ? 'active' : ''), :id => "inventories" %></li>
+      <li><%= link_to "Inventory Template", "#", :id => "inventory_template" %></li>
+      <li><%= link_to "Inventory Template Groups", "#", :id => "inventory_template_groups" %></li>
+      <li><%= link_to "Account Profile", "#", :id => "account_profile" %></li>
+    </ul>
+  </div>
+</div>

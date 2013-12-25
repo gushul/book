@@ -45,6 +45,8 @@ AuthApp::Application.routes.draw do
     get 'my' => "inventories#my", :on => :collection, :as => :my
   end
 
+  resources :owner_dashboards, :only => [:index]
+  
   resources :inventory_templates do
     get 'my' => "inventory_templates#my", :on => :collection, :as => :my
   end

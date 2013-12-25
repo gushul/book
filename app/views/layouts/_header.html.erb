@@ -44,7 +44,7 @@
             <li class="ownerLoged dropdown">
               <a data-toggle="dropdown" class="dropdown-toggle lblack" href="#">THE GARRET SECRET BISTRO<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="../owner/index.html"><i style="margin-right:5px;" class="glyphicon glyphicon-cog"></i>SETTING</a></li>
+                <li><a href="<%= owner_dashboards_path%>"><i style="margin-right:5px;" class="glyphicon glyphicon-cog"></i>SETTING</a></li>
                 <li>
                   <%= link_to "<i style='margin-right:5px;' class='glyphicon glyphicon-off'></i>LOG OUT".html_safe, destroy_owner_session_path, :method => :delete %>
                 </li>
