@@ -1,59 +1,44 @@
-  <div class="topContent container">
-
-     <div class="row">
-      <div class="col-sm-12"><h2 class="rlight"><i class="glyphicon glyphicon-cog" style="font-size:24px;margin-right:10px;"></i>Setting</h2></div> 
-     
-      <%= render :partial => "owners/menu" %>
-
-                          <!-- main col right -->
-                       <div class="col-sm-8 col-sm-8">
-                            <div class="storyContent setting">
-                <div class="header">
-                  <h3 class="rmedium">Inventory Template Groups</h3>
-                </div>
-                <div class="content">
-
-
-          <!-- <h1>Listing inventory Template Groups</h1> -->
-
-<% unless @inventory_template_groups.blank? %>
-  <table  class="table table-striped table-bordered table-hover">
-    <thead>
-    <tr>
-      <th>Restaurant</th>
-      <th>Name</th>
-      <th>Primary</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-    <% @inventory_template_groups.each do |itg| %>
-      <tr>
-        <td><%= itg.restaurant.name %></td>
-        <td><%= itg.name %></td>
-        <td><%= itg.primary %></td>
-        <td><%= link_to 'Show', itg %></td>
-        <td><%= link_to 'Edit', edit_inventory_template_group_path(itg) %></td>
-        <td><%= link_to 'Destroy', itg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </table>
-<% else %>
-  There no inventories now
-<% end %>
-
-<br />
-
-<%= link_to 'New Inventory Template Group', new_inventory_template_group_path if owner_signed_in?  %>
-
-
-
-
-                </div>
-              </div>
-              </div>
-                       </div><!--/row-->
+<div class="topContent container">
+  <div class="row">
+    <%= render :partial => "/shared/setting" %>
+    <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'inventory_template_groups' }%>
+    <div class="col-sm-8 col-sm-8">
+      <div class="storyContent setting">
+        <div class="header">
+          <h3 class="rmedium">Inventory Template Groups</h3>
+        </div>
+        <div class="content">
         
-                    </div><!-- /col-9 -->
-        </div><!-- /content -->
+          <% unless @inventory_template_groups.blank? %>
+            <table  class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Restaurant</th>
+                  <th>Name</th>
+                  <th>Primary</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <% @inventory_template_groups.each do |itg| %>
+                <tr>
+                  <td><%= itg.restaurant.name %></td>
+                  <td><%= itg.name %></td>
+                  <td><%= itg.primary %></td>
+                  <td><%= link_to 'Show', itg %></td>
+                  <td><%= link_to 'Edit', edit_inventory_template_group_path(itg) %></td>
+                  <td><%= link_to 'Destroy', itg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </table>
+          <% else %>
+            There no inventories template groups now
+          <% end %>
+          <br />
+          <%= link_to 'New Inventory Template Group', new_inventory_template_group_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
