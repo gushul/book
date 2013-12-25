@@ -2,7 +2,7 @@
   <div class="settingMenu">
     <ul>
       <li><%= link_to "Dashboard", owner_dashboards_path, :class=> (active_tab == 'dashboard' ? 'active' : '') %></li>
-      <li><%= link_to "My Restaurant", "#", :class=> (active_tab == 'my_restaurant' ? 'active' : '') %></li>
+      <li><%= link_to "My Restaurant", restaurants_path, :class=> (active_tab == 'my_restaurant' ? 'active' : '') %></li>
       <li><%= link_to "Reservation", "#", :class=> (active_tab == 'reservation' ? 'active' : '') %></li>
       <li><%= link_to "Inventories", inventories_path, :class=> (active_tab == 'inventories' ? 'active' : '') %></li>
       <li><%= link_to "Inventory Template", "#", :class=> (active_tab == 'inventory_template' ? 'active' : '') %></li>
