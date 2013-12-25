@@ -1,5 +1,5 @@
 <div class="screenfade"></div>
-<% unless user_signed_in? %>
+<% if owner_signed_in? == false && user_signed_in? == false %>
   <div class="model model-login">
     <div class="header">
       <i class="glyphicon glyphicon-remove" onclick="closeModel('login');"></i>
@@ -19,11 +19,10 @@
           <%= f.password_field :password, :class=> "rregular", :placeholder=>"Password" %>
         </div>
         <div class="submit">
-
-        <%= f.submit 'LogIn', :class=> "btn lblack" %>
+          <%= f.submit 'LogIn', :class=> "btn lblack" %>
         </div>
       <% end %>
-      <h5 class="rregular">For got your password?</h5>
+      <h5 class="rregular"><%= link_to "Forgot your password?", new_user_password_path %></h5>
     </div>
   </div>
 
@@ -70,12 +69,19 @@
       <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;">
         <span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again
       </div>
-      <form method="get" action="">
-        <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="owneremail" value="admin" /></div>
-        <div class="password"><input class="rregular" type="password" placeholder="Password" name="ownerpassword" value="admin" /></div>
-        <div class="submit"><input type="submit" class="btn lblack" value="LogIn" /></div>
-      </form>
-      <h5 class="rregular">For got your password?</h5>
+      
+      <%= form_for :owner, :url => owner_session_path do |f| %>
+        <div class="email">
+          <%= f.text_field :email, :class=> "rregular", :placeholder=>"Email Address" %>
+        </div>
+        <div class="password">
+          <%= f.password_field :password, :class=> "rregular", :placeholder=>"Password" %>
+        </div>
+        <div class="submit">
+          <%= f.submit 'LogIn', :class=> "btn lblack" %>
+        </div>
+      <% end %>
+      <h5 class="rregular"> <%= link_to "Forgot your password?", new_owner_password_path %></h5>
     </div>
   </div>
 <% end %>

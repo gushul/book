@@ -26,7 +26,7 @@
       </form>
       
         <ul class="nav navbar-nav navbar-right">
-          <% unless user_signed_in? %> 
+          <% if owner_signed_in? == false && user_signed_in? == false %> 
             <li>
               <button class="btn btn-default login navbar-btn navbar-right lblack action" id="login" type="button">LOG IN</button>
             </li>
@@ -34,7 +34,7 @@
               <button class="btn btn-default signup navbar-btn navbar-right lblack action" id="signup" type="button">SIGN UP</button>
             </li>
           <% end %>
-          <% unless owner_signed_in? %>
+          <% if owner_signed_in? == false && user_signed_in? == false %>
             <li class="ownerUnlog">
               <a data-toggle="dropdown" id="ownerlogin" class="dropdown-toggle lblack action" href="#">For Your Business <b class="caret"></b>
               </a>
