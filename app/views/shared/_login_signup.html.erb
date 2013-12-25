@@ -11,15 +11,16 @@
       <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again
       </div>
 
-      <%= form_tag user_session_path do %>
+      <%= form_for :user, :url => user_session_path do |f| %>
         <div class="email">
-          <%= text_field_tag 'email','', :class=> "rregular", :placeholder=>"Email Address" %>
+          <%= f.text_field :email, :class=> "rregular", :placeholder=>"Email Address" %>
         </div>
         <div class="password">
-          <%= password_field_tag 'password', '', :class=> "rregular", :placeholder=>"Password" %>
+          <%= f.password_field :password, :class=> "rregular", :placeholder=>"Password" %>
         </div>
         <div class="submit">
-        <%= submit_tag 'LogIn', :class=> "btn lblack" %>
+
+        <%= f.submit 'LogIn', :class=> "btn lblack" %>
         </div>
       <% end %>
       <h5 class="rregular">For got your password?</h5>
@@ -34,24 +35,24 @@
     <div class="content">
       <button class="btn facebook">Sign up with Facebook</button>
       <h4 class="rregular">OR Sign In With Email Address</h4>
-      <%= form_tag user_registration_path do %>
+      <%= form_for :user, :url => user_registration_path do |f| %>
         <div class="name">
-          <%= text_field_tag 'name','', :class=> "rregular", :placeholder=>"Your name" %>
+          <%= f.text_field :name, :class=> "rregular", :placeholder=>"Your Name" %>
         </div>
         <div class="email">
-          <%= text_field_tag 'email','', :class=> "rregular", :placeholder=>"Email Address" %>
+          <%= f.text_field :email, :class=> "rregular", :placeholder=>"Email Address" %>
         </div>
         <div class="phone">
-          <%= text_field_tag 'phone', '', :class=> "rregular", :placeholder=>"Phone" %>
+          <%= f.text_field :phone, :class=> "rregular", :placeholder=>"Phone" %>
         </div>
         <div class="password">
-          <%= password_field_tag 'password', '', :class=> "rregular", :placeholder=>"Password" %>
+          <%= f.password_field :password, :class=> "rregular", :placeholder=>"Password" %>
         </div>
         <div class="password">
-          <%= password_field_tag 'confirmpassword', '', :class=> "rregular", :placeholder=>"Confirm Password" %>
+          <%= f.password_field :password_confirmation, :class=> "rregular", :placeholder=>"Confirm Password" %>
         </div>
         <div class="submit">
-          <%= submit_tag 'Sign up', :class=> "btn lblack" %>
+          <%= f.submit 'Sign up', :class=> "btn lblack" %>
         </div>
       <% end %>
       <h5 class="rregular">By registration, you are agreeing to out Term of Service</h5>
