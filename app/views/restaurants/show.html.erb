@@ -1,8 +1,7 @@
 <div class="topContent container">
-
-     <div class="row">
-        <div class="col-sm-8 col-lg-8">
-            <h2 class="rmedium"><%= @restaurant.name%></h2>
+  <div class="row">
+    <div class="col-sm-8 col-lg-8">
+      <h2 class="rmedium"><%= @restaurant.name%></h2>
       <div class="slideshow">
         <% if true #@restaurant.photos.first.blank? %>
           <%= image_tag @image_tag_string, :width => '100%', :height => "auto" %>
@@ -11,93 +10,93 @@
         <% end %>
         <div class="thumbnails">
           <% unless @restaurant.photos.blank? %>
-              <% @restaurant.photos.each do |pic| %>
-                <div class="thumbnail">
-                  <%= image_tag pic.picture.url(:v100x100) %>
-                </div>
-              <% end %>
+            <% @restaurant.photos.each do |pic| %>
+              <div class="thumbnail">
+                <%= image_tag pic.picture.url(:v100x100) %>
+              </div>
+            <% end %>
           <% else %>
             None
           <% end %>
         </div>
       </div>
       <div id="mytabs" style="clear:both;">
-             <ul class="nav nav-tabs">
-        <li class="active"><a href="#information" data-toggle="tab" class="rblack">INFORMATION</a></li>
-              <li><a href="#reviews" data-toggle="tab" class="rblack">DINER REVIEWS</a></li>
-            </ul>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#information" data-toggle="tab" class="rblack">INFORMATION</a></li>
+          <li><a href="#reviews" data-toggle="tab" class="rblack">DINER REVIEWS</a></li>
+        </ul>
       </div>
       <div class="tab-content">
         <div class="tab-pane fade in active" id="information">
           <div class="storyContent">
-        <div class="header">
-         <% unless @restaurant.star_format == 0 %>
-          <% @restaurant.star_format.times do |s| %>
-              <i class="glyphicon glyphicon-star pink"></i>
-            <% end %>
-          <% else %>
-            Not received any star rank
-          <% end %>
-          <i class="glyphicon glyphicon-tag"></i> Fusion, Bar / Lounge, Thai Cuisine
-        </div>
-        <div class="content">
-                    <div class="body">
-                        <p style="margin:0 10px;"><span class="rbold">Address : </span>   99/99 Sukhumvit 63 (Ekkamai Soi 7) Klongton-Nua, Wattana Bangkok, 10110 </p>
-                        <br/>
-            <br/>
-            <div class="col-sm-6 col-lg-6">
-            <p><span class="rbold">Price : </span>$$$$    (1,000 - 3,000 baht)</p>
-            <br/>
-            <p><span class="rbold">Location : </span>Thonglor - Ekkamai</p>
-            <br/>
-            <p><span class="rbold">Website : </span>garretbistro.com  </p>
-            <br/>
-            <p><span class="rbold">Telephone : </span> +66(0)2 556-5555</p>
+            <div class="header">
+              <% unless @restaurant.star_format == 0 %>
+                <% @restaurant.star_format.times do |s| %>
+                  <i class="glyphicon glyphicon-star pink"></i>
+                <% end %>
+              <% else %>
+                Not received any star rank
+              <% end %>
+              <i class="glyphicon glyphicon-tag"></i> Fusion, Bar / Lounge, Thai Cuisine
             </div>
-            <div class="col-sm-6 col-lg-6">
-                        <p><span class="rbold">Parking : </span> Valet </p>
-                        <br/>
-            <p><span class="rbold">Drinking : </span> Alcohol, Beer, Cocktails, Wine</p>
-            <br/>
-            <p><span class="rbold">Payment : </span>AMEX, MASTER Card / VISA</p>
-            <br/>
-            <p><span class="rbold">Misc : </span> <%= @restaurant.misc %></p>
+            <div class="content">
+              <div class="body">
+                <p style="margin:0 10px;"><span class="rbold">Address : </span>   99/99 Sukhumvit 63 (Ekkamai Soi 7) Klongton-Nua, Wattana Bangkok, 10110 </p>
+                <br/>
+                <br/>
+                <div class="col-sm-6 col-lg-6">
+                  <p><span class="rbold">Price : </span>$$$$    (1,000 - 3,000 baht)</p>
+                  <br/>
+                  <p><span class="rbold">Location : </span>Thonglor - Ekkamai</p>
+                  <br/>
+                  <p><span class="rbold">Website : </span>garretbistro.com  </p>
+                  <br/>
+                  <p><span class="rbold">Telephone : </span> +66(0)2 556-5555</p>
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                  <p><span class="rbold">Parking : </span> Valet </p>
+                  <br/>
+                  <p><span class="rbold">Drinking : </span> Alcohol, Beer, Cocktails, Wine</p>
+                  <br/>
+                  <p><span class="rbold">Payment : </span>AMEX, MASTER Card / VISA</p>
+                  <br/>
+                  <p><span class="rbold">Misc : </span> <%= @restaurant.misc %></p>
+                </div>
+              </div>
             </div>
-                    </div>
+          </div>
         </div>
-        </div>
-        </div><!--/News 2 -->
-        <!-- News 2 -->
         <div class="tab-pane fade in" id="reviews">
-        <div class="comment">
-          <textarea placeholder="Write a review"></textarea>
-          <button class="btn">REVIEW</button>
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <div class="comment">
+            <textarea placeholder="Write a review"></textarea>
+            <button class="btn">REVIEW</button>
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
         </div>
-        </div><!-- News 2 -->
-        <div>
-        </div>
-      </div>
-      </div>  <!-- /main col left -->      
-                          <!-- main col right -->
-                          <div class="col-sm-12 col-sm-4" style="width: 33.3333%;">
-                            <h2 class="rlight">Location :</h2>
-                <img src="http://placehold.it/400x270">
-              <h2 class="rlight">Book your table for today</h2>
-              <div class="booknow">
-                <button id="reservation" class="btn action">6:00 PM</button>
-                <button id="reservation" class="btn action">6:15 PM</button>
-                <button id="reservation" class="btn action">6:30 PM</button>
-                <button id="reservation" class="btn action">OTHER TIMES</button>
-              </div>
-              </div>
-                       </div><!--/row-->
-        
-                    </div><!-- /col-9 -->
-        </div><!-- /content -->
+      <div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12 col-sm-4" style="width: 33.3333%;">
+  <h2 class="rlight">Location :</h2>
+  <img src="http://placehold.it/400x270">
+  <h2 class="rlight">Book your table for today</h2>
+  <div class="booknow">
+    <% id = user_signed_in? ? "check" : "login" %>
+    <button id='<%=id %>' class="btn action">6:00 PM</button>
+    <button id='<%=id %>' class="btn action">6:15 PM</button>
+    <button id='<%=id %>' class="btn action">6:30 PM</button>
+    <button id='<%=id %>' class="btn action">OTHER TIMES</button>
+  </div>
+</div>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $("#check").click();
+  });
+</script>
