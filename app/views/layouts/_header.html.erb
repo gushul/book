@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand logo" href="../home/index.html">hungry hub</a>
+      <a class="navbar-brand logo" href="<%= root_path%>">hungry hub</a>
     </div>
 
     <nav role="navigation" class="collapse navbar-collapse">
@@ -16,7 +16,7 @@
           <a class="dropdown-toggle lblack" href="#">RESTAURANTS</a>
         </li>
       </ul>
-      <form method="get" action="../search/search.html" class="navbar-form navbar-left">
+      <form method="get" action="<%= search_path%>" class="navbar-form navbar-left">
           <div class="input-group input-group-sm">
             <input type="text" id="srch-term" name="srch-term" placeholder="Search by restaurants, location or cuisine" class="form-control llitalic">
             <div class="input-group-btn">
@@ -66,9 +66,3 @@
   </div>
 </div>
 
-
-
-
-<div id="mypopup">
-  <%= render :partial => '/shared/login_signup' %>
-</div>
