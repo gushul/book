@@ -7,7 +7,8 @@ class InventoryTemplateGroupsController < ApplicationController
   # GET /inventory_template_groups
   # GET /inventory_template_groups.json
   def index
-    @inventory_template_groups = InventoryTemplateGroup.all
+#    @inventory_template_groups = InventoryTemplateGroup.all
+    @inventory_template_groups = current_owner.restaurant.inventory_template_groups
 
     respond_to do |format|
       format.html # index.html.erb
