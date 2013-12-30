@@ -12,7 +12,10 @@
           <% unless @restaurant.photos.blank? %>
             <% @restaurant.photos.each do |pic| %>
               <div class="thumbnail">
-                <%= image_tag pic.picture.url(:v100x100) %>
+                <a id="image" class="dropdown-toggle lblack image_large" href="#" data-toggle="dropdown" image_url='<%= pic.picture.url(:v280x160) %>'>
+                  <%= image_tag pic.picture.url(:v100x100) %>
+                </a>
+                
               </div>
             <% end %>
           <% else %>
@@ -95,6 +98,11 @@
     <button id='<%=id %>' class="btn action">OTHER TIMES</button>
   </div>
 </div>
+
+<div id="image_popup">
+  <%= render :partial => '/shared/image_large' %>
+</div>
+
 <script type="text/javascript">
   $( document ).ready(function() {
     $("#check").click();
