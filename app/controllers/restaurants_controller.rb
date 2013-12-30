@@ -1,13 +1,26 @@
 # encoding: utf-8
 class RestaurantsController < ApplicationController
   before_filter :authenticate_owner!, 
-                except: [:index, :show]
+                except: [:index, :index_all, :show]
   
   # GET /restaurants
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
     # @restaurants = current_owner.restaurants
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @restaurants }
+    end
+  end
+
+  # GET /restaurants_all
+  # GET /restaurants.json
+  def index_all
+    # @restaurants = Restaurant.all
+    # @restaurants = current_owner.restaurants
+    @restaurants = Restaurant.order(:name).page(params[:page]).per(3)  
 
     respond_to do |format|
       format.html # index.html.erb

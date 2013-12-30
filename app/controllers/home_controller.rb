@@ -60,6 +60,8 @@ class HomeController < ApplicationController
       @image_tag_string << '&sensor=false'
     end
 
+    @restaurants = Restaurant.all
+
   end
 
 

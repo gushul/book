@@ -61,7 +61,10 @@ AuthApp::Application.routes.draw do
   end
     
   resources :rewards
-  resources :restaurants
+  resources :restaurants do
+    get 'all' => "restaurants#index_all", :on => :collection, :as => :all
+  end
+
    
    
 end

@@ -13,6 +13,7 @@ gem 'carrierwave'
 gem 'figaro'
 gem "geocoder"
 gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 # gem 'acts-as-taggable-on'
 gem 'mysql2'
 

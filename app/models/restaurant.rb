@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Restaurant < ActiveRecord::Base
-
+  
   attr_accessible :lat, :lng, :misc, 
                   :name, :owner_id,
                   :restaurant_tags_attributes,
