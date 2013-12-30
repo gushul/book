@@ -1,3 +1,13 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=172752929594532";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
 <div class="topContent position-relative">
   <div id="myCarousel">
     <!-- CAROUSEL -->
@@ -304,10 +314,10 @@
     <!-- main col right -->
     <div class="col-sm-12 col-sm-4" style="width: 33.3333%;">
       <h3 class="rregular">What is Hungry Hub?</h3>
-      <img src="http://placehold.it/360x280">
+      <iframe width="360" height="280" src="http://hungryhub.com/hh_animation.mov" frameborder="0" allowfullscreen></iframe>
       <img style="margin-top:40px;" src="http://placehold.it/360x88">
       <img style="margin-top:40px;" src="http://placehold.it/360x280">
-      <img style="margin-top:40px;" src="http://placehold.it/360x280">                  
+      <div class="fb-like-box" style="margin-top:40px;" data-href="http://www.facebook.com/HungryHub" data-width="360" data-height="280" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
     </div>
   </div><!--/row-->
 </div>
@@ -320,3 +330,4 @@
     $('#datepicker2').datepicker();
   });
 </script>
+
