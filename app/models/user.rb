@@ -33,9 +33,9 @@ class User < ActiveRecord::Base
         user.uid = auth.uid
         user.email = auth.info.email
         # TODO: Temp stub
-        user.phone = "0" + auth.uid.slice(0..8)
+        # user.phone = "0" + auth.uid.slice(0..8)
         user.username = auth.extra.raw_info.name
-        user.password = Devise.friendly_token[0,20]
+        # user.password = Devise.friendly_token[0,20]
       end
     end
   end 
