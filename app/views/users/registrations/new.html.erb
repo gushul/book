@@ -1,5 +1,6 @@
+<div style="padding-top:80px;" />
 <h2>User Registration</h2> 
- 
+<%= flash[:notice] %>
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
