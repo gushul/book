@@ -4,6 +4,7 @@ AuthApp::Application.routes.draw do
   root :to => "home#index"
   get "home/index"
   get 'search', to: 'home#search', as: 'search'
+  get 'search_restaurants', to: 'home#search_restaurants', as: 'search_restaurants'
   # get 'calendar', to: 'home#calendar', as: 'calendar'
 
   devise_for :owners
