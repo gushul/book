@@ -20,8 +20,8 @@ class HomeController < ApplicationController
     if params[:set_locale]
       redirect_to root_path(locale: params[:set_locale])
     elsif 
-  	  # @restaurant1 = Restaurant.first(:order => "RAND()")
-  	  # @restaurant2 = Restaurant.last(:order => "RAND()")
+      # @restaurant1 = Restaurant.first(:order => "RAND()")
+      # @restaurant2 = Restaurant.last(:order => "RAND()")
       if user_signed_in?
         @rewards = current_user.rewards
       end
@@ -63,6 +63,29 @@ class HomeController < ApplicationController
     @restaurants = Restaurant.all
 
   end
+  
+  def search_restaurants
+    @search_terms = []
+    unless params[:tags].blank?
+      @search_results = Restaurant.by_tags(params[:tags])
+      params[:tags].each do |t|
+        @search_terms << RestaurantTag.find(t).title
+      end
+    else
+      @search_results = Restaurant.all
+      @search_terms << "All restaurants"
+    end
+
+    unless @search_results.blank?
+      @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=550x300"
+      @search_results.each do |restaurant|
+        @image_tag_string << "&markers=icon:http://tinyurl.com/pgdsbxb%7C#{restaurant.lat}%2C#{restaurant.lng}"
+      end
+      @image_tag_string << '&sensor=false'
+    end
+
+  end
+
 
 
   def calendar
