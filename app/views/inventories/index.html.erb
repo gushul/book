@@ -40,6 +40,9 @@
           <% else %>
             There no inventories now
           <% end %>
+          <div class="navigation">
+            <%= paginate @inventories %>
+          </div>
           <br />
           <%= link_to 'New Inventory', new_inventory_path  %>
         </div>

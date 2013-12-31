@@ -1,5 +1,7 @@
 # encoding: utf-8
 class Inventory < ActiveRecord::Base
+  paginates_per 20
+  
   attr_accessible :date, :restaurant_id, :start_time,
                   :end_time, :quantity_available
 
