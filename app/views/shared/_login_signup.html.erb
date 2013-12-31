@@ -6,7 +6,9 @@
       <h4 class="lbold">Log In</h4>
     </div>
     <div class="content">
-      <button class="btn facebook">Facebook</button>
+      <!-- <button class="btn facebook">Facebook</button> -->
+      <%= link_to "Facebook", omniauth_authorize_path(:user, :facebook), :id => "fb-connect", :class => "btn facebook" %>
+
       <h4 class="rregular">OR Log In With Email Address</h4>
       <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Invalid Email or Password! </span>&nbsp;&nbsp;Please check it again
       </div>
@@ -32,7 +34,8 @@
       <h4 class="lbold">Sign Up</h4>
     </div>
     <div class="content">
-      <button class="btn facebook">Sign up with Facebook</button>
+      <!-- <button class="btn facebook">Sign up with Facebook</button> -->
+      <%= link_to "Sign up with Facebook", omniauth_authorize_path(resource_name, :facebook), :id => "fb-connect", :class => "btn facebook" %>
       <h4 class="rregular">OR Sign In With Email Address</h4>
       <%= form_for :user, :url => user_registration_path do |f| %>
         <div class="name">
