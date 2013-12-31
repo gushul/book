@@ -4,7 +4,7 @@ AuthApp::Application.routes.draw do
   root :to => "home#index"
   get "home/index"
   get 'search', to: 'home#search', as: 'search'
-  get 'search_restaurants', to: 'home#search_restaurants', as: 'search_restaurants'
+  get 'search_with_date_time', to: 'home#search_with_date_time', as: 'search_with_date_time'
   # get 'calendar', to: 'home#calendar', as: 'calendar'
 
   devise_for :owners

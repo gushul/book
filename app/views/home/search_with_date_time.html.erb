@@ -5,55 +5,63 @@
       <h3 class="rlight">We've found <%= @search_results.size %> restaurants for you.</h3>
       <div class="list result">
         <ul class="media-list">
-          
-          <% @search_results.each_with_index do |restaurant, index| %>
-            <li class="media">
-              <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
-                <% if restaurant.photos.first.present? %>
-                  <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144" %>
-                <% else %>
-                  <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
-                <% end %>
-              </a>
-              <div class="media-body">
-                <div class="col-sm-12 col-lg-9">
-                  <h4 class="media-heading">
-                    <%= link_to restaurant.name, restaurant_path(restaurant) %>
-                  </h4>
-                  <p><%= restaurant.misc %></p><br>
-                  <p>
-                    <% unless restaurant.star_format == 0 %>
-                      <% restaurant.star_format.times do |s| %>
-                        <i class="glyphicon glyphicon-star pink"></i>
-                      <% end %>
-                    <% else %>
-                      Not received any star rank
-                    <% end %>                      
-                  </p>
-                  <p>
-                    <% unless restaurant.price_format == 0 %>
-                      <% restaurant.price_format.times do |s| %>
-                        <i class="glyphicon glyphicon-usd"></i>
-                      <% end %>
-                    <% else %>
-                      No yet assigned any price rank
-                    <% end %>
-                  </p><br>
-                  <p><i class="glyphicon glyphicon-tag"></i> <%= restaurant.cuisines_format %></p>
-                </div>
-                <div class="col-sm-12 col-lg-3">
-                  <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary ", :method => :get %>
-                </div>
-              </div>
-            </li>
-          <% end %>
 
+         <% @search_results.each_with_index do |restaurant, index| %>
+              
+                <li class="media">
+                  <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
+                    <% if restaurant.photos.first.present? %>
+                      <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144" %>
+                    <% else %>
+                      <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
+                    <% end %>
+                  </a>
+                  <div class="media-body">
+                    <div class="col-sm-12 col-lg-9">
+                      <h4 class="media-heading">
+                        <%= link_to restaurant.name, restaurant_path(restaurant) %>
+                      </h4>
+                      <p><%= restaurant.misc %></p>
+                      <p>
+                        <% unless restaurant.star_format == 0 %>
+                          <% restaurant.star_format.times do |s| %>
+                            <i class="glyphicon glyphicon-star pink"></i>
+                          <% end %>
+                        <% else %>
+                          Not received any star rank
+                        <% end %>  
+                        <span style="padding-left:20px"/>
+                        <% unless restaurant.price_format == 0 %>
+                          <% restaurant.price_format.times do |s| %>
+                            <i class="glyphicon glyphicon-usd"></i>
+                          <% end %>
+                        <% else %>
+                          No yet assigned any price rank
+                        <% end %>
+                      </p>
+                      <p><i class="glyphicon glyphicon-tag"></i> <%= restaurant.cuisines_format %></p>
+                    </div>
+                    <div class="col-sm-12 col-lg-3 right">
+                      <h4 class="rmedium">Book Now :</h4>
+                      <% id = user_signed_in? ? "check" : "login" %>
+                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.00PM</button>
+                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.15PM</button>
+                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.30PM</button>
+                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">OTHER ITEMS</button>
+                    </div>
+                  </div>
+                </li><!-- News 1 -->
+              <% end %>
+          
         </ul>
+
         <div class="navigation">
           <%= paginate @search_results %>
         </div>
+
       </div>
-    </div>  
+    </div>  <!-- /main col left -->      
+    <!-- main col right -->
     <div class="col-sm-4">
       <h2 class="rlight">Location :</h2>
       <img src='<%= @image_tag_string %>'>
@@ -137,3 +145,10 @@
     </div>
   </div><!--/row-->
 </div><!-- /content -->
+<div id="check" class="action"></div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $("#check").click();
+  });
+</script>

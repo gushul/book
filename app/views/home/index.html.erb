@@ -52,9 +52,9 @@
       </ul>
       <div class="tab-content">
         <div id="byLocation" class="tab-pane fade in active">
-          <form method="get" action="<%= search_path%>" class="navbar-form navbar-left">
+          <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
             <div class="input-group input-group-sm">
-              <input type="text" id="srch-term" name="srch-location" placeholder="Search by restaurants" class="form-control ritalic">
+              <input type="text" id="srch-term" name="srch-location" placeholder="Search by location" class="form-control ritalic">
               <div class="input-group-btn">
                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
               </div>
@@ -93,9 +93,9 @@
           </form>
         </div>
         <div id="byName" class="tab-pane fade">
-          <form method="get" action="#" class="navbar-form navbar-left">
+          <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
             <div class="input-group input-group-sm">
-              <input type="text" id="srch-term" name="srch-restaurant" placeholder="Search by location" class="form-control">
+              <input type="text" id="srch-term" name="srch-restaurant" placeholder="Search by restaurants" class="form-control">
               <div class="input-group-btn">
                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
               </div>

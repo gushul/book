@@ -40,15 +40,13 @@ class HomeController < ApplicationController
   end
 
   # GET /search/:search_term
+  
   def search
     @search_terms = []
-    unless params[:tags].blank?
-      @search_results = Restaurant.by_tags(params[:tags])
-      params[:tags].each do |t|
-        @search_terms << RestaurantTag.find(t).title
-      end
+    unless params['srch-term'].blank?
+      @search_results = Restaurant.where("name like ?", "%#{params['srch-term']}%").page(params[:page])
     else
-      @search_results = Restaurant.all
+      @search_results = Restaurant.page(params[:page])
       @search_terms << "All restaurants"
     end
 
@@ -59,17 +57,17 @@ class HomeController < ApplicationController
       end
       @image_tag_string << '&sensor=false'
     end
-
-    @restaurants = Restaurant.all
-
   end
   
-  def search_restaurants
+  def search_with_date_time
     @search_terms = []
-    unless params[:tags].blank?
-      @search_results = Restaurant.by_tags(params[:tags])
-      params[:tags].each do |t|
-        @search_terms << RestaurantTag.find(t).title
+
+    unless params['srch-restaurant'].blank?
+      if params['datepicker'].present?
+        date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
+        @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
+      else
+        @search_results = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%").page(params[:page])
       end
     else
       @search_results = Restaurant.all
@@ -83,11 +81,9 @@ class HomeController < ApplicationController
       end
       @image_tag_string << '&sensor=false'
     end
-
+    
   end
-
-
-
+  
   def calendar
     
   end

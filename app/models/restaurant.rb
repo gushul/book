@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Restaurant < ActiveRecord::Base
+  paginates_per 5
   
   attr_accessible :lat, :lng, :misc, 
                   :name, :owner_id,
