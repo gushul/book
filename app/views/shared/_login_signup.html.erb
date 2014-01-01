@@ -6,7 +6,6 @@
       <h4 class="lbold">Log In</h4>
     </div>
     <div class="content">
-      <!-- <button class="btn facebook">Facebook</button> -->
       <%= link_to "Facebook", omniauth_authorize_path(:user, :facebook), :id => "fb-connect", :class => "btn facebook" %>
 
       <h4 class="rregular">OR Log In With Email Address</h4>
@@ -34,8 +33,8 @@
       <h4 class="lbold">Sign Up</h4>
     </div>
     <div class="content">
-      <!-- <button class="btn facebook">Sign up with Facebook</button> -->
-      <%= link_to "Sign up with Facebook", omniauth_authorize_path(resource_name, :facebook), :id => "fb-connect", :class => "btn facebook" %>
+      <%= link_to "Sign up with Facebook", omniauth_authorize_path(:user, :facebook), :id => "fb-connect", :class => "btn facebook" %>
+
       <h4 class="rregular">OR Sign In With Email Address</h4>
       <%= form_for :user, :url => user_registration_path do |f| %>
         <div class="name">
