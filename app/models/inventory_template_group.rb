@@ -1,4 +1,6 @@
 class InventoryTemplateGroup < ActiveRecord::Base
+  paginates_per 20
+  
   attr_accessible :name, :primary, :restaurant
  
   validates :restaurant_id,      :presence => true

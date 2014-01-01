@@ -35,6 +35,9 @@
           <% else %>
             There no inventories template groups now
           <% end %>
+          <div class="navigation">
+            <%= paginate @inventory_template_groups, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+          </div>
           <br />
           <%= link_to 'New Inventory Template Group', new_inventory_template_group_path %>
         </div>

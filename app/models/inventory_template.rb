@@ -1,5 +1,7 @@
 # encoding: utf-8
 class InventoryTemplate < ActiveRecord::Base
+  paginates_per 20
+  
   attr_accessible :start_time, :end_time, 
                   :quantity_available,
                   # :name, :primary, 

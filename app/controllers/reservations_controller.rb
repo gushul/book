@@ -20,6 +20,7 @@ class ReservationsController < ApplicationController
         @reservations = current_owner.restaurant.reservations
       end
     end
+    @reservations = @reservations.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

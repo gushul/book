@@ -41,7 +41,7 @@
             There no inventories now
           <% end %>
           <div class="navigation">
-            <%= paginate @inventories %>
+            <%= paginate @inventories, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
           </div>
           <br />
           <%= link_to 'New Inventory', new_inventory_path  %>

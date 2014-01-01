@@ -8,7 +8,7 @@ class InventoryTemplatesController < ApplicationController
   # GET /inventory_templates
   # GET /inventory_templates.json
   def index
-    @inventory_templates = InventoryTemplate.all
+    @inventory_templates = InventoryTemplate.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
