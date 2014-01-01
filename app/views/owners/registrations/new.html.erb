@@ -1,19 +1,22 @@
-<h2>Restaurant Owner Registration</h2>
+<div class="topContent container">
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <h2>Restaurant Owner Registration</h2>
 
-  <div class="form-inputs">
-    <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :owner_name, :required => true %>
-    <%= f.input :phone, :required => true %>
-    <%= f.input :password, :required => true %>
-    <%= f.input :password_confirmation, :required => true %>
-  </div>
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: "form-horizontal"} ) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" , :class => 'btn btn-success btn-large' %>
-  </div>
-<% end %>
+    <div class="form-inputs" style="width:300px;">
+      <%= f.input :email, :required => true, :autofocus => true %>
+      <%= f.input :owner_name, :required => true %>
+      <%= f.input :phone, :required => true %>
+      <%= f.input :password, :required => true %>
+      <%= f.input :password_confirmation, :required => true %>
+    </div>
 
-<%= render "owners/shared/links" %>
+    <div class="form-actions">
+      <%= f.button :submit, "Sign up" , :class => 'btn btn-success btn-large' %>
+    </div>
+  <% end %>
+
+  <%= render "owners/shared/links" %>
+</div>
