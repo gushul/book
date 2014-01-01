@@ -1,5 +1,20 @@
-<h1>New inventory</h1>
+<div class="topContent container">
+  <div class="row">
+    <%= render :partial => "/shared/setting" %>
+    <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'inventories' }%>
+    <div class="col-sm-8 col-sm-8">
+      <div class="storyContent setting">
+        <div class="header">
+          <h3 class="rmedium">Inventories</h3>
+        </div>
+        <div class="content"> 
 
-<%= render 'form' %>
+          <h1>New inventory</h1>
+          <%= render 'form' %>
+          <%= link_to 'Back', inventories_path %>
 
-<%= link_to 'Back', inventories_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

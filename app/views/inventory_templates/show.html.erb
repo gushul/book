@@ -1,24 +1,39 @@
-<!-- <p id="notice"><%#= notice %></p> -->
+<div class="topContent container">
+  <div class="row">
+    <%= render :partial => "/shared/setting" %>
+    <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'inventory_templates' }%>
+    <div class="col-sm-8 col-sm-8">
+      <div class="storyContent setting">
+        <div class="header">
+          <h3 class="rmedium">Inventory Templates</h3>
+        </div>
+        <div class="content"> 
+        
+          <p>
+            <b>Inventory Template Group</b>
+            <%= @inventory_template.inventory_template_group.name %>
+          </p>
 
-<p>
-  <b>Inventory Template Group</b>
-  <%= @inventory_template.inventory_template_group.name %>
-</p>
+          <p>
+            <b>Start time:</b>
+            <%= mtime(@inventory_template.start_time) %>
+          </p>
 
-<p>
-  <b>Start time:</b>
-  <%= mtime(@inventory_template.start_time) %>
-</p>
+          <p>
+            <b>End time:</b>
+            <%= mtime(@inventory_template.end_time) %>
+          </p>
 
-<p>
-  <b>End time:</b>
-  <%= mtime(@inventory_template.end_time) %>
-</p>
+          <p>
+            <b>Quantity available:</b>
+            <%= @inventory_template.quantity_available %>
+          </p>
 
-<p>
-  <b>Quantity available:</b>
-  <%= @inventory_template.quantity_available %>
-</p>
+          <%= link_to 'Edit', edit_inventory_template_path(@inventory_template) %> |
+          <%= link_to 'Back', inventory_templates_path %>
 
-<%= link_to 'Edit', edit_inventory_template_path(@inventory_template) %> |
-<%= link_to 'Back', inventory_templates_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

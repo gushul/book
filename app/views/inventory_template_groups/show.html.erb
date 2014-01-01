@@ -1,20 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="topContent container">
+  <div class="row">
+    <%= render :partial => "/shared/setting" %>
+    <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'inventory_template_groups' }%>
+    <div class="col-sm-8 col-sm-8">
+      <div class="storyContent setting">
+        <div class="header">
+          <h3 class="rmedium">Inventory Template Groups</h3>
+        </div>
+        <div class="content"> 
 
-<p>
-  <b>Restaurant:</b>
-  <%= @inventory_template_group.restaurant.name %>
-</p>
+          <p>
+            <b>Restaurant:</b>
+            <%= @inventory_template_group.restaurant.name %>
+          </p>
 
-<p>
-  <b>Name:</b>
-  <%= @inventory_template_group.name %>
-</p>
+          <p>
+            <b>Name:</b>
+            <%= @inventory_template_group.name %>
+          </p>
 
-<p>
-  <b>Primary:</b>
-  <%= @inventory_template_group.primary %>
-</p>
+          <p>
+            <b>Primary:</b>
+            <%= @inventory_template_group.primary %>
+          </p>
 
 
-<%= link_to 'Edit', edit_inventory_template_group_path(@inventory_template_group) %> |
-<%= link_to 'Back', inventory_template_groups_path %>
+          <%= link_to 'Edit', edit_inventory_template_group_path(@inventory_template_group) %> |
+          <%= link_to 'Back', inventory_template_groups_path %>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
