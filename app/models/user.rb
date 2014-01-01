@@ -59,7 +59,7 @@ private
   end
 
   def username_setup
-    self.username = self.email if self.username.blank?
+    self.username = self.email.split('@').first if self.username.blank?
   end
 
   def check_phone_number

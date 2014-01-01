@@ -38,7 +38,7 @@
       <h4 class="rregular">OR Sign In With Email Address</h4>
       <%= form_for :user, :url => user_registration_path do |f| %>
         <div class="name">
-          <%= f.text_field :name, :class=> "rregular", :placeholder=>"Your Name" %>
+          <%= f.text_field :username, :class=> "rregular", :placeholder=>"Your Name" %>
         </div>
         <div class="email">
           <%= f.text_field :email, :class=> "rregular", :placeholder=>"Email Address" %>
