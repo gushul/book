@@ -1,9 +1,16 @@
 <div class="topContent container">
   <div class="row">
-    <%= render :partial => "/shared/setting" %>
-    <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'reservation' }%>
+    
+    <% if owner_signed_in? %>
+      <%= render :partial => "/shared/setting" %>
+      <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'reservation' }%>
+
     <div class="col-sm-8 col-sm-8">
-      <div class="storyContent setting">
+      
+    <% end %> 
+
+      <div class="storyContent">
+
         <div class="header">
           <h3 class="rmedium">Reservation</h3>
         </div>
@@ -111,7 +118,12 @@
           <br />
           <%= link_to 'New Reservation', new_reservation_path if owner_signed_in? or user_signed_in? %>
         </div>
+
+      <% if owner_signed_in? %>
       </div>
+      <% end %> 
+
     </div>
+
   </div>
 </div>          

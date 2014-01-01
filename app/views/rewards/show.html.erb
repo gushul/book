@@ -1,21 +1,33 @@
-<h2>View reward from reservation id: <%= @reward.reservation_id %></h2>
+<div class="topContent container">
+  <div class="row">
+    <div class="storyContent">
 
-<% unless @reward.blank? %>
-  <table  class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Restaurant</th>
-        <th>Points_total</th>
-        <th>Points_pending</th>
-        <th>Description</th>
-      </tr>
-    </thead>
+      <div class="header">
+        <h3 class="rmedium">View reward from reservation id: <%= @reward.reservation_id %></h3>
+      </div>
 
-    <tr>
-      <td><%= @reward.reservation.restaurant.name %></td>
-      <td><%= @reward.points_total %></td>
-      <td><%= @reward.points_pending %></td>
-      <td><%= @reward.description %></td>
-    </tr>
-  </table>
-<% end %>
+      <div class="content"> 
+      <% unless @reward.blank? %>
+        <table  class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Restaurant</th>
+              <th>Points_total</th>
+              <th>Points_pending</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+
+          <tr>
+            <td><%= @reward.reservation.restaurant.name %></td>
+            <td><%= @reward.points_total %></td>
+            <td><%= @reward.points_pending %></td>
+            <td><%= @reward.description %></td>
+          </tr>
+        </table>
+      <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
