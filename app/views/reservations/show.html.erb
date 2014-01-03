@@ -1,55 +1,84 @@
-<p>
-  <b>User:</b>
-  <% if @reservation.user %>
-    <%= @reservation.user.username  %>
-  <% else %>
-    <%= "#{@reservation.name} /" %> 
-    <%= "#{@reservation.phone} /" %> 
-    <%= @reservation.email %>
-  <% end %>
-</p>
+<div class="topContent container">
+  <div class="row">
+    
+    <% if owner_signed_in? %>
+      <%= render :partial => "/shared/setting" %>
+      <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'reservation' }%>
 
-<p>
-  <b>Restaurant:</b>
-  <%= @reservation.restaurant.name %>
-</p>
+    <div class="col-sm-12">
+      
+    <% end %> 
 
-<p>
-  <b>Date:</b>
-  <%= @reservation.date %>
-</p>
+      <div class="storyContent">
 
-<p>
-  <b>Start time:</b>
-  <%= @reservation.start_time %>
-</p>
+        <div class="header">
+          <h3 class="rmedium">Reservation</h3>
+        </div>
+        <div class="content"> 
 
-<p>
-  <b>End time:</b>
-  <%= @reservation.end_time %>
-</p>
+          <p>
+            <b>User:</b>
+            <% if @reservation.user %>
+              <%= @reservation.user.username  %>
+            <% else %>
+              <%= "#{@reservation.name} /" %> 
+              <%= "#{@reservation.phone} /" %> 
+              <%= @reservation.email %>
+            <% end %>
+          </p>
 
-<p>
-  <b>Party size:</b>
-  <%= @reservation.party_size %>
-</p>
+          <p>
+            <b>Restaurant:</b>
+            <%= @reservation.restaurant.name %>
+          </p>
 
-<p>
-  <b>Table:</b>
-  <%= @reservation.table %>
-</p>
+          <p>
+            <b>Date:</b>
+            <%= @reservation.date %>
+          </p>
 
-<p>
-  <b>Active:</b>
-  <%= @reservation.active %>
-</p>
+          <p>
+            <b>Start time:</b>
+            <%= @reservation.start_time %>
+          </p>
 
-<p>
-  <b>Special Request:</b>
-  <%= @reservation.special_request %>
-</p>
+          <p>
+            <b>End time:</b>
+            <%= @reservation.end_time %>
+          </p>
+
+          <p>
+            <b>Party size:</b>
+            <%= @reservation.party_size %>
+          </p>
+
+          <p>
+            <b>Table:</b>
+            <%= @reservation.table %>
+          </p>
+
+          <p>
+            <b>Active:</b>
+            <%= @reservation.active %>
+          </p>
+
+          <p>
+            <b>Special Request:</b>
+            <%= @reservation.special_request %>
+          </p>
 
 
 
-<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
-<%= link_to 'Back', reservations_path %>
+          <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+          <%= link_to 'Back', reservations_path %>
+
+       </div>
+
+      <% if owner_signed_in? %>
+      </div>
+      <% end %> 
+
+    </div>
+
+  </div>
+</div>          

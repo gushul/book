@@ -64,8 +64,6 @@ class Restaurant < ActiveRecord::Base
   }
 
   def self.generate_schedule
-    puts "-------CRON----------"
-
     @intervals = []
       24.times do |h| 
         4.times do |m| 

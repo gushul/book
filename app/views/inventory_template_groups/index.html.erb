@@ -13,7 +13,7 @@
             <table  class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>Restaurant</th>
+                  <!-- <th>Restaurant</th> -->
                   <th>Name</th>
                   <th>Primary</th>
                   <th></th>
@@ -23,7 +23,7 @@
               </thead>
               <% @inventory_template_groups.each do |itg| %>
                 <tr>
-                  <td><%= itg.restaurant.name %></td>
+                  <!-- <td><%#= itg.restaurant.name %></td> -->
                   <td><%= itg.name %></td>
                   <td><%= itg.primary %></td>
                   <td><%= link_to 'Show', itg %></td>
