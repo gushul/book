@@ -59,80 +59,61 @@
       <img src='<%= @image_tag_string %>'>
       <h2 class="rlight">Filter Options :</h2>
       <div class="filter">
-        <form action="test.php" method="post">
+
+        <%= form_tag("/search", method: "get") do %>
+
           <div class="star">
             <h4 class="rmedium">Star Rating :</h4>
-            <div>
-              <input type="checkbox" name="star[]" value="value 1">
-              <i class="glyphicon glyphicon-star pink"></i>
-            </div>
-            <div>
-              <input type="checkbox" name="star[]" value="value 2">
-              <% 2.times do %>
-                <i class="glyphicon glyphicon-star pink"></i>
-              <% end %>
-            </div>
-            <div>
-              <input type="checkbox" name="star[]" value="value 3">
-              <% 3.times do %>
-                <i class="glyphicon glyphicon-star pink"></i>
-              <% end %>
-            </div>
-            <div>
-              <input type="checkbox" name="star[]" value="value 4">
-              <% 4.times do %>
-                <i class="glyphicon glyphicon-star pink"></i>
-              <% end %>
-            </div>
-            <div>
-              <input type="checkbox" name="star[]" value="value 5">
-              <% 5.times do %>
-                <i class="glyphicon glyphicon-star pink"></i>
-              <% end %>
-            </div>
+            <% RestaurantTag.where("title LIKE ?", "Star:%").each do |star| %>
+              <div>
+                <%= check_box_tag 'tags[]', star.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(star.id) %>
+                <% star.title.slice(5..star.title.length).to_i.times do |s| %>
+                  <i class="glyphicon glyphicon-star pink"></i>
+                <% end %>
+              </div>
+            <% end %>
           </div>
+          
           <hr/>
           <div class="price">
             <h4 class="rmedium">Price :</h4>
-            <div>
-              <input type="checkbox" name="price[]" value="value 1">
-              <% 2.times do %>
-                <i class="glyphicon glyphicon-usd"></i>
+            <% RestaurantTag.where("title LIKE ?", "Price:%").each do |price| %>
+              <% if price.title.slice(6..price.title.length).size > 1 && price.title.slice(6..price.title.length).size < 5 %>
+                <div>
+                  <%= check_box_tag 'tags[]', price.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(price.id)  %>
+                  <% price.title.slice(6..price.title.length).size.times do |s|  %>
+                    <i class="glyphicon glyphicon-usd"></i>
+                  <% end %>
+                  <% if price.title.slice(6..price.title.length).size == 2 %>
+                    (500 baht and under)
+                  <% elsif price.title.slice(6..price.title.length).size == 3 %>
+                    (501 -1,000 baht)
+                  <% elsif price.title.slice(6..price.title.length).size == 4 %>
+                    (1,000 baht and over)
+                  <% end %>
+                </div>
               <% end %>
-              (500 baht and under)
-            </div>
-            <div>
-              <input type="checkbox" name="price[]" value="value 2">
-              <% 3.times do %>
-                <i class="glyphicon glyphicon-usd"></i>
-              <% end %>
-              (501 -1,000 baht)
-            </div>
-            <div>
-              <input type="checkbox" name="price[]" value="value 3">
-              <% 4.times do %>
-                <i class="glyphicon glyphicon-usd"></i>
-              <% end %> 
-              (1,000 baht and over)
-            </div>
+            <% end %>
           </div>
+
           <hr/>
           <div class="credit">
             <h4 class="rmedium">Credit Card :</h4>
-            <div>
-              <input type="checkbox" name="credit[]" value="value 1"> American Express
-            </div>
-            <div>
-              <input type="checkbox" name="credit[]" value="value 2"> Credit Card
-            </div>
-            <div>
-              <input type="checkbox" name="credit[]" value="value 3"> Master Card
-            </div>
-            <div>
-              <input type="checkbox" name="credit[]" value="value 4"> Visa
-            </div>
+             <% RestaurantTag.where("title LIKE ?", "Payment:%").each do |pay| %>
+              <div>
+                <%= check_box_tag 'tags[]', pay.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(pay.id) %>
+                <%= h pay.title.slice(8..pay.title.length) -%>
+              </div>
+            <% end %>
           </div>
-        </form>
+          <%= params["tags"] %>
+
+          <input type="hidden" name="filter" value="<%= @search_results.map {|r| r.id} %>">
+          <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-search"></i></button>
+          <%#= submit_tag "Search", :class => 'btn btn-success btn-large' %>
+
+        <% end %>
+
       </div>
     </div>
   </div><!--/row-->

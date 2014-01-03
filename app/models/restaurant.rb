@@ -53,6 +53,16 @@ class Restaurant < ActiveRecord::Base
     ids.collect {|i| joins(:restaurant_tags).where('restaurant_tags.id = ?', i ) }.flatten
   }
 
+  scope :by_ids_and_tags, lambda { |ids, tag_ids|
+    restaurants = Restaurant.by_ids(ids)
+    restaurants.map! { |r| r.restaurant_tags.where("id in (?)", tag_ids).blank? ? nil : r }
+    restaurants.compact
+  }
+
+  scope :by_ids, lambda { |ids|
+    where('id in (?)',  ids )
+  }
+
   def self.generate_schedule
     puts "-------CRON----------"
 

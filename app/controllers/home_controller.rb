@@ -40,11 +40,19 @@ class HomeController < ApplicationController
   end
 
   # GET /search/:search_term
-  
   def search
     @search_terms = []
-    unless params['srch-term'].blank?
+    if !params['srch-term'].blank?
       @search_results = Restaurant.where("name like ?", "%#{params['srch-term']}%").page(params[:page])
+    elsif !params['filter'].blank? && !params["tags"].blank? 
+      restaurants_array = JSON.parse(params['filter'])
+      restaurants_tags = params["tags"].collect { |i| i.to_i }
+      restaurants = Restaurant.by_ids_and_tags(restaurants_array, restaurants_tags)
+      @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
+    # elsif !params['filter'].blank?
+    #   restaurants_array = JSON.parse(params['filter'])
+    #   restaurants = Restaurant.by_ids(restaurants_array)
+    #   @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     else
       @search_results = Restaurant.page(params[:page])
       @search_terms << "All restaurants"
@@ -62,13 +70,18 @@ class HomeController < ApplicationController
   def search_with_date_time
     @search_terms = []
 
-    unless params['srch-restaurant'].blank?
+    if !params['srch-restaurant'].blank?
       if params['datepicker'].present?
         date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
         @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
       else
         @search_results = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%").page(params[:page])
       end
+    elsif !params['filter'].blank? && !params["tags"].blank? 
+      restaurants_array = JSON.parse(params['filter'])
+      restaurants_tags = params["tags"].collect { |i| i.to_i }
+      restaurants = Restaurant.by_ids_and_tags(restaurants_array, restaurants_tags)
+      @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     else
       @search_results = Restaurant.all
       @search_terms << "All restaurants"
