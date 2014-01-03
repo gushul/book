@@ -409,7 +409,7 @@ div.list .media .media-body .star{float:left;margin-right:20px;}
 div.list .media .media-body .price{}
 div.list .media .media-body .tag{}
 div.list .media .media-body .right{text-align:center;}
-div.list .media .media-body .btn-primary{width:100%;margin-bottom:10px;}
+div.list .media .media-body .btn-primary{min-width:80px;margin-bottom:10px; margin-right: 10px;}
 div.list .media .media-body .btn-primary:hover{background:#ff6760;border-color:#ff6760;}
 div.list .navigation{text-align:center;}
 div.list .pagination > li > a{font-size:12px;}

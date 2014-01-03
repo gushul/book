@@ -4,7 +4,7 @@
       <% if @date.present? %>
         <h2 class="rbold">
           You're searching for <%= @date.to_date.to_formatted_s(:long) %> at <%= @time %> 
-          <br/>and <%= @people %> people
+          and <%= @people %> people
         </h2>
       <% else %>
         <h2 class="rbold">Search Results</h2>
@@ -59,7 +59,7 @@
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.00PM</button> -->
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.15PM</button> -->
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.30PM</button> -->
-                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">OTHER ITEMS</button>
+                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">OTHER</button>
                     </div>
                   </div>
                 </li><!-- News 1 -->

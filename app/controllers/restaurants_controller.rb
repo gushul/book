@@ -16,16 +16,18 @@ class RestaurantsController < ApplicationController
   end
 
   # GET /restaurants_all
-  # GET /restaurants.json
   def index_all
-    # @restaurants = Restaurant.all
-    # @restaurants = current_owner.restaurants
-    @restaurants = Restaurant.order(:name).page(params[:page]).per(3)  
+    @search_results_full = Restaurant.all
+    @search_results = Restaurant.page(params[:page])
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @restaurants }
+    unless @search_results.blank?
+      @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=550x550"
+      @search_results.each do |restaurant|
+        @image_tag_string << "&markers=icon:http://i42.tinypic.com/rj2txf.png%7C#{restaurant.lat}%2C#{restaurant.lng}"
+      end
+      @image_tag_string << '&sensor=false'
     end
+
   end
      
   # GET /restaurants/1

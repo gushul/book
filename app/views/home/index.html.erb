@@ -71,8 +71,8 @@
               </div>
               <div class="people"><i class="glyphicon glyphicon-user"></i>
                 <select name="people" class="selectpicker">
-                  <option selected="selected" value="1">1</option>
-                  <option value="2">2</option>
+                  <option value="1">1</option>
+                  <option value="2" selected="selected" >2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
@@ -89,7 +89,12 @@
                 </select>
               </div>
             </div>
-            <div class="info white"><h6 class="rregular">See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
+            <div class="info white">
+              <%= link_to restaurants_path do %>
+                <h6 class="rregular">See all Bangkok restaurants</h6>
+                <i class="glyphicon glyphicon-circle-arrow-right"></i>
+              <% end %>
+            </div>
             <div><input type="submit" value="FIND TABLE" class="btn btn-default lblack"></div>
           </form>
 
@@ -114,8 +119,8 @@
               </div>
               <div class="people"><i class="glyphicon glyphicon-user"></i>
                 <select name="people" class="selectpicker">
-                  <option selected="selected" value="1">1</option>
-                  <option value="2">2</option>
+                  <option value="1">1</option>
+                  <option selected="selected" value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
@@ -132,7 +137,11 @@
                 </select>
               </div>
             </div>
-            <div class="info white"><h6>Not ready to reserve? See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
+            <div class="info white">
+              <%= link_to restaurants_path do %>
+                <h6>Not ready to reserve? See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i>
+              <% end %>
+            </div>
             <div><input type="submit" value="FIND TABLE" class="btn btn-default"></div>
           </form>
 
@@ -335,6 +344,11 @@
 
     var d = new Date();
     var curr_date = d.getDate();
+    // Default Date to be set as today until 6pm of current date and after that it should be set as tomorrow
+    if (d.getHours() > 18 ) {
+      curr_date = curr_date + 1;
+    }
+
     if (curr_date < 10) {
       curr_date = 0 + "" + curr_date
     }
@@ -345,6 +359,10 @@
     var curr_year = d.getFullYear();
     $('#datepicker').val(curr_month + "/" + curr_date + "/" + curr_year);
     $('#datepicker2').val(curr_month + "/" + curr_date + "/" + curr_year);
+
+    // Default Time should be set as 7pm
+    $('#timepicker').val("7:00 PM");
+    $('#timepicker2').val("7:00 PM");
   });
 </script>
 
