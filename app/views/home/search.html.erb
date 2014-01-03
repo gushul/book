@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-8 col-lg-8">
       <h2 class="rbold">Search Results</h2>
-      <h3 class="rlight">We've found <%= @search_results.size %> restaurants for you.</h3>
+      <h3 class="rlight">We've found <%= @search_results_full.size %> restaurants for you.</h3>
       <div class="list result">
         <ul class="media-list">
           
@@ -50,7 +50,7 @@
 
         </ul>
         <div class="navigation">
-          <%= paginate @search_results %>
+          <%= paginate @search_results, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
         </div>
       </div>
     </div>  
@@ -106,9 +106,8 @@
               </div>
             <% end %>
           </div>
-          <%= params["tags"] %>
 
-          <input type="hidden" name="filter" value="<%= @search_results.map {|r| r.id} %>">
+          <input type="hidden" name="filter" value="<%= @search_results_full.map {|r| r.id} %>">
           <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-search"></i></button>
           <%#= submit_tag "Search", :class => 'btn btn-success btn-large' %>
 

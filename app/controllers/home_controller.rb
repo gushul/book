@@ -43,17 +43,20 @@ class HomeController < ApplicationController
   def search
     @search_terms = []
     if !params['srch-term'].blank?
-      @search_results = Restaurant.where("name like ?", "%#{params['srch-term']}%").page(params[:page])
+      @search_results_full = Restaurant.where("name like ?", "%#{params['srch-term']}%")
+      @search_results = @search_results_full.page(params[:page])
     elsif !params['filter'].blank? && !params["tags"].blank? 
       restaurants_array = JSON.parse(params['filter'])
       restaurants_tags = params["tags"].collect { |i| i.to_i }
       restaurants = Restaurant.by_ids_and_tags(restaurants_array, restaurants_tags)
+      @search_results_full = restaurants
       @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     # elsif !params['filter'].blank?
     #   restaurants_array = JSON.parse(params['filter'])
     #   restaurants = Restaurant.by_ids(restaurants_array)
     #   @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     else
+      @search_results_full = Restaurant.all
       @search_results = Restaurant.page(params[:page])
       @search_terms << "All restaurants"
     end
@@ -73,17 +76,21 @@ class HomeController < ApplicationController
     if !params['srch-restaurant'].blank?
       if params['datepicker'].present?
         date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
+        @search_results_full = Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date)
         @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
       else
+        @search_results_full = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%")
         @search_results = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%").page(params[:page])
       end
     elsif !params['filter'].blank? && !params["tags"].blank? 
       restaurants_array = JSON.parse(params['filter'])
       restaurants_tags = params["tags"].collect { |i| i.to_i }
       restaurants = Restaurant.by_ids_and_tags(restaurants_array, restaurants_tags)
+      @search_results_full = restaurants
       @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     else
-      @search_results = Restaurant.all
+      @search_results_full = Restaurant.all
+      @search_results = Restaurant.page(params[:page])
       @search_terms << "All restaurants"
     end
 
