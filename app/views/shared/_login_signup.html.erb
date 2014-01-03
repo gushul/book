@@ -103,7 +103,7 @@
           <div class="title">Selected Date:</div>
           <div class="text">
             <i class="glyphicon glyphicon-calendar"></i>
-            <input type="text" id="datepicker" name="datepicker" class="rregular">
+            <input type="text" id="datepicker" name="datepicker" class="rregular" value="<%= params["datepicker"].blank? ? "" : params["datepicker"] %>">
             <i class="glyphicon glyphicon-chevron-down"></i>
             
             <script type="text/javascript">
@@ -115,7 +115,7 @@
           <div class="title">Requested Time:</div>
           <div class="text">
             <i class="glyphicon glyphicon-time"></i>
-            <input type="text" id="timepicker" name="timepicker" class="rregular">
+            <input type="text" id="timepicker" name="timepicker" class="rregular" value="<%= params["timepicker"].blank? ? "" : params["timepicker"] %>">
             <i class="glyphicon glyphicon-chevron-down"></i>
              <script type="text/javascript">
               $('#timepicker').timepicker();

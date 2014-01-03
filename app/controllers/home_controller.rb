@@ -82,6 +82,21 @@ class HomeController < ApplicationController
         @search_results_full = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%")
         @search_results = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%").page(params[:page])
       end
+    elsif !params['datepicker'].blank? && !params['timepicker'].blank?
+      @date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
+      @time = Time.strptime(params['timepicker'], '%H:%M %p').to_s.slice(11..15) 
+      @people = params['people'].to_i
+      # TODO: availability need to check
+      @search_results_full = Restaurant.by_date_time_people(@date, @time, @people)
+      @inventories = []
+      @search_results_full.each do |r|
+        arr = []
+        Inventory.find_available_time(@date, @time, @people, r.id ).each do |inv|
+          arr << inv.start_time.to_s.slice(11..15) 
+        end
+        @inventories << arr
+      end
+      @search_results =  @search_results_full.page(params[:page])
     elsif !params['filter'].blank? && !params["tags"].blank? 
       restaurants_array = JSON.parse(params['filter'])
       restaurants_tags = params["tags"].collect { |i| i.to_i }

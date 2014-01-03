@@ -1,7 +1,14 @@
 <div class="topContent container">
   <div class="row">
     <div class="col-sm-8 col-lg-8">
-      <h2 class="rbold">Search Results</h2>
+      <% if @date.present? %>
+        <h2 class="rbold">
+          You're searching for <%= @date.to_date.to_formatted_s(:long) %> at <%= @time %> 
+          <br/>and <%= @people %> people
+        </h2>
+      <% else %>
+        <h2 class="rbold">Search Results</h2>
+      <% end %>
       <h3 class="rlight">We've found <%= @search_results_full.size %> restaurants for you.</h3>
       <div class="list result">
         <ul class="media-list">
@@ -44,9 +51,14 @@
                     <div class="col-sm-12 col-lg-3 right">
                       <h4 class="rmedium">Book Now :</h4>
                       <% id = user_signed_in? ? "check" : "login" %>
-                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.00PM</button>
-                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.15PM</button>
-                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.30PM</button>
+                      <% @inventories[index].each do |time| %>
+                        <button type="button" id="<%= id %>" class="btn btn-primary lblack action">
+                          <%= time %>
+                        </button>
+                      <% end %>
+                      <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.00PM</button> -->
+                      <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.15PM</button> -->
+                      <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.30PM</button> -->
                       <button type="button" id="<%= id %>" class="btn btn-primary lblack action">OTHER ITEMS</button>
                     </div>
                   </div>

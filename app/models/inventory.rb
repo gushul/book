@@ -13,6 +13,11 @@ class Inventory < ActiveRecord::Base
       :numericality => { :greater_than_or_equal_to => 1 }
 
   scope :future, -> { where("date >= ?", DateTime.now.to_date) }
+ 
+  scope :find_available_time, lambda { |date, time, people, restaurant_id|
+    # limit 3
+    Inventory.where('restaurant_id = ? AND date = ? AND start_time >= ? AND quantity_available >= ?', restaurant_id, date, "2000-01-01 #{time}:00", people).limit(3)
+  }
 
   belongs_to :restaurant
 end

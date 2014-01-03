@@ -63,6 +63,10 @@ class Restaurant < ActiveRecord::Base
     where('id in (?)',  ids )
   }
 
+  scope :by_date_time_people, lambda { |date, time, people|
+    joins(:inventories).where('inventories.date = ? AND inventories.start_time = ? AND inventories.quantity_available >= ?', date, "2000-01-01 #{time}:00", people)
+  }
+
   def self.generate_schedule
     @intervals = []
       24.times do |h| 

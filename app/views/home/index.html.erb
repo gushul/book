@@ -52,6 +52,7 @@
       </ul>
       <div class="tab-content">
         <div id="byLocation" class="tab-pane fade in active">
+
           <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
             <div class="input-group input-group-sm">
               <input type="text" id="srch-term" name="srch-location" placeholder="Search by location" class="form-control ritalic">
@@ -91,8 +92,10 @@
             <div class="info white"><h6 class="rregular">See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
             <div><input type="submit" value="FIND TABLE" class="btn btn-default lblack"></div>
           </form>
+
         </div>
         <div id="byName" class="tab-pane fade">
+
           <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
             <div class="input-group input-group-sm">
               <input type="text" id="srch-term" name="srch-restaurant" placeholder="Search by restaurants" class="form-control">
@@ -132,6 +135,7 @@
             <div class="info white"><h6>Not ready to reserve? See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i></div>
             <div><input type="submit" value="FIND TABLE" class="btn btn-default"></div>
           </form>
+
         </div>
       </div>
     </div>  
@@ -328,6 +332,19 @@
     
     $('#timepicker2').timepicker();
     $('#datepicker2').datepicker();
+
+    var d = new Date();
+    var curr_date = d.getDate();
+    if (curr_date < 10) {
+      curr_date = 0 + "" + curr_date
+    }
+    var curr_month = d.getMonth() + 1; //Months are zero based
+    if (curr_month < 10) {
+      curr_month = 0 + "" + curr_month
+    }
+    var curr_year = d.getFullYear();
+    $('#datepicker').val(curr_month + "/" + curr_date + "/" + curr_year);
+    $('#datepicker2').val(curr_month + "/" + curr_date + "/" + curr_year);
   });
 </script>
 
