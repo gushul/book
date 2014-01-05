@@ -40,7 +40,9 @@
               <% else %>
                 Not received any star rank
               <% end %>
-              <i class="glyphicon glyphicon-tag"></i> Fusion, Bar / Lounge, Thai Cuisine
+              <i class="glyphicon glyphicon-tag"></i> 
+               <!-- style="margin-left:50px;" -->
+              <%= @restaurant.cuisines_format %>
             </div>
             <div class="content">
               <div class="body">
@@ -48,22 +50,38 @@
                 <br/>
                 <br/>
                 <div class="col-sm-6 col-lg-6">
-                  <p><span class="rbold">Price : </span>$$$$    (1,000 - 3,000 baht)</p>
+                  <p><span class="rbold">Price : </span>
+                    <% @restaurant.price_format.times do |s| %>
+                      <i class="glyphicon glyphicon-usd"></i>
+                    <% end %>
+                    <%= @restaurant.price_desc%>
+                  </p>
                   <br/>
-                  <p><span class="rbold">Location : </span>Thonglor - Ekkamai</p>
+                  <p><span class="rbold">Location : </span> 
+                    <%= @restaurant.location_format %>
+                  </p>
                   <br/>
                   <p><span class="rbold">Website : </span>garretbistro.com  </p>
                   <br/>
                   <p><span class="rbold">Telephone : </span> +66(0)2 556-5555</p>
                 </div>
                 <div class="col-sm-6 col-lg-6">
-                  <p><span class="rbold">Parking : </span> Valet </p>
+                  <p><span class="rbold">Parking : </span>
+                    <%= @restaurant.parking_format %>
+                  </p>
                   <br/>
-                  <p><span class="rbold">Drinking : </span> Alcohol, Beer, Cocktails, Wine</p>
+                  <p><span class="rbold">Drinking : </span>   
+                    <%= @restaurant.drinks_format %>
+                  </p>
                   <br/>
-                  <p><span class="rbold">Payment : </span>AMEX, MASTER Card / VISA</p>
+                  <p><span class="rbold">Payment : </span>
+                    AMEX, MASTER Card / VISA
+                    <%#= @restaurant %>
+                  </p>
                   <br/>
-                  <p><span class="rbold">Misc : </span> <%= @restaurant.misc %></p>
+                  <p><span class="rbold">Misc : </span> 
+                    <%= @restaurant.misc %>
+                  </p>
                 </div>
               </div>
             </div>
@@ -86,6 +104,7 @@
     </div>
   </div>
 </div>
+
 <div class="col-sm-12 col-sm-4" style="width: 33.3333%;">
   <h2 class="rlight">Location :</h2>
   <!-- <img src="http://placehold.it/400x270"> -->

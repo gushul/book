@@ -85,12 +85,15 @@
           <div class="star">
             <h4 class="rmedium">Star Rating :</h4>
             <% RestaurantTag.where("title LIKE ?", "Star:%").each do |star| %>
-              <div>
-                <%= check_box_tag 'tags[]', star.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(star.id) %>
-                <% star.title.slice(5..star.title.length).to_i.times do |s| %>
-                  <i class="glyphicon glyphicon-star pink"></i>
-                <% end %>
-              </div>
+              <% num = star.title.slice(5..star.title.length) %>
+              <% if num.to_f == num.to_i %>
+                <div>
+                  <%= check_box_tag 'tags[]', star.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(star.id) %>
+                  <% num.to_i.times do |s| %>
+                    <i class="glyphicon glyphicon-star pink"></i>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
           </div>
           

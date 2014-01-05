@@ -20,7 +20,7 @@
                   <h4 class="media-heading">
                     <%= link_to restaurant.name, restaurant_path(restaurant) %>
                   </h4>
-                  <p><%= restaurant.misc %></p><br>
+                  <p><%= restaurant.misc %></p>
                   <p>
                     <% unless restaurant.star_format == 0 %>
                       <% restaurant.star_format.times do |s| %>
@@ -29,8 +29,6 @@
                     <% else %>
                       Not received any star rank
                     <% end %>                      
-                  </p>
-                  <p>
                     <% unless restaurant.price_format == 0 %>
                       <% restaurant.price_format.times do |s| %>
                         <i class="glyphicon glyphicon-usd"></i>
@@ -38,7 +36,7 @@
                     <% else %>
                       No yet assigned any price rank
                     <% end %>
-                  </p><br>
+                  </p>
                   <p><i class="glyphicon glyphicon-tag"></i> <%= restaurant.cuisines_format %></p>
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -65,12 +63,15 @@
           <div class="star">
             <h4 class="rmedium">Star Rating :</h4>
             <% RestaurantTag.where("title LIKE ?", "Star:%").each do |star| %>
-              <div>
-                <%= check_box_tag 'tags[]', star.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(star.id) %>
-                <% star.title.slice(5..star.title.length).to_i.times do |s| %>
-                  <i class="glyphicon glyphicon-star pink"></i>
-                <% end %>
-              </div>
+              <% num = star.title.slice(5..star.title.length) %>
+              <% if num.to_f == num.to_i %>
+                <div>
+                  <%= check_box_tag 'tags[]', star.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(star.id) %>
+                  <% num.to_i.times do |s| %>
+                    <i class="glyphicon glyphicon-star pink"></i>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
           </div>
           

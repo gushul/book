@@ -128,10 +128,44 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
+  def location_format
+    tag = restaurant_tags.where("title LIKE ?", "Location:%").first
+    unless tag.blank?
+      return tag.title.slice(9..tag.title.length)
+    end
+    "None"
+  end
+
+  def parking_format
+    tag = restaurant_tags.where("title LIKE ?", "Parking:%").first
+    unless tag.blank?
+      return tag.title.slice(8..tag.title.length)
+    end
+    "No"
+  end
+
   def price_format
     tag = restaurant_tags.where("title LIKE ?", "Price:%").first
     unless tag.blank?
       return tag.title.slice(6..tag.title.length).length
+    end
+    0
+  end
+
+  def price_desc
+    tag = restaurant_tags.where("title LIKE ?", "Price:%").first
+    unless tag.blank?
+      price = tag.title.slice(6..tag.title.length).length
+      if price == 1 
+        price = "100 - 400 Baht"
+      elsif price == 2
+        price = "400 - 700 Baht"
+      elsif price == 3
+        price = "700 - 1000 Baht"
+      else
+        price = "> 1000 Baht"
+      end
+      return price
     end
     0
   end
@@ -142,6 +176,14 @@ class Restaurant < ActiveRecord::Base
       return tag.map {|r| r.title.slice(8..r.title.length) }.join(", ")
     end
     "No yet assigned any cuisine"
+  end
+
+  def drinks_format
+    tag = restaurant_tags.where("title LIKE ?", "Drinking:%")
+    unless tag.blank?
+      return tag.map {|r| r.title.slice(9..r.title.length) }.join(", ")
+    end
+    "None"
   end
 
   def star_format
