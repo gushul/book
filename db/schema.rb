@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131225071355) do
+ActiveRecord::Schema.define(:version => 20140105063549) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -179,5 +179,15 @@ ActiveRecord::Schema.define(:version => 20131225071355) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "vips", :force => true do |t|
+    t.integer "user_id"
+    t.integer "restaurant_id"
+    t.string  "name"
+    t.string  "phone"
+  end
+
+  add_index "vips", ["restaurant_id"], :name => "index_vips_on_restaurant_id"
+  add_index "vips", ["user_id"], :name => "index_vips_on_user_id"
 
 end
