@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class Api::Owner::CustomerInformationsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
@@ -7,6 +6,8 @@ class Api::Owner::CustomerInformationsController < ApplicationController
   
   # POST /customers_info.json
   def index
+    @owner = Owner.where(:email => params[:owner][:email] ).first 
+
     @owners = @owner.restaurant.reservations.where("name <> ?", "")
     @users  = @owner.restaurant.reservations.map {|res| res.user }.uniq
 
@@ -14,9 +15,15 @@ class Api::Owner::CustomerInformationsController < ApplicationController
     @users.each do |r|
       info = {}
       if r.present?
-        info[:name]  = r[:username]
-        info[:email] = r[:email]
-        info[:phone] = r[:phone]
+        info[:name]    = r[:username]
+        info[:email]   = r[:email]
+        info[:phone]   = r[:phone]
+        info[:user_id] = r[:id]
+        if r.vips.map {|v| v.restaurant_id == @owner.restaurant.id }.include?(true)
+          info[:vip] = true
+        else
+          info[:vip] = false
+        end
         @info_json << info
       end
     end

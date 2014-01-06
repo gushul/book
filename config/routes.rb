@@ -33,6 +33,8 @@ AuthApp::Application.routes.draw do
       post "/inventories"          => "inventories#index"
       
       post "/customers_info"       => "customer_informations#index"
+      
+      post "/create_vip"           => "vips#create"
 
       post "/reservations"         => "reservations#index"
       post "/reservation"          => "reservations#show"

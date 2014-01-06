@@ -12,7 +12,7 @@ class Api::Owner::ReservationsController < ApplicationController
     @reservations_json = []
     @reservations.each do |r|
       r = r.as_json
-      %w{user_id}.each {|k| r.delete(k)}
+      # %w{user_id}.each {|k| r.delete(k)}
       @reservations_json << r
     end
     
