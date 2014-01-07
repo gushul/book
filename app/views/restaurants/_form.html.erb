@@ -27,17 +27,25 @@
   <%= f.input :sun, :collection => InventoryTemplateGroup.all %>
   
   <h4>Photos</h4>
-    <% unless @restaurant.photos.blank? %>
-      <% @restaurant.photos.each do |pic| %>
-        <% unless pic ==  %>
-          <%= image_tag pic.picture.url(:v100x100) %>
+    <%# unless @restaurant.photos.blank? %>
+      <%# @restaurant.photos.each do |pic| %>
+        <%# unless pic ==  %>
+          <%#= image_tag pic.picture.url(:v100x100) %>
           <!-- img.input :_destroy, :label => "Remove", :as => :boolean %> -->
-        <% end %> 
-      <% end %>
-    <% end %>
+        <%# end %> 
+      <%# end %>
+    <%# end %>
 
+  <!-- TODO: refactoring needed -->
+  <%= f.simple_fields_for :photos, @restaurant.photos do |img|  %>
+    <%# if img.object.new_record? %>
+      <%#= img.input :picture, :label => "Picture", :as => :file %>
+    <%# else %>
+      <%= image_tag(img.object.picture.url(:v100x100)) %>
+      <%= img.input :_destroy, :as => :boolean, :label => "Remove" %> 
+    <%# end %>
+  <% end %>
   <%= f.simple_fields_for :photos, @restaurant.photos.build do |img|  %>
-
     <%= img.input :picture, :label => "Picture", :as => :file %>
     <%#= img.input :title,    label: "Title" %>
     <%#= img.input :is_cover, label: "Cover?", as: :select, include_blank: false, :selected => false %>
