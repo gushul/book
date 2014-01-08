@@ -50,7 +50,6 @@ AuthApp::Application.routes.draw do
 
   resources :owner_dashboards, :only => [:index] do 
     get 'customers_index' => "owner_dashboards#customers_index", :on => :collection, :as => :customers_index
-    put 'toggle_customer_status'  => "owner_dashboards#customers_index", :on => :collection, :as => :customers_index
   end
 
   resources :inventory_templates do

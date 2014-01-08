@@ -35,7 +35,5 @@ class OwnerDashboardsController < ApplicationController
 
   end
 
-  def toggle_customer_status
-  end
 
 end
