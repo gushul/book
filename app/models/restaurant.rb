@@ -120,7 +120,7 @@ class Restaurant < ActiveRecord::Base
                                  quantity_available: inv.quantity_available, 
                                  start_time: inv.start_time, 
                                  end_time: inv.end_time, 
-                                 restaurant_id: Restaurant.first.id)
+                                 restaurant_id: r.id)
                 created_count += 1
               end
             end
