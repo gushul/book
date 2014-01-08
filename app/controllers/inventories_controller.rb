@@ -8,7 +8,8 @@ class InventoriesController < ApplicationController
   # GET /inventories
   # GET /inventories.json
   def index  
-    @inventories = Inventory.order("id desc").page(params[:page])
+    # @inventories = Inventory.order("id desc").page(params[:page])
+    @inventories = current_owner.restaurant.inventories.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

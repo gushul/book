@@ -6,14 +6,14 @@ class InventoryTemplatesController < ApplicationController
                 except: [:index, :show, :new, :create, :my]
    
   # GET /inventory_templates
-  # GET /inventory_templates.json
   def index
-    @inventory_templates = InventoryTemplate.order("id desc").page(params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @inventory_templates }
+    # @inventory_templates = InventoryTemplate.order("id desc").page(params[:page])
+    itg_all = current_owner.restaurant.inventory_template_groups
+    @inventory_templates = itg_all.map do |itg|
+      itg.inventory_templates 
     end
+    @inventory_templates.flatten!
+    @inventory_templates = Kaminari.paginate_array(@inventory_templates).page(params[:page])
   end
 
   def my  

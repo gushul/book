@@ -89,13 +89,13 @@ class Restaurant < ActiveRecord::Base
     @intervals << "24:00"
 
     Restaurant.all.each do |r|
-    # r = Restaurant.first
+      # r = Restaurant.first
       # puts r.inventory_template_groups.count
       
       # count of needed days
       # inv_cnt_have = r.inventories.where("date >= ?", Date.today).count
       created_count = 0
-      inv_cnt_have = r.inventories.unscoped.where("date >= ?", Date.today).group(:date).length
+      inv_cnt_have = r.inventories.where("date >= ?", Date.today).group(:date).length
       cnt = r.days_in_advance - inv_cnt_have
       
       puts "*************"
@@ -113,14 +113,16 @@ class Restaurant < ActiveRecord::Base
 
         dates.each do |d|
           unless r.inventory_template_groups.blank?
-            it = r.inventory_template_groups.first.inventory_templates
-            it.each do |inv|
-              Inventory.create(date: d.to_s, 
-                               quantity_available: inv.quantity_available, 
-                               start_time: inv.start_time, 
-                               end_time: inv.end_time, 
-                               restaurant_id: Restaurant.first.id)
-              created_count += 1
+            r.inventory_template_groups.each do |itg|
+              it = itg.inventory_templates
+              it.each do |inv|
+                Inventory.create(date: d.to_s, 
+                                 quantity_available: inv.quantity_available, 
+                                 start_time: inv.start_time, 
+                                 end_time: inv.end_time, 
+                                 restaurant_id: Restaurant.first.id)
+                created_count += 1
+              end
             end
           end
         end
