@@ -9,6 +9,11 @@ module ApplicationHelper
     end
   end
 
+  def lang_link(link_text, link_path)
+    class_name = params["locale"] == link_text.downcase ? 'red' : ''
+    link_to link_text, link_path , class: "rblack #{class_name}"
+  end
+
   def resource_name
     :user
   end

@@ -11,6 +11,11 @@
   <%= f.input :largest_table, label: "Largest Table"%>
   <%= f.input :lat, label: "Latitude" %>
   <%= f.input :lng, label: "Longitude" %>
+  
+  <%= f.input :address, label: "Address", as: :text, input_html: { rows: "2", class: "text_area_for_misc"} %>
+  <%= f.input :phone, label: "Phone" %>
+  <%= f.input :website, label: "Website" %>
+
   <%= f.input :misc, label: "Misc", as: :text, input_html: { rows: "15", class: "text_area_for_misc"} %>
  
   <h4>Restaurant tags</h4>

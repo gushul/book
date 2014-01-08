@@ -8,7 +8,8 @@ class Restaurant < ActiveRecord::Base
                   :days_in_advance, :min_booking_time, :res_duration,
                   :restaurant_tag_ids,
                   :photos_attributes, :largest_table,
-                  :mon, :tue, :wed, :thu, :fri, :sat, :sun
+                  :mon, :tue, :wed, :thu, :fri, :sat, :sun,
+                  :phone, :address, :website
  
   validates :name,  :presence => true
   validates :lng,   :presence => true

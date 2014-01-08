@@ -37,8 +37,8 @@ class RestaurantsController < ApplicationController
     @reservation = Reservation.new
     @image_tag_string = "/assets/slideshow-rest.jpg"
 
-    @google_map = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=550x300"
-    @google_map << "&markers=icon:http://tinyurl.com/pgdsbxb%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
+    @google_map = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=400x300"
+    @google_map << "&markers=icon:http://i42.tinypic.com/rj2txf.png%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
     @google_map << '&sensor=false&zoom=16'
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
