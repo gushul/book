@@ -46,7 +46,7 @@
             </div>
             <div class="content">
               <div class="body">
-                <p style="margin:0 10px;"><span class="rbold">Address : </span>   99/99 Sukhumvit 63 (Ekkamai Soi 7) Klongton-Nua, Wattana Bangkok, 10110 </p>
+                <p style="margin:0 10px;"><span class="rbold">Address : </span>Soi Anuman Rachathon Surawong, Bang Rak Bangkok 10500</p>
                 <br/>
                 <br/>
                 <div class="col-sm-6 col-lg-6">
@@ -61,9 +61,9 @@
                     <%= @restaurant.location_format %>
                   </p>
                   <br/>
-                  <p><span class="rbold">Website : </span>garretbistro.com  </p>
+                  <p><span class="rbold">Website : </span>coca.com</p>
                   <br/>
-                  <p><span class="rbold">Telephone : </span> +66(0)2 556-5555</p>
+                  <p><span class="rbold">Telephone : </span> +66(0)2236-0107</p>
                 </div>
                 <div class="col-sm-6 col-lg-6">
                   <p><span class="rbold">Parking : </span>
@@ -80,7 +80,7 @@
                   </p>
                   <br/>
                   <p><span class="rbold">Misc : </span> 
-                    <%= @restaurant.misc %>
+                    <%= @restaurant.misc.html_safe %>
                   </p>
                 </div>
               </div>
