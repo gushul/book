@@ -18,4 +18,12 @@ class InventoryTemplate < ActiveRecord::Base
   # belongs_to :restaurant
   belongs_to :inventory_template_group
 
+  scope :by_min, lambda { |min| 
+    where("start_time LIKE ?", "%:#{min}:00") 
+  }
+
+  def start_time_hour
+    start_time.strftime("%H").to_i
+  end
+
 end

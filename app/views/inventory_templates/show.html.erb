@@ -29,9 +29,10 @@
             <%= @inventory_template.quantity_available %>
           </p>
 
-          <%= link_to 'Edit', edit_inventory_template_path(@inventory_template) %> |
-          <%= link_to 'Back', inventory_templates_path %>
-
+          <%= link_to 'Edit', edit_inventory_template_path(@inventory_template) %>
+          <%#= link_to 'Back', inventory_templates_path %> 
+          |
+          <%= link_to 'Destroy', @inventory_template, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
       </div>
     </div>

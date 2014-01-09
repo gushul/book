@@ -107,7 +107,7 @@ Restaurant.all.each_with_index do |restaurant, i|
   itg_id2 = restaurant.inventory_template_groups.last.id
   itg_id3 = restaurant.inventory_template_groups.find_by_name("Weekends").id
 
-  InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 09:00:00", end_time: "2000-01-01 10:15:00", quantity_available: 10 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 10:15:00", quantity_available: 10 )
   InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 10:15:00", end_time: "2000-01-01 10:30:00", quantity_available: 10 )
   InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 10:30:00", end_time: "2000-01-01 10:45:00", quantity_available: 10 )
   InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 10:45:00", end_time: "2000-01-01 11:00:00", quantity_available: 10 )
@@ -125,11 +125,18 @@ Restaurant.all.each_with_index do |restaurant, i|
   InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 13:00:00", end_time: "2000-01-01 13:15:00", quantity_available: 100 )
   InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 13:15:00", end_time: "2000-01-01 13:30:00", quantity_available: 100 )
   InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 13:30:00", end_time: "2000-01-01 13:45:00", quantity_available: 100 )
-  InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 13:45:00", end_time: "2000-01-01 15:00:00", quantity_available: 100 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 13:45:00", end_time: "2000-01-01 14:00:00", quantity_available: 100 )
   
-  InventoryTemplate.create( inventory_template_group_id: itg_id2, start_time: "2000-01-01 22:00:00", end_time: "2000-01-01 01:00:00", quantity_available: 15 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id2, start_time: "2000-01-01 22:00:00", end_time: "2000-01-01 22:15:00", quantity_available: 15 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id2, start_time: "2000-01-01 22:15:00", end_time: "2000-01-01 22:30:00", quantity_available: 15 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id2, start_time: "2000-01-01 22:30:00", end_time: "2000-01-01 22:45:00", quantity_available: 15 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id2, start_time: "2000-01-01 22:45:00", end_time: "2000-01-01 23:00:00", quantity_available: 15 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id2, start_time: "2000-01-01 23:00:00", end_time: "2000-01-01 23:15:00", quantity_available: 15 )
   
-  InventoryTemplate.create( inventory_template_group_id: itg_id3, start_time: "2000-01-01 18:00:00", end_time: "2000-01-01 20:00:00", quantity_available: 25 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id3, start_time: "2000-01-01 18:00:00", end_time: "2000-01-01 18:15:00", quantity_available: 25 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id3, start_time: "2000-01-01 18:15:00", end_time: "2000-01-01 18:30:00", quantity_available: 25 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id3, start_time: "2000-01-01 18:30:00", end_time: "2000-01-01 18:45:00", quantity_available: 25 )
+  InventoryTemplate.create( inventory_template_group_id: itg_id3, start_time: "2000-01-01 18:45:00", end_time: "2000-01-01 19:00:00", quantity_available: 25 )
 end
 # ==================================================================
 puts "*** Inventory Templates created ***"

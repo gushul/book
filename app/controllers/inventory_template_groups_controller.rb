@@ -10,7 +10,11 @@ class InventoryTemplateGroupsController < ApplicationController
     # @inventory_template_groups = InventoryTemplateGroup.all
     @inventory_template_groups = current_owner.restaurant.inventory_template_groups.page(params[:page])
 
-    @quantity = current_owner.restaurant.it_quantities
+    # @quantity = current_owner.restaurant.it_quantities
+    @inventory_templates1 = current_owner.restaurant.inventory_template_groups.map {|itg| itg.inventory_templates.by_min("00")}.flatten
+    @inventory_templates2 = current_owner.restaurant.inventory_template_groups.map {|itg| itg.inventory_templates.by_min("15")}.flatten
+    @inventory_templates3 = current_owner.restaurant.inventory_template_groups.map {|itg| itg.inventory_templates.by_min("30")}.flatten
+    @inventory_templates4 = current_owner.restaurant.inventory_template_groups.map {|itg| itg.inventory_templates.by_min("45")}.flatten
 
     respond_to do |format|
       format.html # index.html.erb

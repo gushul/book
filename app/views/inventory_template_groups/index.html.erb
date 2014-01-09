@@ -60,31 +60,56 @@
   <tr>
     <td style="font-weight:bold;">00</td>
     <% 24.times do |i| %>
-      <td><%= @quantity[0][i] %></td>
+      <td>
+        <% @inventory_templates1.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
     <% end %>
   </tr>
   <tr>
     <td style="font-weight:bold;">15</td>
     <% 24.times do |i| %>
-      <td><%= @quantity[1][i] %></td>
+      <td>
+        <% @inventory_templates2.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
     <% end %>
   </tr>
   <tr>
     <td style="font-weight:bold;">30</td>
     <% 24.times do |i| %>
-      <td><%= @quantity[2][i] %></td>
+      <td>
+        <% @inventory_templates3.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
     <% end %>
   </tr>
   <tr>
     <td style="font-weight:bold;">45</td>
-    <% 24.times do |i| %>
-      <td><%= @quantity[3][i] %></td>
+   <% 24.times do |i| %>
+      <td>
+        <% @inventory_templates4.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
     <% end %>
   </tr>
 </table>
 <br />
 <%= link_to 'New Inventory Template', new_inventory_template_path %>
 <br />
+
 
         </div>
       </div>

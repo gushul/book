@@ -137,31 +137,27 @@ class Restaurant < ActiveRecord::Base
     self.inventory_template_groups.each do |itg|
       itg.inventory_templates.each do |inv|
 
-          # TODO: issue here
-          # m1 = inv.start_time.strftime("%M").to_i
-          # m1 == 0 ? 0 : m1 = m1/15
-          # m2 = inv.end_time.strftime("%M").to_i
-          # m2 == 0 ? 0 : m2 = m2/15
-          # h1 = inv.start_time.strftime("%H").to_i
-          # h2 = inv.end_time.strftime("%H").to_i
-          # if h1 == h2 and (m2 - m1) > 0
-          #   (m2 - m1).times {|t| @quantity[m1+t][h1] = inv.quantity_available }
-          # elsif h1 != h2
-          #   (h2 - h1 + 1).times do |th| 
-          #     unless th == h2 - h1
-          #       4.times {|tm| 
-          #         p "mins:  #{m1} + #{tm}"
-          #         p "                     hours: #{h1} + #{th}"
-          #         @quantity[m1 + tm][h1 + th] = inv.quantity_available 
-          #       }
-          #     else
-          #       (m2 - m1).times {|tm| 
-          #         p "MMM: #{m1} + #{tm}"
-          #         p "                   HHH: #{h1} + #{th}"
-          #         @quantity[m1 + tm][h1 + th] = inv.quantity_available }
-          #     end
-          #   end
-          # end
+          m1 = inv.start_time.strftime("%M").to_i
+          m1 == 0 ? 0 : m1 = m1/15
+          m2 = inv.end_time.strftime("%M").to_i
+          m2 == 0 ? 0 : m2 = m2/15
+          h1 = inv.start_time.strftime("%H").to_i
+          h2 = inv.end_time.strftime("%H").to_i
+          # works only for 15 min inventory_templates 
+          if h1 == h2 and (m2 - m1) > 0
+            (m2 - m1).times {|t| @quantity[m1+t][h1] = inv.quantity_available }
+          elsif h1 != h2
+            (h2 - h1 + 1).times do |th| 
+              unless th == h2 - h1
+                4.times {|tm| 
+                  @quantity[tm - m1][h1 + th] = inv.quantity_available 
+                }
+              else
+                (m2 - m1).times {|tm| 
+                  @quantity[m1 + tm][h1 + th] = inv.quantity_available }
+              end
+            end
+          end
 
       end
     end
