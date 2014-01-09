@@ -30,6 +30,11 @@ class OwnerDashboardsController < ApplicationController
       info[:name]  = r[:name]
       info[:phone] = r[:phone]
       info[:email] = r[:email]
+      if Vip.where(:name => info[:name]).where(:phone => info[:phone]).first.present?
+        info[:vip] = true
+      else
+        info[:vip] = false
+      end
       @info_json << info
     end
 

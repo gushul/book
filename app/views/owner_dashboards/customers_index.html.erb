@@ -15,7 +15,7 @@
           <table  class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th>User</th>
+                <!-- <th>User (if present)</th> -->
                 <th>Name</th>
                 <th>Phone</th>
                 <th>VIP</th>
@@ -25,11 +25,17 @@
             <tbody>
               <% @info_json.each do |user| %>
                 <tr>
-                  <td><%= user[:user_id].present? ? User.where(:id => user[:user_id]).first.username : "" %></td>
+                  <!-- <td><%#= user[:user_id].present? ? User.where(:id => user[:user_id]).first.username : "" %></td> -->
                   <td><%= user[:name] %></td>
                   <td><%= user[:phone] %></td>
-                  <td><%= user[:vip].present? ? user[:vip] : false %></td>
-                  <!-- <td><%#= link_to "#{user[:vip]} - revert", toggle_customer_status_owner_dashboards_path_url(reservation, :arg => "no_show"), :method => :put, :class => "btn"%></td> -->
+                  <td>
+                    <% if user[:vip] == true  %>
+                      <%= link_to "Remove from VIP", vips_path(:user => user), method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <% else %>
+                      <%= link_to "Add to VIP", vips_path(:user => user), method: :post %>
+                    <% end %>
+
+                  </td>
                 </tr>
               <% end %>
             </tbody>
