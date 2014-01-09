@@ -2,13 +2,11 @@
 
   <!-- <div style="width:200px"> -->
   <%#= f.association :restaurant, label: "Restaurant" %>
-  <%= f.input :date, as: :date, start_year: Date.today.year,
+  <%= f.input :date, :disabled => true, as: :date, start_year: Date.today.year,
               end_year: Date.today.year+1, 
               order: [:day, :month, :year], label: "Date" %>
-  <%= f.input :start_time, :minute_step => 15, label: "Start Time" %>
-  <p>End-time automaticly set as "start-time" + 15 minutes
-  </p>
-  <%#= f.input :end_time, :minute_step => 15, label: "End Time" %>
+  <%= f.input :start_time, :disabled => true, :minute_step => 15, label: "Start Time" %>
+  <%= f.input :end_time, :disabled => true, :minute_step => 15, label: "End Time" %>
   <%= f.input :quantity_available, label: "Quantity Available" %>
   <!-- </div> -->
 

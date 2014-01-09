@@ -19,5 +19,14 @@ class Inventory < ActiveRecord::Base
     Inventory.where('restaurant_id = ? AND date = ? AND start_time >= ? AND quantity_available >= ?', restaurant_id, date, "2000-01-01 #{time}:00", people).limit(3)
   }
 
+  scope :by_min_and_date, lambda { |min, date| 
+    where('start_time LIKE ? AND date = ?', "%:#{min}:00", date) 
+  }
+
   belongs_to :restaurant
+
+  def start_time_hour
+    start_time.strftime("%H").to_i
+  end
+  
 end
