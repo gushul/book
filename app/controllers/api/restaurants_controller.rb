@@ -4,7 +4,9 @@ class Api::RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
-    @restaurants.each do |r| 
+    @restaurants.each do |r|
+      r[:earliest_time] = r.earliest_time
+      r[:latest_time]   = r.latest_time 
       r[:tags] = []
       r.restaurant_tags.each do |t|
         r[:tags] << t.title
@@ -24,6 +26,8 @@ class Api::RestaurantsController < ApplicationController
   def show
     begin
       @restaurant = Restaurant.find(params[:id])
+      @restaurant[:earliest_time] = @restaurant.earliest_time
+      @restaurant[:latest_time]   = @restaurant.latest_time
       @restaurant[:tags] = []
       @restaurant.restaurant_tags.each do |t|
         @restaurant[:tags] << t.title

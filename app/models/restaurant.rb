@@ -131,6 +131,23 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
+  def earliest_time
+    inv = self.inventories.by_date.first
+    unless inv.blank?
+      return inv.start_time.strftime("%H%M")
+    end
+    "No inventories today"
+  end
+
+  def latest_time
+    inv = self.inventories.by_date.last
+    unless inv.blank?
+      time = inv.end_time - res_duration.minutes
+      return time.strftime("%H%M")
+    end
+    "No inventories today"
+  end
+
   def it_quantities
     @quantity = []
     4.times {|i| @quantity[i] = []}

@@ -12,6 +12,8 @@ class Inventory < ActiveRecord::Base
   validates :quantity_available, :presence => true,
       :numericality => { :greater_than_or_equal_to => 1 }
 
+  default_scope :order => :start_time
+
   scope :future, -> { where("date >= ?", DateTime.now.to_date) }
  
   scope :find_available_time, lambda { |date, time, people, restaurant_id|
@@ -21,6 +23,10 @@ class Inventory < ActiveRecord::Base
 
   scope :by_min_and_date, lambda { |min, date| 
     where('start_time LIKE ? AND date = ?', "%:#{min}:00", date) 
+  }
+
+  scope :by_date, lambda { |date = Date.today | 
+    where(:date => date)
   }
 
   belongs_to :restaurant
