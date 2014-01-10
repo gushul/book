@@ -5,6 +5,15 @@ function closeModel(name){
   $(".screenfade").hide();
 }
 
+function openModel(name){
+  $(".model").hide();
+  $(".model").css("opacity","0");
+  $(".model-"+name).show();
+  $(".model-"+name).animate({opacity: 1.0}, 1000).delay(1000);
+  $(".screenfade").show();
+  $(".screenfade").animate({opacity: 0.5}, 1000).delay(1000);
+}
+
 $(document).on('click', ".action", function(){
   
   $(".model").hide();

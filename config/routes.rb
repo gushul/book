@@ -5,6 +5,7 @@ AuthApp::Application.routes.draw do
   get "home/index"
   get 'search', to: 'home#search', as: 'search'
   get 'search_with_date_time', to: 'home#search_with_date_time', as: 'search_with_date_time'
+  get 'check_availability', to: 'home#check_availability', as: 'check_availability'
   # get 'calendar', to: 'home#calendar', as: 'calendar'
 
   devise_for :owners
@@ -72,7 +73,6 @@ AuthApp::Application.routes.draw do
   resources :restaurants do
     get 'all' => "restaurants#index_all", :on => :collection, :as => :all
   end
-
-   
+  get 'restaurants/:id/:datepicker/:timepicker/:people/:status' => 'restaurants#show', :as => 'book_restaurant'
    
 end

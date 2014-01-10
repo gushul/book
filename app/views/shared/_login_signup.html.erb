@@ -95,7 +95,9 @@
     <i class="glyphicon glyphicon-remove" onclick="closeModel('check');"></i>
     <h4 class="lbold">Check Availability</h4></div>
     <div class="content">
-      <form method="get" action="#"><input type="hidden" name="check" value="true"/>
+      <%= form_tag("/check_availability", method: "get") do %>
+      <!-- <form method="get" action="#"> -->
+      <input type="hidden" name="check" value="true"/>
       
       <div class="advanceSearch">
         <div class="error rregular" style="display:none;color:#933b3b;padding:15px 10px;background:#f2dede;border-radius:5px;"><span class="rbold">Oh sorry! </span>&nbsp;&nbsp;We don't have a table for you. Try it again!</div>
@@ -103,12 +105,12 @@
           <div class="title">Selected Date:</div>
           <div class="text">
             <i class="glyphicon glyphicon-calendar"></i>
-            <input type="text" id="datepicker" name="datepicker" class="rregular" value="<%= params["datepicker"].blank? ? "" : params["datepicker"] %>">
+            <input type="text" id="datepicker" name="datepicker" class="rregular" value="<%= params["datepicker"].blank? ? Date.today : params["datepicker"] %>">
             <i class="glyphicon glyphicon-chevron-down"></i>
             
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
               $('#datepicker').datepicker();
-            </script>
+            </script> -->
           </div>
         </div>
         <div class="time">
@@ -117,9 +119,9 @@
             <i class="glyphicon glyphicon-time"></i>
             <input type="text" id="timepicker" name="timepicker" class="rregular" value="<%= params["timepicker"].blank? ? "" : params["timepicker"] %>">
             <i class="glyphicon glyphicon-chevron-down"></i>
-             <script type="text/javascript">
-              $('#timepicker').timepicker();
-            </script>
+             <!--  <script type="text/javascript">
+               $('#timepicker').timepicker();
+             </script> -->
           </div>
         </div>
         <div class="people">
@@ -145,38 +147,109 @@
             </select>
           </div>
         </div>
+      <input type="hidden" name="restaurant_id" class="restaurant_id">
       </div>
+
 
       <h4 class="rbold">You are making a reservation for <span class="pink">The Garret Secret Bistro</span>.</h4>
       <h5 class="rregular">Special requests are not guaranteed and are subject to availability and restaurant discretion.</h5>
       <hr/>
       <div class="submit"><input type="submit" class="btn lblack" value="Check Now" /></div>
-    </form>
+  
+    <!-- </form> -->
+    <% end %>
+
   </div>
 </div>
 
+<% unless params[:status].blank? %>
 <div class="model model-reservation">
   <div class="header">
     <i class="glyphicon glyphicon-remove" onclick="closeModel('reservation');"></i>
     <h4 class="lbold">Make this reservation</h4>
   </div>
   <div class="content">
-    <form method="get" action="#">
-      
-      <div class="green rregular" style="color:#48874a;padding:15px 10px;background:#e0f0d9;border-radius:5px;"><span class="rbold">Well done! </span>&nbsp;&nbsp;We have a table for you.</div>
-      <div class="name"><input class="rregular" type="text" placeholder="Your name" name="name"/></div>
-      <div class="email"><input class="rregular" type="text" placeholder="Email Address" name="email"/></div>
-      <div class="phone"><input class="rregular" type="text" placeholder="Phone" name="phone"/></div>
-      <div class="phone"><textarea class="rregular" type="text" placeholder="Special Requests" name="special"></textarea></div>
 
-      <h5 class="rregular" style="text-align:left;">You are making a reservation for <span class="pink">2 people</span>.</h5>
-      <h5 class="rregular" style="text-align:left;">at <span class="pink">The Garret Secret Bistro</span>.</h5>
-      <h5 class="rregular" style="text-align:left;">on <span class="pink">October 31 2013, 6:15 PM</span>.</h5> 
-      <hr/>
-      <div class="submit">
-      <button class="btn lblack" onclick="window.history.back();">PREVIOUS</button>
-      <input type="submit" class="btn lblack" value="BOOK NOW" />
+    <%#= form_tag "/make_book_from_restaurant", method: "get" do  %>
+    <%= simple_form_for(@reservation, html: { class: "form-horizontal"}) do |f| %>
+
+    <!-- <form method="get" action="#"> -->
+      
+      <div class="green rregular" style="color:#48874a;padding:15px 10px;background:#e0f0d9;border-radius:5px;">
+        <span class="rbold">Well done! </span>&nbsp;&nbsp;We have a table for you.
       </div>
-    </form>
+
+      <!-- <div class="name">
+        <input class="rregular" type="text" placeholder="Your name" name="name"/>
+      </div>
+      <div class="email">
+        <input class="rregular" type="text" placeholder="Email Address" name="email"/>
+      </div>
+      <div class="phone">
+        <input class="rregular" type="text" placeholder="Phone" name="phone"/>
+      </div> -->
+
+
+      <% unless user_signed_in? %>
+        <div class="name">
+          <%= f.input :name, label: false, :placeholder => "Your name",  :required => :true, input_html: { class: "rregular" } %>
+        </div>
+        <div class="email">
+          <%= f.input :email, label: false, :placeholder => "Your email",  :required => :true, input_html: { class: "rregular" } %>
+        </div>
+        <div class="phone">
+          <%= f.input :phone, label: false, :placeholder => "Your phone",  :required => :true, input_html: { class: "rregular" } %>
+        </div>
+      <% end %>
+
+
+      <%= f.input :restaurant_id, as: :hidden, input_html: { value: @restaurant.id }  %>
+      <%= f.input :date, as: :hidden, input_html: { value: params["datepicker"] }  %> 
+      <input id="reservation_start_time" name="reservation[start_time]" type="hidden" value="<%= params["timepicker"] %>" >
+      <input id="reservation_end_time" name="reservation[end_time]" type="hidden" value="<%= (Time.parse(params["timepicker"]) + @restaurant.res_duration.minutes).strftime('%H:%M') %>" >
+      <%#= f.input :start_time, as: :time, default: Time.parse(params["timepicker"]), input_html: { class: "1hidden_element" } %>
+      <%= f.input :party_size, as: :hidden, input_html: { value: params["people"]} %>
+      <!-- setup in controller to true -->
+      <%#= f.input :active, label: false, input_html: { :checked => true,  class: "1hidden_element " } %>
+      <input id="reservation_active" name="reservation[active]" type="hidden" value="true" >
+ 
+      <div class="special">
+        <%= f.input :special_request, label: false, :placeholder =>"Special Requests", as: :text, input_html: { rows: "3", class: "text_area_for_misc"} %>
+        <!-- <textarea class="rregular" type="text" placeholder="Special Requests" name="special"></textarea> -->
+      </div>
+
+      <h5 class="rregular" style="text-align:left;">You are making a reservation for 
+        <span class="pink">
+          <!-- 2 -->
+          <%= params["people"].blank? ? "" : params["people"] %>
+          people
+        </span>.
+      </h5>
+      <h5 class="rregular" style="text-align:left;">at 
+        <span class="pink">
+          <!-- The Garret Secret Bistro -->
+          <%= @restaurant.name %>
+        </span>.
+      </h5>
+      <h5 class="rregular" style="text-align:left;">on 
+        <span class="pink">
+          <!-- October 31 2013  -->
+          <%= params["datepicker"].blank? ? "" : params["datepicker"].to_date.to_formatted_s(:long) %>, 
+          <!-- 6:15 PM -->
+          <%= params["timepicker"].blank? ? "" : params["timepicker"] %>
+        </span>.
+      </h5> 
+      <hr/>
+
+      <div class="submit">
+        <%= f.button :submit, "BOOK NOW", class: "btn btn-primary lblack" %>
+        <!-- <button class="btn lblack" onclick="window.history.back();">PREVIOUS</button> -->
+        <!-- <input type="submit" class="btn lblack" value="BOOK NOW" /> -->
+      </div>
+
+    <!-- </form> -->
+    <% end %>
+
   </div>
 </div>
+<% end %>

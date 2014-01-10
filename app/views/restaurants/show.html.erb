@@ -137,41 +137,32 @@
 
 <script type="text/javascript">
   $( document ).ready(function() {
-    $("#check").click();
+    // $("#check").click();
   });
 </script>
 
 
 <script type="text/javascript">
   $(document).ready(function(){
-    // $('#timepicker').timepicker();
-    // $('#datepicker').datepicker();
     
-    // $('#timepicker2').timepicker();
-    // $('#datepicker2').datepicker();
-
-    var d = new Date();
-    var curr_date = d.getDate();
-    // Default Date to be set as today until 6pm of current date and after that it should be set as tomorrow
-    if (d.getHours() > 18 ) {
-      curr_date = curr_date + 1;
-    }
-
-    if (curr_date < 10) {
-      curr_date = 0 + "" + curr_date
-    }
-    var curr_month = d.getMonth() + 1; //Months are zero based
-    if (curr_month < 10) {
-      curr_month = 0 + "" + curr_month
-    }
-    var curr_year = d.getFullYear();
-    $('#datepicker').val(curr_month + "/" + curr_date + "/" + curr_year);
-    $('#datepicker2').val(curr_month + "/" + curr_date + "/" + curr_year);
-
-    // Default Time should be set as 7pm
-    $('#timepicker').val("7:00 PM");
-    $('#timepicker2').val("7:00 PM");
-
+    // setup span field wth restaurant name
     $('h4.rbold .pink').html('<%= @restaurant.name %>')
+
+    // setup number of people
+    $('.selectpicker').val('<%= params[:people].present? ? params[:people] : "2" %>')
+
+    // setup hidden helper field
+    $('.restaurant_id').val('<%= @restaurant.id %>')
+
+    openModel('check');
+    // setup error "this time/date/people not available"
+    if ("<%= params[:status] %>" == "false"){
+      $('.error:last').show()
+    }
+    if ("<%= params[:status] %>" == "true"){
+      closeModel('check');
+      openModel('reservation');
+    }
+
   });
 </script>

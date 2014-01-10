@@ -52,14 +52,17 @@
                       <h4 class="rmedium">Book Now :</h4>
                       <% id = user_signed_in? ? "check" : "login" %>
                       <% @inventories[index].each do |time| %>
-                        <button type="button" id="<%= id %>" class="btn btn-primary lblack action">
+                        <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">
                           <%= time %>
-                        </button>
+                        </button> -->
+                        <!-- :date => @date, :time => @time, :people => @people -->
+                        <%= button_to time, book_restaurant_path(:id => restaurant.id, :datepicker => @date, :timepicker => time, :people => @people, :status => "check"), :class => "btn btn-primary lblack action", :method => :get %>
                       <% end %>
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.00PM</button> -->
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.15PM</button> -->
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.30PM</button> -->
-                      <button type="button" id="<%= id %>" class="btn btn-primary lblack action">OTHER</button>
+                      <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">OTHER</button> -->
+                      <%= button_to "OTHER", restaurant, :class => "btn btn-primary lblack action", :method => :get %>
                     </div>
                   </div>
                 </li><!-- News 1 -->

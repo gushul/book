@@ -84,24 +84,8 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-
-        if user_signed_in?
-          Reward.create( user_id: @reservation.user_id, 
-                       reservation_id: @reservation.id, 
-                       points_total: 5*@reservation.party_size, 
-                       points_pending: 5*@reservation.party_size,    
-                       description: "")
-        end
-        
-        if user_signed_in?
-          format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-          format.json { render json: @reservation, status: :created, location: @reservation }
-        else
-          format.html { redirect_to root_url, notice: 'Reservation was successfully created.' }
-        end
-
-        # UserMailer.booking_create(current_user, @reservation).deliver
-        # OwnerMailer.booking_create(@reservation).deliver
+        format.html { redirect_to reservations_path,
+                     notice: 'Reservation was successfully created.' }
       else
         format.html { render action: "new" }
         # format.html { redirect_to new_reservation_path(reservation: params[:reservation]) }

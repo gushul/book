@@ -69,6 +69,7 @@ class Restaurant < ActiveRecord::Base
     joins(:inventories).where('inventories.date = ? AND inventories.start_time = ? AND inventories.quantity_available >= ?', date, "2000-01-01 #{time}:00", people)
   }
 
+
   def self.generate_schedule
     @intervals = []
       24.times do |h| 
@@ -146,6 +147,13 @@ class Restaurant < ActiveRecord::Base
       return time.strftime("%H%M")
     end
     "No inventories today"
+  end
+
+  def check_availability(date, time, people)
+    if self.inventories.where('date = ? AND start_time = ? AND quantity_available >= ?', date, "2000-01-01 #{time}:00", people)
+      return true
+    end
+    false
   end
 
   def it_quantities

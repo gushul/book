@@ -118,6 +118,21 @@ class HomeController < ApplicationController
     end
     
   end
+
+  def check_availability
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    date = params[:datepicker]
+    time = params[:timepicker]
+    people = params[:people]
+    # available = false
+    available = @restaurant.check_availability(date, time, people)
+
+    redirect_to book_restaurant_path(:id => @restaurant.id, 
+      :datepicker => date, 
+      :timepicker => time, 
+      :people => people,
+      :status => available.to_s)
+  end
   
   def calendar
     
