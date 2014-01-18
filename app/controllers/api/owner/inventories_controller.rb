@@ -11,7 +11,7 @@ class Api::Owner::InventoriesController < ApplicationController
     @inventories_json = []
     @inventories.each do |r|
       r = r.as_json
-      %w{created_at updated_at restaurant_id id}.each {|k| r.delete(k)}
+      %w{created_at updated_at restaurant_id id end_time}.each {|k| r.delete(k)}
       @inventories_json << r
     end
     
