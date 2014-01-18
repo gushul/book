@@ -60,11 +60,29 @@ Listing future inventories of owners restaurant
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/inventories
 
+Update inventory
+
+    curl -X POST -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}, "inventory":{"id": 2645, "date":"2014-01-18", "quantity_available":20, "start_time":"2000-01-01T10:00:00Z"} }' http://localhost:3000/api/owner/inventories/update
+
 ### Customer Information
 
 Show/List all Customer information for Restaurant
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/customers_info
+
+### Notes
+
+List notes
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/notes
+
+Adding note
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "note":{"user_id":25, "phone": "", "note": "bla-bla"}}' http://localhost:3000/api/owner/notes/create
+
+Update note
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "note":{"id": 1,"user_id": "", "phone": "024561378", "note": "test"}}' http://localhost:3000/api/owner/notes/update
 
 ### VIPs
 

@@ -38,6 +38,7 @@ class Restaurant < ActiveRecord::Base
   #                 :less_than_or_equal_to    => 5   }
 
   has_many :vips,                :dependent => :destroy
+  has_many :notes,               :dependent => :destroy
   has_many :photos,              :dependent => :destroy
   has_many :reservations,        :dependent => :destroy
   has_many :inventories,         :dependent => :destroy

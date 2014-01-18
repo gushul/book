@@ -1,38 +1,53 @@
 # encoding: utf-8
-class Api::Owner::InventoriesController < ApplicationController
+class Api::Owner::NotesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
   before_filter :check_owner_auth_params
   
-  # POST /inventories.json
+  # POST /notes.json
   def index
-    @inventories = @owner.restaurant.inventories.future
-    @inventories_json = []
-    @inventories.each do |r|
+    @notes = @owner.restaurant.notes
+    @notes_json = []
+    @notes.each do |r|
       r = r.as_json
-      %w{created_at updated_at restaurant_id end_time}.each {|k| r.delete(k)}
-      @inventories_json << r
+      %w{created_at updated_at restaurant_id}.each {|k| r.delete(k)}
+      @notes_json << r
     end
     
     respond_to do |format|
-      unless @inventories.blank?
-        format.json { render json: @inventories_json, status: 200 }
+      unless @notes.blank?
+        format.json { render json: @notes_json, status: 200 }
       else
-        format.json { render json: "No inventories yet", status: 200 }
+        format.json { render json: "No notes yet", status: 200 }
       end
     end
   end
 
-  # POST /inventories/update
-  def update
-    @inventory = @owner.restaurant.inventories.find(params[:inventory][:id])
-    @inventory.end_time = @inventory.start_time + 15.minutes
+  # POST /notes/create
+  def create
+    @note = Note.new(params[:note])
+    @note.restaurant_id = @owner.restaurant.id
 
     respond_to do |format|
-      if @inventory.update_attributes(params[:inventory])
-        format.json { render json: @inventory, status: 200  }
+      if @note.save 
+        format.json { render json: @note, status: 200 }
       else
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
+        format.json { render json: @note.errors, 
+                           status: :unprocessable_entity }
+      end
+    end
+    
+  end
+
+  # POST /notes/update
+  def update
+    @note = @owner.restaurant.notes.find(params[:note][:id])
+
+    respond_to do |format|
+      if @note.update_attributes(params[:note])
+        format.json { render json: @note, status: 200  }
+      else
+        format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
