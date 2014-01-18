@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140108100610) do
+ActiveRecord::Schema.define(:version => 20140118091839) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(:version => 20140108100610) do
     t.datetime "updated_at",                  :null => false
     t.integer  "inventory_template_group_id"
   end
+
+  create_table "notes", :force => true do |t|
+    t.integer "user_id"
+    t.integer "restaurant_id"
+    t.string  "phone"
+    t.text    "note"
+  end
+
+  add_index "notes", ["restaurant_id"], :name => "index_notes_on_restaurant_id"
+  add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
 
   create_table "owners", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
