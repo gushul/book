@@ -52,6 +52,20 @@ class Api::Owner::NotesController < ApplicationController
     end
   end
 
+  # POST /notes/delete
+  def delete
+    @note = @owner.restaurant.notes.where(id: params[:note][:id]).first
+
+    respond_to do |format|
+      if @note.present? && @note.destroy
+        format.json { render json: "Successfully", status: 200  }
+      else
+        format.json { render json: "ERR:Check parameters", 
+                           status: :unprocessable_entity }
+      end
+    end
+  end
+
 private
 
   def check_owner_auth_params

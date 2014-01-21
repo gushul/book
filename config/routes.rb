@@ -37,6 +37,7 @@ AuthApp::Application.routes.draw do
       post "/notes"         => "notes#index"
       post "/notes/create"  => "notes#create"
       post "/notes/update"  => "notes#update"
+      post "/notes/delete"  => "notes#delete"
       
       post "/customers_info"       => "customer_informations#index"
       

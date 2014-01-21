@@ -32,7 +32,7 @@ class Api::Owner::VipsController < ApplicationController
       if @vip.present? && @vip.destroy
         format.json { render json: "Successfully", status: 200 }
       else
-        format.json { render json: "Check parameters", 
+        format.json { render json: "ERR:Check parameters", 
                            status: :unprocessable_entity }
       end
     end
