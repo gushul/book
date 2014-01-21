@@ -5,45 +5,80 @@
       <%= render :partial => "/shared/setting" %>
       <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'reservation' }%>
 
-    <div class="col-sm-8 col-sm-12">
+    <div class="col-sm-9 col-lg-9">
       
     <% end %> 
 
-      <div class="storyContent">
+      <div class="storyContent setting">
 
         <div class="header">
           <h3 class="rmedium">Reservation</h3>
         </div>
         <div class="content"> 
 
+        <div class="col-sm-12">
+          <div class="col-sm-5">
+          <div class="date"><i class="glyphicon glyphicon-calendar btn"></i>
+            <input type="text" id="datepicker" name="datepicker" class="rregular form-control" style="width:auto;display:inline;">
+            <script type="text/javascript">
+              $('#datepicker').datepicker();
+            </script>
+          </div>
+        </div>
+        <div class="col-sm-3" style="padding:10px 0;">
+          <span><%= pluralize(@reservations.size, 'Reservation') %></span> <span>45 Covers</span>
+        </div>
+        <div class="pull-right actions">
+          <%= link_to 'NEW RESERVATION', new_reservation_path, class: "btn btn-primary action" if owner_signed_in? or user_signed_in? %>
+        </div>
+        </div>
+
           <% unless @reservations.blank? %>
-            <table  class="table table-striped table-bordered table-hover">
+            <table  class="table table-striped table-hover" border="0">
               <thead>
                 <tr>
-                  <%= content_tag :th, "User"       unless user_signed_in?  %>
-                  <%= content_tag :th, "Restaurant" unless owner_signed_in?  %>
-                  <th>Date</th>
-                  <th>Start time</th>
-                  <th>End time</th>
-                  <th>Party size</th>
-                  <th>Table</th>
+                  <th>DATE</th>
+                  <th>TIME</th>
+                  <%= content_tag :th, "NAME"       unless user_signed_in?  %>
+                  <%= content_tag :th, "RESTAURANT" unless owner_signed_in?  %>
+                  <th>SIZE</th>
+                  <th>STATUS</th>
+                  <th>FLAG</th>
+                  <th>REF#</th>
+                  <th>NOTE</th>
+                  <th></th>
+                  <!-- <th>Start time</th> -->
+                  <!-- <th>End time</th> -->
+                  <!-- <th>Party size</th> -->
+                  <!-- <th>Table</th> -->
                   <!-- <th>Active</th> -->
                   <!-- <th>Edit Active</th> -->
-                  <% if owner_signed_in? %>
-                    <th>No Show</th>
+                  <%# if owner_signed_in? %>
+                    <!-- <th>No Show</th>
                     <th>Party Arrived</th>
-                    <th>Remove</th>
-                  <% else %>
-                    <th></th>
-                  <% end %>
-                  <th></th>
-                  <th></th>
-                  <th></th>
+                    <th>Remove</th> -->
+                  <%# else %>
+                    <!-- <th></th> -->
+                  <%# end %>
+                  <!-- <th></th> -->
+                  <!-- <th></th> -->
+                  <!-- <th></th> -->
                 </tr>
               </thead>
 
               <% @reservations.each do |reservation| %>
                 <tr>
+                  <td><%= reservation.date_format %></td>
+                  <td>
+                    <% if owner_signed_in? %>
+                      <%= content_tag :div, :class => 'bip_reservation_start_time' do %>
+                        <%= best_in_place reservation, :start_time %>
+                        <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
+                      <% end %> 
+                    <% else %>
+                      <%= reservation.start_time %>
+                    <% end %> 
+                  </td>
                   <% unless user_signed_in? %>
                     <% if reservation.user %>
                       <td>
@@ -58,61 +93,61 @@
                     <% end %>
                   <% end %>
                   <%= content_tag :td, reservation.restaurant.name unless owner_signed_in?  %>
-                  <td><%= reservation.date %></td>
-                  <td>
-                    <% if owner_signed_in? %>
-                      <%= content_tag :div, :class => 'bip_reservation_start_time' do %>
-                        <%= best_in_place reservation, :start_time %>
-                        <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
-                      <% end %> 
-                    <% else %>
-                      <%= reservation.start_time %>
-                    <% end %> 
-                  </td>
-                  <td>
-                    <% if owner_signed_in? %>
-                      <%= content_tag :div, :class => 'bip_reservation_end_time' do %>
-                        <%= best_in_place reservation, :end_time %>
-                      <% end %> 
-                    <% else %>
-                      <%= reservation.end_time %></td>
-                    <% end %> 
+                  <!-- <td>
+                    <%# if owner_signed_in? %>
+                      <%#= content_tag :div, :class => 'bip_reservation_end_time' do %>
+                        <%#= best_in_place reservation, :end_time %>
+                      <%# end %> 
+                    <%# else %>
+                      <%#= reservation.end_time %>
+                    <%# end %> 
+                  </td> -->
                   <td>
                     <%= content_tag :div, :class => 'bip_reservation_party_size' do %>
                       <%= best_in_place reservation, :party_size %>
                     <% end %>
                   </td>
-                  <td>
-                  <% if owner_signed_in? %>
-                      <%= content_tag :div, :class => 'bip_reservation_table' do %>
-                        <%= best_in_place reservation, :table, :type => :textarea, :display_with => :truncate, :helper_options => { :length => 80 }, :class => "bip_reservation_table" %>
-                      <% end %>
-                  <% else %>
-                      <%= truncate(reservation.table, length: 100, omission: '...') %>
-                  <% end %> 
-                  </td>
+                  <!-- <td>
+                  <%# if owner_signed_in? %>
+                      <%#= content_tag :div, :class => 'bip_reservation_table' do %>
+                        <%#= best_in_place reservation, :table, :type => :textarea, :display_with => :truncate, :helper_options => { :length => 80 }, :class => "bip_reservation_table" %>
+                      <%# end %>
+                  <%# else %>
+                      <%#= truncate(reservation.table, length: 100, omission: '...') %>
+                  <%# end %> 
+                  </td> -->
                   <!-- <td><%= reservation.active %></td> -->
-                  <% if owner_signed_in? %>
+                 <!--  <%# if owner_signed_in? %>
                     <td>
-                      <%= link_to "#{bool_to_activity(reservation.no_show)}", toggle_reservation_url(reservation, :arg => "no_show"), :method => :put, :class => "btn"%>
+                      <%#= link_to "#{bool_to_activity(reservation.no_show)}", toggle_reservation_url(reservation, :arg => "no_show"), :method => :put, :class => "btn"%>
                     </td>
                     <td>
-                      <%= link_to "#{bool_to_activity(reservation.arrived)}", toggle_reservation_url(reservation, :arg => "arrived"), :method => :put, :class => "btn"%>
+                      <%#= link_to "#{bool_to_activity(reservation.arrived)}", toggle_reservation_url(reservation, :arg => "arrived"), :method => :put, :class => "btn"%>
                     </td>
                     <td>
-                      <%= link_to "#{bool_to_activity(reservation.active)}", toggle_reservation_url(reservation, :arg => "active"), :method => :put, :class => "btn"%>
+                      <%#= link_to "#{bool_to_activity(reservation.active)}", toggle_reservation_url(reservation, :arg => "active"), :method => :put, :class => "btn"%>
                     </td>
-                  <% else %>
+                  <%# else %>
                     <td>
-                      <%= link_to "Switch to #{bool_to_activity(oppsite_bool(reservation.active))}", toggle_reservation_url(reservation, :arg => "active"), :method => :put, :class => "btn"%>
+                      <%#= link_to "Switch to #{bool_to_activity(oppsite_bool(reservation.active))}", toggle_reservation_url(reservation, :arg => "active"), :method => :put, :class => "btn"%>
                     </td>
-                  <% end %>
-                  <td>
-                    <%= link_to 'Show', reservation %><br />
-                    <%= link_to 'View Reward', reservation.reward %>
+                  <%# end %> -->
+                  <!-- <td>
+                    <%#= link_to 'Show', reservation %><br />
+                    <%#= link_to 'View Reward', reservation.reward %>
+                  </td> -->
+                  <td width="250px">
+                    <button class="btn btn-primary">SHOW</button>
+                    <button class="btn btn-primary">NO SHOW</button>
                   </td>
-                  <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-                  <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td><%= vip_or_not(reservation.try(:user),reservation.try(:name),reservation.try(:phone),reservation.restaurant) %></td>
+                  <td><%= reservation.id %></td>
+                  <td>NOTE</td>
+                  <td width="80px">
+                    <%= link_to '<i class="glyphicon glyphicon-search action" id="viewReservation"></i>'.html_safe, reservation %>
+                    <%= link_to '<i class="glyphicon glyphicon-edit action" id="viewReservation"></i>'.html_safe, edit_reservation_path(reservation) %>
+                    <%= link_to '<i class="glyphicon glyphicon-remove action" id="viewReservation"></i>'.html_safe, reservation, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </td>
                 </tr>
               <% end %>
             </table>
@@ -122,10 +157,10 @@
           <div class="navigation">
             <%= paginate @reservations, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
           </div>
-          <br />
-          <%= link_to 'New Reservation', new_reservation_path if owner_signed_in? or user_signed_in? %>
+          <!-- <br /> -->
+          <%#= link_to 'New Reservation', new_reservation_path if owner_signed_in? or user_signed_in? %>
         </div>
-
+       
       <% if owner_signed_in? %>
       </div>
       <% end %> 

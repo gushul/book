@@ -2,17 +2,17 @@
   <div class="row">
     <%= render :partial => "/shared/setting" %>
     <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'my_restaurant' }%>
-    <div class="col-sm-8 col-sm-8">
+    <div class="col-sm-9 col-lg-9">
       <div class="storyContent setting">
         <div class="header">
-          <h3 class="rmedium">Restaurants</h3>
+          <h3 class="rmedium">My Restaurant</h3>
         </div>
         <div class="content">
-          <h4>Editing Restaurant</h4>
+          <!-- <h4>Editing Restaurant</h4> -->
 
           <%= render 'form' %>
 
-          <%= link_to 'Show', @restaurant %>
+          <%#= link_to 'Show', @restaurant, class: "btn btn-primary" %>
           <%#= link_to 'Back', restaurants_path %>
         </div>
       </div>

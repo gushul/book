@@ -1,5 +1,6 @@
 <%= simple_form_for(@reservation, html: { class: "form-horizontal"}) do |f| %>
-  
+  <div class="col-sm-12 col-lg-12">
+
   <% unless user_signed_in? %>
     <%= f.input :name,  label: "Name",  :required => :true %>
     <%= f.input :email, label: "Email", :required => :true %>
@@ -28,6 +29,9 @@
 
   <div class="actions">
     <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to 'Back', reservations_path, class: "btn btn-primary"%>
+  </div>
+
   </div>
  
 <% end %>

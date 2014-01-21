@@ -41,6 +41,13 @@ class User < ActiveRecord::Base
     end
   end 
 
+  def is_vip?(restaurant)
+    if Vip.where(user_id: id).where(restaurant_id: restaurant.id).first.present?
+      return true
+    end
+    false
+  end
+
 private
 
   def send_verification_code_via_email

@@ -1,11 +1,20 @@
 <!--  @restaurant.photos.build unless @restaurant.photos.blank? %> -->
 <%= simple_form_for([@restaurant], html: { class: "form-horizontal"}) do |f| %>
-  
-  <%= f.input :name, label: "Name" %>
+  <div class="col-sm-12 col-lg-12">
 
-  <%= f.input :days_in_advance, label: "Days out allow bookings" %>
-  <%= f.input :min_booking_time, collection: [:"0", :"15", :"30", :"45", :"60", :"90", :"120", :"180", :"1440"], priority: [ :"15" ], include_blank: false ,label: "Minutes in advance bookings close" %>
-  <%= f.input :res_duration, collection: [:"30", :"45", :"60", :"75", :"90", :"105"], priority: [ :"30" ], include_blank: false, label: "Duration of each booking" %>
+  <%= f.input :name, label: "Name: <i>#{@restaurant.name}</i>".html_safe %>
+
+  <div class="row" style="margin-left: -15px;">
+    <div class="col-sm-4 col-lg-4">
+    <%= f.input :days_in_advance, label: "Days out allow bookings" %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+    <%= f.input :min_booking_time, collection: [:"0", :"15", :"30", :"45", :"60", :"90", :"120", :"180", :"1440"], priority: [ :"15" ], include_blank: false ,label: "Minutes in advance bookings close" %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+    <%= f.input :res_duration, collection: [:"30", :"45", :"60", :"75", :"90", :"105"], priority: [ :"30" ], include_blank: false, label: "Duration of each booking" %>
+    </div>
+  </div>
 
   <%#= f.input :price, label: "Price" %>
   <%= f.input :largest_table, label: "Largest Table"%>
@@ -16,22 +25,59 @@
   <%= f.input :phone, label: "Phone" %>
   <%= f.input :website, label: "Website" %>
 
-  <%= f.input :misc, label: "Misc", as: :text, input_html: { rows: "15", class: "text_area_for_misc"} %>
- 
-  <h4>Restaurant tags</h4>
-  <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where("title != ?", "Any"), :label => "", :item_wrapper_class => 'inline' %>
+  <%= f.input :misc, label: "Misc", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
+
+  <hr/>
+  <h3 class="rmedium">Restaurant Tags</h3>
+  <div class="row" style="margin-left: -15px;">
+    <div class="col-sm-4 col-lg-4">
+    <h4 class="rmedium" style="font-weight: bold; margin-left:40px;">Location</h4>
+    <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where('title LIKE ?', 'Location%'), :label => "", :item_wrapper_class => 'checkbox_container' %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+    <h4 class="rmedium" style="font-weight: bold; margin-left:40px;">Cuisines</h4>
+    <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where('title LIKE ?', 'Cuisine%'), :label => "", :item_wrapper_class => 'checkbox_container' %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+    <h4 class="rmedium" style="font-weight: bold; margin-left:40px;">Other</h4>
+    <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where('title NOT LIKE ? AND title NOT LIKE ?', 'Cuisine%', 'Location%'), :label => "", :item_wrapper_class => 'checkbox_container' %>
+    </div>
+  </div>
+
   <!-- item_wrapper_class => 'checkbox_container'  -->
 
-  <h4>Schedule</h4>
-  <%= f.input :mon, :collection => InventoryTemplateGroup.all %>
-  <%= f.input :tue, :collection => InventoryTemplateGroup.all %>
-  <%= f.input :wed, :collection => InventoryTemplateGroup.all %>
-  <%= f.input :thu, :collection => InventoryTemplateGroup.all %>
-  <%= f.input :fri, :collection => InventoryTemplateGroup.all %>
-  <%= f.input :sat, :collection => InventoryTemplateGroup.all %>
-  <%= f.input :sun, :collection => InventoryTemplateGroup.all %>
-  
-  <h4>Photos</h4>
+
+  <hr/>
+  <!-- TODO: refactor -->
+  <h3 class="rmedium">Schedule</h3>
+  <div class="row" style="margin-left: -15px;">
+    <div class="col-sm-3 col-lg-3">
+    <%= f.input :mon, collection: @restaurant.inventory_template_groups %>
+    </div>
+    <div class="col-sm-3 col-lg-3">
+    <%= f.input :tue, collection: @restaurant.inventory_template_groups %>
+    </div>
+    <div class="col-sm-3 col-lg-3">
+    <%= f.input :wed, collection: @restaurant.inventory_template_groups %>
+    </div>
+    <div class="col-sm-3 col-lg-3">
+    <%= f.input :thu, collection: @restaurant.inventory_template_groups %>
+    </div>
+  </div>
+  <div class="row" style="margin-left: -15px;">
+    <div class="col-sm-3 col-lg-3">
+    <%= f.input :fri, collection: @restaurant.inventory_template_groups %>
+    </div>
+    <div class="col-sm-3 col-lg-3">
+    <%= f.input :sat, collection: @restaurant.inventory_template_groups %>
+    </div>
+    <div class="col-sm-3 col-lg-3">
+    <%= f.input :sun, collection: @restaurant.inventory_template_groups %>
+    </div>
+  </div>
+    
+  <hr/>
+  <h3 class="rmedium">Images</h3>
     <%# unless @restaurant.photos.blank? %>
       <%# @restaurant.photos.each do |pic| %>
         <%# unless pic ==  %>
@@ -58,7 +104,10 @@
   <% end %>
 
   <div class="actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= f.button :submit, "UPDATE", class: "btn btn-primary" %>
+    <%= link_to 'SHOW', @restaurant, class: "btn btn-primary" %>
+  </div>
+
   </div>
    
 <% end %> 

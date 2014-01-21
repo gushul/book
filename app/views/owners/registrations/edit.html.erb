@@ -2,22 +2,22 @@
   <div class="row">
     <%= render :partial => "/shared/setting" %>
     <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'account_profile' }%>
-    <div class="col-sm-8 col-sm-8">
+    <div class="col-sm-9 col-lg-9">
       <div class="storyContent setting">
         <div class="header">
           <h3 class="rmedium">Account Profile</h3>
         </div>
         <div class="content">
         
-          <h4>Edit <%= resource_name.to_s.humanize %></h4>
+          <!-- <h4>Edit <%= resource_name.to_s.humanize %></h4> -->
 
           <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put } , html: { class: "form-horizontal"}) do |f| %>
             <%= f.error_notification %>
 
             <div class="form-inputs">
-              <%= f.input :email, :required => true, :autofocus => true %>
-              <%= f.input :owner_name, :required => true %>
-              <%= f.input :phone, :required => true %>
+              <%= f.input :owner_name, label: "Name: <i>#{resource.owner_name}</i>".html_safe, :required => true, :autofocus => true %>
+              <%= f.input :email, label: "Email: <i>#{resource.email}</i>".html_safe, :required => true %>
+              <%= f.input :phone, label: "Phone: <i>#{resource.phone}</i>".html_safe, :required => true %>
 
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                 <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
@@ -28,14 +28,14 @@
               <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
             </div>
 
-            <div class="form-actions">
-              <%= f.button :submit, "Update", :class => 'btn btn-success btn-large'  %>
+            <div class="actions">
+              <%= f.button :submit, "Update", :class => 'btn btn-primary'  %>
             </div>
           <% end %>
 
-          <h4>Cancel my account</h4>
-          <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
-          <%= link_to "Back", :back %>
+          <!-- <h4>Cancel my account</h4>
+          <p>Unhappy? <%#= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+          <%#= link_to "Back", :back %> -->
           
         </div>
       </div>

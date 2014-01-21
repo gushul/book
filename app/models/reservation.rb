@@ -55,6 +55,9 @@ class Reservation < ActiveRecord::Base
     self[:end_time] = Time.zone.parse(value.to_s).utc 
   end
 
+  def date_format 
+    date.to_time.strftime('%m/%d/%Y') unless date.blank?
+  end
 
 private
 
