@@ -20,6 +20,25 @@ class Api::Owner::VipsController < ApplicationController
     
   end
 
+   # POST /delete_vip.json
+  def delete
+    if params[:vip][:user_id].present?
+      @vip = Vip.where(:user_id => params[:vip][:user_id]).where(:restaurant_id => @owner.restaurant.id).first
+    else
+      @vip = Vip.where(:name => params[:vip][:name]).where(:phone => params[:vip][:phone]).where(:restaurant_id => @owner.restaurant.id).first
+    end
+
+    respond_to do |format|
+      if @vip.present? && @vip.destroy
+        format.json { render json: "Successfully", status: 200 }
+      else
+        format.json { render json: "Check parameters", 
+                           status: :unprocessable_entity }
+      end
+    end
+    
+  end
+
 private
 
   def check_owner_auth_params

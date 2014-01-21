@@ -90,7 +90,13 @@ Adding VIPs
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "vip":{"user_id":25}}' http://localhost:3000/api/owner/create_vip
 
-    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "vip":{"name":"Edmund", "phone":"023165479"}}' http://localhost:3000/api/owner/create_vip
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "vip":{"name":"Ed111mund", "phone":"029165479"}}' http://localhost:3000/api/owner/create_vip
+
+Delete VIP
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "vip":{"user_id":57}}' http://localhost:3000/api/owner/delete_vip
+
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "vip":{"name":"sample user 1", "phone":"0213456789"}}' http://localhost:3000/api/owner/delete_vip
 
 ### Rewards
 

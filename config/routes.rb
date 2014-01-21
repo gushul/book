@@ -41,6 +41,7 @@ AuthApp::Application.routes.draw do
       post "/customers_info"       => "customer_informations#index"
       
       post "/create_vip"           => "vips#create"
+      post "/delete_vip"           => "vips#delete"
 
       post "/reservations"         => "reservations#index"
       post "/reservation"          => "reservations#show"
