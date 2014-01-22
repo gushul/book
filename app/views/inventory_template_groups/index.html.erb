@@ -8,16 +8,21 @@
           <h3 class="rmedium">Inventory Template Groups</h3>
         </div>
         <div class="content">
-        
+
+          <div class="options">
+              <div class="pull-right actions">
+                <%= link_to "New Inventory Template Group".upcase, new_inventory_template_group_path, class: "btn btn-primary action" %>
+              </div>
+          </div>
+
+
           <% unless @inventory_template_groups.blank? %>
-            <table  class="table table-striped table-bordered table-hover">
+            <table  class="table table-striped table-hover">
               <thead>
                 <tr>
                   <!-- <th>Restaurant</th> -->
-                  <th>Name</th>
-                  <th>Primary</th>
-                  <th></th>
-                  <th></th>
+                  <th>NAME</th>
+                  <th>PRIMARY</th>
                   <th></th>
                 </tr>
               </thead>
@@ -26,9 +31,13 @@
                   <!-- <td><%#= itg.restaurant.name %></td> -->
                   <td><%= itg.name %></td>
                   <td><%= itg.primary %></td>
-                  <td><%= link_to 'Show', itg %></td>
-                  <td><%= link_to 'Edit', edit_inventory_template_group_path(itg) %></td>
-                  <td><%= link_to 'Destroy', itg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td>
+                    <div class="pull-right">
+                    <%= link_to '<i class="glyphicon glyphicon-search action" id="viewInventory"></i>'.html_safe, itg %>
+                    <%= link_to '<i class="glyphicon glyphicon-edit action" id="editInventory"></i>'.html_safe, edit_inventory_template_group_path(itg) %>
+                    <%= link_to '<i class="glyphicon glyphicon-remove action" id="deleteInventory"></i>'.html_safe, itg, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </div>
+                  </td>
                 </tr>
               <% end %>
             </table>
@@ -39,18 +48,36 @@
             <%= paginate @inventory_template_groups, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
           </div>
           <br />
-          <%= link_to 'New Inventory Template Group', new_inventory_template_group_path %>
+          
 
-          <hr/>
 
 <h3>Inventory Templates</h3>
+<hr/>
 
-<table class="table table-striped table-bordered table-hover" style="float:left;">
+<div class="options">
+  <div class="pull-left">
+    <!-- <div class="date"><i class="glyphicon glyphicon-calendar"></i>
+      <input type="text" id="datepicker" name="datepicker" class="rregular form-control"  style="width:auto;display:inline;">
+      <script type="text/javascript">
+        $('#datepicker').datepicker();
+      </script>
+    </div> -->
+  </div>
+    <div class="pull-right actions">
+      <%= link_to "New Inventory Template".upcase, new_inventory_template_path, class: "btn btn-primary action" %>
+    </div>
+  </div>
+</div>
+
+
+
+
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
       <th></th>
       <% get_intervals.each_with_index do |interval, index| %>
-        <% if index%4 == 0 and interval != "24:00" %>
+        <% if index%4 == 0 and interval < "12:00" %>
           <th><%= interval.slice(0..1) %></th>
         <% end %>
       <% end %>
@@ -59,7 +86,7 @@
 
   <tr>
     <td style="font-weight:bold;">00</td>
-    <% 24.times do |i| %>
+    <% 12.times do |i| %>
       <td>
         <% @inventory_templates1.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
@@ -71,7 +98,7 @@
   </tr>
   <tr>
     <td style="font-weight:bold;">15</td>
-    <% 24.times do |i| %>
+    <% 12.times do |i| %>
       <td>
         <% @inventory_templates2.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
@@ -83,7 +110,7 @@
   </tr>
   <tr>
     <td style="font-weight:bold;">30</td>
-    <% 24.times do |i| %>
+    <% 12.times do |i| %>
       <td>
         <% @inventory_templates3.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
@@ -95,7 +122,7 @@
   </tr>
   <tr>
     <td style="font-weight:bold;">45</td>
-   <% 24.times do |i| %>
+   <% 12.times do |i| %>
       <td>
         <% @inventory_templates4.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
@@ -106,9 +133,75 @@
     <% end %>
   </tr>
 </table>
-<br />
-<%= link_to 'New Inventory Template', new_inventory_template_path %>
-<br />
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <% get_intervals.each_with_index do |interval, index| %>
+        <% if index%4 == 0 && interval > "11:45" && interval != "24:00"%>
+          <th><%= interval.slice(0..1) %></th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tr>
+    <td style="font-weight:bold;">00</td>
+    <% 12.times do |i| %>
+      <% i = i + 12 %>
+      <td>
+        <% @inventory_templates1.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <td style="font-weight:bold;">15</td>
+    <% 12.times do |i| %>
+      <% i = i + 12 %>
+      <td>
+        <% @inventory_templates2.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <td style="font-weight:bold;">30</td>
+    <% 12.times do |i| %>
+      <% i = i + 12 %>
+      <td>
+        <% @inventory_templates3.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <td style="font-weight:bold;">45</td>
+   <% 12.times do |i| %>
+      <% i = i + 12 %>
+      <td>
+        <% @inventory_templates4.each_with_index do |it, ind| %>
+          <% if it.start_time_hour == i %>
+            <%= link_to it.quantity_available, it %>
+          <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+
+
+
 
 
         </div>

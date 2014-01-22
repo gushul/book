@@ -34,5 +34,9 @@ class Inventory < ActiveRecord::Base
   def start_time_hour
     start_time.strftime("%H").to_i
   end
+
+  def date_format 
+    date.to_time.strftime('%m/%d/%Y') unless date.blank?
+  end
   
 end
