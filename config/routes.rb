@@ -34,15 +34,18 @@ AuthApp::Application.routes.draw do
       post "/inventories"          => "inventories#index"
       post "/inventories/update"   => "inventories#update"
 
-      post "/notes"         => "notes#index"
-      post "/notes/create"  => "notes#create"
-      post "/notes/update"  => "notes#update"
-      post "/notes/delete"  => "notes#delete"
+      post "/notes"                => "notes#index"
+      post "/notes/create"         => "notes#create"
+      post "/notes/update"         => "notes#update"
+      post "/notes/delete"         => "notes#delete"
       
       post "/customers_info"       => "customer_informations#index"
       
       post "/create_vip"           => "vips#create"
       post "/delete_vip"           => "vips#delete"
+
+      post "/tags/create"          => "tags#create"
+      post "/tags/delete"          => "tags#delete"
 
       post "/reservations"         => "reservations#index"
       post "/reservation"          => "reservations#show"
