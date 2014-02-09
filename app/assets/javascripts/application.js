@@ -11,8 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require twitter/bootstrap
 //= require jquery_ujs
+//= require jquery.ui.autocomplete
+//= require twitter/bootstrap
+//= require autocomplete-rails
 //= require best_in_place
 //= require_tree .
 

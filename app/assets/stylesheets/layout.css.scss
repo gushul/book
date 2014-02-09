@@ -118,3 +118,11 @@ div.language a.red{
   }
 
  }
+
+.ui-autocomplete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
+  z-index: 9999!important;
+}

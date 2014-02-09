@@ -17,15 +17,18 @@
           <%= link_to t("restaurants"), all_restaurants_path, class: "dropdown-toggle lblack" %>
         </li>
       </ul>
-      <form method="get" action="<%= search_path %>" class="navbar-form navbar-left">
+
+      <%= form_tag('/search', method: "get", :class => 'navbar-form navbar-left') do %>
           <div class="input-group input-group-sm">
-            <input type="text" id="srch-term" name="srch-term" placeholder="Search by restaurants, location or cuisine" class="form-control llitalic">
-            <div class="input-group-btn">
-              <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
+            <%= autocomplete_field_tag 'name', '', home_autocomplete_restaurant_name_path, id: 'autocomplete_name_field', :id_element => '#redirect_elem', class: "form-control llitalic" %>
+              <div class="input-group-btn">
+                <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                  <i class="glyphicon glyphicon-search"></i>                
+                <% end %>
+              </div>
           </div>
-      </form>
-      
+      <% end %>
+
         <ul class="nav navbar-nav navbar-right">
           <% if owner_signed_in? == false && user_signed_in? == false %> 
             <li>
@@ -87,3 +90,11 @@
     </nav>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#autocomplete_name_field').bind('railsAutocomplete.select', function(event, data){
+    // alert(data.item.id);
+    url = "<%= restaurant_path(0) %>";
+    window.location = url.replace("restaurants/0", "restaurants/" + data.item.id);
+  });
+</script>

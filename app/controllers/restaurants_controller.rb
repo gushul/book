@@ -2,7 +2,7 @@
 class RestaurantsController < ApplicationController
   before_filter :authenticate_owner!, 
                 except: [:index, :index_all, :show]
-  
+
   # GET /restaurants
   # GET /restaurants.json
   def index

@@ -15,6 +15,9 @@ gem "geocoder"
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 # gem 'acts-as-taggable-on'
+gem 'rails3-jquery-autocomplete'
+gem 'jquery-ui-rails'
+
 gem 'mysql2'
 
 gem 'thin'

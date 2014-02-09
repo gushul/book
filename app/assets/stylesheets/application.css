@@ -17,6 +17,7 @@
  *= require restaurent-detail
  *= require layout
  *= require reservations
+ *= require jquery.ui.autocomplete
  */
 
 

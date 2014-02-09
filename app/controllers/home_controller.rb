@@ -1,5 +1,6 @@
 # encoding: utf-8
 class HomeController < ApplicationController
+  autocomplete :restaurant, :name
 
   def landing
     @home = true
@@ -28,6 +29,7 @@ class HomeController < ApplicationController
     end
 
     @restaurants = []
+    @restaurant = Restaurant.new
     arr = []
     # when will be many restaurants need to limit records and rnd offset 
     # rnd = rand(Restaurant.count-2)
@@ -42,8 +44,8 @@ class HomeController < ApplicationController
   # GET /search/:search_term
   def search
     @search_terms = []
-    if !params['srch-term'].blank?
-      @search_results_full = Restaurant.where("name like ?", "%#{params['srch-term']}%")
+    if !params['name'].blank?
+      @search_results_full = Restaurant.where("name like ?", "%#{params['name']}%")
       @search_results = @search_results_full.page(params[:page])
     elsif !params['filter'].blank? && !params["tags"].blank? 
       restaurants_array = JSON.parse(params['filter'])
