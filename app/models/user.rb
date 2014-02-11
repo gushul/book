@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   before_create :username_setup
   before_create :set_verify_code
   after_create  :send_verification_code_via_email
+  after_create  :send_verification_code_via_sms
 
   has_many :reservations, :dependent => :destroy
   has_many :rewards,      :dependent => :destroy
@@ -54,6 +55,16 @@ private
     unless ['development'].include?(Rails.env)
       UserMailer.registration_confirmation(self.email, self.verify_code).deliver
     end
+  end
+
+  def send_verification_code_via_sms
+    require 'net/https'
+    require 'open-uri'
+    uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+6600000000&to=+#{self.phone}&text=#{self.verify_code}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.get(uri.request_uri)
   end
 
   def set_verify_code
