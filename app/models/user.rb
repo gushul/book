@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
                   :username, :phone, :verify_code, :verified
 
   validates :phone, :presence => true, :uniqueness => true
-  validate  :phone_number_validation, :if => "phone?"  
+  # validate  :phone_number_validation, :if => "phone?"  
 
   before_create :username_setup
   before_create :set_verify_code
