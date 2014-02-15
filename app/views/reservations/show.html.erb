@@ -34,7 +34,11 @@
 
           <p>
             <b>Date:</b>
-            <%= @reservation.date_format %>
+              <% if user_signed_in? %>
+                <%= @reservation.date_format_user %>
+              <% else %> 
+                <%= @reservation.date_format %>
+              <% end %> 
           </p>
 
           <p>

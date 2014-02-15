@@ -62,6 +62,10 @@ class Reservation < ActiveRecord::Base
     date.to_time.strftime('%m/%d/%Y') unless date.blank?
   end
 
+  def date_format_user
+    date.to_time.strftime('%d %b %Y') unless date.blank?
+  end
+
 private
 
   def party_size_available_validation

@@ -68,7 +68,13 @@
 
               <% @reservations.each do |reservation| %>
                 <tr>
-                  <td><%= reservation.date_format %></td>
+                  <td>
+                    <% if user_signed_in? %>
+                      <%= reservation.date_format_user %>
+                    <% else %> 
+                      <%= reservation.date_format %>
+                    <% end %> 
+                  </td>
                   <td>
                     <% if owner_signed_in? %>
                       <%= content_tag :div, :class => 'bip_reservation_start_time' do %>
