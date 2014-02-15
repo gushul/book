@@ -43,6 +43,7 @@
                   <%= content_tag :th, "RESTAURANT" unless owner_signed_in?  %>
                   <th>SIZE</th>
                   <th>STATUS</th>
+                  <!-- <th>ACTIVE?</th> -->
                   <th>FLAG</th>
                   <th>REF#</th>
                   <th>NOTE</th>
@@ -142,17 +143,22 @@
                     <%#= link_to 'Show', reservation %><br />
                     <%#= link_to 'View Reward', reservation.reward %>
                   </td> -->
-                  <td width="250px">
+                  <td width="215px">
                     <button class="btn btn-primary">SHOW</button>
                     <button class="btn btn-primary">NO SHOW</button>
                   </td>
+                  <!-- <td><%#= reservation.active.to_s.upcase %></td> -->
                   <td><%= vip_or_not(reservation.try(:user),reservation.try(:name),reservation.try(:phone),reservation.restaurant) %></td>
                   <td><%= reservation.id %></td>
                   <td>NOTE</td>
                   <td width="80px">
                     <%= link_to '<i class="glyphicon glyphicon-search action" id="viewReservation"></i>'.html_safe, reservation %>
                     <%= link_to '<i class="glyphicon glyphicon-edit action" id="viewReservation"></i>'.html_safe, edit_reservation_path(reservation) %>
-                    <%= link_to '<i class="glyphicon glyphicon-remove action" id="viewReservation"></i>'.html_safe, reservation, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <% if reservation.active %>
+                      <%= link_to '<i class="glyphicon glyphicon-remove action" id="viewReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                    <% else %>
+                      <%= link_to '<i class="glyphicon glyphicon-repeat action" id="viewReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>

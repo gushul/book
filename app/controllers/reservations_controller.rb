@@ -124,9 +124,11 @@ class ReservationsController < ApplicationController
   def toggle
     @reservation = Reservation.find(params[:id])
     @reservation.toggle!(params[:arg].to_sym)
+    changes = @reservation.send(params[:arg].to_sym)
 
     respond_to do |format|
-      format.html { redirect_to reservations_path, notice: "Reservation in #{@reservation.restaurant.name} at #{@reservation.date} changed." }
+      format.html { redirect_to reservations_path, 
+                    notice: "Reservation in #{@reservation.restaurant.name} at #{@reservation.date}: '#{params[:arg]}' changed to '#{changes}'." }
       format.js
     end
   end
