@@ -9,7 +9,7 @@
 
     <div class="form-inputs" style="width:300px;">
       <%= f.input :email, :required => true, :autofocus => true, :input_html => { :value => s.blank? ? "" : s["email"] }  %>
-      <%= f.input :username, :required => true, :input_html => { :value => s.blank? ? "" : s["username"]  }  %>
+      <%= f.input :username, label: 'Your Name', :required => true, :input_html => { :value => s.blank? ? "" : s["username"]  }  %>
       <%= f.input :phone, :required => true %>
       <%= f.input :password, :required => true %>
       <%= f.input :password_confirmation, :required => true %>

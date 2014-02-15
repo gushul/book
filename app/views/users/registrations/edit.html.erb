@@ -7,7 +7,7 @@
 
   <div class="form-inputs" style="width:400px;">
     <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :username, :required => true %>
+    <%= f.input :username, label: 'Your Name', :required => true %>
     <%= f.input :phone, :required => true%>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
