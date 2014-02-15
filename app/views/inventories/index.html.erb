@@ -10,10 +10,20 @@
         </div>
         <div class="content">
 
-          <div class="pull-right actions">
-            <%= link_to 'NEW INVENTORY', new_inventory_path, class: "btn btn-primary action"  %>
+          
+          <div class="col-sm-12">
+            <div class="col-sm-5">
+              <div class="date"><i class="glyphicon glyphicon-calendar btn"></i>
+                <input type="text" id="datepicker" name="datepicker" class="rregular form-control" style="width:auto;display:inline;">
+                <script type="text/javascript">
+                  $('#datepicker').datepicker();
+                </script>
+              </div>
+            </div>
+            <div class="pull-right actions">
+              <%= link_to 'NEW INVENTORY', new_inventory_path, class: "btn btn-primary action"  %>
+            </div>
           </div>
-
 
 <!-- 
 <div id="reservations">
@@ -126,7 +136,7 @@
               <% end %>
             </table>
           <% else %>
-            There no inventories now
+            There no inventories for <%= @date.to_time.strftime('%d %b %Y') %>.
           <% end %>
           <div class="navigation">
             <%= paginate @inventories, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
@@ -138,3 +148,17 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#datepicker').datepicker().on('changeDate', function (ev) {
+        $('#datepicker').change();
+    });
+    $('#datepicker').change(function () {
+        // console.log($('#datepicker').val());
+        date = $('#datepicker').val();
+        url = "<%= inventories_path %>";
+        window.location = url.replace("inventories?", "inventories?date=" + date + "&");
+    });
+   });
+</script>

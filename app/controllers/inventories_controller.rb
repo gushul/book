@@ -9,15 +9,14 @@ class InventoriesController < ApplicationController
   # GET /inventories.json
   def index  
     # @inventories = Inventory.order("id desc").page(params[:page])
-    @inventories = current_owner.restaurant.inventories.order("id desc").page(params[:page])
-
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    # @inventories = current_owner.restaurant.inventories.order("id desc").page(params[:page])
+    @date = params[:date] ? Date.strptime(params[:date], '%m/%d/%Y') : Date.today
+    @inventories = current_owner.restaurant.inventories.by_date(@date).order("id desc").page(params[:page])
 
     @inventories1 = current_owner.restaurant.inventories.by_min_and_date("00", @date)
     @inventories2 = current_owner.restaurant.inventories.by_min_and_date("15", @date)
     @inventories3 = current_owner.restaurant.inventories.by_min_and_date("30", @date)
     @inventories4 = current_owner.restaurant.inventories.by_min_and_date("45", @date)
-
 
     respond_to do |format|
       format.html # index.html.erb
