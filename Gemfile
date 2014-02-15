@@ -5,6 +5,7 @@ gem 'rails', '3.2.13'
 gem 'jquery-rails'
 gem 'atomic', '1.1.12'
 
+gem 'active_enum'
 gem 'simple_form'
 gem 'best_in_place'
 # gem 'haml'

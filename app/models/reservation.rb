@@ -9,7 +9,8 @@ class Reservation < ActiveRecord::Base
                   :user_id, :owner_id, :restaurant_id,
                   :name, :email, :phone,
                   :no_show, :arrived, :table,
-                  :special_request
+                  :special_request,
+                  :channel
  
   # validates :user_id,       :presence => true
   # validates user/owner id presence
@@ -24,8 +25,10 @@ class Reservation < ActiveRecord::Base
   validate  :date_validation, :if => :is_restaurant_id_real?
   # validate  :party_size_available_validation
 
-  validates :party_size, :numericality => { 
-      :greater_than => 0 }
+  validates :party_size, :numericality => { :greater_than => 0 }
+  validates :channel, :inclusion => { :in => ChannelType }
+
+  enumerate :channel, :with => ChannelType
 
   after_create   :create_reward
   after_update   :update_reward

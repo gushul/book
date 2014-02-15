@@ -1,0 +1,9 @@
+en:
+  active_enum:
+    channel_type:
+      unset: Unset
+      web: Web (user)
+      iphone: iPhone mobile
+      ipad: iPad mobile
+      android: Android mobile
+      owner_mobile: Owner Mobile (restaurant)
