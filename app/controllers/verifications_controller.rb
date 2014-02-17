@@ -5,10 +5,7 @@ class VerificationsController < ApplicationController
   # GET /verifications
   # GET /verifications.json
   def index
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @rewards }
-    end
+    redirect_to root_url , notice: 'You already verified your account.' if current_user.verified
   end  
 
   # POST /verifications
@@ -23,7 +20,7 @@ class VerificationsController < ApplicationController
         # format.json { render json: @restaurant, status: :created, location: @restaurant }
       else
         format.html { 
-          flash[:notice] = 'Incorrect code'
+          flash[:alert] = 'Incorrect code'
           redirect_to verification_path
         }
         # format.json { render json: @restaurant.errors, status: :unprocessable_entity }

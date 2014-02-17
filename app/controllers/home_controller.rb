@@ -1,6 +1,6 @@
 # encoding: utf-8
 class HomeController < ApplicationController
-  autocomplete :restaurant, :name
+  autocomplete :restaurant, :name, :full => true#, :extra_data => [:slogan]
 
   def landing
     @home = true

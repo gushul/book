@@ -83,6 +83,11 @@
                 <li>
                   <%= link_to "Profile", edit_user_registration_path(current_user) %>
                 </li>
+                <% unless current_user.verified %>
+                  <li>
+                    <%= link_to "Verify", verification_path %>
+                  </li>
+                <% end %>
                 <li>
                   <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
                 </li>
