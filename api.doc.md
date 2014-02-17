@@ -54,6 +54,10 @@ Show an individual restaurant
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/api/restaurants/1
 
+Update restaurant model (owner ability)
+
+   curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "restaurant":{ "largest_table":15}}' http://localhost:3000/api/owner/restaurant/update
+
 ### Tags
 
 Adding note
@@ -93,6 +97,8 @@ Adding note
 Update note
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "note":{"id": 1,"user_id": "", "phone": "024561378", "note": "test"}}' http://localhost:3000/api/owner/notes/update
+
+
 
 Delete note
     
