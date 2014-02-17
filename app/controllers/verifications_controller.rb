@@ -28,4 +28,16 @@ class VerificationsController < ApplicationController
     end
   end
 
+  # GET /verifications
+  def resend
+    message = 'You already verified your account.'
+    route = root_url
+    unless current_user.verified
+      current_user.send_verification_code_via_sms
+      route = verification_path
+      message = 'We re-sent code to you phone.'
+    end
+    redirect_to route, notice: message
+  end 
+
 end

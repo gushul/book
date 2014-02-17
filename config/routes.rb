@@ -10,6 +10,7 @@ AuthApp::Application.routes.draw do
   devise_for :owners
   get  'verification', to: 'verifications#index', as: 'verification'
   post 'verification', to: 'verifications#create'
+  get  'verification/resend', to: 'verifications#resend', as: 'resend_code'
   devise_for :users, controllers: { 
     omniauth_callbacks: "omniauth_callbacks" 
   }

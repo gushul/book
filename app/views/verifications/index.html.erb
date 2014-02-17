@@ -6,8 +6,10 @@
     <%= text_field_tag(:verify_code) %>
     <br/>
     <div class="form-actions" style="padding-top: 15px;">
-      <%= submit_tag "Submit", :class => "btn" %>
+      <%= submit_tag "Submit", :class => "btn btn-success" %>
+      <%= link_to "Send new code", resend_code_path, :class => "btn btn-default btn-large" %>
     </div>
   <% end %>
+
 
 </div>
