@@ -1,7 +1,14 @@
 AuthApp::Application.routes.draw do
 
   root :to => "home#index"
-  get "home/index"
+
+  controller :home do
+    get 'index' 
+    get "about_us",     as: 'about_us'
+    get "how_it_works", as: 'how_it_works'
+    get "careers",      as: 'careers'
+  end
+
   get 'search', to: 'home#search', as: 'search'
   get 'search_with_date_time', to: 'home#search_with_date_time', as: 'search_with_date_time'
   get 'check_availability', to: 'home#check_availability', as: 'check_availability'

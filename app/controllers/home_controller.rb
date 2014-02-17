@@ -136,8 +136,7 @@ class HomeController < ApplicationController
       :status => available.to_s)
   end
   
-  def calendar
-    
+  def about_us
   end
 
 end   
