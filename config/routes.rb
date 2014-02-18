@@ -50,6 +50,11 @@ AuthApp::Application.routes.draw do
       post "/notes/update"         => "notes#update"
       post "/notes/delete"         => "notes#delete"
       
+      post "/nicknames"            => "nicknames#index"
+      post "/nicknames/create"     => "nicknames#create"
+      post "/nicknames/update"     => "nicknames#update"
+      post "/nicknames/delete"     => "nicknames#delete"
+
       post "/customers_info"       => "customer_informations#index"
       
       post "/restaurant/update"    => "restaurants#update"

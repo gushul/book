@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :reservations, :dependent => :destroy
   has_many :rewards,      :dependent => :destroy
   has_many :vips,         :dependent => :destroy
+  has_many :nicknames,    :dependent => :destroy
 
   def self.facebook(auth)
     if user = User.find_by_email(auth.info.email)

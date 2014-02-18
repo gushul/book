@@ -37,6 +37,7 @@ class Restaurant < ActiveRecord::Base
   #                 :greater_than_or_equal_to => 1, 
   #                 :less_than_or_equal_to    => 5   }
 
+  has_many :nicknames,            :dependent => :destroy
   has_many :vips,                :dependent => :destroy
   has_many :notes,               :dependent => :destroy
   has_many :photos,              :dependent => :destroy

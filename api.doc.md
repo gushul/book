@@ -112,11 +112,28 @@ Update note
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "note":{"id": 1,"user_id": "", "phone": "024561378", "note": "test"}}' http://localhost:3000/api/owner/notes/update
 
-
-
 Delete note
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "note":{"id": 1}}' http://localhost:3000/api/owner/notes/delete
+
+### Nicknames
+
+List nickname
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/nicknames
+
+Adding nickname
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "nickname":{"user_id":55, "nickname": "bla-bla"}}' http://localhost:3000/api/owner/nicknames/create
+
+Update nickname
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "nickname":{"id": 1, "nickname": "Saple-Nickname"}}' http://localhost:3000/api/owner/nicknames/update
+
+Delete nickname
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "nickname":{"id": 1}}' http://localhost:3000/api/owner/nicknames/delete
+
 
 ### VIPs
 
