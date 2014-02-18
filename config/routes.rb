@@ -41,6 +41,10 @@ AuthApp::Application.routes.draw do
       post "/inventories"          => "inventories#index"
       post "/inventories/update"   => "inventories#update"
 
+      post "/inventory_template_groups"          => "inventory_template_groups#index"
+      post "/inventory_template_groups/create"   => "inventory_template_groups#create"
+      post "/inventory_template_groups/update"   => "inventory_template_groups#update"
+
       post "/notes"                => "notes#index"
       post "/notes/create"         => "notes#create"
       post "/notes/update"         => "notes#update"

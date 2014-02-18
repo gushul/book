@@ -78,6 +78,20 @@ Update inventory
 
     curl -X POST -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}, "inventory":{"id": 2645, "date":"2014-01-18", "quantity_available":20, "start_time":"2000-01-01T10:00:00Z"} }' http://localhost:3000/api/owner/inventories/update
 
+### Inventory Template Groups
+
+Listing future inventoriy template groups of owners restaurant
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/inventory_template_groups
+
+Create inventory template group
+    
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "inventory_template_group":{"name":"Sample-name", "primary": "false"}}' http://localhost:3000/api/owner/inventory_template_groups/create
+
+Update inventory template group
+
+    curl -X POST -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}, "inventory_template_group":{"id": 382, "name":"Main-1"} }' http://localhost:3000/api/owner/inventory_template_groups/update
+
 ### Customer Information
 
 Show/List all Customer information for Restaurant
