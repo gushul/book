@@ -73,7 +73,7 @@
 
           <p>
             <b>Channel:</b>
-            <%= @reservation.channel %>
+            <%= ChannelType[@reservation.channel] %>
           </p>
 
           <%= link_to 'Edit', edit_reservation_path(@reservation) %> |

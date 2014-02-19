@@ -27,7 +27,7 @@ class Reservation < ActiveRecord::Base
   # validate  :party_size_available_validation
 
   validates :party_size, :numericality => { :greater_than => 0 }
-  validates :channel, :inclusion => { :in => ChannelType }
+  validates_inclusion_of :channel, :in => ChannelType
 
   enumerate :channel, :with => ChannelType
 

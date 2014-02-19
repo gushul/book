@@ -2,7 +2,7 @@ en:
   active_enum:
     channel_type:
       unset: Unset
-      web: Web (user)
+      web_user: Web (user)
       iphone: iPhone mobile
       ipad: iPad mobile
       android: Android mobile
