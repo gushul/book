@@ -21,6 +21,7 @@ class Reservation < ActiveRecord::Base
   validates :party_size,    :presence => true
 
   validate  :unreg_user_validation            
+  validate  :start_end_time
   validate  :restaurant_id_validation            
   validate  :date_validation, :if => :is_restaurant_id_real?
   # validate  :party_size_available_validation
@@ -67,6 +68,12 @@ class Reservation < ActiveRecord::Base
   end
 
 private
+
+  def start_end_time
+    if start_time > end_time
+      self.errors.add(:start_time, "Start time can't be after end time.")
+    end
+  end
 
   def party_size_available_validation
     unless is_avilabale_reservation?

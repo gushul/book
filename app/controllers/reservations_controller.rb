@@ -77,9 +77,11 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(params[:reservation])
     if user_signed_in?
       @reservation.user_id = current_user.id
+      @reservation.channel = 1
     elsif owner_signed_in?
       @reservation.owner_id = current_owner.id
       @reservation.restaurant = current_owner.restaurant
+      @reservation.channel = 6
     end
 
     respond_to do |format|
