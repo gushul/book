@@ -15,8 +15,8 @@ class Api::RestaurantsController < ApplicationController
     @restaurants_json = []
     @restaurants.each do |r|
       r = r.as_json
-      %w{mon tue wed thu fri sat sun 
-         owner_id updated_at created_at}.each {|k| r.delete(k)}
+      # %w{mon tue wed thu fri sat sun 
+      %w{owner_id updated_at created_at}.each {|k| r.delete(k)}
       @restaurants_json << r
     end
     render json: @restaurants_json 
@@ -33,8 +33,8 @@ class Api::RestaurantsController < ApplicationController
         @restaurant[:tags] << t.title
       end
       @restaurant = @restaurant.as_json
-        %w{mon tue wed thu fri sat sun 
-           owner_id updated_at created_at}.each {|k| @restaurant.delete(k)}
+        # %w{mon tue wed thu fri sat sun 
+       %w{owner_id updated_at created_at}.each {|k| @restaurant.delete(k)}
     rescue 
       @restaurant = "{\"id\":[\"Invalid Restaurant ID\"]}"
 #      render json: @restaurant, status: :unprocessable_entity
