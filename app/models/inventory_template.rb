@@ -22,6 +22,10 @@ class InventoryTemplate < ActiveRecord::Base
     where("start_time LIKE ?", "%:#{min}:00") 
   }
 
+  scope :by_time, lambda { |time| 
+    where("start_time LIKE ?", "%#{time.slice(0..1)}:#{time.slice(3..4)}:00") 
+  }
+
   def start_time_hour
     start_time.strftime("%H").to_i
   end

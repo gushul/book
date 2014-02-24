@@ -27,9 +27,9 @@ class Api::Owner::ReservationsController < ApplicationController
 
   # POST /reservation.json
   def show
-    @reservation = @owner.reservations.where(:id => params[:reservation][:id] ).first
+    @reservation = @owner.restaurant.reservations.where(:id => params[:reservation][:id] ).first
     respond_to do |format|
-      unless @reservation.nil?
+      if @reservation.present?
         format.json { render json: @reservation, status: 200 }
       else
         format.json { render json: "Incorect reservation id", status: 400 }

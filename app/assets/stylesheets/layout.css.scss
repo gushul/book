@@ -47,9 +47,12 @@
     height: auto;
   }
 
-  .inventory_template_quantity_available {
+  .inventory_template_quantity_available, .inventory_template_group_quantity_available {
     width: 50px;
     padding-left: 4px;
+  }
+  .inventory_template_group_quantity_available {
+    width: 60px;
   }
 
   .form-group {

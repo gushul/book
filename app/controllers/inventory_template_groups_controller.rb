@@ -50,6 +50,11 @@ class InventoryTemplateGroupsController < ApplicationController
   # GET /inventory_template_groups/1/edit
   def edit
     @inventory_template_group = InventoryTemplateGroup.find(params[:id])
+
+    @itg1 = @inventory_template_group.inventory_templates.by_min("00").flatten
+    @itg2 = @inventory_template_group.inventory_templates.by_min("15").flatten
+    @itg3 = @inventory_template_group.inventory_templates.by_min("30").flatten
+    @itg4 = @inventory_template_group.inventory_templates.by_min("45").flatten
   end
 
   # POST /inventory_template_groups
@@ -60,6 +65,19 @@ class InventoryTemplateGroupsController < ApplicationController
 
     respond_to do |format|
       if @inventory_template_group.save
+
+        @intervals = Reservation::PERIODS
+        @intervals.each do |interval| 
+          quan = params[:inventory_template_group][:quantity_available]["#{@intervals.index(interval)}".to_s]
+          unless interval == "24:00" or quan.to_i == 0
+            @inventory_template = InventoryTemplate.new(inventory_template_group_id: @inventory_template_group.id)
+            @inventory_template.start_time = interval
+            @inventory_template.end_time = @intervals[@intervals.index(interval)+1]
+            @inventory_template.quantity_available = quan
+            @inventory_template.save
+          end 
+        end 
+        
         format.html { redirect_to @inventory_template_group, notice: 'Inventory Template Group was successfully created.' }
         format.json { render json: @inventory_template_group, status: :created, location: @inventory_template_group }
       else
@@ -67,6 +85,7 @@ class InventoryTemplateGroupsController < ApplicationController
         format.json { render json: @inventory_template_group.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PUT /inventory_template_groups/1
@@ -77,6 +96,22 @@ class InventoryTemplateGroupsController < ApplicationController
 
     respond_to do |format|
       if @inventory_template_group.update_attributes(params[:inventory_template_group])
+        
+        @intervals = Reservation::PERIODS
+        @intervals.each do |interval| 
+          quan = params[:inventory_template_group][:quantity_available]["#{@intervals.index(interval)}".to_s]
+          unless interval == "24:00" or quan.to_i == 0
+            @inventory_template = InventoryTemplate.where(inventory_template_group_id: @inventory_template_group.id).by_time(interval).first
+            if @inventory_template.blank?
+              @inventory_template = InventoryTemplate.new(inventory_template_group_id: @inventory_template_group.id)
+              @inventory_template.start_time = interval
+              @inventory_template.end_time = @intervals[@intervals.index(interval)+1]
+            end
+            @inventory_template.quantity_available = quan
+            @inventory_template.save
+          end 
+        end 
+
         format.html { redirect_to @inventory_template_group, notice: 'Inventory template was successfully updated.' }
         format.json { head :no_content }
       else
