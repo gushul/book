@@ -58,6 +58,10 @@ Update restaurant model (owner ability)
 
    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "restaurant":{ "largest_table":15}}' http://localhost:3000/api/owner/restaurant/update
 
+Show owner's restaurant
+
+    curl -X POST -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/restaurant/show
+
 ### Tags
 
 Adding note

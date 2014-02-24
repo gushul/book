@@ -4,6 +4,18 @@ class Api::Owner::RestaurantsController < ApplicationController
 
   before_filter :check_owner_auth_params
 
+  # POST /restautant/show
+  def show
+    @restaurant = @owner.restaurant
+    respond_to do |format|
+      if @restaurant.present?
+        format.json { render json: @restaurant, status: 200 }
+      else
+        format.json { render json: "You have not created restaurant yet.", status: 400 }
+      end
+    end
+  end
+
   # POST /restaurant/update
   def update
     @restaurant = @owner.restaurant
