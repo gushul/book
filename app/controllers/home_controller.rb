@@ -122,18 +122,24 @@ class HomeController < ApplicationController
   end
 
   def check_availability
-    @restaurant = Restaurant.find(params[:restaurant_id])
-    date = params[:datepicker]
-    time = params[:timepicker]
-    people = params[:people]
-    # available = false
-    available = @restaurant.check_availability(date, time, people)
-
-    redirect_to book_restaurant_path(:id => @restaurant.id, 
-      :datepicker => date, 
-      :timepicker => time, 
-      :people => people,
-      :status => available.to_s)
+    if current_user.present? || current_owner.present? 
+      @restaurant = Restaurant.find(params[:restaurant_id])
+      date = params[:datepicker]
+      time = params[:timepicker]
+      people = params[:people]
+      # available = false
+      available = @restaurant.check_availability(date, time, people)
+      r_path = book_restaurant_path(:id => @restaurant.id, 
+        :datepicker => date, 
+        :timepicker => time, 
+        :people => people,
+        :status => available.to_s)
+      mes = false
+    else
+      r_path = root_path
+      mes = "Please, register first."
+    end
+      redirect_to r_path, notice: mes
   end
   
   def about_us
