@@ -16,6 +16,18 @@
     </div>
   </div>
 
+  <div class="row" style="margin-left: -15px;">
+    <div class="col-sm-4 col-lg-4">
+    <%= f.input :est_duration, collection: [:"0", :"15", :"30", :"45", :"60", :"90", :"120", :"180"], include_blank: false,  label: "est_duration, min" %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+    <%= f.input :est_duration_confidence, collection: Array.new(21){ |i| (i*5).to_s }, include_blank: false ,label: "est_duration_confidence, %" %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+    </div>
+  </div>
+
+
   <%#= f.input :price, label: "Price" %>
   <%= f.input :largest_table, label: "Largest Table"%>
   <%= f.input :lat, label: "Latitude" %>

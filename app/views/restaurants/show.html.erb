@@ -76,6 +76,13 @@
                     <!-- uncomment to show it -->
                     <%= @restaurant.phone %>
                   </p>
+                  <br/>
+                  <p><span class="rbold">Estimate Duration : </span> 
+                    <%= "#{@restaurant.est_duration} min" if @restaurant.est_duration.present? %>
+                  </p>
+                  <p><span class="rbold">Estimate Duration Confidence: </span> 
+                    <%= "#{@restaurant.est_duration_confidence}%" if @restaurant.est_duration_confidence.present? %>
+                  </p>
                 </div>
                 <div class="col-sm-6 col-lg-6">
                   <p><span class="rbold">Parking : </span>
