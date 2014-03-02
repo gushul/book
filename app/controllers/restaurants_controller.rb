@@ -41,7 +41,13 @@ class RestaurantsController < ApplicationController
     @google_map << "&markers=icon:http://i42.tinypic.com/rj2txf.png%7C#{@restaurant.lat}%2C#{@restaurant.lng}"
     @google_map << '&sensor=false&zoom=16'
 
-    # @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @today = true
+    if @restaurant.inventories.available.size >= 3
+      @times = @restaurant.inventories.available.limit(3).map{|inv| inv.start_time.to_s.slice(11..15)}
+    else
+      @today = false
+      @times = @restaurant.inventories.available(Date.tomorrow, "00:00").limit(3).map{|inv| inv.start_time.to_s.slice(11..15)}
+    end
 
     respond_to do |format|
       format.html # show.html.erb

@@ -15,6 +15,10 @@ class Inventory < ActiveRecord::Base
   default_scope :order => :start_time
 
   scope :future, -> { where("date >= ?", DateTime.now.to_date) }
+  
+  scope :available, lambda { |date = DateTime.now.to_date, time = Time.now.to_s.slice(11..15) |
+    where('date = ? AND inventories.start_time >= ?', date, "2000-01-01 #{time}:00" ) 
+  }
  
   scope :find_available_time, lambda { |date, time, people, restaurant_id|
     # limit 3
