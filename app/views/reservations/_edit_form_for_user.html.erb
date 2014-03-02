@@ -1,0 +1,24 @@
+<%= simple_form_for(@reservation, html: { class: "form-horizontal"}) do |f| %>
+  <div class="col-sm-12 col-lg-12">
+  <%= f.error_notification %>
+  
+  <%= f.association :restaurant, label: "Restaurant", :disabled => true %>
+  <%= f.input :date, label: "Date", :disabled => true %> 
+  
+  <%= f.input :start_time, collection: @intervals, :disabled => true %>
+  <%= f.input :end_time, collection: @intervals, :disabled => true %>
+
+  <%= f.input :party_size, label: "Party Size" %>
+
+  <%= f.input :active, label: "Active (not changeable)", :disabled => true %>
+ 
+  <%= f.input :special_request, label: "Special Request", as: :text, input_html: { rows: "5", class: "text_area_for_misc"} %>
+
+  <div class="actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to 'Back', reservations_path, class: "btn btn-primary"%>
+  </div>
+
+  </div>
+ 
+<% end %>

@@ -2,7 +2,11 @@
 
 <h1>Editing reservation</h1>
 
-<%= render 'form' %>
+<% if owner_signed_in? %>
+  <%= render 'form' %>
+<% else %>
+  <%= render 'edit_form_for_user' %>
+<% end %>
 
 <%= link_to 'Show', @reservation %> |
 <%= link_to 'Back', reservations_path %>
