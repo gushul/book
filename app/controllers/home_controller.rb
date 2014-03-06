@@ -136,7 +136,7 @@ class HomeController < ApplicationController
         :status => available.to_s)
       mes = false
     else
-      r_path = root_path
+      r_path = new_user_registration_path
       mes = "Please, register first."
     end
       redirect_to r_path, notice: mes
