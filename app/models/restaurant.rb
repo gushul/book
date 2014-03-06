@@ -72,6 +72,10 @@ class Restaurant < ActiveRecord::Base
     joins(:inventories).where('inventories.date = ? AND inventories.start_time = ? AND inventories.quantity_available >= ?', date, "2000-01-01 #{time}:00", people)
   }
 
+  def get_text_tags_by_group(group)
+    self.restaurant_tags.where("title LIKE ?", "#{group}:%").map{|t| t.title.gsub( /.*:/, "" ) }
+  end
+
   def self.generate_schedule
     @intervals = []
       24.times do |h| 
