@@ -9,7 +9,7 @@ class Restaurant < ActiveRecord::Base
                   :restaurant_tag_ids,
                   :photos_attributes, :largest_table,
                   :mon, :tue, :wed, :thu, :fri, :sat, :sun,
-                  :phone, :address, :website,
+                  :phone, :address, :th_address, :website,
                   :est_duration_confidence, :est_duration
  
   validates :name,  :presence => true

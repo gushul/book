@@ -46,11 +46,18 @@
             </div>
             <div class="content">
               <div class="body">
-                <p style="margin:0 10px;"><span class="rbold">Address : </span>
-                  <!-- Soi Anuman Rachathon Surawong, Bang Rak Bangkok 10500 -->
-                  <!-- uncomment to show it -->
+
+                <p style="margin:0 10px;">
+                <span class="rbold">Address : </span>
                   <%= @restaurant.address %>
                 </p>
+
+                <br/>
+                <p style="margin:0 10px;">
+                <span class="rbold">Address (Thai version) : </span>
+                  <%= @restaurant.th_address %>
+                </p>
+
                 <br/>
                 <br/>
                 <div class="col-sm-6 col-lg-6">

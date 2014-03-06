@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140302170925) do
+ActiveRecord::Schema.define(:version => 20140306114420) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20140302170925) do
     t.string   "address"
     t.integer  "est_duration"
     t.integer  "est_duration_confidence"
+    t.string   "th_address"
   end
 
   create_table "rewards", :force => true do |t|
