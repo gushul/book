@@ -262,6 +262,14 @@ class Restaurant < ActiveRecord::Base
     0
   end
 
+  def star_format_f
+    tag = restaurant_tags.where("title LIKE ?", "Star:%").first
+    unless tag.blank?
+      return tag.title.slice(5..tag.title.length).to_f
+    end
+    0
+  end
+
 # private
 
 #   def cover_controll

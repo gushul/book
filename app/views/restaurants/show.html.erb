@@ -37,6 +37,10 @@
                 <% @restaurant.star_format.times do |s| %>
                   <i class="glyphicon glyphicon-star pink"></i>
                 <% end %>
+                <% if @restaurant.star_format_f - @restaurant.star_format > 0  %>
+                  <i class="glyphicon glyphicon-star pink" style="width:4px;"></i>
+                  <i style="position: relative; display: inline-block; background: rgb(245, 245, 245); width: 10px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                <% end %>
               <% else %>
                 Not received any star rank
               <% end %>
