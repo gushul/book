@@ -81,8 +81,6 @@
                   </p>
                   <br/>
                   <p><span class="rbold">Telephone : </span> 
-                    <!-- +66(0)2236-0107 -->
-                    <!-- uncomment to show it -->
                     <%= @restaurant.phone %>
                   </p>
                   <br/>
@@ -97,8 +95,7 @@
                   </p>
                   <br/>
                   <p><span class="rbold">Payment : </span>
-                    AMEX, MASTER Card / VISA
-                    <%#= @restaurant %>
+                    <%= raw(@restaurant.get_text_tags_by_group("Payment").join) %>
                   </p>
                   <br/>
                   <p><span class="rbold">Misc : </span> 
