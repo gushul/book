@@ -21,7 +21,7 @@
                       <h4 class="media-heading">
                         <%= link_to restaurant.name, restaurant_path(restaurant) %>
                       </h4>
-                      <p><%= restaurant.misc %></p>
+                      <p><%= restaurant.address %></p>
                       <p>
                         <% unless restaurant.star_format == 0 %>
                           <% restaurant.star_format.times do |s| %>
