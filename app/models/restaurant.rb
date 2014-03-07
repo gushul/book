@@ -213,7 +213,7 @@ class Restaurant < ActiveRecord::Base
   end
 
   def price_format
-    tag = restaurant_tags.where("title LIKE ?", "Price:%").first
+    tag = restaurant_tags.where("title LIKE ?", "Price:%").last
     unless tag.blank?
       return tag.title.slice(6..tag.title.length).length
     end
