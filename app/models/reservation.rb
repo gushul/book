@@ -152,26 +152,32 @@ private
   end
 
   def create_reward
-    Reward.create( user_id: user_id, 
-                   reservation_id: id, 
-                   points_total: 5*party_size, 
-                   points_pending: 5*party_size,    
-                   description: "")
+    if user_id.present?
+      Reward.create( user_id: user_id, 
+                     reservation_id: id, 
+                     points_total: 5*party_size, 
+                     points_pending: 5*party_size,    
+                     description: "")
+    end
     # UserMailer.booking_create(current_user, @reservation).deliver
     # OwnerMailer.booking_create(@reservation).deliver
   end
 
   def update_reward
-    reward = Reward.where(:reservation_id => id).first
-    reward.update_attributes( points_total: 5*party_size, 
-                              points_pending: 5*party_size )
+    if user_id.present?
+      reward = Reward.where(:reservation_id => id).first
+      reward.update_attributes( points_total: 5*party_size, 
+                                points_pending: 5*party_size )
+    end
     # UserMailer.booking_update(current_user, @reservation).deliver
     # OwnerMailer.booking_update(@reservation).deliver
   end
 
   def delete_reward
-    reward = Reward.where(:reservation_id => id).first
-    reward.destroy
+    if user_id.present?
+      reward = Reward.where(:reservation_id => id).first
+      reward.destroy
+    end
     # UserMailer.booking_removed(current_user, @reservation).deliver
     # OwnerMailer.booking_removed(@reservation).deliver
   end
