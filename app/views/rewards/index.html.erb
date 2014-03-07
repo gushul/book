@@ -15,6 +15,24 @@
             <h3 class="rmedium">Rewards history</h3>
           </div>
 
+
+          <br>
+          <% @reward = Reward.new %>
+          <%= simple_form_for(@reward, html: { class: "form-horizontal"}) do |f| %>
+            <div class="row" style="margin-left: -15px;">
+              <div class="col-sm-4 col-lg-4">
+              <%= f.input :restaurant_id, collection: Restaurant.all,  label: "Restaurant" %>
+              </div>
+              <div class="col-sm-4 col-lg-4">
+              <%= f.input :points_total, collection: [:"50", :"100", :"200"],  label: "Points to Redeem" %>              </div>
+              <div class="col-sm-4 col-lg-4" style="padding-top:23px;">
+                <%= f.button :submit, "REDEEM", class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %> 
+          <hr/>
+
+
           <div class="content"> 
           <% unless @rewards.blank? %>
             <table class="table table-striped table-bordered table-hover">
@@ -30,7 +48,13 @@
 
               <% @rewards.each do |reward| %>
                 <tr>
-                  <td><%= link_to "#{reward.reservation.restaurant.name}", reward.reservation.restaurant %><%=  %></td>
+                  <td>
+                    <% if reward.reservation.present? %>
+                      <%= link_to "#{reward.reservation.restaurant.name}", reward.reservation.restaurant %>
+                    <% else %>
+                      <%= link_to "#{reward.restaurant.name}", reward.restaurant %>
+                    <% end %>
+                  </td>
                   <td><%= reward.points_total %></td>
                   <td><%= reward.points_pending %></td>
                   <td><%= reward.description %></td>
@@ -54,7 +78,7 @@
               <thead>
                 <tr>
                   <th>User</th>
-                  <th>Points_pending</th>
+                  <th>Points</th>
                   <th>Created at</th>
                 </tr>
               </thead>

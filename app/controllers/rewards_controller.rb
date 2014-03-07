@@ -28,4 +28,20 @@ class RewardsController < ApplicationController
     end
   end
 
+  # POST /create
+  def create
+    @reward = Reward.new(params[:reward])
+    @reward.user_id = current_user.id
+    @reward.points_total = (-1) * @reward.points_total
+
+    if @reward.points_total.abs <= current_user.get_credits && @reward.save
+      @reward = Reward.last
+      @reward.description = "Redeemeded #{@reward.points_total.abs} Points at #{Restaurant.find(@reward.restaurant_id).name} Confirm No: #{@reward.id}"
+      @reward.save
+      redirect_to rewards_path, notice: 'Reward was created.'
+    else
+      redirect_to rewards_path, notice: "You're only have #{current_user.get_credits} credits"
+    end
+  end
+
 end
