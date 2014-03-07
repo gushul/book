@@ -7,6 +7,8 @@ class RewardsController < ApplicationController
   def index
     if user_signed_in?
       @rewards = current_user.rewards
+    else
+      @rewards = Reservation.where(restaurant_id: current_owner.restaurant.id ).map{|r| r.reward}.compact
     end
 
     respond_to do |format|

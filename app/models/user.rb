@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     end
   end 
 
+  def get_credits
+    self.rewards.map(&:points_pending).reduce(0, :+)
+  end
+
   def is_vip?(restaurant)
     if Vip.where(user_id: id).where(restaurant_id: restaurant.id).first.present?
       return true

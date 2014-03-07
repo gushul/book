@@ -4,6 +4,8 @@ class Reward < ActiveRecord::Base
                   :points_pending, :points_total, 
                   :description
 
-   belongs_to :user
-   belongs_to :reservation  
+  belongs_to :user
+  belongs_to :reservation  
+
+  
 end
