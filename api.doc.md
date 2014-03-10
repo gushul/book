@@ -64,11 +64,11 @@ Show owner's restaurant
 
 ### Tags
 
-Adding note
+Create tag and add it to owners restaurant
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "tag":{"title":"Cuisine:Test"}}' http://localhost:3000/api/owner/tags/create
 
-Delete note
+Remove tag from tag-list and owners restaurant
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "tag":{"title":"Cuisine:Test"}}' http://localhost:3000/api/owner/tags/delete
 

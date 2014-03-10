@@ -7,6 +7,7 @@ class Api::Owner::TagsController < ApplicationController
   # POST /tags/create
   def create
     @tag = RestaurantTag.new(params[:tag])
+    @owner.restaurant.restaurant_tags << @tag
 
     respond_to do |format|
       if @tag.save 
@@ -22,6 +23,7 @@ class Api::Owner::TagsController < ApplicationController
    # POST /tags/delete
   def delete
     @tag = RestaurantTag.where(:title => params[:tag][:title]).first
+    @owner.restaurant.restaurant_tags.delete(@tag)
 
     respond_to do |format|
       if @tag.present? && @tag.destroy
