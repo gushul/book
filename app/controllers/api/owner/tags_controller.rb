@@ -22,14 +22,15 @@ class Api::Owner::TagsController < ApplicationController
 
    # POST /tags/delete
   def delete
-    @tag = RestaurantTag.where(:title => params[:tag][:title]).first
-    @owner.restaurant.restaurant_tags.delete(@tag)
+    @tag = @owner.restaurant.restaurant_tags.where(:title => params[:tag][:title]).first
 
     respond_to do |format|
-      if @tag.present? && @tag.destroy
+      if @tag.present?
+        @owner.restaurant.restaurant_tags.delete(@tag)
+        # @tag.destroy 
         format.json { render json: "Successfully", status: 200 }
       else
-        format.json { render json: "ERR:Check parameters", 
+        format.json { render json: "ERR:Check tag title", 
                            status: :unprocessable_entity }
       end
     end
