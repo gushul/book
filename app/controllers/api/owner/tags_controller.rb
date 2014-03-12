@@ -7,14 +7,15 @@ class Api::Owner::TagsController < ApplicationController
   # POST /tags/create
   def create
     @tag = RestaurantTag.new(params[:tag])
-    @owner.restaurant.restaurant_tags << @tag
+    @tag.save if RestaurantTag.find_by_title(@tag.title).blank?
 
     respond_to do |format|
-      if @tag.save 
+      if !@owner.restaurant.restaurant_tags.map(&:title).include?(@tag.title)
+        @owner.restaurant.restaurant_tags << @tag
         format.json { render json: @tag, status: 200 }
       else
-        format.json { render json: @tag.errors, 
-                           status: :unprocessable_entity }
+        format.json { render json: "This tag already assigned to your restaurant.", 
+                           status: :unprocessable_entity}
       end
     end
     
