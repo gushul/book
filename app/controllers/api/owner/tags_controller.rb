@@ -21,7 +21,7 @@ class Api::Owner::TagsController < ApplicationController
         format.json { render json: "This tag already assigned to your restaurant.", 
                            status: :unprocessable_entity}
       end
-    end
+    end`
     
   end
 
