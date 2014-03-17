@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
       http.get(uri.request_uri)
   end
 
-#private
+private
 
   def send_verification_code_via_email
     Thread.new do
@@ -98,4 +98,5 @@ class User < ActiveRecord::Base
     false
   end
 
+end
 end
