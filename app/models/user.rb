@@ -64,6 +64,7 @@ class User < ActiveRecord::Base
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       http.get(uri.request_uri)
+    end
   end
 
 private
