@@ -77,7 +77,6 @@ private
     end
   end
 
-
   def set_verify_code
      self.verify_code = rand(10 ** 5).to_i
   end
@@ -99,5 +98,4 @@ private
     false
   end
 
-end
 end
