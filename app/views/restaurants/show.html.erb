@@ -73,7 +73,7 @@
                   </p>
                   <br/>
                   <p><span class="rbold">Location : </span> 
-                    <%= @restaurant.location_format %>
+                    <%= raw(@restaurant.get_text_tags_by_group("Location").join(', ')) %>
                   </p>
                   <br/>
                   <p><span class="rbold">Website : </span>
@@ -87,19 +87,19 @@
                 </div>
                 <div class="col-sm-6 col-lg-6">
                   <p><span class="rbold">Parking : </span>
-                    <%= @restaurant.parking_format %>
+                    <%= raw(@restaurant.get_text_tags_by_group("Parking").join(', ')) %>
                   </p>
                   <br/>
                   <p><span class="rbold">Drinking : </span>   
-                    <%= @restaurant.drinks_format %>
+                    <%= raw(@restaurant.get_text_tags_by_group("Drinking").join(', ')) %>
                   </p>
                   <br/>
                   <p><span class="rbold">Payment : </span>
-                    <%= raw(@restaurant.get_text_tags_by_group("Payment").join) %>
+                    <%= raw(@restaurant.get_text_tags_by_group("Payment").join(', ')) %>
                   </p>
                   <br/>
                   <p><span class="rbold">Misc : </span> 
-                    <%= @restaurant.misc.html_safe %>
+                    <%= raw(@restaurant.get_text_tags_by_group("Misc").join(', ')) %>
                   </p>
                 </div>
               </div>
