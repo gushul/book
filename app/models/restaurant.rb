@@ -213,17 +213,19 @@ class Restaurant < ActiveRecord::Base
   end
 
   def price_format
-    tag = restaurant_tags.where("title LIKE ?", "Price:%").last
+    tags = restaurant_tags.where("title LIKE ?", "Price:%").map(&:title)
+    tag = tags.sort.last
     unless tag.blank?
-      return tag.title.slice(6..tag.title.length).length
+      return tag.slice(6..tag.length).to_i
     end
     0
   end
 
   def price_desc
-    tag = restaurant_tags.where("title LIKE ?", "Price:%").first
+    tags = restaurant_tags.where("title LIKE ?", "Price:%").map(&:title)
+    tag = tags.sort.last
     unless tag.blank?
-      price = tag.title.slice(6..tag.title.length).length
+      price = tag.slice(6..tag.length).to_i
       if price == 1 
         price = "100 - 400 Baht"
       elsif price == 2

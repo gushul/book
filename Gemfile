@@ -6,7 +6,7 @@ gem 'jquery-rails'
 gem 'atomic', '1.1.12'
 
 gem 'active_enum'
-gem 'simple_form'
+gem 'simple_form', '2.1.0'
 gem 'best_in_place'
 # gem 'haml'
 gem 'rmagick', '2.13.2'
@@ -17,13 +17,13 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 # gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
-gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
 
 gem 'mysql2'
 
 gem 'thin'
 
-gem 'devise'
+gem 'devise', '3.1.0'
 gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook' 
@@ -65,13 +65,11 @@ end
 
 gem 'sass-rails',     '>= 3.2'
 gem 'coffee-rails', '~> 3.2.1'
-gem 'bootstrap-sass-rails'
+gem 'bootstrap-sass-rails', '3.0.2.1'
 # gem 'bootstrap-sass', '~> 3.0.3.0'
 # gem 'bootswatch-rails'
 
 group :assets do
-  
   gem 'uglifier', '>= 1.0.3'
-  
-  gem 'jquery-ui-rails'
+  gem 'jquery-ui-rails', '4.1.1'
 end
