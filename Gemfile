@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "1.9.3"
 
 gem 'rails', '3.2.13'
-gem 'jquery-rails'
+gem 'jquery-rails', '3.0.4'
 gem 'atomic', '1.1.12'
 
 gem 'active_enum'
@@ -17,7 +17,7 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 # gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
-# gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '4.0.5'
 
 gem 'mysql2'
 
@@ -71,5 +71,5 @@ gem 'bootstrap-sass-rails', '3.0.2.1'
 
 group :assets do
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-ui-rails', '4.1.1'
+  # gem 'jquery-ui-rails', '4.0.5'
 end
