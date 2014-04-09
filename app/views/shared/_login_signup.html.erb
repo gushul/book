@@ -124,29 +124,39 @@
              </script> -->
           </div>
         </div>
+
         <div class="people">
           <div class="title">Amount:</div>
-          <div class="text">
-            <i class="glyphicon glyphicon-user"></i>
-            <select class="selectpicker" name="people" class="rregular">
-              <option value="1">1</option>
-              <option value="2" selected="selected">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-            </select>
-          </div>
-        </div>
+            <div class="text"><i class="glyphicon glyphicon-user"></i>
+                <div class="input-append btn-group">
+                  <input class="rregular" name="people" id="people" type="hidden" value="2">
+                  <div id="currectVal3" class="inputSelection rregular"></div>
+                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                  </a>
+                  <ul class="dropdown-menu" id="selection">
+                    <li><a title="1"> 1</a></li>
+                    <li><a title="2"> 2</a></li>
+                    <li><a title="3"> 3</a></li>
+                    <li><a title="4"> 4</a></li>
+                    <li><a title="5"> 5</a></li>
+                    <li><a title="6"> 6</a></li>
+                    <li><a title="7"> 7</a></li>
+                    <li><a title="8"> 8</a></li>
+                    <li><a title="9"> 9</a></li>
+                    <li><a title="10"> 10</a></li>
+                  </ul>
+                  <script type="text/javascript">
+                    $("#currectVal3").html(2);
+                    $('#selection > li a').click(function(){
+                      var selectVal = $(this).attr("title");
+                      $("#people").attr("value",selectVal);
+                      $("#currectVal3").html($(this).html());
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
       <input type="hidden" name="restaurant_id" class="restaurant_id">
       </div>
 

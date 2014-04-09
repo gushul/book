@@ -73,7 +73,7 @@
 
               <div class="people"><i class="glyphicon glyphicon-user"></i>
               <div class="input-append btn-group">
-                <input class="rregular" name="people" id="people" type="hidden">
+                <input class="rregular" name="people" id="people" type="hidden" value="2">
                 <div id="currectVal" class="inputSelection rregular"></div>
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                   <span class="glyphicon glyphicon-chevron-down"></span>
@@ -91,6 +91,8 @@
                   <li><a title="10"> 10</a></li>
                 </ul>
                 <script type="text/javascript">
+                  $("#currectVal").html(2);
+
                   $('#selection > li a').click(function(){
                     var selectVal = $(this).attr("title");
                     $("#people").attr("value",selectVal);
@@ -132,7 +134,7 @@
               </div>
               <div class="people"><i class="glyphicon glyphicon-user"></i>
               <div class="input-append btn-group">
-                <input class="rregular" name="people" id="people" type="hidden">
+                <input class="rregular" name="people" id="people" type="hidden" value="2">
                 <div id="currectVal2" class="inputSelection rregular"></div>
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                   <span class="glyphicon glyphicon-chevron-down"></span>
@@ -150,6 +152,8 @@
                   <li><a title="10"> 10</a></li>
                 </ul>
                 <script type="text/javascript">
+                  $("#currectVal2").html(2);
+
                   $('#selection > li a').click(function(){
                     var selectVal = $(this).attr("title");
                     $("#people").attr("value",selectVal);
