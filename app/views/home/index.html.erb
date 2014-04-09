@@ -70,26 +70,38 @@
                 <input type="text" class="rregular" name="timepicker" id="timepicker">
                 <i class="glyphicon glyphicon-chevron-down"></i>
               </div>
+
               <div class="people"><i class="glyphicon glyphicon-user"></i>
-                <select name="people" class="selectpicker">
-                  <option value="1">1</option>
-                  <option value="2" selected="selected" >2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                </select>
+              <div class="input-append btn-group">
+                <input class="rregular" name="people" id="people" type="hidden">
+                <div id="currectVal" class="inputSelection rregular"></div>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu" id="selection">
+                  <li><a title="1"> 1</a></li>
+                  <li><a title="2"> 2</a></li>
+                  <li><a title="3"> 3</a></li>
+                  <li><a title="4"> 4</a></li>
+                  <li><a title="5"> 5</a></li>
+                  <li><a title="6"> 6</a></li>
+                  <li><a title="7"> 7</a></li>
+                  <li><a title="8"> 8</a></li>
+                  <li><a title="9"> 9</a></li>
+                  <li><a title="10"> 10</a></li>
+                </ul>
+                <script type="text/javascript">
+                  $('#selection > li a').click(function(){
+                    var selectVal = $(this).attr("title");
+                    $("#people").attr("value",selectVal);
+                    $("#currectVal").html($(this).html());
+                  });
+                </script>
               </div>
+              </div>
+
             </div>
+
             <div class="info white">
               <%= link_to all_restaurants_path do %>
                 <h6 class="rregular">See all Bangkok restaurants</h6>
@@ -119,23 +131,32 @@
                 <i class="glyphicon glyphicon-chevron-down"></i>
               </div>
               <div class="people"><i class="glyphicon glyphicon-user"></i>
-                <select name="people" class="selectpicker">
-                  <option value="1">1</option>
-                  <option selected="selected" value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                </select>
+              <div class="input-append btn-group">
+                <input class="rregular" name="people" id="people" type="hidden">
+                <div id="currectVal2" class="inputSelection rregular"></div>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu" id="selection">
+                  <li><a title="1"> 1</a></li>
+                  <li><a title="2"> 2</a></li>
+                  <li><a title="3"> 3</a></li>
+                  <li><a title="4"> 4</a></li>
+                  <li><a title="5"> 5</a></li>
+                  <li><a title="6"> 6</a></li>
+                  <li><a title="7"> 7</a></li>
+                  <li><a title="8"> 8</a></li>
+                  <li><a title="9"> 9</a></li>
+                  <li><a title="10"> 10</a></li>
+                </ul>
+                <script type="text/javascript">
+                  $('#selection > li a').click(function(){
+                    var selectVal = $(this).attr("title");
+                    $("#people").attr("value",selectVal);
+                    $("#currectVal2").html($(this).html());
+                  });
+                </script>
+              </div>
               </div>
             </div>
             <div class="info white">
