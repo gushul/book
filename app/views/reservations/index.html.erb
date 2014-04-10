@@ -152,12 +152,12 @@
                   <td><%= reservation.id %></td>
                   <td>NOTE</td>
                   <td width="80px">
-                    <%= link_to '<i class="glyphicon glyphicon-search action" id="viewReservation"></i>'.html_safe, reservation %>
-                    <%= link_to '<i class="glyphicon glyphicon-edit action" id="viewReservation"></i>'.html_safe, edit_reservation_path(reservation) %>
+                    <%= link_to '<i class="glyphicon glyphicon-search action" id="viewReservation"></i>'.html_safe, reservation, remote: true %>
+                    <%= link_to '<i class="glyphicon glyphicon-edit action" id="viewReservation"></i>'.html_safe, edit_reservation_path(reservation), remote: true %>
                     <% if reservation.active %>
-                      <%= link_to '<i class="glyphicon glyphicon-remove action" id="viewReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                      <%= link_to '<i class="glyphicon glyphicon-remove action" id="editReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
                     <% else %>
-                      <%= link_to '<i class="glyphicon glyphicon-repeat action" id="viewReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                      <%= link_to '<i class="glyphicon glyphicon-repeat action" id="cancelReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
                     <% end %>
                   </td>
                 </tr>
@@ -181,3 +181,5 @@
 
   </div>
 </div>          
+
+<%= render "modal" %>

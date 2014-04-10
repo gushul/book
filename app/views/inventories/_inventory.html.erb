@@ -1,0 +1,23 @@
+ <table> 
+  <tr> 
+    <td class="my_bold">Start Time:</td>
+    <td><%= @inventory.start_time_format %></td> 
+  </tr>
+  <tr> 
+    <td class="my_bold"> End Time: </td> 
+    <td><%= @inventory.end_time_format %></td> 
+  </tr>
+  <tr> 
+    <td class="my_bold"> Quantity Available: </td> 
+    <td><%= @inventory.quantity_available %></td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Date: </td> 
+    <td><%= @inventory.date_format_ext %></td> 
+  </tr>
+</table>
+
+<hr/>
+<div class="submit">
+  <button class="btn btn-primary pull-right" onclick="closeModel('viewInventory');">CLOSE</button>
+</div>

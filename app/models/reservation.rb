@@ -67,6 +67,18 @@ class Reservation < ActiveRecord::Base
     date.to_time.strftime('%d %b %Y') unless date.blank?
   end
 
+  def date_format_ext
+    date.to_time.strftime("#{date.day.ordinalize} %B %Y") unless date.blank? # 20th December 2013 
+  end
+
+  def created_at_format 
+    created_at.to_time.strftime("#{created_at.day.ordinalize} %B %Y") # 20th December 2013 
+  end
+
+  def full_datetime
+    "#{start_time} on #{date.strftime('%A')}, #{date_format_ext}" # 18:00 on Friday, 20th December 2013 
+  end
+
 private
 
   def start_end_time

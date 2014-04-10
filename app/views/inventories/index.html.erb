@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="pull-right actions">
-              <%= link_to 'NEW INVENTORY', new_inventory_path, class: "btn btn-primary action"  %>
+              <%= link_to 'NEW INVENTORY', new_inventory_path, remote: true, class: "btn btn-primary action"  %>
             </div>
           </div>
 
@@ -43,9 +43,6 @@
 
 <h3>Inventories</h3> -->
 
-
-
-
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
@@ -64,7 +61,7 @@
       <td>
         <% @inventories1.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -76,7 +73,7 @@
       <td>
         <% @inventories2.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -88,7 +85,7 @@
       <td>
         <% @inventories3.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -100,7 +97,7 @@
       <td>
         <% @inventories4.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -127,7 +124,7 @@
       <td>
         <% @inventories1.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -140,7 +137,7 @@
       <td>
         <% @inventories2.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -153,7 +150,7 @@
       <td>
         <% @inventories3.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -166,7 +163,7 @@
       <td>
         <% @inventories3.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it %>
+            <%= link_to it.quantity_available, it, remote: true %>
           <% end %>
         <% end %>
       </td>
@@ -197,8 +194,8 @@
                   <td><%= inventory.quantity_available %></td>
                   <td>
                     <div class="pull-right">
-                    <%= link_to '<i class="glyphicon glyphicon-search action" id="viewInventory"></i>'.html_safe, inventory %>
-                    <%= link_to '<i class="glyphicon glyphicon-edit action" id="editInventory"></i>'.html_safe, edit_inventory_path(inventory) if inventory.restaurant.owner == current_owner %>
+                    <%= link_to '<i class="glyphicon glyphicon-search action" id="viewInventory"></i>'.html_safe, inventory, remote: true %>
+                    <%= link_to '<i class="glyphicon glyphicon-edit action" id="editInventory"></i>'.html_safe, edit_inventory_path(inventory), remote: true  if inventory.restaurant.owner == current_owner %>
                     <%= link_to '<i class="glyphicon glyphicon-remove action" id="deleteInventory"></i>'.html_safe, inventory, method: :delete, data: { confirm: 'Are you sure?' } if inventory.restaurant.owner == current_owner %>
                     </div>
                   </td>
@@ -218,6 +215,9 @@
     </div>
   </div>
 </div>
+
+<%= render "modal" %>
+
 
 <script type="text/javascript">
   $(document).ready(function(){

@@ -9,7 +9,43 @@
     <%= f.input :days_in_advance, label: "Days out allow bookings" %>
     </div>
     <div class="col-sm-4 col-lg-4">
-    <%= f.input :min_booking_time, collection: [:"0", :"15", :"30", :"45", :"60", :"90", :"120", :"180", :"1440"], priority: [ :"15" ], include_blank: false ,label: "Minutes in advance bookings close" %>
+    <%= f.input :min_booking_time, collection: [:"0", :"15", :"30", :"45", :"60", :"90", :"120", :"180", :"1440"], priority: [ :"15" ], include_blank: false ,label: "Minutes in advance bookings close", :input_html => { :class => "caret" } %>
+    <%#= f.input :min_booking_time, label: "Minutes in advance bookings close" %>
+
+<!--     <div class="form-group integer required restaurant_min_booking_time">
+      <label class="integer required" for="restaurant_min_booking_time">
+        <abbr title="required">*</abbr> 
+        Minutes in advance bookings close
+      </label>
+      <div class="input-append btn-group">
+        <input class="numeric integer required form-control form-control" id="restaurant_min_booking_time" max="720" min="15" name="restaurant[min_booking_time]" required="required" step="1" type="hidden" value="60">
+
+        <div id="currectVal2" class="inputSelection rregular pull-left"></div>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" id="selection2">
+          <li><a title="0"> 0 minutes</a></li>
+          <li><a title="15"> 15 minutes</a></li>
+          <li><a title="30"> 30 minutes</a></li>
+          <li><a title="45"> 45 minutes</a></li>
+          <li><a title="60"> 1 hour</a></li>
+          <li><a title="90"> 1.5 hours</a></li>
+          <li><a title="120"> 2 hours </a></li>
+          <li><a title="180"> 3 hours </a></li>
+          <li><a title="1440"> 1 day </a></li>
+        </ul>
+        <script type="text/javascript">
+          $('#selection2 > li a').click(function(){
+            var selectVal = $(this).attr("title");
+            $("#restaurant_min_booking_time").attr("value",selectVal);
+            $("#currectVal2").html($(this).html());
+          });
+        </script>
+      </div>
+    </div> -->
+
+
     </div>
     <div class="col-sm-4 col-lg-4">
     <%= f.input :res_duration, collection: [:"30", :"45", :"60", :"75", :"90", :"105"], priority: [ :"30" ], include_blank: false, label: "Duration of each booking" %>
@@ -56,6 +92,18 @@
     <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where('title NOT LIKE ? AND title NOT LIKE ?', 'Cuisine%', 'Location%'), :label => "", :item_wrapper_class => 'checkbox_container' %>
     </div>
   </div>
+
+  <!-- <div class="row" style="margin-left: -15px;">
+    <div class="col-sm-4 col-lg-4">
+      <%#= f.input :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Price%'), include_blank: false , label: "Price" %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+      <%#= f.input :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Star%'), include_blank: false , label: "Stars" %>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+      <%#= f.input :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Parking%'), include_blank: false , label: "Parking" %>
+    </div>
+  </div> -->
 
   <!-- item_wrapper_class => 'checkbox_container'  -->
 

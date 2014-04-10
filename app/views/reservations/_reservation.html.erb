@@ -1,0 +1,65 @@
+<table class="table" border="0" style="text-align:left;"> 
+  <tr> 
+    <td class="my_bold">Reservation:</td> 
+    <td><%= @reservation.full_datetime %></td> 
+  </tr>
+  <tr> 
+    <td class="my_bold"> Party Size: </td> 
+    <td><%= @reservation.party_size %></td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Name: </td> 
+    <td> 
+      <% if @reservation.user %>
+        <%= @reservation.user.username  %>
+      <% else %>
+        <%= @reservation.name %> 
+      <% end %>
+    </td>
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Phone: </td> 
+    <td><%= @reservation.phone %></td> 
+  </tr>
+  <tr>
+    <td class="my_bold"> Email: </td> 
+    <td><%= @reservation.email %></td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Start Time: </td> 
+    <td><%= @reservation.start_time %></td> 
+  </tr> 
+  <tr>
+    <td class="my_bold"> End Time: </td> 
+    <td><%= @reservation.end_time %></td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Confirm Number: </td> 
+    <td> JERYTU </td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Reservation Made: </td> 
+    <td><%= @reservation.created_at_format %></td> 
+  </tr> 
+  <tr> 
+    <td> </td>
+    <td> </td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Reservation Note: </td> 
+    <td> Booth please </td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Booking Channel: </td> 
+    <td><%= ChannelType[@reservation.channel] %></td> 
+  </tr> 
+  <tr> 
+    <td class="my_bold"> Status: </td> 
+    <td><%= @reservation.active ? "Active" : "Not Active" %></td> 
+  </tr> 
+</table>
+
+<hr/>
+<div class="pull-right actions" style="padding-bottom:30px">
+  <button class="btn btn-primary pull-right" onclick="closeModel('viewReservation');">CANCEL</button>
+</div>

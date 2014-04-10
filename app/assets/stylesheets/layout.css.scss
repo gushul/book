@@ -129,3 +129,11 @@ div.language a.red{
   cursor: default;
   z-index: 9999!important;
 }
+
+.btn-primary .caret, .btn-success .caret, .btn-warning .caret, .btn-danger .caret, .btn-info .caret {
+  border-top-color: #000;
+}
+
+.my_bold {
+  font-weight:bold;
+}

@@ -39,8 +39,20 @@ class Inventory < ActiveRecord::Base
     start_time.strftime("%H").to_i
   end
 
+  def start_time_format
+    start_time.strftime('%H:%M') unless start_time.blank?
+  end
+
+  def end_time_format
+    end_time.strftime('%H:%M') unless end_time.blank?
+  end
+
   def date_format 
     date.to_time.strftime('%m/%d/%Y') unless date.blank?
+  end
+
+  def date_format_ext
+    date.to_time.strftime("#{date.day.ordinalize} %B %Y") unless date.blank? # 20th December 2013 
   end
   
 end

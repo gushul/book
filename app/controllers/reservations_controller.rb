@@ -1,4 +1,4 @@
-# encoding: utf-8
+  # encoding: utf-8
 class ReservationsController < ApplicationController
   before_filter :check_who_editing,  
                 except: [:index, :show, :new, :create, :my]
@@ -39,6 +39,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.js
       format.json { render json: @reservation }
     end
   end

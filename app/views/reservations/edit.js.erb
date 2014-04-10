@@ -1,0 +1,7 @@
+$modal = $('.model model-viewReservation'),
+$modalBody = $('.model .content'),
+$modalHeading = $('.model .header .lbold');
+// $modalHeading.html("<%= @reservation.email %>");
+$modalHeading.html("Edit Reservation");
+$modalBody.html("<%= escape_javascript(render 'form') %>");
+$modal.modal();
