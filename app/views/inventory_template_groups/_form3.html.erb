@@ -1,0 +1,22 @@
+<%= simple_form_for(@inventory_template_group) do |f| %>
+  <table  border="0" style="text-align:left;"> 
+    <tr> 
+      <td class="my_bold">Date:</td> 
+      <td><%= f.input :name, label: false %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Start Time:</td> 
+      <td><%= f.input :primary, label: false  %></td>
+    </tr>
+  </table>
+
+  <hr/>
+
+  <div class="actions pull-right">
+    <div>
+      <%= f.submit "UPDATE", class: "btn btn-primary" %>
+      <%= link_to 'CANCEL', inventory_template_groups_path, class: "btn btn-primary"%>
+    </div>
+  </div>
+
+<% end %>

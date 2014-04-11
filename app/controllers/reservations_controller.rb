@@ -141,11 +141,10 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])
     reservation_to_email_attach = @reservation
-    @reservation.destroy
-
+    # @reservation.destroy
    
     respond_to do |format|
-      format.html { redirect_to reservations_url }
+      format.html {  redirect_to(:back) } #redirect_to reservations_url }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,7 @@
+// $modal = $('.model.model-viewInventory'),
+$modalBody = $('.model-viewInventoryT .content'),
+$modalHeading = $('.model-viewInventoryT .header .lbold');
+$modalHeading.html("New Inventory Template");
+$modalBody.html("<%= escape_javascript(render 'form3') %>");
+// $modal.modal();
+openModel("viewInventoryT");

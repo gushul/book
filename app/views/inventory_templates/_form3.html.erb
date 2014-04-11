@@ -1,0 +1,30 @@
+<%= simple_form_for(@inventory_template) do |f| %>
+  <table  border="0" style="text-align:left;"> 
+    <tr> 
+      <td class="my_bold">Inventory Template Group:</td> 
+      <td><%= f.association :inventory_template_group, :collection => current_owner.restaurant.inventory_template_groups, label: false %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Start Time:</td> 
+      <td><%= f.input :start_time, :minute_step => 15, label: false, :time_separator => ""  %></td>
+    </tr>
+    <tr> 
+      <td class="my_bold">End Time:</td> 
+      <td><%= f.input :end_time, :minute_step => 15, label: false, :time_separator => ""  %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Quantity Available:</td> 
+      <td><div style="width:85px"><%= f.input :quantity_available, label: false %></div></td> 
+    </tr>
+  </table>
+
+  <hr/>
+
+  <div class="actions pull-right">
+    <div>
+      <%= f.submit "CREATE", class: "btn btn-primary" %>
+      <button class="btn btn-primary" onclick="closeModel('viewInventoryT');">CANCEL</button>
+    </div>
+  </div>
+
+<% end %>

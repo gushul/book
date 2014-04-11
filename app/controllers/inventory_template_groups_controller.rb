@@ -32,6 +32,7 @@ class InventoryTemplateGroupsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.js 
       format.json { render json: @inventory_template_group }
     end
   end
@@ -43,6 +44,7 @@ class InventoryTemplateGroupsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
+      format.js 
       format.json { render json: @inventory_template_group }
     end
   end
@@ -97,19 +99,21 @@ class InventoryTemplateGroupsController < ApplicationController
     respond_to do |format|
       if @inventory_template_group.update_attributes(params[:inventory_template_group])
         
-        @intervals = Reservation::PERIODS
-        @intervals.each do |interval| 
-          quan = params[:inventory_template_group][:quantity_available]["#{@intervals.index(interval)}".to_s]
-          unless interval == "24:00" or quan.to_i == 0
-            @inventory_template = InventoryTemplate.where(inventory_template_group_id: @inventory_template_group.id).by_time(interval).first
-            if @inventory_template.blank?
-              @inventory_template = InventoryTemplate.new(inventory_template_group_id: @inventory_template_group.id)
-              @inventory_template.start_time = interval
-              @inventory_template.end_time = @intervals[@intervals.index(interval)+1]
-            end
-            @inventory_template.quantity_available = quan
-            @inventory_template.save
-          end 
+        if params[:inventory_template_group][:quantity_available].present?
+            @intervals = Reservation::PERIODS
+            @intervals.each do |interval| 
+              quan = params[:inventory_template_group][:quantity_available]["#{@intervals.index(interval)}".to_s]
+              unless interval == "24:00" or quan.to_i == 0
+                @inventory_template = InventoryTemplate.where(inventory_template_group_id: @inventory_template_group.id).by_time(interval).first
+                if @inventory_template.blank?
+                  @inventory_template = InventoryTemplate.new(inventory_template_group_id: @inventory_template_group.id)
+                  @inventory_template.start_time = interval
+                  @inventory_template.end_time = @intervals[@intervals.index(interval)+1]
+                end
+                @inventory_template.quantity_available = quan
+                @inventory_template.save
+              end 
+            end 
         end 
 
         format.html { redirect_to @inventory_template_group, notice: 'Inventory template was successfully updated.' }
@@ -128,7 +132,7 @@ class InventoryTemplateGroupsController < ApplicationController
     @inventory_template_group.destroy
 
     respond_to do |format|
-      format.html { redirect_to inventory_template_groups_url }
+      format.html { redirect_to(:back) } #redirect_to inventory_template_groups_url }
       format.json { head :no_content }
     end
   end 

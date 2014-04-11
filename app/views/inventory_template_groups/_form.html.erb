@@ -78,8 +78,11 @@
     <% end %>
   </table>
  
-  <div class="actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
+  <div class="actions pull-right">
+    <div>
+      <%= f.submit "CREATE", class: "btn btn-primary" %>
+      <!-- <button class="btn btn-primary" onclick="closeModel('viewInventoryTG');">CANCEL</button> -->
+    </div>
   </div>
   
 <% end %>

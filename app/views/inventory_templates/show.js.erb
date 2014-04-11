@@ -1,0 +1,7 @@
+// $modal = $('.model-viewInventory');
+$modalBody = $('.model-viewInventoryT .content');
+$modalHeading = $('.model-viewInventoryT .header .lbold');
+$modalHeading.html("View Inventory Template");
+$modalBody.html("<%= escape_javascript(render @inventory_template) %>");
+// $modal.modal();
+openModel("viewInventoryT");

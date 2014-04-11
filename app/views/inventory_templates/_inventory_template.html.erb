@@ -1,0 +1,25 @@
+ <table> 
+  <tr> 
+    <td class="my_bold">Inventory Template Group:</td>
+    <td><%= @inventory_template.inventory_template_group.name %></td> 
+  </tr>
+  <tr> 
+    <td class="my_bold">Start time:</td> 
+    <td><%= mtime(@inventory_template.start_time) %></td> 
+  </tr>
+  <tr> 
+    <td class="my_bold">End time:</td> 
+    <td><%= mtime(@inventory_template.end_time) %></td> 
+  </tr>
+  <tr> 
+    <td class="my_bold">Quantity available:</td> 
+    <td><%= @inventory_template.quantity_available %></td> 
+  </tr>
+</table>
+
+<hr/>
+<div class="submit">
+  <button class="btn btn-primary pull-right" onclick="closeModel('viewInventoryT');">CLOSE</button>
+</div>
+<p>
+           
