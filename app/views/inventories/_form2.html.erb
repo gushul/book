@@ -1,0 +1,40 @@
+<%= form_for @inventory do |f| %>
+  <table class="table" border="0" style="text-align:left;"> 
+    <!-- <div style="width:200px"> -->
+    <%#= f.шт :restaurant, label: "Restaurant" %>
+    <%#= f.input :date, as: :date, start_year: Date.today.year,
+                end_year: Date.today.year+1, 
+                order: [:day, :month, :year], label: "Date" %>
+    <%#= f.input :start_time, :minute_step => 15, label: "Start Time" %>
+    <!-- <p>End-time automaticly set as "start-time" + 15 minutes -->
+    <%#= f.input :end_time, :minute_step => 15, label: "End Time" %>
+    <%#= f.input :quantity_available, label: "Quantity Available" %>
+    <!-- </div> -->
+
+      
+    <tr> 
+      <td class="my_bold"><%= f.label :date, 'Date' %>:</td> 
+      <td><%= f.date_select :date, class: "form-control" %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold"><%= f.label :start_time, 'Start Time' %>:</td> 
+      <td><%= f.time_select :start_time, :ignore_date => true, :minute_step => 15, class: "form-control" %></td>
+      <%#= f.datetime_select :start_datetime, :ampm => true, :minute_step => 15 %> 
+    </tr>
+    <tr> 
+      <td class="my_bold"><%= f.label :end_time, 'End Time' %>:</td> 
+      <td><%= f.time_select :end_time, :ignore_date => true, :minute_step => 15, class: "form-control" %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold"><%= f.label :quantity_available, 'Author' %>:</td> 
+      <td><%= f.text_field :quantity_available, class: "form-control", style: "width: 50px" %></td> 
+    </tr>
+  </table>
+  <hr/>
+
+  <div class="actions">
+    <%# = f.submit %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to 'CANCEL', inventories_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

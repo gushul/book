@@ -1,0 +1,32 @@
+<%= simple_form_for(@inventory) do |f| %>
+  <table  border="0" style="text-align:left;"> 
+    <tr> 
+      <td class="my_bold">Date:</td> 
+      <td><%= f.input :date, as: :date, start_year: Date.today.year,
+                end_year: Date.today.year+1, 
+                order: [:day, :month, :year], label: false %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Start Time:</td> 
+      <td><%= f.input :start_time, :minute_step => 15, label: false, :time_separator => ""  %></td>
+    </tr>
+    <tr> 
+      <td class="my_bold">End Time:</td> 
+      <td><%= f.input :end_time, :minute_step => 15, label: false, :time_separator => ""  %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Quantity Available:</td> 
+      <td><div style="width:85px"><%= f.input :quantity_available, label: false %></div></td> 
+    </tr>
+  </table>
+
+  <hr/>
+
+  <div class="actions pull-right">
+    <div>
+      <%= f.submit "UPDATE", class: "btn btn-primary" %>
+      <%= link_to 'CANCEL', inventories_path, class: "btn btn-primary"%>
+    </div>
+  </div>
+
+<% end %>

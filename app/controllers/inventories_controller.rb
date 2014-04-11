@@ -80,7 +80,15 @@ class InventoriesController < ApplicationController
   def update
     @inventory = Inventory.find(params[:id])
     @inventory.restaurant = current_owner.restaurant
-
+    if params[:inventory]["end_time(5i)"].present?
+      params[:inventory]["end_time(5i)"] = (params[:inventory]["start_time(5i)"].to_i + 15).to_s
+      params[:inventory]["end_time(4i)"] = (params[:inventory]["start_time(4i)"].to_i).to_s
+      if params[:inventory]["end_time(5i)"].to_i == 60
+        params[:inventory]["end_time(4i)"] = (params[:inventory]["start_time(4i)"].to_i + 1).to_s
+        params[:inventory]["end_time(5i)"] = "00" 
+      end
+    end
+    
     respond_to do |format|
       if @inventory.update_attributes(params[:inventory])
         format.html { redirect_to @inventory, notice: 'Inventory was successfully updated.' }
@@ -99,7 +107,8 @@ class InventoriesController < ApplicationController
     @inventory.destroy
 
     respond_to do |format|
-      format.html { redirect_to inventories_url }
+      # format.js   { redirect_to inventories_url }
+      format.html { redirect_to(:back) } #redirect_to inventories_url }
       format.json { head :no_content }
     end
   end
