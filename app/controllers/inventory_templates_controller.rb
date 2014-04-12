@@ -134,7 +134,8 @@ class InventoryTemplatesController < ApplicationController
       end 
     end 
 
-    redirect_to inventory_templates_path
+    redirect_to :back,
+        notice: 'Inventory Template was successfully created.'#inventory_templates_path
   end
 
   # PUT /inventory_templates/1

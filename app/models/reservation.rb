@@ -43,7 +43,11 @@ class Reservation < ActiveRecord::Base
 
   scope :active, -> { where active: true }
 
-  def start_time 
+  # def start_time 
+  #   self[:start_time].strftime('%H:%M') unless self[:start_time].blank?
+  # end
+
+  def start_time_format
     self[:start_time].strftime('%H:%M') unless self[:start_time].blank?
   end
 
@@ -51,7 +55,7 @@ class Reservation < ActiveRecord::Base
     self[:start_time] = Time.zone.parse(value.to_s).utc 
   end
 
-  def end_time 
+  def end_time_format
     self[:end_time].strftime('%H:%M') unless self[:end_time].blank?
   end
 
@@ -76,7 +80,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def full_datetime
-    "#{start_time} on #{date.strftime('%A')}, #{date_format_ext}" # 18:00 on Friday, 20th December 2013 
+    "#{start_time_format} on #{date.strftime('%A')}, #{date_format_ext}" # 18:00 on Friday, 20th December 2013 
   end
 
 private

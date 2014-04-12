@@ -116,7 +116,9 @@ class ReservationsController < ApplicationController
         # UserMailer.booking_update(current_user, @reservation).deliver
         # OwnerMailer.booking_update(@reservation).deliver
 
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
+        format.html { redirect_to :back ,
+                      notice: 'Reservation was successfully updated.'
+                      } #redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render json: @reservation }
       else
         format.html { render action: "edit" }

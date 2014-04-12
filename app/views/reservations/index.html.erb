@@ -77,14 +77,14 @@
                     <% end %> 
                   </td>
                   <td>
-                    <% if owner_signed_in? %>
-                      <%= content_tag :div, :class => 'bip_reservation_start_time' do %>
-                        <%= best_in_place reservation, :start_time %>
+                    <%# if owner_signed_in? %>
+                      <%#= content_tag :div, :class => 'bip_reservation_start_time' do %>
+                        <%#= best_in_place reservation, :start_time %>
                         <!-- , :display_with => Proc.new { |f| f.strftime("%H:%M") } -->
-                      <% end %> 
-                    <% else %>
-                      <%= reservation.start_time %>
-                    <% end %> 
+                      <%# end %> 
+                    <%# else %>
+                      <%= reservation.start_time_format %>
+                    <%# end %> 
                   </td>
                   <% unless user_signed_in? %>
                     <% if reservation.user %>

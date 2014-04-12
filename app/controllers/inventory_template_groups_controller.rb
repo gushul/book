@@ -80,7 +80,8 @@ class InventoryTemplateGroupsController < ApplicationController
           end 
         end 
         
-        format.html { redirect_to @inventory_template_group, notice: 'Inventory Template Group was successfully created.' }
+        format.html { redirect_to inventory_template_groups_path, notice: 'Inventory Template Group was successfully created.' }
+        # redirect_to { :back } # notice: 'Inventory Template Group was successfully created.' }
         format.json { render json: @inventory_template_group, status: :created, location: @inventory_template_group }
       else
         format.html { render action: "new" }
@@ -116,7 +117,8 @@ class InventoryTemplateGroupsController < ApplicationController
             end 
         end 
 
-        format.html { redirect_to @inventory_template_group, notice: 'Inventory template was successfully updated.' }
+        # format.html { redirect_to @inventory_template_group, notice: 'Inventory template was successfully updated.' }
+        format.html { redirect_to inventory_template_groups_path, notice: 'Inventory Template Group was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -13,8 +13,11 @@
   <%#= f.input :start_time, :minute_step => 15, label: "Start Time", :input_html => { class: "start_time", :onchange => "auto_set_end_time(#{ @duration.to_json }, #{ owner_signed_in? })" }  %>
   <%#= f.input :end_time %>
   
-  <%= f.input :start_time, collection: @intervals %>
-  <%= f.input :end_time, collection: @intervals %>
+  <%#= f.input :start_time, collection: @intervals %>
+  <%#= f.input :end_time, collection: @intervals %>
+  <%= f.input :start_time, :minute_step => 15, :time_separator => ""%>
+  <%= f.input :end_time, :minute_step => 15, :time_separator => ""%>
+
 
   <%= f.input :party_size, label: "Party Size" %>
 
