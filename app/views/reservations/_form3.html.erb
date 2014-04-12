@@ -1,0 +1,58 @@
+<%= simple_form_for(@reservation) do |f| %>
+  <table  border="0" style="text-align:left;"> 
+    <tr> 
+      <td class="my_bold">Date:</td> 
+      <td><%= f.input :date, as: :date, start_year: Date.today.year,
+                end_year: Date.today.year+1, 
+                order: [:day, :month, :year], label: false %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Start Time:</td> 
+      <td><div style="width:150px"><%= f.input :start_time, collection: @intervals, label: false %></td>
+    </tr>
+    <tr> 
+      <td class="my_bold">End Time:</td> 
+      <td><div style="width:150px"><%= f.input :end_time, collection: @intervals, label: false %></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Party Size:</td> 
+      <td><div style="width:350px"><%= f.input :party_size, label: false %></div></td> 
+    </tr>
+    <% unless user_signed_in? %>
+      <tr> 
+        <td class="my_bold">Name:</td> 
+        <td><div style="width:350px">
+          <%= f.input :name,  label: "Name",  :required => :true, label: false %>
+        </div></td> 
+      </tr>
+      <tr> 
+        <td class="my_bold">Email:</td> 
+        <td><div style="width:350px">
+          <%= f.input :email, label: "Email", :required => :true, label: false %>
+        </div></td> 
+      </tr>
+      <tr> 
+        <td class="my_bold">Phone:</td> 
+        <td><div style="width:350px">
+          <%= f.input :phone, label: "Phone", :required => :true, label: false %>
+        </div></td> 
+      </tr>
+    <% end %>
+    <tr> 
+      <td class="my_bold">Special Request:</td> 
+      <td><div style="width:350px">
+        <%= f.input :special_request, as: :text, input_html: { rows: "3", class: "text_area_for_misc"}, label: false %>
+      </div></td> 
+    </tr>
+  </table>
+
+  <hr/>
+
+  <div class="actions pull-right">
+    <div>
+      <%= f.submit "CREATE", class: "btn btn-primary" %>
+      <button class="btn btn-primary" onclick="closeModel('viewReservation');">CANCEL</button>
+    </div>
+  </div>
+
+<% end %>

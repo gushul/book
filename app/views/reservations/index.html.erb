@@ -29,7 +29,7 @@
           <span><%= pluralize(@reservations.size, 'Reservation') %></span> <span>45 Covers</span>
         </div>
         <div class="pull-right actions">
-          <%= link_to 'NEW RESERVATION', new_reservation_path, class: "btn btn-primary action" if owner_signed_in? or user_signed_in? %>
+          <%= link_to 'NEW RESERVATION', new_reservation_path, remote: true, class: "btn btn-primary action" if owner_signed_in? or user_signed_in? %>
         </div>
         </div>
 

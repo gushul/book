@@ -1,0 +1,7 @@
+// $modal = $('.model .model-viewReservation'),
+$modalBody = $('.model.model-viewReservation .content'),
+$modalHeading = $('.model.model-viewReservation .header .lbold');
+$modalHeading.html("New Reservation");
+$modalBody.html("<%= escape_javascript(render 'form3') %>");
+// $modal.modal();
+openModel("viewReservation");

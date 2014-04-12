@@ -1,12 +1,95 @@
 <%= simple_form_for(@inventory_template_group) do |f| %>
   <table  border="0" style="text-align:left;"> 
     <tr> 
-      <td class="my_bold">Date:</td> 
-      <td><%= f.input :name, label: false %></td> 
+      <td class="my_bold" >Name:</td> 
+      <td><div style="width:85px float:left;"><%= f.input :name, label: false %> </div></td> 
     </tr>
     <tr> 
-      <td class="my_bold">Start Time:</td> 
+      <td class="my_bold" >Default Quantity:</td> 
+      <td >
+          <div style="width:85px">
+          <div class="input integer optional">
+            <input id="default" class="numeric integer optional form-control" step="1" type="number" value="10">
+            <%#= text_field_tag "Default", nil, :value => '10' %>
+          </div>
+          </div>
+      </td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Primary:</td> 
       <td><%= f.input :primary, label: false  %></td>
+    </tr>
+    <tr> 
+      <td colspan="2">
+        
+    <table style="width:500px;">
+    <thead>
+      <tr>
+        <th></th>
+        <th>:00</th>
+        <th>:15</th>
+        <th>:30</th>
+        <th>:45</th>
+        <th></th>
+      </tr>
+      </thead>
+    <% get_intervals.each_with_index do |interval, index| %>
+      <% if index%4 == 0 and interval != "24:00" %> 
+        <tr>
+          <td style="font-weight:bold;"><%= interval.slice(0..1) %></td>
+          <td>
+            <% qnt = 0 %>
+            <% if @itg1.present? %>
+              <% @itg1.each do |it| %>
+                <% if it.start_time_hour == index/4 %>
+                  <% qnt = it.quantity_available %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= f.input "quantity_available[#{@intervals.index(interval)}]" , label: false, :input_html => { :value => qnt, class: 'inventory_template_group_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <% qnt = 0 %>
+            <% if @itg2.present? %>
+              <% @itg2.each do |it| %>
+                <% if it.start_time_hour == index/4 %>
+                  <% qnt = it.quantity_available %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= f.input "quantity_available[#{@intervals.index(interval)+1}]" , label: false, :input_html => { :value => qnt, class: 'inventory_template_group_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <% qnt = 0 %>
+            <% if @itg3.present? %>
+              <% @itg3.each do |it| %>
+                <% if it.start_time_hour == index/4 %>
+                  <% qnt = it.quantity_available %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= f.input "quantity_available[#{@intervals.index(interval)+2}]" , label: false, :input_html => { :value => qnt, class: 'inventory_template_group_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <% qnt = 0 %>
+            <% if @itg4.present? %>
+              <% @itg4.each do |it| %>
+                <% if it.start_time_hour == index/4 %>
+                  <% qnt = it.quantity_available %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= f.input "quantity_available[#{@intervals.index(interval)+3}]" , label: false, :input_html => { :value => qnt, class: 'inventory_template_group_quantity_available' }, as: :integer %>
+          </td>
+          <td>
+            <%= link_to "Default", "#", :id => "#{@intervals.index(interval)}", remote: true, :class => "btn btn-mini btn-success btn-it-def itg_def_quantity[#{@intervals.index(interval)}]"%>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+
+      </td> 
     </tr>
   </table>
 
