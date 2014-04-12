@@ -93,8 +93,86 @@
     </div>
   </div>
 
-  <!-- <div class="row" style="margin-left: -15px;">
-    <div class="col-sm-4 col-lg-4">
+
+
+  <div class="row" style="margin-left: -15px;">
+
+<div class="col-sm-12">
+                    <div class="col-sm-4">
+                      Price
+                      <div class="input-append btn-group">
+                      <input id="price" name="price" type="hidden">
+                      <div id="currectVal4" class="inputSelection rregular pull-left"></div>
+                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" id="selection4">
+                        <li><a title="1"> $</a></li>
+                        <li><a title="2"> $$</a></li>
+                        <li><a title="3"> $$$</a></li>
+                        <li><a title="4"> $$$$</a></li>
+                        <li><a title="5"> $$$$$</a></li>
+                      </ul>
+                      <script type="text/javascript">
+                        $('#selection4 > li a').click(function(){
+                          var selectVal = $(this).attr("title");
+                          $("#price").attr("value",selectVal);
+                          $("#currectVal4").html($(this).html());
+                        });
+                      </script>
+                    </div>
+                    </div>
+                    <div class="col-sm-4">
+                      Stars
+                      <div class="input-append btn-group">
+                      <input id="star" name="star" type="hidden">
+                      <div id="currectVal5" class="inputSelection rregular pull-left"></div>
+                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" id="selection5">
+                        <li><a title="1"> <i class="glyphicon glyphicon-star pink"></i></a></li>
+                        <li><a title="2"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
+                        <li><a title="3"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
+                        <li><a title="4"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
+                        <li><a title="5"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
+                      </ul>
+                      <script type="text/javascript">
+                        $('#selection5 > li a').click(function(){
+                          var selectVal = $(this).attr("title");
+                          $("#star").attr("value",selectVal);
+                          $("#currectVal5").html($(this).html());
+                        });
+                      </script>
+                    </div>
+                    </div>
+                    <div class="col-sm-4">
+                      Parking
+                      <div class="input-append btn-group">
+                      <input id="parking" name="parking" type="hidden">
+                      <div id="currectVal6" class="inputSelection rregular pull-left"></div>
+                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" id="selection6">
+                        <li><a title="1"> Valet Parking</a></li>
+                        <li><a title="2"> Yes</a></li>
+                        <li><a title="3"> No</a></li>
+                        <li><a title="4"> OK</a></li>
+                        <li><a title="5"> Thank You</a></li>
+                      </ul>
+                      <script type="text/javascript">
+                        $('#selection6 > li a').click(function(){
+                          var selectVal = $(this).attr("title");
+                          $("#parking").attr("value",selectVal);
+                          $("#currectVal6").html($(this).html());
+                        });
+                      </script>
+                    </div>
+                    </div>
+                  </div>
+
+<!--     <div class="col-sm-4 col-lg-4">
       <%#= f.input :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Price%'), include_blank: false , label: "Price" %>
     </div>
     <div class="col-sm-4 col-lg-4">
@@ -102,8 +180,8 @@
     </div>
     <div class="col-sm-4 col-lg-4">
       <%#= f.input :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Parking%'), include_blank: false , label: "Parking" %>
-    </div>
-  </div> -->
+    </div> -->
+  </div>
 
   <!-- item_wrapper_class => 'checkbox_container'  -->
 
@@ -113,27 +191,207 @@
   <h3 class="rmedium">Schedule</h3>
   <div class="row" style="margin-left: -15px;">
     <div class="col-sm-3 col-lg-3">
-    <%= f.input :mon, collection: @restaurant.inventory_template_groups %>
+      <%#= f.input :mon, collection: @restaurant.inventory_template_groups %>
+        Monday<br>
+        <div class="input-append btn-group">
+        <input id="restaurant_mon" name="restaurant[mon]" type="hidden" value="<%= @restaurant.mon.present? && @restaurant.mon != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.mon).id : "" %>">
+        <div id="currectVal7" class="inputSelection rregular pull-left"><%= @restaurant.mon.present?  && @restaurant.mon != 0 ? @restaurant.inventory_template_groups.find(@restaurant.mon).name : "" %></div>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" id="selection7">
+          <li><a title="0">&nbsp;</a></li>
+          <% @restaurant.inventory_template_groups.each do |itg| %>
+            <%= content_tag :li do -%>
+              <a title="<%= itg.id %>"><%= itg.name %></a>
+            <% end %>
+          <% end %>
+        </ul>
+        <script type="text/javascript">
+          $('#selection7 > li a').click(function(){
+            var selectVal = $(this).attr("title");
+            $("#monday").attr("value",selectVal);
+            $("#restaurant_mon").attr("value",selectVal);
+            $("#currectVal7").html($(this).html());
+          });
+        </script>
+      </div>
+
+   
     </div>
     <div class="col-sm-3 col-lg-3">
-    <%= f.input :tue, collection: @restaurant.inventory_template_groups %>
+    <%#= f.input :tue, collection: @restaurant.inventory_template_groups %>
+          Tuesday<br>
+          <div class="input-append btn-group">
+          <input id="restaurant_tue" name="restaurant[tue]" type="hidden" value="<%= @restaurant.tue.present? && @restaurant.tue != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.tue).id : "" %>">
+          <div id="currectVal8" class="inputSelection rregular pull-left"><%= @restaurant.tue.present?  && @restaurant.tue != 0 ? @restaurant.inventory_template_groups.find(@restaurant.tue).name : "" %></div>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" id="selection8">
+            <li><a title="0">&nbsp;</a></li>
+            <% @restaurant.inventory_template_groups.each do |itg| %>
+              <%= content_tag :li do -%>
+                <a title="<%= itg.id %>"><%= itg.name %></a>
+              <% end %>
+            <% end %>
+          </ul>
+          <script type="text/javascript">
+            $('#selection8 > li a').click(function(){
+              var selectVal = $(this).attr("title");
+              $("#tueday").attr("value",selectVal);
+              $("#restaurant_tue").attr("value",selectVal);
+              $("#currectVal8").html($(this).html());
+            });
+          </script>
+        </div>
+
+
     </div>
     <div class="col-sm-3 col-lg-3">
-    <%= f.input :wed, collection: @restaurant.inventory_template_groups %>
+    <%#= f.input :wed, collection: @restaurant.inventory_template_groups %>
+          Wednesday<br>
+          <div class="input-append btn-group">
+          <input id="restaurant_wed" name="restaurant[wed]" type="hidden" value="<%= @restaurant.wed.present? && @restaurant.wed != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.wed).id : "" %>">
+          <div id="currectVal9" class="inputSelection rregular pull-left"><%= @restaurant.wed.present? && @restaurant.wed != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.wed).name : "" %></div>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" id="selection9">
+            <li><a title="0">&nbsp;</a></li>
+            <% @restaurant.inventory_template_groups.each do |itg| %>
+              <%= content_tag :li do -%>
+                <a title="<%= itg.id %>"><%= itg.name %></a>
+              <% end %>
+            <% end %>
+          </ul>
+          <script type="text/javascript">
+            $('#selection9 > li a').click(function(){
+              var selectVal = $(this).attr("title");
+              $("#wednesday").attr("value",selectVal);
+              $("#restaurant_wed").attr("value",selectVal);
+              $("#currectVal9").html($(this).html());
+            });
+          </script>
+        </div>
+
+
     </div>
     <div class="col-sm-3 col-lg-3">
-    <%= f.input :thu, collection: @restaurant.inventory_template_groups %>
+    <%#= f.input :thu, collection: @restaurant.inventory_template_groups %>
+          Thursday<br>
+          <div class="input-append btn-group">
+          <input id="restaurant_thu" name="restaurant[thu]" type="hidden" value="<%= @restaurant.thu.present? && @restaurant.thu != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.thu).id : "" %>">
+          <div id="currectVal10" class="inputSelection rregular pull-left"><%= @restaurant.thu.present? && @restaurant.thu != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.thu).name : "" %></div>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" id="selection10">
+            <li><a title="0">&nbsp;</a></li>
+            <% @restaurant.inventory_template_groups.each do |itg| %>
+              <%= content_tag :li do -%>
+                <a title="<%= itg.id %>"><%= itg.name %></a>
+              <% end %>
+            <% end %>
+          </ul>
+          <script type="text/javascript">
+            $('#selection10 > li a').click(function(){
+              var selectVal = $(this).attr("title");
+              $("#thursday").attr("value",selectVal);
+              $("#restaurant_thu").attr("value",selectVal);
+              $("#currectVal10").html($(this).html());
+            });
+          </script>
+        </div>
+
+
     </div>
   </div>
   <div class="row" style="margin-left: -15px;">
     <div class="col-sm-3 col-lg-3">
-    <%= f.input :fri, collection: @restaurant.inventory_template_groups %>
+    <%#= f.input :fri, collection: @restaurant.inventory_template_groups %>
+        Friday<br>
+        <div class="input-append btn-group">
+        <input id="restaurant_fri" name="restaurant[fri]" type="hidden" value="<%= @restaurant.fri.present? && @restaurant.fri != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.fri).id : "" %>">
+        <div id="currectVal11" class="inputSelection rregular pull-left"><%= @restaurant.fri.present? && @restaurant.fri != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.fri).name : "" %></div>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" id="selection11">
+          <li><a title="0">&nbsp;</a></li>
+          <% @restaurant.inventory_template_groups.each do |itg| %>
+            <%= content_tag :li do -%>
+              <a title="<%= itg.id %>"><%= itg.name %></a>
+            <% end %>
+          <% end %>
+        </ul>
+        <script type="text/javascript">
+          $('#selection11 > li a').click(function(){
+            var selectVal = $(this).attr("title");
+            $("#friday").attr("value",selectVal);
+            $("#restaurant_fri").attr("value",selectVal);
+            $("#currectVal11").html($(this).html());
+          });
+        </script>
+      </div>
+
     </div>
     <div class="col-sm-3 col-lg-3">
-    <%= f.input :sat, collection: @restaurant.inventory_template_groups %>
+    <%#= f.input :sat, collection: @restaurant.inventory_template_groups %>
+        Saturday<br>
+        <div class="input-append btn-group">
+        <input id="restaurant_sat" name="restaurant[sat]" type="hidden" value="<%= @restaurant.sat.present? && @restaurant.sat != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.sat).id : "" %>">
+        <div id="currectVal12" class="inputSelection rregular pull-left"><%= @restaurant.sat.present? && @restaurant.sat != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.sat).name : "" %></div>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" id="selection12">
+          <li><a title="0">&nbsp;</a></li>
+          <% @restaurant.inventory_template_groups.each do |itg| %>
+            <%= content_tag :li do -%>
+              <a title="<%= itg.id %>"><%= itg.name %></a>
+            <% end %>
+          <% end %>
+        </ul>
+        <script type="text/javascript">
+          $('#selection12 > li a').click(function(){
+            var selectVal = $(this).attr("title");
+            $("#saturday").attr("value",selectVal);
+            $("#restaurant_sat").attr("value",selectVal);
+            $("#currectVal12").html($(this).html());
+          });
+        </script>
+      </div>
+
+
     </div>
     <div class="col-sm-3 col-lg-3">
-    <%= f.input :sun, collection: @restaurant.inventory_template_groups %>
+    <%#= f.input :sun, collection: @restaurant.inventory_template_groups %>
+        Sunday<br>
+        <div class="input-append btn-group">
+        <input id="restaurant_sun" name="restaurant[sun]" type="hidden" value="<%= @restaurant.sun.present? && @restaurant.sun != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.sun).id : "" %>">
+        <div id="currectVal13" class="inputSelection rregular pull-left"><%= @restaurant.sun.present? && @restaurant.sun != 0  ? @restaurant.inventory_template_groups.find_by_id(@restaurant.sun).name : "" %></div>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" id="selection13">
+          <li><a title="0">&nbsp;</a></li>
+          <% @restaurant.inventory_template_groups.each do |itg| %>
+            <%= content_tag :li do -%>
+              <a title="<%= itg.id %>"><%= itg.name %></a>
+            <% end %>
+          <% end %>
+        </ul>
+        <script type="text/javascript">
+          $('#selection13 > li a').click(function(){
+            var selectVal = $(this).attr("title");
+            $("#sunday").attr("value",selectVal);
+            $("#restaurant_sun").attr("value",selectVal);
+            $("#currectVal13").html($(this).html());
+          });
+        </script>
+      </div>
+
     </div>
   </div>
     
