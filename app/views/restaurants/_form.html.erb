@@ -89,88 +89,128 @@
     </div>
     <div class="col-sm-4 col-lg-4">
     <h4 class="rmedium" style="font-weight: bold; margin-left:40px;">Other</h4>
-    <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where('title NOT LIKE ? AND title NOT LIKE ?', 'Cuisine%', 'Location%'), :label => "", :item_wrapper_class => 'checkbox_container' %>
+    <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where('title NOT LIKE ? AND title NOT LIKE ? AND title NOT LIKE ? AND title NOT LIKE ? AND title NOT LIKE ?', 'Cuisine%', 'Location%', 'Price%', 'Star%', 'Parking%'), :label => "", :item_wrapper_class => 'checkbox_container' %>
     </div>
   </div>
 
 
-
+  <br/>
   <div class="row" style="margin-left: -15px;">
 
-<div class="col-sm-12">
-                    <div class="col-sm-4">
-                      Price
-                      <div class="input-append btn-group">
-                      <input id="price" name="price" type="hidden">
-                      <div id="currectVal4" class="inputSelection rregular pull-left"></div>
-                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu" id="selection4">
-                        <li><a title="1"> $</a></li>
-                        <li><a title="2"> $$</a></li>
-                        <li><a title="3"> $$$</a></li>
-                        <li><a title="4"> $$$$</a></li>
-                        <li><a title="5"> $$$$$</a></li>
-                      </ul>
-                      <script type="text/javascript">
-                        $('#selection4 > li a').click(function(){
-                          var selectVal = $(this).attr("title");
-                          $("#price").attr("value",selectVal);
-                          $("#currectVal4").html($(this).html());
-                        });
-                      </script>
-                    </div>
-                    </div>
-                    <div class="col-sm-4">
-                      Stars
-                      <div class="input-append btn-group">
-                      <input id="star" name="star" type="hidden">
-                      <div id="currectVal5" class="inputSelection rregular pull-left"></div>
-                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu" id="selection5">
-                        <li><a title="1"> <i class="glyphicon glyphicon-star pink"></i></a></li>
-                        <li><a title="2"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
-                        <li><a title="3"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
-                        <li><a title="4"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
-                        <li><a title="5"> <i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i><i class="glyphicon glyphicon-star pink"></i></a></li>
-                      </ul>
-                      <script type="text/javascript">
-                        $('#selection5 > li a').click(function(){
-                          var selectVal = $(this).attr("title");
-                          $("#star").attr("value",selectVal);
-                          $("#currectVal5").html($(this).html());
-                        });
-                      </script>
-                    </div>
-                    </div>
-                    <div class="col-sm-4">
-                      Parking
-                      <div class="input-append btn-group">
-                      <input id="parking" name="parking" type="hidden">
-                      <div id="currectVal6" class="inputSelection rregular pull-left"></div>
-                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu" id="selection6">
-                        <li><a title="1"> Valet Parking</a></li>
-                        <li><a title="2"> Yes</a></li>
-                        <li><a title="3"> No</a></li>
-                        <li><a title="4"> OK</a></li>
-                        <li><a title="5"> Thank You</a></li>
-                      </ul>
-                      <script type="text/javascript">
-                        $('#selection6 > li a').click(function(){
-                          var selectVal = $(this).attr("title");
-                          $("#parking").attr("value",selectVal);
-                          $("#currectVal6").html($(this).html());
-                        });
-                      </script>
-                    </div>
-                    </div>
-                  </div>
+    <div class="col-sm-12">
+    <%#= f.association :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Price%'), include_blank: false , label: "Price" %>
+    <%#= f.association :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Star%'), include_blank: false , label: "Stars" %>
+    <%#= f.association :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Parking%'), include_blank: false , label: "Parking" %>
+
+        <div class="col-sm-4">
+              Price
+              <div class="input-append btn-group">
+              <input id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]" type="hidden"  value="<%= @restaurant.price_format(1) %>">
+              <div id="currectVal4" class="inputSelection rregular pull-left"><%= @restaurant.price_format_with_dollar %></div>
+              <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" id="selection4">
+                <% RestaurantTag.where('title LIKE ?', 'Price%').each do |tag| %>
+                  <%= content_tag :li do -%>
+                    <a title="<%= tag.id %>">
+                      <% tag.title.slice(6..tag.title.length).to_i.times do %>
+                        $
+                      <% end %>
+                    </a>
+                  <% end %>
+                <% end %>
+              </ul>
+              <script type="text/javascript">
+                $('#selection4 > li a').click(function(){
+                  var selectVal = $(this).attr("title");
+                  $("#price").attr("value",selectVal);
+                  $("#restaurant_restaurant_tag_ids").attr("value",selectVal);
+                  $("#currectVal4").html($(this).html());
+                });
+              </script>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4">
+            Stars
+            <div class="input-append btn-group">
+            <div id="prestars">
+              <input id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]" type="hidden" value="<%= @restaurant.get_star_id %>">
+            </div>  
+            <div id="currectVal5" class="inputSelection rregular pull-left">
+              <% if @restaurant.get_star_id.present?%>
+                    <% @restaurant.star_format.times do |s| %>
+                      <i class="glyphicon glyphicon-star pink"></i>
+                    <% end %>
+                    <% if @restaurant.star_format_f - @restaurant.star_format > 0  %>
+                      <i class="glyphicon glyphicon-star pink" style="width:4px;"></i>
+                      <i style="position: relative; display: inline-block; background: white; width: 10px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                    <% end %>
+              <% end %>
+            </div>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="selection5">
+              <% RestaurantTag.where('title LIKE ?', 'Star%').each do |tag| %>
+                <%= content_tag :li do -%>
+                  <a title="<%= tag.id %>">
+                    <% ttf = tag.title.slice(5..tag.title.length).to_f  %>
+                    <% tti = tag.title.slice(5..tag.title.length).to_i  %>
+                    <% tag.title.slice(5..tag.title.length).to_i.times do |t| %>
+                      <i class="glyphicon glyphicon-star pink"></i>   
+                    <% end %>
+                    <% if ttf - tti > 0  %>
+                      <i class="glyphicon glyphicon-star pink" style="width:3px;"></i>
+                      <i style="position: relative; display: inline-block; background:white; width: 10px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                    <% end %>
+                  </a>
+                <% end %>
+              <% end %>
+            </ul>
+            <script type="text/javascript">
+              $('#selection5 > li a').click(function(){
+                var selectVal = $(this).attr("title");
+                $("#star").attr("value",selectVal);
+                $("#prestars #restaurant_restaurant_tag_ids").attr("value",selectVal);
+                $("#currectVal5").html($(this).html());
+              });
+            </script>
+          </div>
+        </div>
+
+
+
+        <div class="col-sm-4">
+                Parking
+                <div class="input-append btn-group">
+                <div id="preparking">
+                  <input id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]" type="hidden" value="<%= @restaurant.get_parking_id %>">
+                </div>
+                <div id="currectVal6" class="inputSelection rregular pull-left"><%= @restaurant.parking_format %></div>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" id="selection6">
+                  <%  RestaurantTag.where('title LIKE ?', 'Parking%').each do |tag| %>
+                    <%= content_tag :li do -%>
+                      <a title="<%= tag.id %>"><%= tag.title.slice(8..tag.title.length) %></a>
+                    <% end %>
+                  <% end %>
+                </ul>
+                <script type="text/javascript">
+                  $('#selection6 > li a').click(function(){
+                    var selectVal = $(this).attr("title");
+                    $("#parking").attr("value",selectVal);
+                    $("#preparking #restaurant_restaurant_tag_ids").attr("value",selectVal);
+                    $("#currectVal6").html($(this).html());
+                  });
+                </script>
+              </div>
+              </div>
+          </div>
 
 <!--     <div class="col-sm-4 col-lg-4">
       <%#= f.input :restaurant_tags, :as => :select, collection: RestaurantTag.where('title LIKE ?', 'Price%'), include_blank: false , label: "Price" %>

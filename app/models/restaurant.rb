@@ -209,16 +209,47 @@ class Restaurant < ActiveRecord::Base
     unless tag.blank?
       return tag.title.slice(8..tag.title.length)
     end
-    "No"
+    "None"
   end
 
-  def price_format
+  def get_parking_id
+    tag = restaurant_tags.where("title LIKE ?", "Parking:%").first
+    unless tag.blank?
+      return tag.id
+    end
+    RestaurantTag.where("title LIKE ?", "Parking:None").first.id
+  end
+
+  def price_format(id = 0)
     tags = restaurant_tags.where("title LIKE ?", "Price:%").map(&:title)
     tag = tags.sort.last
     unless tag.blank?
-      return tag.slice(6..tag.length).to_i
+      if id == 0
+        return tag.slice(6..tag.length).to_i
+      else
+        return restaurant_tags.where("title LIKE ?", tag).first.id
+      end
     end
     0
+  end
+
+  def price_format_with_dollar
+    tags = restaurant_tags.where("title LIKE ?", "Price:%").map(&:title)
+    tag = tags.sort.last
+    unless tag.blank?
+      num = tag.slice(6..tag.length).to_i
+      if num == 1 
+        num = "$"
+      elsif num == 2
+        num = "$$"
+      elsif num == 3
+        num = "$$$"
+      else
+        num = "$$$$"
+      end
+      return num
+    end
+    "Not Specified"
   end
 
   def price_desc
@@ -262,6 +293,14 @@ class Restaurant < ActiveRecord::Base
       return tag.title.slice(5..tag.title.length).to_i
     end
     0
+  end
+
+  def get_star_id
+    tag = restaurant_tags.where("title LIKE ?", "Star:%").first
+    unless tag.blank?
+      return tag.id
+    end
+    ""
   end
 
   def star_format_f
