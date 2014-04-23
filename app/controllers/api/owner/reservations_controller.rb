@@ -10,6 +10,7 @@ class Api::Owner::ReservationsController < ApplicationController
     @reservations = @owner.restaurant.reservations
     @reservations_json = []
     @reservations.each do |r|
+      ro = r
       r = r.as_json
       # r[:quality] = rand(10)
       user = User.where(id: r[:user_id]).first
@@ -28,6 +29,8 @@ class Api::Owner::ReservationsController < ApplicationController
           r[:quality] = ( res.map(&:active).flatten.count(true) - res.map(&:no_show).flatten.count(true) ) / res.map(&:active).flatten.count(true)
         end
       end
+      r[:start_time] = ro.start_time_format
+      r[:end_time] = ro.end_time_format
       # %w{user_id}.each {|k| r.delete(k)}
       @reservations_json << r
     end

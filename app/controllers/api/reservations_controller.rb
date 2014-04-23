@@ -10,8 +10,11 @@ class Api::ReservationsController < ApplicationController
     @reservations = @user.reservations
     @reservations_json = []
     @reservations.each do |r|
+      ro = r
       r = r.as_json
       %w{arrived email no_show owner_id}.each {|k| r.delete(k)}
+      r[:start_time] = ro.start_time_format
+      r[:end_time] = ro.end_time_format
       @reservations_json << r
     end
 
