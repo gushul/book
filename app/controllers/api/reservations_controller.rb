@@ -25,6 +25,7 @@ class Api::ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(params[:reservation])
     @reservation.user_id = @user.id
+    @reservation.active = true
 
     respond_to do |format|
       if @reservation.save 
