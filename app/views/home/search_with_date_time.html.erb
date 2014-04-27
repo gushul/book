@@ -51,12 +51,14 @@
                     <div class="col-sm-12 col-lg-3 right">
                       <h4 class="rmedium">Book Now :</h4>
                       <% id = user_signed_in? ? "check" : "login" %>
-                      <% @inventories[index].each do |time| %>
-                        <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">
-                          <%= time %>
-                        </button> -->
-                        <!-- :date => @date, :time => @time, :people => @people -->
-                        <%= button_to time, book_restaurant_path(:id => restaurant.id, :datepicker => @date, :timepicker => time, :people => @people, :status => "check"), :class => "btn btn-primary lblack action", :method => :get %>
+                      <% if @inventories[index].present? %>
+                        <% @inventories[index].each do |time| %>
+                          <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">
+                            <%= time %>
+                          </button> -->
+                          <!-- :date => @date, :time => @time, :people => @people -->
+                          <%= button_to time, book_restaurant_path(:id => restaurant.id, :datepicker => @date, :timepicker => time, :people => @people, :status => "check"), :class => "btn btn-primary lblack action", :method => :get %>
+                        <% end %>
                       <% end %>
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.00PM</button> -->
                       <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">6.15PM</button> -->
