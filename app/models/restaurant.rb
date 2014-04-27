@@ -157,7 +157,8 @@ class Restaurant < ActiveRecord::Base
   end
 
   def check_availability(date, time, people)
-    if self.inventories.where('date = ? AND start_time = ? AND quantity_available >= ?', date, "2000-01-01 #{time}:00", people)
+    time = Time.strptime(time, '%H:%M %p').to_s.slice(11..15) 
+    if self.inventories.where('date = ? AND start_time = ? AND quantity_available >= ?', date, "2000-01-01 #{time}:00", people).present?
       return true
     end
     false
