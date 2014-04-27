@@ -84,6 +84,15 @@ class HomeController < ApplicationController
         @search_results_full = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%")
         @search_results = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%").page(params[:page])
       end
+    elsif !params['srch-location'].blank?
+      if params['datepicker'].present?
+        date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
+        # @search_results_full = Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date)
+        # @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
+      # else
+        @search_results_full = Restaurant.where("name like ? OR address like ?", "%#{params['srch-location']}%", "%#{params['srch-location']}%")
+        @search_results = Restaurant.where("name like ? OR address like ?", "%#{params['srch-location']}%", "%#{params['srch-location']}%").page(params[:page])
+      end
     elsif !params['datepicker'].blank? && !params['timepicker'].blank?
       @date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
       @time = Time.strptime(params['timepicker'], '%H:%M %p').to_s.slice(11..15) 
