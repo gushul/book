@@ -77,7 +77,7 @@ class HomeController < ApplicationController
 
     if !params['srch-restaurant'].blank?
       if params['datepicker'].present?
-        date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
+        @date = Date.strptime(params['datepicker'], '%m/%d/%Y') 
         # @search_results_full = Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date)
         # @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
       # else
@@ -133,13 +133,14 @@ class HomeController < ApplicationController
   def check_availability
     if current_user.present? || current_owner.present? 
       @restaurant = Restaurant.find(params[:restaurant_id])
-      date = params[:datepicker]
+      date = params[:datepicker].gsub!('/','-')
+      @date = date
       time = params[:timepicker]
       people = params[:people]
       # available = false
       available = @restaurant.check_availability(date, time, people)
       r_path = book_restaurant_path(:id => @restaurant.id, 
-        :datepicker => date.gsub!('/','-'), 
+        :datepicker => date, 
         :timepicker => time, 
         :people => people,
         :status => available.to_s)

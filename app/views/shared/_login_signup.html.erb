@@ -89,7 +89,7 @@
 <% end %>
 
 
-
+<% if controller.to_s.include? "Restaurants" %>
 <div class="model model-check">
   <div class="header">
     <i class="glyphicon glyphicon-remove" onclick="closeModel('check');"></i>
@@ -171,6 +171,7 @@
 
   </div>
 </div>
+<% end %>
 
 <% unless params[:status].blank? %>
 <div class="model model-reservation">
