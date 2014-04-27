@@ -244,7 +244,7 @@
       <h5 class="rregular" style="text-align:left;">on 
         <span class="pink">
           <!-- October 31 2013  -->
-          <%= params["datepicker"].blank? ? "" : params["datepicker"].to_date.to_formatted_s(:long) %>, 
+          <%= params["datepicker"].blank? ? "" :  Date.strptime(params['datepicker'], '%m-%d-%Y').to_formatted_s(:long) %>, 
           <!-- 6:15 PM -->
           <%= params["timepicker"].blank? ? "" : params["timepicker"] %>
         </span>.
