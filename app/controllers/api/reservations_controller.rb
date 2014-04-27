@@ -29,7 +29,10 @@ class Api::ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save 
-        format.json { render json: @reservation, status: 200 }
+        reservation = @reservation.as_json
+        reservation[:start_time]  = @reservation.start_time_format
+        reservation[:end_time]    = @reservation.end_time_format
+        format.json { render json: reservation, status: 200 }
       else
         format.json {
 #				render json: @reservation.errors, 
@@ -47,7 +50,10 @@ class Api::ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
-        format.json { render json: @reservation, status: 200 }
+        reservation = @reservation.as_json
+        reservation[:start_time]  = @reservation.start_time_format
+        reservation[:end_time]    = @reservation.end_time_format
+        format.json { render json: reservation, status: 200 }
       else
         format.json { 
 	
