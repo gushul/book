@@ -51,7 +51,7 @@
                     <div class="col-sm-12 col-lg-3 right">
                       <h4 class="rmedium">Book Now :</h4>
                       <% id = user_signed_in? ? "check" : "login" %>
-                      <% if @inventories[index].present? %>
+                      <% if @inventories.present? &&  @inventories[index].present? %>
                         <% @inventories[index].each do |time| %>
                           <!-- <button type="button" id="<%= id %>" class="btn btn-primary lblack action">
                             <%= time %>
