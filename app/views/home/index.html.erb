@@ -243,6 +243,9 @@
                 <hr>
               <% end %>
             </ul>
+            <div class="navigation">
+              <%= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+            </div>
           </div>
           
           <!-- /.NEW -->
@@ -295,6 +298,9 @@
               <hr>
               <% end %>
             </ul>
+            <div class="navigation">
+              <%= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+            </div>
           </div>
           
           <!-- /.MOST POPULAR -->
@@ -347,6 +353,9 @@
                 <hr>
               <% end %>
             </ul>
+            <div class="navigation">
+              <%= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+            </div>
           </div>
           <!-- /.RECOMMENDATION -->
         </div>

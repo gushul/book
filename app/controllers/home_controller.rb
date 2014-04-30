@@ -38,7 +38,8 @@ class HomeController < ApplicationController
     # arr = arr.sample(3)
     arr = arr.sample(Restaurant.count)
     arr.each {|id| @restaurants <<  Restaurant.find(id) }
-
+    # @restaurants = @restaurants.page(params[:page]).per(5)
+    @restaurants = Kaminari.paginate_array(@restaurants).page(params[:page]).per(5)
   end
 
   # GET /search/:search_term
