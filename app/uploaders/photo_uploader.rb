@@ -20,6 +20,14 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # version :v270x150v2 do
   #   process :resize_and_pad => [270, 150, :transparent, ::Magick::CenterGravity]
   # end
+
+  version :original do
+    # process :resize_to_fit => [280, 160]#, ::Magick::CenterGravity]
+  end
+
+  version :v600x480 do
+    process :resize_to_fit => [600, 480]#, ::Magick::CenterGravity]
+  end
   
   version :v280x160 do
     process :resize_to_fit => [280, 160]#, ::Magick::CenterGravity]

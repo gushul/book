@@ -77,6 +77,10 @@ class Restaurant < ActiveRecord::Base
     self.restaurant_tags.where("title LIKE ?", "#{group}:%").map{|t| t.title.gsub( /.*:/, "" ) }
   end
 
+  def cover_photos
+    self.photos.covers 
+  end
+
   def self.generate_schedule
     @intervals = []
       24.times do |h| 
@@ -163,6 +167,25 @@ class Restaurant < ActiveRecord::Base
       return true
     end
     false
+  end
+
+  def check_availability_for_api(date, time, people)
+    time = time.to_time.to_s.slice(11..15) 
+    date = date.to_date.strftime('%Y-%m-%d')
+    if !self.inventories.where('date = ? AND start_time = ? AND quantity_available >= ?', date, "2000-01-01 #{time}:00", people).present?
+      return 'ERR:No seats defined for this time'
+    else 
+      inv = self.inventories.where('date = ? AND start_time = ? AND quantity_available >= ?', date, "2000-01-01 #{time}:00", people)
+      res = self.reservations.where('date = ? AND start_time = ? AND party_size >= ?', date, "2000-01-01 #{time}:00", people)
+      if inv.present?
+        if res.present? && (inv.first.quantity_available - res.first.party_size) < people
+          return 'ERR:All seats taken'
+        else
+          return true
+        end
+      end
+    end
+    return 'ERR:Something wrong'
   end
 
   def it_quantities

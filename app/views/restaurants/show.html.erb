@@ -12,7 +12,7 @@
           <% unless @restaurant.photos.blank? %>
             <% @restaurant.photos.each do |pic| %>
               <div class="thumbnail">
-                <a id="image" class="dropdown-toggle lblack image_large" href="#" data-toggle="dropdown" image_url='<%= pic.picture.url(:v280x160) %>'>
+                <a id="image" class="dropdown-toggle lblack image_large" href="#" data-toggle="dropdown" image_url='<%= pic.picture.url(:v600x480) %>'>
                   <%= image_tag pic.picture.url(:v100x100) %>
                 </a>
                 

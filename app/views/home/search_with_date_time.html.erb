@@ -18,7 +18,12 @@
                 <li class="media">
                   <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
                     <% if restaurant.photos.first.present? %>
-                      <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% if restaurant.cover_photos.present? %>
+                        <%= image_tag restaurant.cover_photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% else %>
+                        <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% end %>
+                      <%#= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
                     <% else %>
                       <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
                     <% end %>

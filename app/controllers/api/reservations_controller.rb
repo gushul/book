@@ -27,17 +27,36 @@ class Api::ReservationsController < ApplicationController
     @reservation.user_id = @user.id
     @reservation.active = true
 
+    restaurant = Restaurant.find(@reservation.restaurant_id)
+    date = @reservation.date
+    time = @reservation.start_time
+    people = @reservation.party_size
+    available = restaurant.check_availability_for_api(date, time, people)
+
+    check = false
+    if available == true && available.to_s.include?('ERR') == false
+      check = true
+    end
+
+    p check
+    p available
+
     respond_to do |format|
-      if @reservation.save 
+      if check && @reservation.save 
         reservation = @reservation.as_json
         reservation[:start_time]  = @reservation.start_time_format
         reservation[:end_time]    = @reservation.end_time_format
         format.json { render json: reservation, status: 200 }
       else
         format.json {
+        available = "" if check
+        # err1 = "ERR:#{@reservation.errors}" if @reservation.errors
 #				render json: @reservation.errors, 
 #				status: :unprocessable_entity
-				render text: "ERR:#{@reservation.errors.to_s}", status: 400
+        # render text: "ERR:#{@reservation.errors.to_s}", status: 400
+        p @reservation.errors
+        # p @reservation.save!
+				render text: "#{available}", status: 400
 			}
       end
     end

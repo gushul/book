@@ -15,7 +15,9 @@ class Photo < ActiveRecord::Base
 
   # before_save :cover_controll
   
-  scope :by_date, -> {order('created_at DESC')}
+  default_scope order('created_at DESC')
+  # scope :by_date, -> {order('created_at DESC')}
+  scope :covers, -> { where(is_cover: true) }
 
   # def cover!
   #   self.update_attributes :is_cover => true
