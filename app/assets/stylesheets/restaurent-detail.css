@@ -6,3 +6,7 @@
 .model-image .header{
   height: 50px;
 }
+
+.img-responsive {
+  height: 144px;
+}
