@@ -91,8 +91,12 @@ class HomeController < ApplicationController
         # @search_results_full = Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date)
         # @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
       # else
-        @search_results_full = Restaurant.where("name like ? OR address like ?", "%#{params['srch-location']}%", "%#{params['srch-location']}%")
-        @search_results = Restaurant.where("name like ? OR address like ?", "%#{params['srch-location']}%", "%#{params['srch-location']}%").page(params[:page])
+        # query1 = Restaurant.where("name like ? OR address like ?", "%#{params['srch-location']}%", "%#{params['srch-location']}%")
+        query = Restaurant.by_location_or_cuisine("#{params['srch-location']}")
+        # query2 = Restaurant.by_tag_title("#{params['srch-location']}")
+        # merged_select = query1.merge(query2)
+        @search_results_full = query
+        @search_results = query.page(params[:page])
       end
     elsif !params['datepicker'].blank? && !params['timepicker'].blank?
       @date = Date.strptime(params['datepicker'], '%m/%d/%Y') 

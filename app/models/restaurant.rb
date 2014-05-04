@@ -59,6 +59,15 @@ class Restaurant < ActiveRecord::Base
     ids.collect {|i| joins(:restaurant_tags).where('restaurant_tags.id = ?', i ) }.flatten
   }
 
+  scope :by_tag_title, lambda { |title|
+    joins(:restaurant_tags).where('restaurant_tags.title LIKE ?', "%#{title}" ) 
+  }
+
+  scope :by_location_or_cuisine, lambda { |field|
+    joins(:restaurant_tags).where('name like ? OR address like ? OR restaurant_tags.title LIKE ?', "%#{field}%", "%#{field}%", "%#{field}" ).uniq
+  }
+
+
   scope :by_ids_and_tags, lambda { |ids, tag_ids|
     restaurants = Restaurant.by_ids(ids)
     restaurants.map! { |r| r.restaurant_tags.where("id in (?)", tag_ids).blank? ? nil : r }
