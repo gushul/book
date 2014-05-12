@@ -1,6 +1,6 @@
 # encoding: utf-8
 # TODO: rework 
-class Api::RewardsController < ApplicationController
+class Api::RewardsController < Api::BaseController
 
   # GET /rewards.json
   def index

@@ -1,5 +1,5 @@
 # TODO: before_filters rewiew 
-class Api::ReservationsController < ApplicationController
+class Api::ReservationsController < Api::BaseController
   skip_before_filter  :verify_authenticity_token
 
   before_filter :check_user_auth_params

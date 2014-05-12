@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Api::RestaurantsController < ApplicationController
+class Api::RestaurantsController < Api::BaseController
   
   # GET /restaurants.json
   def index

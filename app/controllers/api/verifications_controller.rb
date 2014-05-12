@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Api::VerificationsController < ApplicationController
+class Api::VerificationsController < Api::BaseController
   
   before_filter :check_user_auth_params
 
