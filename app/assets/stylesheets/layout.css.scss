@@ -142,3 +142,10 @@ div.language a.red{
 .form-group {
   margin-bottom: 0px;
 }
+
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+  color: white;
+  background-color: #ff6700;
+  border-color: #ff6700;
+}

@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse color-white" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li>
-            <%= link_to "Home", root_path %>
+            <%= link_to "HOME", root_path %>
           </li>
           <li>
             <%= link_to "About us", about_us_path %>
@@ -57,4 +57,35 @@
       </div>
     </div> 
   </div>
+
+  <div class="row clearfix bottom">
+    <div class="pull-left">
+      
+    </div>
+    <div class="pull-right">
+      <a href="#" class="go-top">Go to Top</a> 
+    </div>
+  </div>
+
 </div><!-- /footer -->
+
+<!-- JavaScript -->
+<script>
+  $(document).ready(function() {
+    // Show or hide the sticky footer button
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.go-top').fadeIn(200);
+      } else {
+      $('.go-top').fadeOut(200);
+      }
+    });
+
+    // Animate the scroll to top
+    $('.go-top').click(function(event) {
+      event.preventDefault();
+
+      $('html, body').animate({scrollTop: 0}, 300);
+    })
+  });
+</script>
