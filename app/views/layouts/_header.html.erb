@@ -74,11 +74,14 @@
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <%= link_to "Reservations", reservations_path %>
+               <li>
+                  <%= link_to "Dashboard", user_dashboards_path %>
                 </li>
                 <li>
-                  <%= link_to "Rewards",rewards_path %>
+                  <%= link_to "Reservations", reservations_user_dashboards_path %>
+                </li>
+                <li>
+                  <%= link_to "Rewards",rewards_user_dashboards_path %>
                 </li>
                 <li>
                   <%= link_to "Profile", edit_user_registration_path(current_user) %>
