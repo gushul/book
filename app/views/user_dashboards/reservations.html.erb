@@ -22,11 +22,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="table-align-left">The Garret Secret Bistro</td>
-                    <td>18/02/14</td>
-                    <td>18:00</td>
-                  </tr>
+                  <% @reservations.each do |reservation| %>
+                    <tr>
+                      <td class="table-align-left"><%= reservation.restaurant.name %></td>
+                      <td><%= reservation.date_format %></td>
+                      <td><%= reservation.start_time_format %></td>
+                    </tr>
+                  <% end %>
                 </tbody>
               </table>
             </div>

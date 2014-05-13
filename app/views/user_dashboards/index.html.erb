@@ -26,7 +26,11 @@
                         <td class="td-gray-light numeric">
                           <%= link_to "#{current_user.reservations.count}", reservations_user_dashboards_path %>
                         </td>
-                        <td class="td-gray numeric"><span class="red">35</span></td>
+                        <td class="td-gray numeric">
+                          <span class="red">
+                            <%= current_user.get_credits %>
+                          </span>
+                        </td>
                         <td class="td-gray numeric">
                           <%= link_to "#{current_user.rewards.count}", rewards_user_dashboards_path %>
                         </td>
@@ -47,34 +51,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <%# @reservations.each do |reservation| %>
+                    <% @stats.each do |st| %>
                     <tr>
-                      <td class="table-align-left">The Garret Secret Bistro</td>
-                      <td>5</td>
-                      <td>1</td>
+                      <td class="table-align-left"><%= st[0] %></td>
+                      <td><%= st[1] %></td>
+                      <td><%= st[2] %></td>
                     </tr>
-                    <%# end %>
-
-                    <tr>
-                      <td class="table-align-left">Maison Chin</td>
-                      <td>5</td>
-                      <td>1</td>
-                    </tr>
-                    <tr>
-                      <td class="table-align-left">Mugendai</td>
-                      <td>5</td>
-                      <td>1</td>
-                    </tr>
-                    <tr>
-                      <td class="table-align-left">Roast Coffee &amp; Eatery</td>
-                      <td>5</td>
-                      <td>1</td>
-                    </tr>
-                    <tr>
-                      <td class="table-align-left">Kuppa</td>
-                      <td>5</td>
-                      <td>1</td>
-                    </tr>
+                    <% end %>
                   </tbody>
                 </table>
                 <small>Visits within the last 90 days</small>
