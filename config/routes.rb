@@ -85,6 +85,11 @@ AuthApp::Application.routes.draw do
     get 'customers_index' => "owner_dashboards#customers_index", :on => :collection, :as => :customers_index
   end
 
+  resources :user_dashboards, :only => [:index] do 
+    get 'reservations' => "user_dashboards#reservations", :on => :collection, :as => :reservations
+    get 'rewards'      => "user_dashboards#rewards",      :on => :collection, :as => :rewards
+  end
+
   resources :inventory_templates do
     get 'my' => "inventory_templates#my", :on => :collection, :as => :my
   end

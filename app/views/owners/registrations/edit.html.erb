@@ -15,9 +15,9 @@
             <%= f.error_notification %>
 
             <div class="form-inputs">
-              <%= f.input :owner_name, label: "Name: <i>#{resource.owner_name}</i>".html_safe, :required => true, :autofocus => true %>
-              <%= f.input :email, label: "Email: <i>#{resource.email}</i>".html_safe, :required => true %>
-              <%= f.input :phone, label: "Phone: <i>#{resource.phone}</i>".html_safe, :required => true %>
+              <%= f.input :owner_name, label: "Name: <i style='font-weight:normal;'>#{resource.owner_name}</i>".html_safe, :required => true, :autofocus => true %>
+              <%= f.input :email, label: "Email: <i style='font-weight:normal;'>#{resource.email}</i>".html_safe, :required => true %>
+              <%= f.input :phone, label: "Phone: <i style='font-weight:normal;'>#{resource.phone}</i>".html_safe, :required => true %>
 
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                 <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>

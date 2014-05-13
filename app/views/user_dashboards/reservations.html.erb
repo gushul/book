@@ -1,0 +1,39 @@
+<div id="hh-user" class="topContent container">
+  <div class="row">
+
+    <%= render :partial => "setting_left_tab", :locals => {:active_tab => 'reservation' }%>
+   
+
+
+    <div class="col-sm-9 col-lg-9">
+        <div class="storyContent setting" id ="dashboard">
+        <!-- <div class="settings-panel"> -->
+            <div class="header">
+              <h3>Reservations</h3>
+            </div>
+            <div class="content">
+              <h4>Your Reservations</h4>
+              <table class="table table-striped visit-table">
+                <thead>
+                  <tr>
+                    <th>Restaurants</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="table-align-left">The Garret Secret Bistro</td>
+                    <td>18/02/14</td>
+                    <td>18:00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+
+
+
+  </div><!--/row-->
+</div>

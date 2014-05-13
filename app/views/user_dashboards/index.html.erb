@@ -1,0 +1,88 @@
+<div id="hh-user" class="topContent container">
+  <div class="row">
+
+    <%= render :partial => "setting_left_tab", :locals => {:active_tab => 'dashboard' }%>
+   
+    <div class="col-sm-9 col-lg-9">
+          <div class="storyContent setting" id ="dashboard">
+          <!-- <div class="settings-panel"> -->
+            <div class="header">
+              <h3>Dashboard</h3>
+            </div>
+            <div class="content">
+              <div id="profile-form">
+                <div class="table-responsive">
+                  <table class="table table-bordered dashboard-user-table">
+                    <thead>
+                      <tr>
+                        <th>Reservations</th>
+                        <th>Reward Points</th>
+                        <th>Rewards Redeemed</th>
+                        <th>Total Visits</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="td-gray-light numeric">
+                          <%= link_to "#{current_user.reservations.count}", reservations_user_dashboards_path %>
+                        </td>
+                        <td class="td-gray numeric"><span class="red">35</span></td>
+                        <td class="td-gray numeric">
+                          <%= link_to "#{current_user.rewards.count}", rewards_user_dashboards_path %>
+                        </td>
+                        <td class="td-gray-light numeric"><span class="red">7</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <br>
+                <h4>Your Visits</h4>
+                <hr>
+                <table class="table table-striped reservation-table">
+                  <thead>
+                    <tr>
+                      <th>Restaurants</th>
+                      <th>Points</th>
+                      <th>Visits</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%# @reservations.each do |reservation| %>
+                    <tr>
+                      <td class="table-align-left">The Garret Secret Bistro</td>
+                      <td>5</td>
+                      <td>1</td>
+                    </tr>
+                    <%# end %>
+
+                    <tr>
+                      <td class="table-align-left">Maison Chin</td>
+                      <td>5</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td class="table-align-left">Mugendai</td>
+                      <td>5</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td class="table-align-left">Roast Coffee &amp; Eatery</td>
+                      <td>5</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td class="table-align-left">Kuppa</td>
+                      <td>5</td>
+                      <td>1</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <small>Visits within the last 90 days</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+  </div><!--/row-->
+</div>

@@ -12,6 +12,8 @@
  *= require bootstrap.min
  *= require bootstrap
  *= require hungryhub
+ *= require hungryhub-custom
+ *= require hungryhub-fix
  *= require bootstrap-timepicker.min
  *= require datepicker
  *= require restaurent-detail

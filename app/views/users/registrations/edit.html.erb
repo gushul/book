@@ -1,33 +1,50 @@
-<div class="topContent container">
+<div id="hh-user" class="topContent container">
+  <div class="row">
 
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+    <%= render :partial => "user_dashboards/setting_left_tab", :locals => {:active_tab => 'account_profile' }%>
+   
+    <div class="col-sm-9 col-lg-9">
+          <div class="storyContent setting" id ="dashboard">
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: "form-horizontal" }) do |f| %>
-  <%= f.error_notification %>
+          <h2>Profile <%#= resource_name.to_s.humanize %></h2>
 
-  <div class="form-inputs" style="width:400px;">
-    <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :username, label: 'Your Name', :required => true %>
-    <%= f.input :phone, :required => true%>
+          <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: "form-horizontal" }) do |f| %>
+            <%= f.error_notification %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+            <div class="form-inputs" style="width:400px;">
+              <%= f.input :username, label: "Name: <i style='font-weight:normal;'>#{resource.username}</i>".html_safe, :autofocus => true, :required => true %>
+              <%= f.input :email, label: "Email: <i style='font-weight:normal;'>#{resource.email}</i>".html_safe, :required => true %>
+              <%= f.input :phone, label: "Phone: <i style='font-weight:normal;'>#{resource.phone}</i>".html_safe, :required => true%>
 
-    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
-    <%= f.input :password_confirmation, :required => false %>
-    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
-  </div>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" , :class => 'btn btn-success btn-large' %>
-  </div>
-<% end %>
+              <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
+              <%= f.input :password_confirmation, :required => false %>
+              <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
+            </div>
 
-<h3>Cancel my account</h3>
+          <!--   <div class="form-actions">
+              <%#= f.button :submit, "Update" , :class => 'btn btn-success btn-large' %>
+            </div> -->
+             <div class="actions">
+              <%= f.button :submit, "Save", :class => 'btn btn-primary btn-lg', style: "padding: 10px 40px 10px 40px;"  %>
+            </div>
+          <% end %>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+          <hr>  
 
-<%= link_to "Back", :back %>
+          <h3>Cancel my account</h3>
 
+          <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+
+          <%#= link_to "Back", :back %>
+
+
+
+
+</div>
+</div>
+</div>
 </div>
