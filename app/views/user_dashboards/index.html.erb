@@ -34,7 +34,11 @@
                         <td class="td-gray numeric">
                           <%= link_to "#{current_user.rewards.count}", rewards_user_dashboards_path %>
                         </td>
-                        <td class="td-gray-light numeric"><span class="red">7</span></td>
+                        <td class="td-gray-light numeric">
+                          <span class="red">
+                            <%= @visits %>
+                          </span>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

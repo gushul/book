@@ -1,9 +1,11 @@
 class UserDashboardsController < ApplicationController
+  
   before_filter :authenticate_user!
 
   def index
-    @stats = []
-    reservations = current_user.reservations.where('created_at >= ?', 90.days.ago)
+    @stats  = []
+    @visits = 0
+    reservations = current_user.reservations.active.where('created_at >= ?', 90.days.ago)
     restaurants = reservations.map { |r| r.restaurant }.uniq
     restaurants.each_with_index do |rst, i|
       res = reservations.where(restaurant_id: rst)
@@ -12,8 +14,8 @@ class UserDashboardsController < ApplicationController
       @stats[i] << rst.name
       @stats[i] << rew
       @stats[i] << res.count
+      @visits += res.count
     end
-
   end
   
   def reservations
