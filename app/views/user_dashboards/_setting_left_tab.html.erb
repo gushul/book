@@ -3,7 +3,7 @@
   <div class="settingMenu">
     <ul>
       <li>
-        <%= link_to '<i class="fa fa-list-ul"></i>&nbsp; Dashboard'.html_safe  , user_dashboards_path, :class=> (active_tab == 'dashboard' ? 'active' : '') %>
+        <%= link_to '<i class="fa fa-list-ul"></i>&nbsp; Dashboard'.html_safe, user_dashboards_path, :class=> (active_tab == 'dashboard' ? 'active' : '') %>
       </li>
       <li>
         <%= link_to '<i class="fa fa-file-text-o"></i>&nbsp; Reservations'.html_safe, reservations_user_dashboards_path, :class=> (active_tab == 'reservation' ? 'active' : '') %>
