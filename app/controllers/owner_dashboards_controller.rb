@@ -4,9 +4,9 @@ class OwnerDashboardsController < ApplicationController
   def index
   end
   
-  def customers_index
+  def customers
     @owners = current_owner.restaurant.reservations.where("name <> ?", "")
-    @users  = current_owner.restaurant.reservations.map {|res| res.user }.uniq
+    @users  = current_owner.restaurant.reservations.active.map {|res| res.user }.uniq
 
     @info_json = []
     @users.each do |r|
@@ -21,6 +21,9 @@ class OwnerDashboardsController < ApplicationController
         else
           info[:vip] = false
         end
+        res = current_owner.restaurant.reservations.active.where(user_id: r[:id])
+        info[:total_visit] = res.count
+        info[:last_visit] = res.last.date
         @info_json << info
       end
     end
@@ -38,7 +41,22 @@ class OwnerDashboardsController < ApplicationController
       @info_json << info
     end
 
+
   end
 
+  def reservations
+  end
+
+  def rewards
+  end
+
+  def reports
+  end
+
+  def inventories
+  end
+
+  def account
+  end
 
 end

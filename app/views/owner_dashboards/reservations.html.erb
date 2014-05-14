@@ -1,0 +1,372 @@
+<div id="hh-owner" class="topContent container">
+  <div class="row">
+
+    <%= render :partial => "setting_left_tab", :locals => {:active_tab => 'reservation' }%>
+    
+    <div class="col-sm-9 col-lg-9">
+      
+      
+      <div class="storyContent setting" id ="dashboard">
+      <!-- <div class="settings-panel"> -->
+            <div class="header">
+              <h3>Reservations</h3>
+            </div>
+            <div class="content">
+              <div id="reservations">
+                <div class="row">
+                  <form action="" method="get" role="form">
+                    <!-- New Reservation -->
+                    <div class="col-sm-12 col-md-4" id="add-reservation">
+                      <a href="account-reservations-add.html" class="btn btn-reservation btn-xs">+ New Reservation</a>
+                    </div>
+                    <!-- Summary -->
+                    <div class="col-sm-12 col-md-4" id="summary">
+                      <p>
+                        <small>Reservations :&nbsp; </small><strong>9</strong>
+                        <small>&nbsp;Covers :&nbsp; </small><strong>39</strong>
+                      </p>
+                    </div>
+                    <!-- Date Picker -->
+                    <div class="col-sm-12 col-md-4 pull-right" id="date-picker">
+                      <div class="input-group input-group-sm date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" value="dd-mm-yyyy" id="datepicker" name="datepicker">
+                      </div>
+                      <script type="text/javascript">$('#datepicker').datepicker();</script>
+                    </div>
+                  </form>
+                </div>
+                <br>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+                  <li><a href="#pending" data-toggle="tab">Pending</a></li>
+                  <li><a href="#confirm" data-toggle="tab">Confirm</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="account-reservation">
+                  <div class="tab-pane fade in active" id="all">
+                    <div class="table-responsive">
+                      <table class="table table-striped reservation-table">
+                        <thead>
+                          <tr>
+                            <th>Time</th>
+                            <th>Name</th>
+                            <th>Cover</th>
+                            <th>Status</th>
+                            <th>Flag</th>
+                            <th>Quality</th>
+                            <th>Note</th>
+                            <th>Table</th>
+                            <th>Edit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>18:00</td>
+                            <td>Bellawana</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>25%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>7A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>18:00</td>
+                            <td>Marissa</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>25%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>12A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>18:15</td>
+                            <td>Matthew</td>
+                            <td>3</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>15%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>7B</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>18:30</td>
+                            <td>Surasit</td>
+                            <td>6</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>35%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>10A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>18:45</td>
+                            <td>Karl</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>5%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>5A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>19:00</td>
+                            <td>Federik</td>
+                            <td>2</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>5%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>3BA</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>19:15</td>
+                            <td>Mark</td>
+                            <td>3</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>5%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>2B</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>20:00</td>
+                            <td>Jenny</td>
+                            <td>4</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>25%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>6A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>20:30</td>
+                            <td>Patty</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>5%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>10A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="pending">
+                    <div class="table-responsive">
+                      <table class="table table-striped reservation-table">
+                        <thead>
+                          <tr>
+                            <th>Time</th>
+                            <th>Name</th>
+                            <th>Cover</th>
+                            <th>Status</th>
+                            <th>Flag</th>
+                            <th>Quality</th>
+                            <th>Note</th>
+                            <th>Table</th>
+                            <th>Edit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>18:00</td>
+                            <td>Bellawana</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>25%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>7A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>18:00</td>
+                            <td>Marissa</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>25%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>12A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="confirm">
+                    <div class="table-responsive">
+                      <table class="table table-striped reservation-table">
+                        <thead>
+                          <tr>
+                            <th>Time</th>
+                            <th>Name</th>
+                            <th>Cover</th>
+                            <th>Status</th>
+                            <th>Flag</th>
+                            <th>Quality</th>
+                            <th>Note</th>
+                            <th>Table</th>
+                            <th>Edit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>18:00</td>
+                            <td>Bellawana</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>25%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>7A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="#"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>18:00</td>
+                            <td>Marissa</td>
+                            <td>5</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>25%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>12A</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>18:15</td>
+                            <td>Matthew</td>
+                            <td>3</td>
+                            <td>
+                              <button class="btn btn-reservation btn-xs">Show</button>
+                              <button class="btn btn-reservation btn-xs">No Show</button>
+                            </td>
+                            <td>VIP</td>
+                            <td>15%</td>
+                            <td><a href="#"><i class="fa fa-info"></i></a></td>
+                            <td>7B</td>
+                            <td>
+                              <a href="#"><i class="fa fa-search"></i></a>
+                              <a href="account-reservations-new.html"><i class="fa fa-edit"></i></a>
+                              <a href="#"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    </div>
+  </div><!--/row-->
+</div>

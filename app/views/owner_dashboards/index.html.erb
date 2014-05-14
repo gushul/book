@@ -1,24 +1,72 @@
-<div class="topContent container">
+<div id="hh-owner" class="topContent container">
   <div class="row">
-    <%= render :partial => "/shared/setting"%>
-    <%= render :partial => "/shared/setting_left_tab", :locals => {:active_tab => 'dashboard' }%>
+  
+    <%= render :partial => "setting_left_tab", :locals => {:active_tab => 'dashboard' }%>
     
     <div class="col-sm-9 col-lg-9">
     
       <div class="storyContent setting" id ="dashboard">
-        <div class="header">
-          <h3 class="rmedium">Dashboard</h3>
-        </div>
-        <div class="content">
-          <p>Future home of the Owner's Dashboard</p>
-          <br>
-          <p>Daily Stats</p>
-          <br>
-          <p>Weekly Stats</p>
-          <br>
-          <p>Monthly Stats</p>
-          <br>
-        </div>
+     <!-- <div class="settings-panel"> -->
+            <div class="header">
+              <h3>Dashboard</h3>
+            </div>
+            <div class="content">
+              <div class="table-responsive">
+                <table class="table table-bordered dashboard-table">
+                  <thead>
+                    <tr>
+                      <th colspan="2" class="th-gray">Yesterday</th>
+                      <th colspan="2">Today</th>
+                      <th colspan="2" class="th-gray">Next 7 Days</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="td-gray-light">Reservations</td>
+                      <td class="td-gray">Covers</td>
+                      <td class="td-gray-light">Reservations</td>
+                      <td class="td-gray">Covers</td>
+                      <td class="td-gray-light">Reservations</td>
+                      <td class="td-gray">Covers</td>
+                    </tr>
+                    <tr>
+                      <td class="td-gray-light numeric">2</td>
+                      <td class="td-gray numeric">6</td>
+                      <td class="td-gray-light numeric">1</td>
+                      <td class="td-gray numeric">6</td>
+                      <td class="td-gray-light numeric">5</td>
+                      <td class="td-gray numeric">16</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><a href="#" class="btn btn-table">View Yesterday</a></td>
+                      <td colspan="2"><a href="account-reservations.html" class="btn btn-table">View Today</a></td>
+                      <td colspan="2"><a href="#" class="btn btn-table">View Next 7 Days</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <p><small><i class="fa fa-calendar"></i>&nbsp; 02-02-2014 &nbsp; <i class="fa fa-clock-o"></i>&nbsp; 18:47:24</small></p>
+              <hr>
+              <div class="row">
+                <div class="col-sm-12 col-lg-4">
+                  <p><strong>Today Booking :</strong><br>3 / 31 <small>(reservations / covers)</small></p>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                  <p><strong>Manual Booking :</strong><br>15 / 29 <small>(reservations / covers)</small></p>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                  <p><strong>Booking via Hungry Hub :</strong><br>12 / 42 <small>(reservations / covers)</small></p>
+                </div>
+              </div>
+              <hr>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p><br>
+              
+            </div>
+          </div>
+
+
+
       </div>
     </div>
   </div><!--/row-->

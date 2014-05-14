@@ -1,0 +1,29 @@
+<h2 style="padding-left:15px;padding-bottom:15px"><i class="fa fa-gear"></i>&nbsp; Settings</h2>
+<div class="col-sm-3 col-lg-3">
+  <div class="settingMenu">
+    <ul>
+      <li>
+        <%= link_to '<i class="fa fa-list-ul"></i>&nbsp; Dashboard'.html_safe, owner_dashboards_path, :class=> (active_tab == 'dashboard' ? 'active' : '') %>
+      </li>
+      <li>
+        <%= link_to '<i class="fa fa-user"></i>&nbsp; Account'.html_safe,  account_owner_dashboards_path, :class=> (active_tab == 'account' ? 'active' : '') %>
+      </li>
+      <li>
+        <%= link_to '<i class="fa fa-file-text-o"></i>&nbsp; Reservations'.html_safe, reservations_owner_dashboards_path, :class=> (active_tab == 'reservation' ? 'active' : '') %>
+      </li>
+      <li>
+        <%= link_to '<i class="fa fa-star-o"></i>&nbsp; Rewards'.html_safe, rewards_owner_dashboards_path, :class=> (active_tab == 'rewards' ? 'active' : '') %>
+      </li>
+      <li>
+        <%= link_to '<i class="fa fa-users"></i>&nbsp; Customers'.html_safe, customers_owner_dashboards_path, :class => (active_tab == 'customers' ? 'active' : '') %>
+      </li>
+      <li>
+        <%= link_to '<i class="fa fa-bar-chart-o"></i>&nbsp; Reports'.html_safe, reports_owner_dashboards_path, :class => (active_tab == 'reports' ? 'active' : '') %>
+      </li>
+      <li>
+        <%= link_to '<i class="fa fa-table"></i>&nbsp; Inventories'.html_safe, inventories_owner_dashboards_path, :class=> (active_tab == 'inventories' ? 'active' : '') %>
+      </li>
+      <!-- <li><%#= link_to "Inventory Template Groups", inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %></li> -->
+    </ul>
+  </div>
+</div>

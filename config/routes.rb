@@ -82,7 +82,12 @@ AuthApp::Application.routes.draw do
   delete 'vips' => "vips#destroy"
 
   resources :owner_dashboards, :only => [:index] do 
-    get 'customers_index' => "owner_dashboards#customers_index", :on => :collection, :as => :customers_index
+    get 'account'         => "owner_dashboards#account",         :on => :collection, :as => :account
+    get 'reservations'    => "owner_dashboards#reservations",    :on => :collection, :as => :reservations
+    get 'rewards'         => "owner_dashboards#rewards",         :on => :collection, :as => :rewards
+    get 'customers'       => "owner_dashboards#customers",       :on => :collection, :as => :customers
+    get 'reports'         => "owner_dashboards#reports",         :on => :collection, :as => :reports
+    get 'inventories'     => "owner_dashboards#inventories",     :on => :collection, :as => :inventories
   end
 
   resources :user_dashboards, :only => [:index] do 

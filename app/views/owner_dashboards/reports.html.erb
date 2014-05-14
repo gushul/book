@@ -1,0 +1,81 @@
+<div id="hh-owner" class="topContent container">
+  <div class="row">
+
+    <%= render :partial => "setting_left_tab", :locals => {:active_tab => 'reports' }%>
+    
+    <div class="col-sm-9 col-lg-9">
+      
+      
+      <div class="storyContent setting" id ="dashboard">
+      <!-- <div class="settings-panel"> -->
+            <div class="header">
+              <h3>Reports</h3>
+            </div>
+            <div class="content">
+              <div id="reports">
+                <div class="row">
+                  <form action="" method="get" role="form">
+                    <!-- Date -->
+                    <div class="col-sm-12 col-md-4" id="summary">
+                      <p><strong>Date : </strong><small>12 November 2013</small></p>
+                    </div>
+                    <!-- Date Picker -->
+                    <div class="col-sm-12 col-md-4 pull-right" id="date-picker">
+                      <div class="input-group input-group-sm date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" value="dd-mm-yyyy" id="datepicker" name="datepicker">
+                      </div>
+                      <script type="text/javascript">$('#datepicker').datepicker();</script>
+                    </div>
+                  </form>
+                </div>
+                <br>
+                <div class="table-responsive">
+                  <table class="table table-striped report-table">
+                    <thead>
+                      <tr>
+                        <th>Status</th>
+                        <th>Confirm</th>
+                        <th>No Show</th>
+                        <th>Pending</th>
+                        <th>Cancel</th>
+                        <th>Totals</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Manual</td>
+                        <td>1 (7%)</td>
+                        <td>3 (20%)</td>
+                        <td>3 (20%)</td>
+                        <td>8 (53%)</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Hungry Hub</td>
+                        <td>1 (5%)</td>
+                        <td>0 (0%)</td>
+                        <td>7 (35%)</td>
+                        <td>12 (60%)</td>
+                        <td>20</td>
+                      </tr>
+                      <tr class="red">
+                        <td><strong>Total</strong></td>
+                        <td>2 (6%)</td>
+                        <td>3 (9%)</td>
+                        <td>10 (29%)</td>
+                        <td>20 (57%)</td>
+                        <td>35</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- TABLE END -->
+              </div>
+            </div>
+          </div>
+
+
+    </div>
+  </div><!--/row-->
+</div>

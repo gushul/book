@@ -1,0 +1,82 @@
+<div id="hh-owner" class="topContent container">
+  <div class="row">
+
+    <%= render :partial => "setting_left_tab", :locals => {:active_tab => 'customers' }%>
+    
+    <div class="col-sm-9 col-lg-9">
+      
+      <div class="storyContent setting" id ="dashboard">
+      <!-- <div class="settings-panel"> -->
+            <div class="header">
+              <h3>Customers</h3>
+            </div>
+            <div class="content">
+              <div id="customers">
+                <div class="row">
+                  <form action="" method="get" role="form">
+                    <div class="col-sm-12 col-md-4">
+                      <div class="left-inner-addon">
+                        <i class="fa fa-search"></i>
+                        <input type="text" class="form-control" placeholder="Search customer's name" id="search-term" name="search-loction" style="background-color: #f5f5f5;">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <br>
+                <div class="table-responsive">
+                  <table class="table table-striped customer-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Last Visit (Total)</th>
+                        <th>Flag</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @info_json.each do |user| %>
+                        <tr>
+                          <!-- <td><%#= user[:user_id].present? ? User.where(:id => user[:user_id]).first.username : "" %></td> -->
+                          <td><%= user[:name] %></td>
+                          <td><%= user[:email] %></td>
+                          <td><%= user[:phone] %></td>
+                          <td><%= "#{pretty_date_ago(user[:last_visit])} (#{user[:total_visit]})" if user[:total_visit].present? %></td>
+                          <td>
+                            <%= "VIP" if user[:vip] == true  %>
+                            <%# if user[:vip] == true  %>
+                              <%#= link_to "Remove from VIP", vips_path(:user => user), method: :delete, data: { confirm: 'Are you sure?' } %>
+                            <%# else %>
+                              <%#= link_to "Add to VIP", vips_path(:user => user), method: :post %>
+                            <%# end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                      
+                      <tr>
+                        <td><a href="#">Belle Aramwattananont</a></td>
+                        <td>bellawanna@mail.com</td>
+                        <td>+66(0)8 4655 4455</td>
+                        <td>Last Wednesday (1)</td>
+                        <td>VIP</td>
+                      </tr>
+                     
+                      <tr>
+                        <td><a href="#">Federik Lunberg</a></td>
+                        <td>federik@mail.com</td>
+                        <td>+66(0)2 6455 5455</td>
+                        <td>16 days ago (4)</td>
+                        <td>VIP</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    </div>
+  </div><!--/row-->
+</div>
