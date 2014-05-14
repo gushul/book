@@ -151,8 +151,9 @@ hr {  border-color:#dedede;clear:both;}
 .navbar-black li > a,.navbar-toggle  {   color:#efefef;padding:10px;}
 .navbar-black .dropdown-menu li a {color:#2A4888;}
 .navbar-black .dropdown-menu li > a {padding-left:30px;}
-.navbar-black li>a:focus, .navbar-black .open, .navbar-black .open>a, .navbar-black .open>a:focus {   background-color: #2A4888; }
-.navbar-black li>a:hover, .navbar-black .open>a:hover {   background:0 0;   color:#FF6700;}
+// .navbar-black li>a:focus, .navbar-black .open, .normalavbar-black .open>a, .navbar-black .open>a:hover, .navbar-black .open>a:focus {   background:0 0;   color:#FF6700;}
+.navbar-black li>a:focus,  .navbar-black .open>a:focus { color: #fff;  background-color: #2A4888; }
+.navbar-black li>a:hover, .navbar-black .open, .navbar-black .open>a, .navbar-black .open>a:hover {   background:0 0;   color:#FF6700;}
 
 @font-face {
     font-family: 'robotobold';
