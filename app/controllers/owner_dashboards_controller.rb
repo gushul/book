@@ -52,10 +52,18 @@ class OwnerDashboardsController < ApplicationController
   end
 
   def reservations
-   if current_owner.restaurant.blank?
+    if current_owner.restaurant.blank?
       @reservations = []
     else
       @reservations = current_owner.restaurant.reservations
+      if params[:date].present? 
+        if ['today','yesterday','next_7_days'].any? { |word| params[:date].include?(word) }
+          @reservations = @reservations.send(params[:date])
+        else
+          @date = Date.strptime(params[:date], '%m-%d-%Y')
+          @reservations = @reservations.by_date(@date)
+        end
+      end
       @reservations_pending = @reservations.first(3) # STUB
       @reservations_confirm = @reservations.last(1)  # STUB
     end
@@ -68,6 +76,15 @@ class OwnerDashboardsController < ApplicationController
   end
 
   def inventories
+    if params[:date].present? 
+      @date = Date.strptime(params[:date], '%m-%d-%Y').strftime('%Y-%m-%d')
+    end
+    @inventories = current_owner.restaurant.inventories.by_date(@date)
+  end
+
+  def inventory
+    @inventory = current_owner.restaurant.inventories.find(params[:id])
+    render 'owner_dashboards/inventories/show'
   end
 
   def account

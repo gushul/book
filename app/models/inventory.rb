@@ -29,6 +29,10 @@ class Inventory < ActiveRecord::Base
     where('start_time LIKE ? AND date = ?', "%:#{min}:00", date) 
   }
 
+  scope :by_hr_min, lambda { |time| 
+    where('start_time LIKE ?', "%#{time}:00") 
+  }
+
   scope :by_date, lambda { |date = Date.today | 
     where(:date => date)
   }

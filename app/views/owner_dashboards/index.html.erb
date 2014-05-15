@@ -38,9 +38,15 @@
                       <td class="td-gray numeric"><%= @res_next_7_days.map(&:party_size).compact.reduce(0, :+)  %></td>
                     </tr>
                     <tr>
-                      <td colspan="2"><a href="#" class="btn btn-table">View Yesterday</a></td>
-                      <td colspan="2"><%= link_to 'View Today', reservations_owner_dashboards_path %></td>
-                      <td colspan="2"><a href="#" class="btn btn-table">View Next 7 Days</a></td>
+                      <td colspan="2">
+                        <%= link_to 'View Yesterday', reservations_owner_dashboards_path(date: "yesterday"), class: "btn btn-table" %>
+                      </td>
+                      <td colspan="2">
+                        <%= link_to 'View Today', reservations_owner_dashboards_path(date: "today"), class: "btn btn-table" %>
+                      </td>
+                      <td colspan="2">
+                        <%= link_to 'View Next 7 Days', reservations_owner_dashboards_path(date: "next_7_days"), class: "btn btn-table" %>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

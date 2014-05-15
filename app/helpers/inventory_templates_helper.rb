@@ -21,4 +21,18 @@ module InventoryTemplatesHelper
     @intervals << "24:00"
   end
 
+  def int_to_hr(int)
+    int = "0#{int}" if int < 9
+    int
+  end
+
+  def int_to_min(int)
+    if int == 0 
+      int = "0#{int}" 
+    else
+      int = "#{int*15}"
+    end
+    int
+  end
+
 end

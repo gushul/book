@@ -20,13 +20,14 @@
                     <div class="col-sm-12 col-md-4 pull-right" id="date-picker">
                       <div class="input-group input-group-sm date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                         <span class="input-group-addon"><i class="fa fa-calendar" style=" top: 0;"></i></span> 
-                        <input type="text" class="form-control" value="dd-mm-yyyy" id="datepicker" name="datepicker" style="background-color: #f5f5f5;">
+                        <input type="text" class="form-control" value="<%= @date.present? ? params[:date].gsub!('-','/') : Date.today.strftime('%d/%m/%Y') %>" id="datepicker" name="datepicker" style="background-color: #f5f5f5;">
                       </div>
                       <script type="text/javascript">$('#datepicker').datepicker();</script>
                     </div>
                   </form>
                 </div>
                 <br>
+
                 <!-- Inverntory Table -->
                 <div class="table-responsive">
                   <table class="table table-bordered inventories-table">
@@ -40,186 +41,43 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>0</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>9</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>10</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>11</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>12</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
+                      <% 24.times do |hr| %>
+                        <tr>
+                          <td><%= int_to_hr(hr) %></td>
+                          <% 4.times do |min| %>
+                          <td>
+                            <% @inventories.by_hr_min("#{int_to_hr(hr)}:#{int_to_min(min)}").each do |inv| %>
+                              <%= link_to inv.quantity_available, inventory_owner_dashboards_path(inv.id) %>
+                            <% end %>
+                          </td>
+                          <% end %>
+                        </tr>
+                      <% end %>
 
-                      <tr>
-                        <td>13</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>14</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>15</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>16</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>17</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>18</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>19</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>20</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>21</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>22</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      <tr>
-                        <td>23</td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                        <td><a href="account-inventories-new.html">20</a></td>
-                        <td><a href="account-inventories-new.html">10</a></td>
-                        <td><a href="account-inventories-new.html">15</a></td>
-                      </tr>
-                      
                     </tbody>
                   </table>
                 </div>
+
               </div>
             </div>
           </div>
 
 
-
-
     </div>
   </div><!--/row-->
 </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#datepicker').datepicker().on('changeDate', function (ev) {
+        $('#datepicker').change();
+    });
+    $('#datepicker').change(function () {
+        date = $('#datepicker').val();
+        date = date.replace(/\//g, "-")
+        url = "<%= inventories_owner_dashboards_path %>";
+        window.location = url.replace("inventories?", "inventories/" + date + "?");
+    });
+   });
+</script>

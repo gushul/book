@@ -45,9 +45,13 @@ class Reservation < ActiveRecord::Base
 
   scope :active, -> { where active: true }
 
-  scope :today,       -> { where(:date => Date.today..Date.today) }
+  scope :today,       -> { where(:date => Date.today) }
   scope :yesterday,   -> { where(:date => Date.yesterday..Date.today) }
   scope :next_7_days, -> { where(:date => Date.tomorrow..(Date.today + 7.days)) }
+
+  scope :by_date, lambda { |date|
+     where(:date => date)
+  }
   
   scope :owners,     -> { where(:channel => 5..6) }
   scope :exc_owners, -> { where(:channel => 0..4) }

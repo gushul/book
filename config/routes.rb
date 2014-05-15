@@ -83,11 +83,12 @@ AuthApp::Application.routes.draw do
 
   resources :owner_dashboards, :only => [:index] do 
     get 'account'         => "owner_dashboards#account",         :on => :collection, :as => :account
-    get 'reservations'    => "owner_dashboards#reservations",    :on => :collection, :as => :reservations
+    get 'reservations(/:date)' => "owner_dashboards#reservations", :on => :collection, :as => :reservations
     get 'rewards'         => "owner_dashboards#rewards",         :on => :collection, :as => :rewards
     get 'customers'       => "owner_dashboards#customers",       :on => :collection, :as => :customers
     get 'reports'         => "owner_dashboards#reports",         :on => :collection, :as => :reports
-    get 'inventories'     => "owner_dashboards#inventories",     :on => :collection, :as => :inventories
+    get 'inventories(/:date)' => "owner_dashboards#inventories", :on => :collection, :as => :inventories
+    get 'inventory/:id'   => "owner_dashboards#inventory",       :on => :collection, :as => :inventory
   end
 
   resources :user_dashboards, :only => [:index] do 
