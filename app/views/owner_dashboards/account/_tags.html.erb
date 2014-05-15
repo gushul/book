@@ -1,0 +1,152 @@
+<div class="tab-pane fade" id="tag">
+  <ul class="media-list">
+    <li class="media">
+      <div class="media-body">
+      <div class="col-sm-12 col-lg-12">
+
+
+        <% @restaurant = current_owner.restaurant %>
+        <%= simple_form_for( @restaurant, html: { class: "form-horizontal"}) do |f| %>
+
+          <div class="form-group">
+            <label>Cuisine</label>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.association :restaurant_tags, :as => :check_boxes, :collection => RestaurantTag.where('title LIKE ?', 'Cuisine%'), :label => false, :item_wrapper_class => 'checkbox_container' %>
+                <!-- <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option1"> American</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Bar</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Barbeque</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option4"> Breakfast</label>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <div class="row">
+              <!-- Price -->
+              <div class="col-sm-12 col-lg-4">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Price%'), include_blank: false, label: "Price" %>
+              </div>
+              <!-- Rating -->
+              <div class="col-sm-12 col-lg-4">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Star%'), include_blank: false, label: "Stars" %>
+              </div>
+              <!-- Parking -->
+              <div class="col-sm-12 col-lg-4">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Parking%'),include_blank: false, label: "Parking" %>
+              </div>
+            </div>
+          </div> 
+          
+          <hr>
+
+           <!-- Drinking -->
+          <div class="form-group">
+            <label>Drinking</label>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Drinking%'), label: false %>
+                <!-- <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option1"> Alcohol</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Beer</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Cocktails</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option4"> Wine</label>
+                </div> -->
+              </div>
+            </div>
+          </div><hr>
+          <!-- Meals -->
+          <div class="form-group">
+            <label>Meals</label>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Meals%'), label: false %>
+               <!--  <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option1"> Breakfast</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Lunch</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Dinner</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option4"> Late Night</label>
+                </div> -->
+              </div>
+            </div>
+          </div><hr>
+          <!-- Payment -->
+          <div class="form-group">
+            <label>Payment</label>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Payment%'), label: false %>
+                <!-- <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option1"> Credit Card</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Master Card</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Visa</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option4"> American Express</label>
+                </div> -->
+              </div>
+            </div>
+          </div><hr>
+          <!-- Misc. -->
+          <div class="form-group">
+            <label>Misc.</label>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Misc%'), label: false %>
+               <!--  <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option1"> Casual Dress</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Child Friendly</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Formal Dress</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option4"> Large Group</label>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <hr>
+
+
+         <div class="form-group">
+            <div class="col-sm-12 col-lg-4">
+              <%= f.button :submit, "UPDATE", class: "btn btn-table" %>
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -96,7 +96,8 @@ class RestaurantsController < ApplicationController
 
     respond_to do |format|
       if @restaurant.update_attributes(params[:restaurant])
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
+        # format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
+        format.html { redirect_to account_owner_dashboards_path, notice: 'Restaurant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

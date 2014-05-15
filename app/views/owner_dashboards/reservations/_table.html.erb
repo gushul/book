@@ -1,0 +1,47 @@
+<div class="table-responsive">
+  <table class="table table-striped reservation-table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Name</th>
+        <th>Cover</th>
+        <th>Status</th>
+        <th>Flag</th>
+        <th>Quality</th>
+        <th>Note</th>
+        <th>Table</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.start_time_format %></td>
+          <td>
+            <% if reservation.user %>
+              <%= truncate(reservation.user.username, :length => 15) %>
+            <% else %>
+              <%= truncate(reservation.name, :length => 15)  %> 
+            <% end %>
+          </td>
+          <td><%= reservation.party_size %></td>
+          <td>
+            <button class="btn btn-reservation btn-xs">Show</button>
+            <button class="btn btn-reservation btn-xs">No Show</button>
+          </td>
+          <td>
+            <%= vip_or_not(reservation.try(:user), reservation.try(:name), reservation.try(:phone), reservation.restaurant) %>
+          </td>
+          <td>25%</td>
+          <td><a href="#"><i class="fa fa-info"></i></a></td>
+          <td>7A</td>
+          <td>
+            <%= link_to '<i class="fa fa-search"></i>'.html_safe, reservation %>
+            <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_reservation_path(reservation) %>
+            <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, reservation, method: :delete, data: { confirm: 'Why are you cancelling?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

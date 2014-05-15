@@ -1,0 +1,61 @@
+<div class="tab-pane fade" id="image">
+  <ul class="media-list">
+    <li class="media">
+      <div class="media-body">
+        <div class="col-sm-12 col-lg-8">
+
+          <% @restaurant = current_owner.restaurant %>
+          <%= simple_form_for( @restaurant, html: { class: "form-horizontal"}) do |f| %>
+
+            <%= f.simple_fields_for :photos, @restaurant.photos.covers do |img|  %>
+            <label>Cover Image</label>
+            <br>
+              <div class="row">
+                <div class="col-sm-12 col-lg-3">
+                  <%= image_tag(img.object.picture.url(:v100x100)) %>
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <%= img.input :_destroy, :as => :boolean, :label => "Remove" %> 
+                  <%#= img.input :is_cover, label: "Cover?", as: :boolean, include_blank: false, :selected => false %>
+                </div>
+              </div>
+            <% end %>
+
+            <br>
+            
+            <% @restaurant.photos.no_covers.each.with_index do |photo, index| %>
+              <%= f.simple_fields_for :photos, photo do |img|  %>
+              <label><%= (index+1).ordinalize %> Image</label>
+              <br>
+               <div class="row">
+                  <div class="col-sm-12 col-lg-3">
+                    <%= image_tag(img.object.picture.url(:v100x100)) %>
+                  </div>
+                  <div class="col-sm-12 col-lg-3">
+                    <%= img.input :_destroy, :as => :boolean, :label => "Remove" %> 
+                    <%= img.input :is_cover, label: "Cover?", as: :boolean, include_blank: false, :selected => false %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+            
+            <br>
+
+            <%= f.simple_fields_for :photos, @restaurant.photos.build do |img|  %>
+              <%= img.input :picture, :label => "Add Picture", :as => :file %>
+            <% end %>
+
+            <div class="form-group">
+              <div class="col-sm-12 col-lg-4">
+                <%= f.button :submit, "UPDATE", class: "btn btn-table" %>
+              </div>
+            </div>
+
+          <% end %>
+            
+
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

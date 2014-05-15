@@ -40,6 +40,8 @@ class Reservation < ActiveRecord::Base
   belongs_to :restaurant
 
   has_one :reward
+  
+  default_scope order('created_at DESC')
 
   scope :active, -> { where active: true }
 

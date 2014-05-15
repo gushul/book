@@ -451,7 +451,7 @@
     <%# if img.object.new_record? %>
       <%#= img.input :picture, :label => "Picture", :as => :file %>
     <%# else %>
-      <%= image_tag(img.object.picture.url(:v100x100)) %>
+      <%= image_tag(img.object.url(:v100x100)) %>
       <%= img.input :_destroy, :as => :boolean, :label => "Remove" %> 
       <%= img.input :is_cover, label: "Cover?", as: :boolean, include_blank: false, :selected => false %>
     <%# end %>

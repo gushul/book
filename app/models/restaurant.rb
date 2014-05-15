@@ -10,22 +10,27 @@ class Restaurant < ActiveRecord::Base
                   :photos_attributes, :largest_table,
                   :mon, :tue, :wed, :thu, :fri, :sat, :sun,
                   :phone, :address, :th_address, :website,
-                  :est_duration_confidence, :est_duration
+                  :est_duration_confidence, :est_duration,
+                  :days_out_allow_booking,
+                  :min_in_adv_bookings_close,
+                  :avg_turn_time,
+                  :conf_in_avg_turn_time,
+                  :max_turn_time
  
   validates :name,  :presence => true
   validates :lng,   :presence => true
   validates :lat,   :presence => true
   # validates :price, :presence => true
 
-  validates :days_in_advance,  :presence    => true, 
-                :numericality => { 
-                  :greater_than_or_equal_to => 0, 
-                  :less_than_or_equal_to    => 180 }
-  validates :min_booking_time, :presence    => true,
-                :numericality => { 
-                  :greater_than_or_equal_to => 15, 
-                  :less_than_or_equal_to    => 720 }
-  validates :res_duration,     :presence    => true, 
+  # validates :days_in_advance,  :presence    => true, 
+  #               :numericality => { 
+  #                 :greater_than_or_equal_to => 0, 
+  #                 :less_than_or_equal_to    => 180 }
+  # validates :min_booking_time, :presence    => true,
+  #               :numericality => { 
+  #                 :greater_than_or_equal_to => 15, 
+  #                 :less_than_or_equal_to    => 720 }
+  validates :res_duration,     #:presence    => true, 
                 :numericality => { 
                   :greater_than_or_equal_to => 15, 
                   :less_than_or_equal_to    => 720 }

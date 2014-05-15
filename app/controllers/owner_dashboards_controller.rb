@@ -45,6 +45,13 @@ class OwnerDashboardsController < ApplicationController
   end
 
   def reservations
+   if current_owner.restaurant.blank?
+      @reservations = []
+    else
+      @reservations = current_owner.restaurant.reservations
+      @reservations_pending = @reservations.first(3) # STUB
+      @reservations_confirm = @reservations.last(1)  # STUB
+    end
   end
 
   def rewards

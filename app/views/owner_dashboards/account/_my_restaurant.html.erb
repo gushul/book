@@ -1,0 +1,55 @@
+<div class="tab-pane fade" id="myrestaurant">
+  <ul class="media-list">
+    <li class="media">
+      <div class="media-body">
+        <div class="col-sm-12 col-lg-8">
+
+          <% @restaurant = current_owner.restaurant %>
+          <%= simple_form_for( @restaurant, html: { class: "form-horizontal"}) do |f| %>
+
+            <%= f.input :name, label: "Name: <i style='font-weight:normal;'>#{@restaurant.name}</i>".html_safe %>
+            <%= f.input :address, label: "Address", as: :text, input_html: { rows: "4", class: "text_area_for_misc"} %>
+            <%= f.input :phone, label: "Phone: <i style='font-weight:normal;'>#{@restaurant.phone}</i>".html_safe  %>
+            
+            <div class="row">
+              <label>GPS Coordinates</label><br>
+              <div class="col-sm-12 col-lg-6" style="padding-right: 15px; padding-left: 0px;">
+                <%= f.input :lat, label: false %>
+              </div>
+              <div class="col-sm-12 col-lg-6" style="padding-right: 0px;">
+                <%= f.input :lng, label: false %>
+              </div>
+            </div>
+
+            <%= f.input :largest_table, label: "Largest Table"%>
+                
+            <div class="row">
+              <div class="col-sm-4 col-lg-4" style="padding-right: 15px; padding-left: 0px;">
+                <%= f.input :days_out_allow_booking, collection: [:"1", :"2", :"3", :"4", :"5", :"6", :"6", :"7", :"8"], priority: [ :"30" ], include_blank: false, label: "Day Out Allow Bookings" %>
+              </div>
+              <div class="col-sm-4 col-lg-4" style="padding-right: 15px; ">
+                <%= f.input :min_in_adv_bookings_close, collection: [:"15", :"30", :"45", :"60", :"90", :"105", :"120"], priority: [ :"15" ], include_blank: false, label: "Minutes in Advance Bookings Close" %>
+              </div>
+              <div class="col-sm-4 col-lg-4" style="padding-right: 0px;">
+                <%= f.input :res_duration, collection: [:"15", :"30", :"45", :"60", :"90", :"105", :"120"], priority: [ :"15" ], include_blank: false, label: "Duration of each booking" %>
+              </div>
+            </div>
+
+            <%= f.input :avg_turn_time,         label: "Average Turnaround Time" %>
+            <%= f.input :conf_in_avg_turn_time, label: "Confidence in Average Turnaround Time (%)" %>
+            <%= f.input :max_turn_time,         label: "Max Turnaround Time" %>
+
+
+            <div class="form-group">
+              <div class="col-sm-12 col-lg-4">
+                <%= f.button :submit, "UPDATE", class: "btn btn-table" %>
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

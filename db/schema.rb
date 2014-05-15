@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140309075720) do
+ActiveRecord::Schema.define(:version => 20140515151141) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -147,10 +147,10 @@ ActiveRecord::Schema.define(:version => 20140309075720) do
   create_table "restaurants", :force => true do |t|
     t.string   "name"
     t.text     "misc"
-    t.decimal  "lat",                     :precision => 15, :scale => 10
-    t.decimal  "lng",                     :precision => 15, :scale => 10
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.decimal  "lat",                       :precision => 15, :scale => 10
+    t.decimal  "lng",                       :precision => 15, :scale => 10
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
     t.integer  "owner_id"
     t.integer  "days_in_advance"
     t.integer  "min_booking_time"
@@ -169,6 +169,11 @@ ActiveRecord::Schema.define(:version => 20140309075720) do
     t.integer  "est_duration"
     t.integer  "est_duration_confidence"
     t.string   "th_address"
+    t.string   "days_out_allow_booking"
+    t.string   "min_in_adv_bookings_close"
+    t.string   "avg_turn_time"
+    t.string   "conf_in_avg_turn_time"
+    t.string   "max_turn_time"
   end
 
   create_table "rewards", :force => true do |t|

@@ -13,11 +13,12 @@ class Photo < ActiveRecord::Base
   #   :maximum => 10.megabytes.to_i
   # }
 
-  # before_save :cover_controll
+  before_save :cover_controll
   
   default_scope order('created_at DESC')
   # scope :by_date, -> {order('created_at DESC')}
-  scope :covers, -> { where(is_cover: true) }
+  scope :covers,    -> { where(is_cover: true) }
+  scope :no_covers, -> { where(is_cover: false) }
 
   # def cover!
   #   self.update_attributes :is_cover => true
@@ -54,15 +55,14 @@ class Photo < ActiveRecord::Base
   #   @brothers_without_me ||= brothers.where('id <> ?', id)
   # end
 
-  # private
+private
 
-  # def cover_controll
-  #   # если первая картинка в альбоме
-  #   if new_record? && !is_cover? && brothers.blank?
-  #     self.is_cover = true
-  #   elsif !changes.blank? && !changes['is_cover'].blank? && is_cover?
-  #     # если картинку помечают как обложка, то старые обложки помечаем как НЕ обложка :)
-  #     photo_album.photos.update_all :is_cover => false
-  #   end
-  # end
+  def cover_controll
+    if Restaurant.find(self.restaurant_id).photos.empty? && !is_cover?
+      self.is_cover = true
+    elsif is_cover? && !Restaurant.find(self.restaurant_id).photos.empty?
+      Photo.update_all :is_cover => false
+    end
+  end
+  
 end
