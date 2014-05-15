@@ -2,6 +2,13 @@ class OwnerDashboardsController < ApplicationController
   before_filter :authenticate_owner!
   
   def index
+    res = current_owner.restaurant.reservations.active
+    @res_today = res.today
+    @res_yesterday = res.yesterday
+    @res_next_7_days = res.next_7_days
+
+    @res_manual = res.owners
+    @res_normal = res.exc_owners
   end
   
   def customers
