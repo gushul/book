@@ -35,21 +35,21 @@
     <td class="my_bold"> End Time: </td> 
     <td><%= @reservation.end_time_format %></td> 
   </tr> 
-  <tr> 
+  <!-- <tr> 
     <td class="my_bold"> Confirm Number: </td> 
     <td> JERYTU </td> 
-  </tr> 
+  </tr>  -->
   <tr> 
     <td class="my_bold"> Reservation Made: </td> 
     <td><%= @reservation.created_at_format %></td> 
   </tr> 
-  <tr> 
+<!--   <tr> 
     <td> </td>
     <td> </td> 
-  </tr> 
+  </tr>  -->
   <tr> 
     <td class="my_bold"> Reservation Note: </td> 
-    <td> Booth please </td> 
+    <td><%= @reservation.special_request.present? ? @reservation.special_request : "None" %></td> 
   </tr> 
   <tr> 
     <td class="my_bold"> Booking Channel: </td> 
@@ -62,6 +62,6 @@
 </table>
 
 <hr/>
-<div class="pull-right actions" style="padding-bottom:30px">
-  <button class="btn btn-primary pull-right" onclick="closeModel('viewReservation');">CANCEL</button>
-</div>
+<!-- <div class="pull-right actions" style="padding-bottom:30px">
+  <button class="btn btn-primary pull-right" onclick="closeModel('viewReservation');">CLOSE</button>
+</div> -->

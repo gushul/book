@@ -131,9 +131,15 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     @reservation.toggle!(params[:arg].to_sym)
     changes = @reservation.send(params[:arg].to_sym)
+    redir = reservations_path
+    if current_user.present?
+      redir = reservations_user_dashboards_path
+    elsif current_owner.present?
+      redir = reservations_owner_dashboards_path
+    end
 
     respond_to do |format|
-      format.html { redirect_to reservations_path, 
+      format.html { redirect_to redir, 
                     notice: "Reservation in #{@reservation.restaurant.name} at #{@reservation.date}: '#{params[:arg]}' changed to '#{changes}'." }
       format.js
     end

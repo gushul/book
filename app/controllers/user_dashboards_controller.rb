@@ -16,14 +16,19 @@ class UserDashboardsController < ApplicationController
       @stats[i] << res.count
       @visits += res.count
     end
+    @stats.sort! { |x, y| y[2] <=> x[2] }
   end
   
   def reservations
-    @reservations = current_user.reservations.order("reservations.created_at DESC")
+    res = current_user.reservations
+    @reservations_upcoming = res.upcoming
+    @reservations_past = res.past
   end
 
   def rewards
-    @rewards = current_user.rewards.order("rewards.created_at DESC")
+    rewards = current_user.rewards.order("rewards.created_at DESC")
+    @rewards_redeemed =  rewards.redeemed
+    @rewards_received =  rewards.received
   end
 
 end

@@ -13,24 +13,82 @@
             </div>
             <div class="content">
               <h4>Your Reservations</h4>
-              <table class="table table-striped visit-table">
-                <thead>
-                  <tr>
-                    <th>Restaurants</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @reservations.each do |reservation| %>
-                    <tr>
-                      <td class="table-align-left"><%= reservation.restaurant.name %></td>
-                      <td><%= reservation.date_format %></td>
-                      <td><%= reservation.start_time_format %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#upcoming" data-toggle="tab">Upcoming Reservations</a></li>
+                  <li class=""><a href="#past" data-toggle="tab">Past Reservations</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="account-reservation">
+                  <div class="tab-pane fade active in" id="upcoming">
+                    <div class="table-responsive">
+                      <table class="table table-striped visit-table">
+                        <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Restaurants</th>
+                            <th>Seats</th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @reservations_upcoming.each do |reservation| %>
+                            <tr>
+                              <td><%= reservation.date_format %></td>
+                              <td><%= reservation.start_time_format %></td>
+                              <td class="table-align-left"><%= reservation.restaurant.name %></td>
+                              <td><%= reservation.party_size %></td>
+                              <td>
+                                <%= link_to '<i class="glyphicon glyphicon-search action" id="viewReservation"></i>'.html_safe, reservation, remote: true %>
+                              </td>
+                              <td>
+                              <% if reservation.active %>
+                                <%= link_to '<i class="glyphicon glyphicon-remove action" id="editReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                              <% else %>
+                                <%= link_to '<i class="glyphicon glyphicon-repeat action" id="cancelReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                              <% end %>
+                              </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="past">
+                    <div class="table-responsive">
+                      <table class="table table-striped visit-table">
+                        <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Restaurants</th>
+                            <th>Seats</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @reservations_past.each do |reservation| %>
+                            <tr>
+                              <td><%= reservation.date_format %></td>
+                              <td><%= reservation.start_time_format %></td>
+                              <td class="table-align-left"><%= reservation.restaurant.name %></td>
+                              <td><%= reservation.party_size %></td>
+                              <td>
+                                <%= link_to '<i class="glyphicon glyphicon-search action" id="viewReservation"></i>'.html_safe, reservation, remote: true %>
+                              </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
             </div>
           </div>
     </div>
@@ -39,3 +97,7 @@
 
   </div><!--/row-->
 </div>
+
+
+<%= render "reservations/modal" %>
+<%= render "reservations/destroy_popup" %>

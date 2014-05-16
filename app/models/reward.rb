@@ -7,5 +7,8 @@ class Reward < ActiveRecord::Base
   belongs_to :user
   belongs_to :reservation  
   belongs_to :restaurant  
+
+  scope :redeemed, -> { where('points_total <= 0') }
+  scope :received, -> { where('points_total > 0') }
   
 end

@@ -49,8 +49,8 @@
                 <table class="table table-striped reservation-table">
                   <thead>
                     <tr>
-                      <th>Restaurants</th>
-                      <th>Points</th>
+                      <th style="text-align: left;">Restaurants</th>
+                      <!-- <th>Points</th> -->
                       <th>Visits</th>
                     </tr>
                   </thead>
@@ -58,7 +58,7 @@
                     <% @stats.each do |st| %>
                     <tr>
                       <td class="table-align-left"><%= st[0] %></td>
-                      <td><%= st[1] %></td>
+                      <!-- <td><%#= st[1] %></td> -->
                       <td><%= st[2] %></td>
                     </tr>
                     <% end %>

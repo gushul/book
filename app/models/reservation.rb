@@ -41,13 +41,16 @@ class Reservation < ActiveRecord::Base
 
   has_one :reward
   
-  default_scope order('created_at DESC')
+  default_scope order('date DESC')
 
   scope :active, -> { where active: true }
 
   scope :today,       -> { where(:date => Date.today) }
   scope :yesterday,   -> { where(:date => Date.yesterday..Date.today) }
   scope :next_7_days, -> { where(:date => Date.tomorrow..(Date.today + 7.days)) }
+  
+  scope :past,     -> { where('date < ?',  Date.today.strftime('%Y-%m-%d') ) }
+  scope :upcoming, -> { where('date >= ?', Date.today.strftime('%Y-%m-%d') ) }
 
   scope :by_date, lambda { |date|
      where(:date => date)
@@ -77,7 +80,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def date_format 
-    date.to_time.strftime('%m/%d/%Y') unless date.blank?
+    date.to_time.strftime('%d/%m/%Y') unless date.blank?
   end
 
   def date_format_user
@@ -196,9 +199,11 @@ private
   def update_reward
     if user_id.present?
       reward = Reward.where(:reservation_id => id).first
-      reward.update_attributes( points_total: 5*party_size, 
-                                points_pending: 5*party_size,
-                                restaurant_id: restaurant_id )
+      if reward.present?
+        reward.update_attributes( points_total: 5*party_size, 
+                                  points_pending: 5*party_size,
+                                  restaurant_id: restaurant_id )
+      end
     end
     # UserMailer.booking_update(current_user, @reservation).deliver
     # OwnerMailer.booking_update(@reservation).deliver
