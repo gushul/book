@@ -17,7 +17,7 @@
                   <form action="" method="get" role="form">
                     <!-- New Reservation -->
                     <div class="col-sm-12 col-md-4" id="add-reservation">
-                      <%= link_to '+ New Reservation', new_reservation_path, remote: true, class: "btn btn-reservation btn-xs" %>
+                      <%= link_to '+ New Reservation', reservation_owner_dashboards_path(id: "new"), class: "btn btn-reservation btn-xs" %>
                     </div>
                     <!-- Summary -->
                     <div class="col-sm-12 col-md-4" id="summary">
@@ -32,13 +32,15 @@
                     <div class="col-sm-12 col-md-4 pull-right" id="date-picker">
                       <div class="input-group input-group-sm date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="text" class="form-control" value="<%= @date.present? ? params[:date].gsub!('-','/') : "dd-mm-yyyy" %>" id="datepicker" name="datepicker">
+                        <input type="text" class="form-control" value="<%= @date.present? ? params[:date] : Date.today.strftime('%d-%m-%Y') %>" id="datepicker" name="datepicker" data-date-format="dd-mm-yyyy">
                       </div>
                       <script type="text/javascript">$('#datepicker').datepicker();</script>
                     </div>
                   </form>
                 </div>
                 <br>
+
+                <% if @reservations.present? || @reservations_pending.present? ||  @reservations_confirm.present?  %>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#all" data-toggle="tab">All</a></li>
@@ -58,6 +60,12 @@
                     <%= render :partial => "owner_dashboards/reservations/table", :locals => { reservations: @reservations_confirm }  %>
                   </div>
                 </div>
+                <% else %>
+                  <div style="padding-bottom:95px;">
+                    No reservations during <%= @date.present? ? Date.strptime(params[:date], '%d-%m-%Y').strftime('%d %b %Y') : Date.today.strftime('%d %b %Y') %>
+                  </div>
+                <% end %>
+
               </div>
             </div>
           </div>

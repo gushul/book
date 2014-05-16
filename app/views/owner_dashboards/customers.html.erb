@@ -37,38 +37,15 @@
                     <tbody>
                       <% @info_json.each do |user| %>
                         <tr>
-                          <!-- <td><%#= user[:user_id].present? ? User.where(:id => user[:user_id]).first.username : "" %></td> -->
                           <td><%= user[:name] %></td>
                           <td><%= user[:email] %></td>
                           <td><%= user[:phone] %></td>
                           <td><%= "#{pretty_date_ago(user[:last_visit])} (#{user[:total_visit]})" if user[:total_visit].present? %></td>
                           <td>
                             <%= "VIP" if user[:vip] == true  %>
-                            <%# if user[:vip] == true  %>
-                              <%#= link_to "Remove from VIP", vips_path(:user => user), method: :delete, data: { confirm: 'Are you sure?' } %>
-                            <%# else %>
-                              <%#= link_to "Add to VIP", vips_path(:user => user), method: :post %>
-                            <%# end %>
                           </td>
                         </tr>
                       <% end %>
-                      
-                      <tr>
-                        <td><a href="#">Belle Aramwattananont</a></td>
-                        <td>bellawanna@mail.com</td>
-                        <td>+66(0)8 4655 4455</td>
-                        <td>Last Wednesday (1)</td>
-                        <td>VIP</td>
-                      </tr>
-                     
-                      <tr>
-                        <td><a href="#">Federik Lunberg</a></td>
-                        <td>federik@mail.com</td>
-                        <td>+66(0)2 6455 5455</td>
-                        <td>16 days ago (4)</td>
-                        <td>VIP</td>
-                      </tr>
-
                     </tbody>
                   </table>
                 </div>

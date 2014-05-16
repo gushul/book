@@ -21,7 +21,7 @@
                             <div id="date-picker">
                               <div class="input-group date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input type="text" class="form-control" value="dd-mm-yyyy" id="datepicker" name="datepicker">
+                                <input type="text" class="form-control" value="<%= @inventory.present? ? @inventory.date.strftime('%d-%m-%Y') : "" %>" id="datepicker" name="datepicker" data-date-format="dd-mm-yyyy">
                               </div>
                               <script type="text/javascript">$('#datepicker').datepicker();</script>
                             </div>
@@ -32,7 +32,7 @@
                             <div id="start-time-picker">
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                <input type="text" class="form-control" id="timepicker2" name="timepicker">
+                                <input type="text" class="form-control" id="timepicker2" name="timepicker" value="<%= @inventory.present? ? @inventory.start_time_format : "" %>">
                               </div>
                               <script type="text/javascript">$('#timepicker2').timepicker({showMeridian: false});</script>
                             </div>
@@ -43,20 +43,20 @@
                             <div id="end-time-picker">
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                <input type="text" class="form-control" id="timepicker" name="timepicker">
+                                <input type="text" class="form-control" id="timepicker" name="timepicker" value="<%= @inventory.present? ? @inventory.end_time_format : "" %>">
                               </div>
                               <script type="text/javascript">$('#timepicker').timepicker({showMeridian: false});</script>
                             </div>
                           </div>
 
                           <%= simple_form_for @inventory  do |f| %>
-                            <!-- <div style="display:none"> -->
+                            <div style="display:none">
                             <%= f.input :date, as: :date, start_year: Date.today.year,
                                         end_year: Date.today.year+1, 
                                         order: [:day, :month, :year], label: false %> 
                             <%= f.input :start_time, :minute_step => 15, label: false, :time_separator => ""  %>
                             <%= f.input :end_time, :minute_step => 15, label: false, :time_separator => ""  %>
-                            <!-- </div> -->
+                            </div>
                             <label>Quantity Available</label>
                             <%= f.input :quantity_available, collection: 1..10, include_blank: false, label: false %> 
                             <hr>
@@ -89,16 +89,16 @@
         $('#datepicker').change();
     });
     $('#timepicker').datepicker().on('changeTime', function (ev) {
-        $('#timepicker').changeEndTime();
+        $('#timepicker').change();
     });
     $('#timepicker2').datepicker().on('changeTime', function (ev) {
-        $('#timepicker2').changeStartTime();
+        $('#timepicker2').change();
     });
 
     $('#datepicker').change(function () {
         date = $('#datepicker').val();
-        mon = parseInt(date.substring(1, 2));
-        day = parseInt(date.substring(3, 5));
+        day = parseInt(date.substring(0, 2));
+        mon = parseInt(date.substring(3, 5));
         year = parseInt(date.substring(6, 10));
         $("#inventory_date_3i").val(day);
         $("#inventory_date_2i").val(mon);
@@ -108,6 +108,12 @@
         time = $('#timepicker2').val();
         hr = parseInt(time.substr(0, time.indexOf(':')));
         min = parseInt(time.substr(time.indexOf(':') + 1, time.length));
+        fix = false
+        if (!isInt(hr)) {
+          hr = 0
+          min = 0 
+          fix = true
+        }
         if (hr <= 9) {
           hr = "0" + hr.toString();
         } else {
@@ -117,6 +123,9 @@
           min = "0" + min.toString();
         } else {
           min = min.toString();
+        }
+        if (fix) {
+          $("#timepicker2").val(hr+":"+min);
         }
         $("#inventory_start_time_4i").val(hr);
         $("#inventory_start_time_5i").val(min);
@@ -125,6 +134,12 @@
         time = $('#timepicker').val();
         hr = parseInt(time.substr(0, time.indexOf(':')));
         min = parseInt(time.substr(time.indexOf(':') + 1, time.length));
+        fix = false
+        if (!isInt(hr)) {
+          hr = 0
+          min = 0 
+          fix = true
+        }
         if (hr <= 9) {
           hr = "0" + hr.toString();
         } else {
@@ -135,8 +150,15 @@
         } else {
           min = min.toString();
         }
+        if (fix) {
+          $("#timepicker2").val(hr+":"+min);
+        }
         $("#inventory_end_time_4i").val(hr);
         $("#inventory_end_time_5i").val(min);
     });
+
+    function isInt(n) {
+       return typeof n === 'number' && n % 1 == 0;
+    }
    });
 </script>

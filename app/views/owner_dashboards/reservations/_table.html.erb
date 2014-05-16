@@ -36,7 +36,7 @@
           <td><a href="#"><i class="fa fa-info"></i></a></td>
           <td>7A</td>
           <td>
-            <%= link_to '<i class="fa fa-search"></i>'.html_safe, reservation %>
+            <%= link_to '<i class="fa fa-search"></i>'.html_safe, reservation_owner_dashboards_path(reservation.id) %>
             <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_reservation_path(reservation) %>
             <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, reservation, method: :delete, data: { confirm: 'Why are you cancelling?' } %>
           </td>

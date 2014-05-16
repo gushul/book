@@ -84,6 +84,7 @@ AuthApp::Application.routes.draw do
   resources :owner_dashboards, :only => [:index] do 
     get 'account'         => "owner_dashboards#account",         :on => :collection, :as => :account
     get 'reservations(/:date)' => "owner_dashboards#reservations", :on => :collection, :as => :reservations
+    get 'reservation/:id' => "owner_dashboards#reservation",       :on => :collection, :as => :reservation
     get 'rewards'         => "owner_dashboards#rewards",         :on => :collection, :as => :rewards
     get 'customers'       => "owner_dashboards#customers",       :on => :collection, :as => :customers
     get 'reports'         => "owner_dashboards#reports",         :on => :collection, :as => :reports

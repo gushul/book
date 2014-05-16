@@ -12,7 +12,7 @@ class OwnerDashboardsController < ApplicationController
   end
   
   def customers
-    @owners = current_owner.restaurant.reservations.where("name <> ?", "")
+    @owners = current_owner.restaurant.reservations.active.where("name <> ?", "")
     @users  = current_owner.restaurant.reservations.active.map {|res| res.user }.uniq
 
     @info_json = []
@@ -45,6 +45,9 @@ class OwnerDashboardsController < ApplicationController
       else
         info[:vip] = false
       end
+      res = current_owner.restaurant.reservations.active.where(email: r[:email])
+      info[:total_visit] = res.count
+      info[:last_visit] = res.last.date if res.present?
       @info_json << info
     end
 
@@ -60,13 +63,19 @@ class OwnerDashboardsController < ApplicationController
         if ['today','yesterday','next_7_days'].any? { |word| params[:date].include?(word) }
           @reservations = @reservations.send(params[:date])
         else
-          @date = Date.strptime(params[:date], '%m-%d-%Y')
+          @date = Date.strptime(params[:date], '%d-%m-%Y')
           @reservations = @reservations.by_date(@date)
         end
+      else
+        @reservations = @reservations.today
       end
-      @reservations_pending = @reservations.first(3) # STUB
-      @reservations_confirm = @reservations.last(1)  # STUB
+      @reservations_pending = [] # @reservations.first(3) # STUB
+      @reservations_confirm = [] # @reservations.last(1)  # STUB
     end
+  end
+
+  def reservation
+    render 'owner_dashboards/reservations/form'
   end
 
   def rewards
@@ -77,7 +86,7 @@ class OwnerDashboardsController < ApplicationController
 
   def inventories
     if params[:date].present? 
-      @date = Date.strptime(params[:date], '%m-%d-%Y').strftime('%Y-%m-%d')
+      @date = Date.strptime(params[:date], '%d-%m-%Y').strftime('%Y-%m-%d')
     end
     @inventories = current_owner.restaurant.inventories.by_date(@date)
   end
