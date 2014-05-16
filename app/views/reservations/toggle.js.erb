@@ -1,0 +1,8 @@
+$modal = $('.model .model-viewReservation'),
+$modalBody = $('.model .content'),
+$modalHeading = $('.model .header .lbold');
+// $modalHeading.html("<%= @reservation.email %>");
+$modalHeading.html("Cancel Reservation");
+$modalBody.html("<%= escape_javascript(render 'cancel_confirm', :locals => { reservation: @reservation } ) %>");
+$modal.modal();
+openModel("viewReservation");

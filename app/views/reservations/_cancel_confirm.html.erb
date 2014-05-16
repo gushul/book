@@ -1,0 +1,5 @@
+Please confirm your Cancellation with an Ok/Cancel Button
+<div class="pull-right actions" style="padding-bottom:30px">
+  <button class="btn btn-primary pull-right"  style="margin-left:20px" onclick="closeModel('viewReservation');">Cancel</button>
+  <%= link_to "Ok", toggle_reservation_url(@reservation, :arg => "active"), :method => :put, :class => "btn btn-primary pull-right" %>
+</div>

@@ -43,13 +43,16 @@
                               <td class="table-align-left"><%= reservation.restaurant.name %></td>
                               <td><%= reservation.party_size %></td>
                               <td>
-                                <%= link_to '<i class="glyphicon glyphicon-search action" id="viewReservation"></i>'.html_safe, reservation, remote: true %>
+                                <%= link_to '<i class="glyphicon glyphicon-search action" style="color: #000000;" id="viewReservation"></i>'.html_safe, reservation, remote: true %>
                               </td>
-                              <td>
+                              <td style="width: 95px;">
                               <% if reservation.active %>
-                                <%= link_to '<i class="glyphicon glyphicon-remove action" id="editReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                                <%= link_to 'Cancel', toggle_reservation_url(reservation, :arg => "active", process: "0"), :method => :put , remote: true, class: "btn btn-reservation btn-xs"%>
                               <% else %>
-                                <%= link_to '<i class="glyphicon glyphicon-repeat action" id="cancelReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put %>
+                                <%#= link_to '<i class="glyphicon glyphicon-repeat action" id="cancelReservation"></i>'.html_safe, toggle_reservation_url(reservation, :arg => "active"), :method => :put, remote: true   %>
+                                <div style="color: #000; text-decoration: none; background-color: #f4f4f4; border: 2px solid #2a2a2a; border-radius: 4px; width: 85 px; padding: 0px 3px;font-family: Lato, Helvetica, Arial, sans-serif;font-size: 12px;">
+                                  CANCELLED
+                                </div>
                               <% end %>
                               </td>
                             </tr>
