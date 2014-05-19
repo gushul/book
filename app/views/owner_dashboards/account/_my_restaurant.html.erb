@@ -22,10 +22,11 @@
             </div>
 
             <%= f.input :largest_table, label: "Largest Table"%>
-                
+
             <div class="row">
               <div class="col-sm-4 col-lg-4" style="padding-right: 15px; padding-left: 0px;">
-                <%= f.input :days_in_advance, collection: [:"1", :"2", :"3", :"4", :"5", :"6", :"6", :"7", :"8"], priority: [ :"30" ], include_blank: false, label: "Day Out Allow Bookings" %>
+                <%#= f.input :days_in_advance, collection: [:"1", :"2", :"3", :"4", :"5", :"6", :"6", :"7", :"8"], priority: [ :"30" ], include_blank: false, label: "Day Out Allow Bookings" %>
+                <%= f.input :days_in_advance, collection: Array.new(100){ |i| (i+=1).to_s }, priority: [ :"30" ], include_blank: false, label: "Day Out Allow Bookings" %>
               </div>
               <div class="col-sm-4 col-lg-4" style="padding-right: 15px; ">
                 <%= f.input :min_booking_time, collection: [:"15", :"30", :"45", :"60", :"90", :"105", :"120"], priority: [ :"15" ], include_blank: false, label: "Minutes in Advance Bookings Close" %>
@@ -37,8 +38,8 @@
 
             <%= f.input :est_duration,             label: "Average Turnaround Time" %>
             <%= f.input :est_duration_confidence,  label: "Confidence in Average Turnaround Time (%)" %>
-            <%= f.input :max_turn_time,            label: "Max Turnaround Time" %>
-
+            <%#= f.input :max_turn_time,            label: "Max Turnaround Time" %>
+            <%= f.input :res_duration, collection: [:"15", :"30", :"45", :"60", :"90", :"105", :"120"], priority: [ :"15" ], include_blank: false, label: "Max Turnaround Time of each booking" %>
 
             <div class="form-group">
               <div class="col-sm-12 col-lg-4">
