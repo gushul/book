@@ -112,7 +112,30 @@
                 </div> -->
               </div>
             </div>
-          </div><hr>
+          </div>
+          <hr>
+          <!-- Location. -->
+          <div class="form-group">
+            <label>Location</label>
+            <div class="row">
+              <div class="col-sm-12">
+                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Location%'), label: false, :item_wrapper_class => 'checkbox_container' %>
+               <!--  <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option1"> Casual Dress</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Child Friendly</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Formal Dress</label>
+                </div>
+                <div class="col-sm-3">
+                  <label class="checkbox-inline"><input type="checkbox" value="option4"> Large Group</label>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <hr>
           <!-- Misc. -->
           <div class="form-group">
             <label>Misc.</label>
@@ -135,6 +158,8 @@
             </div>
           </div>
           <hr>
+
+          
 
 
          <div class="form-group">

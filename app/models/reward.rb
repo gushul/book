@@ -10,5 +10,5 @@ class Reward < ActiveRecord::Base
 
   scope :redeemed, -> { where('points_total <= 0') }
   scope :received, -> { where('points_total > 0') }
-  
+
 end
