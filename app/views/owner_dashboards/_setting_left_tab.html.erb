@@ -23,6 +23,9 @@
       <li>
         <%= link_to '<i class="fa fa-table"></i>&nbsp; Inventories'.html_safe, inventories_owner_dashboards_path, :class=> (active_tab == 'inventories' ? 'active' : '') %>
       </li>
+      <li>
+        <li><%= link_to '<i class="fa fa-table"></i>&nbsp;  Inventory Template Groups'.html_safe, inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %>
+      </li>
       <!-- <li><%#= link_to "Inventory Template Groups", inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %></li> -->
     </ul>
   </div>
