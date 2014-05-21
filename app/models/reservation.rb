@@ -41,7 +41,7 @@ class Reservation < ActiveRecord::Base
 
   has_one :reward
   
-  default_scope order('date DESC')
+  # default_scope order('date DESC')
 
   scope :active, -> { where active: true }
 

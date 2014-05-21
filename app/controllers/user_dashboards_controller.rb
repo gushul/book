@@ -21,8 +21,8 @@ class UserDashboardsController < ApplicationController
   
   def reservations
     res = current_user.reservations
-    @reservations_upcoming = res.upcoming
-    @reservations_past = res.past
+    @reservations_upcoming = res.upcoming.order("reservations.date ASC, reservations.start_time ASC")
+    @reservations_past = res.past.order("reservations.date DESC")
   end
 
   def rewards
