@@ -1,5 +1,9 @@
 <table class="table" border="0" style="text-align:left;"> 
   <tr> 
+    <td class="my_bold">Restaurant:</td> 
+    <td><%= @reservation.restaurant.name %></td> 
+  </tr>
+  <tr> 
     <td class="my_bold">Reservation:</td> 
     <td><%= @reservation.full_datetime %></td> 
   </tr>
@@ -31,10 +35,10 @@
     <td class="my_bold"> Start Time: </td> 
     <td><%= @reservation.start_time_format %></td> 
   </tr> 
-  <tr>
+ <!--  <tr>
     <td class="my_bold"> End Time: </td> 
-    <td><%= @reservation.end_time_format %></td> 
-  </tr> 
+    <td><%#= @reservation.end_time_format %></td> 
+  </tr>  -->
   <!-- <tr> 
     <td class="my_bold"> Confirm Number: </td> 
     <td> JERYTU </td> 
@@ -51,19 +55,19 @@
     <td class="my_bold"> Reservation Note: </td> 
     <td><%= @reservation.special_request.present? ? @reservation.special_request : "None" %></td> 
   </tr> 
-  <tr> 
+ <!--  <tr> 
     <td class="my_bold"> Booking Channel: </td> 
-    <td><%= ChannelType[@reservation.channel] %></td> 
-  </tr> 
+    <td><%#= ChannelType[@reservation.channel] %></td> 
+  </tr>  -->
   <tr> 
     <td class="my_bold"> Status: </td> 
-    <td><%= @reservation.active ? "Active" : "Not Active" %></td> 
+    <td><%= @reservation.status %></td> 
   </tr> 
 </table>
 
 <hr/>
 
-<% if @reservation.active %>
+<% if @reservation.status == "Upcoming" %>
   <div class="pull-right actions" style="padding-bottom:30px">
     <%= link_to "Cancel This Reservation", toggle_reservation_url(@reservation, :arg => "active"), :method => :put, :class => "btn btn-primary pull-right" %>
   </div>

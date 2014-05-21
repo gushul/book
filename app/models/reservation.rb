@@ -49,8 +49,19 @@ class Reservation < ActiveRecord::Base
   scope :yesterday,   -> { where(:date => Date.yesterday..Date.today) }
   scope :next_7_days, -> { where(:date => Date.tomorrow..(Date.today + 7.days)) }
   
-  scope :past,     -> { where('date < ?',  Date.today.strftime('%Y-%m-%d') ) }
-  scope :upcoming, -> { where('date >= ?', Date.today.strftime('%Y-%m-%d') ) }
+  scope :past,     -> { 
+    ids = Reservation.where('date = ? AND start_time >= ?',  Date.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
+    ids = 0 if ids.empty?
+    select = where('date <= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
+    # select = where('date <= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
+    # where('date <= ?', Date.today.strftime('%Y-%m-%d') ) 
+  }
+  scope :upcoming, -> { 
+    ids = Reservation.where('date = ? AND start_time <= ?',  Date.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
+    ids = 0 if ids.empty?
+    select = where('date >= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
+    # where('date >= ?', Date.today.strftime('%Y-%m-%d') ) 
+  }
 
   scope :by_date, lambda { |date|
      where(:date => date)
@@ -97,6 +108,16 @@ class Reservation < ActiveRecord::Base
 
   def full_datetime
     "#{start_time_format} on #{date.strftime('%A')}, #{date_format_ext}" # 18:00 on Friday, 20th December 2013 
+  end
+
+  def status
+    return "Cancelled" unless self.active
+    if Date.today <= self.date 
+      if ( (Date.today == self.date) && (Time.now.strftime('%H:%M') <= self.start_time_format) ) || Date.today < self.date
+        return "Upcoming"
+      end
+    end
+    return "Past" 
   end
 
 private
