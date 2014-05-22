@@ -29,18 +29,6 @@
                   <% end %>
                   <% cu_offset += cu_limit %>
                 <% end %>
-               <!--  <div class="col-sm-3">
-                  <%#= f.association :restaurant_tags, :as => :check_boxes, :collection => tags.limit(num/4), :label => false, :label_method => lambda { |tag| tag.title_format } %>
-                </div>
-                <div class="col-sm-3">
-                  <%#= f.association :restaurant_tags, :as => :check_boxes, :collection => tags.offset(num/4).limit(num/4), :label => false, :label_method => lambda { |tag| tag.title_format } %>
-                </div>
-                <div class="col-sm-3">
-                  <%#= f.association :restaurant_tags, :as => :check_boxes, :collection => tags.offset(num/2).limit(num/4), :label => false, :label_method => lambda { |tag| tag.title_format } %>
-                </div>
-                <div class="col-sm-3">
-                  <%#= f.association :restaurant_tags, :as => :check_boxes, :collection => tags.offset(num*3/4), :label => false, :label_method => lambda { |tag| tag.title_format } %>
-                </div> -->
               </div>
             </div>
           </div>
@@ -96,20 +84,24 @@
           <div class="form-group">
             <label>Meals</label>
             <div class="row">
+              <% me_tags = RestaurantTag.where('title LIKE ?', 'Meals%').ordered %>
+              <% me_num = me_tags.count %>
               <div class="col-sm-12">
-                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Meals%').ordered, label: false, :label_method => lambda { |tag| tag.title_format } %>
-               <!--  <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option1"> Breakfast</label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Lunch</label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Dinner</label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option4"> Late Night</label>
-                </div> -->
+                <% me_offset = 0 %>
+                <% me_limit = me_num/4 %>
+                <% 4.times do |i| %>
+                  <!-- refactor -->
+                  <% ((me_num - me_offset) % 2) != 0 ? (me_limit = me_num/4 + 1) : (me_limit = me_num/4)  %>
+                  <% (i+1)%2 == 0 && (((me_num - me_offset) % 2) == 0 && ((me_num - me_offset) % 4 == 0)) ? me_limit = me_num/4 + 1 : ""  %>
+                  <% i == 0 && (((me_num - me_offset) % 2) == 0 && ((me_num - me_offset) % 4 != 0)) ? me_limit = me_num/4 + 1 : ""  %>
+                  <!-- if 4/8/12/16 -->
+                  <% me_limit = me_tags.count/4 if me_tags.count%4 == 0 %>
+
+                  <%= content_tag(:div, :class => "col-sm-3") do %>
+                    <%= f.association :restaurant_tags, :as => :check_boxes, :collection => me_tags.offset(me_offset).limit(me_limit), :label => false, :label_method => lambda { |tag| tag.title_format } %>
+                  <% end %>
+                  <% me_offset += me_limit %>
+                <% end %>
               </div>
             </div>
           </div><hr>
@@ -117,20 +109,24 @@
           <div class="form-group">
             <label>Payment</label>
             <div class="row">
+              <% pay_tags = RestaurantTag.where('title LIKE ?', 'Payment%').ordered %>
+              <% pay_num = pay_tags.count %>
               <div class="col-sm-12">
-                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Payment%').ordered, label: false, :label_method => lambda { |tag| tag.title_format } %>
-                <!-- <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option1"> Credit Card</label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option2"> Master Card</label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option3"> Visa</label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="checkbox-inline"><input type="checkbox" value="option4"> American Express</label>
-                </div> -->
+                <% pay_offset = 0 %>
+                <% pay_limit = pay_num/4 %>
+                <% 4.times do |i| %>
+                  <!-- refactor -->
+                  <% ((pay_num - pay_offset) % 2) != 0 ? (pay_limit = pay_num/4 + 1) : (pay_limit = pay_num/4)  %>
+                  <% (i+1)%2 == 0 && (((pay_num - pay_offset) % 2) == 0 && ((pay_num - pay_offset) % 4 == 0)) ? pay_limit = pay_num/4 + 1 : ""  %>
+                  <% i == 0 && (((pay_num - pay_offset) % 2) == 0 && ((pay_num - pay_offset) % 4 != 0)) ? pay_limit = pay_num/4 + 1 : ""  %>
+                  <!-- if 4/8/12/16 -->
+                  <% pay_limit = pay_tags.count/4 if pay_tags.count%4 == 0 %>
+
+                  <%= content_tag(:div, :class => "col-sm-3") do %>
+                    <%= f.association :restaurant_tags, :as => :check_boxes, :collection => pay_tags.offset(pay_offset).limit(pay_limit), :label => false, :label_method => lambda { |tag| tag.title_format } %>
+                  <% end %>
+                  <% pay_offset += pay_limit %>
+                <% end %>
               </div>
             </div>
           </div>
