@@ -1,4 +1,4 @@
-/*.symbol
+.symbol
 {
 	max-width:330px;
 	margin:20px auto
@@ -618,12 +618,10 @@
 	color:#ff6760;
 	text-decoration:none
 }
-*/
 .red
 {
 	color:#ff6760
 }
-/*
 .navigation
 {
 	text-align:center
@@ -690,7 +688,7 @@
 .slideshow .thumbnails .thumbnail:first-child
 {
 	margin-left:0
-}*/
+}
 .storyContent,.diner-review
 {
 	border:1px solid #ccc;
@@ -711,7 +709,7 @@
 {
 	padding:10px 0
 }
-/*.comment
+.comment
 {
 	margin-top:20px
 }
@@ -770,7 +768,7 @@
 	div.booknow .btn:first-child
 {
 	margin-top:0
-}*/
+}
 	#hh-owner h2
 {
 	margin:40px 15px 20px
@@ -1034,7 +1032,6 @@
 }
 
 }
-
 .form-group
 {
 	padding-bottom:20px
@@ -1062,7 +1059,6 @@
 	padding:10px 12px;
 	pointer-events:none
 }
-/*
 	#hh-footer
 {
 	margin-top:40px
@@ -1194,4 +1190,3 @@
 }
 
 }
-*/

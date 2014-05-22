@@ -1,6 +1,6 @@
-<h2 style="padding-left:15px;padding-bottom:15px"><i class="fa fa-gear"></i>&nbsp; Settings</h2>
+<h2 style="margin-top: 20px;"><i class="fa fa-gear"></i>&nbsp; Settings</h2>
 <div class="col-sm-3 col-lg-3">
-  <div class="settingMenu">
+  <div class="settings-menu">
     <ul>
       <li>
         <%= link_to '<i class="fa fa-list-ul"></i>&nbsp; Dashboard'.html_safe, owner_dashboards_path, :class=> (active_tab == 'dashboard' ? 'active' : '') %>
@@ -23,8 +23,8 @@
       <li>
         <%= link_to '<i class="fa fa-table"></i>&nbsp; Inventories'.html_safe, inventories_owner_dashboards_path, :class=> (active_tab == 'inventories' ? 'active' : '') %>
       </li>
-      <li>
-        <li><%= link_to '<i class="fa fa-table"></i>&nbsp;  Inventory Template Groups'.html_safe, inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %>
+      <li style="width: 230px;">
+        <%= link_to '<i class="fa fa-table"></i>&nbsp;  Inventory Template Groups'.html_safe, inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %>
       </li>
       <!-- <li><%#= link_to "Inventory Template Groups", inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %></li> -->
     </ul>

@@ -1,7 +1,7 @@
 <div class="topContent container">
   <div class="row">
     <div class="col-sm-8 col-lg-8">
-      <h2 class="rmedium"><%= @restaurant.name%></h2>
+      <h2 class="rbold"><%= @restaurant.name%></h2>
       <div class="slideshow">
         <% if true #@restaurant.photos.first.blank? %>
           <%= image_tag @image_tag_string, :width => '100%', :height => "auto" %>

@@ -11,8 +11,8 @@
  *= require_self
  *= require bootstrap.min
  *= require bootstrap
- *= require hungryhub
  *= require hungryhub-custom
+ *= require hungryhub
  *= require hungryhub-fix
  *= require bootstrap-timepicker.min
  *= require datepicker
