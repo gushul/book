@@ -5,4 +5,11 @@ class RestaurantTag < ActiveRecord::Base
   validates :title, :presence => true
  
   has_and_belongs_to_many :restaurants
+
+  scope :ordered, order('title ASC')
+
+  def title_format
+    title.gsub( /.*:/, "" )
+  end
+
 end
