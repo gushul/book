@@ -39,6 +39,7 @@
             <div class="row">
               <!-- Price -->
               <div class="col-sm-12 col-lg-4">
+                  <label>Price</label>
                   <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
                     <option value=""></option>
                     <% RestaurantTag.where('title LIKE ?', 'Price%').each do |tag| %>
@@ -52,6 +53,7 @@
               </div>
               <!-- Rating -->
               <div class="col-sm-12 col-lg-4">
+                 <label>Rating</label>
                  <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
                     <option value=""></option>
                     <% RestaurantTag.where('title LIKE ?', 'Star%').each do |tag| %>
@@ -63,6 +65,7 @@
               </div>
               <!-- Parking -->
               <div class="col-sm-12 col-lg-4">
+                  <label>Parking</label>
                   <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
                     <option value=""></option>
                     <% RestaurantTag.where('title LIKE ?', 'Parking%').each do |tag| %>
