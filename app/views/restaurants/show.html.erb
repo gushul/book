@@ -67,9 +67,9 @@
                 <div class="col-sm-6 col-lg-6">
                   <p><span class="rbold">Price : </span>
                     <% @restaurant.price_format.times do |s| %>
-                      <i class="glyphicon glyphicon-usd"></i>
+                      <i class="glyphicon glyphicon-usd" style="width: 0.5em;"></i>
                     <% end %>
-                    <%= @restaurant.price_desc%>
+                    <span style="padding-left:10px;"><%= @restaurant.price_desc%></span>
                   </p>
                   <br/>
                   <p><span class="rbold">Location : </span> 

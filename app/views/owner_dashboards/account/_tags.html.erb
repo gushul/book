@@ -42,11 +42,11 @@
                   <label>Price</label>
                   <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
                     <option value=""></option>
-                    <% RestaurantTag.where('title LIKE ?', 'Price%').each do |tag| %>
+                    <% RestaurantTag.where('title LIKE ?', 'Price%').ordered.each do |tag| %>
                         <option value="<%= tag.id %>" <%= "selected='selected'" if tag.id == @restaurant.price_format(1) %>>
-                          <% tag.title.slice(6..tag.title.length).to_i.times do %>
-                            $
-                          <% end %>
+                          <% pr = "" %>
+                          <% tag.title.slice(6..tag.title.length).to_i.times {|i| pr+="$" } %>
+                          <%= pr %>
                         </option>
                     <% end %>
                   </select>                     
@@ -56,7 +56,7 @@
                  <label>Rating</label>
                  <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
                     <option value=""></option>
-                    <% RestaurantTag.where('title LIKE ?', 'Star%').each do |tag| %>
+                    <% RestaurantTag.where('title LIKE ?', 'Star%').ordered.each do |tag| %>
                         <option value="<%= tag.id %>" <%= "selected='selected'" if tag.id == @restaurant.get_star_id %>>
                           <%= tag.title_format %>
                         </option>
@@ -68,7 +68,7 @@
                   <label>Parking</label>
                   <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
                     <option value=""></option>
-                    <% RestaurantTag.where('title LIKE ?', 'Parking%').each do |tag| %>
+                    <% RestaurantTag.where('title LIKE ?', 'Parking%').ordered.each do |tag| %>
                         <option value="<%= tag.id %>" <%= "selected='selected'" if tag.id == @restaurant.get_parking_id %>>
                           <%= tag.title_format %>
                         </option>
