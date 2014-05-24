@@ -33,6 +33,8 @@ AuthApp::Application.routes.draw do
     post "/reservations"        => "reservations#index"
     post "/reservations/create" => "reservations#create"
     post "/reservations/update" => "reservations#update"
+    
+    post "/me" => "users#show"
 
     resources :rewards #, :only => [:create]
     resources :restaurants
