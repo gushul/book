@@ -27,4 +27,5 @@
 every 1.day, :at => '20:00 pm' do
 # every 1.minute do
   runner "Restaurant.generate_schedule"
+  runner "Reward.set_points_pending"
 end

@@ -53,14 +53,11 @@ class Reservation < ActiveRecord::Base
     ids = Reservation.where('date = ? AND start_time >= ?',  Date.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
     ids = 0 if ids.empty?
     select = where('date <= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
-    # select = where('date <= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
-    # where('date <= ?', Date.today.strftime('%Y-%m-%d') ) 
   }
   scope :upcoming, -> { 
     ids = Reservation.where('date = ? AND start_time <= ?',  Date.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
     ids = 0 if ids.empty?
     select = where('date >= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
-    # where('date >= ?', Date.today.strftime('%Y-%m-%d') ) 
   }
 
   scope :by_date, lambda { |date|

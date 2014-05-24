@@ -11,4 +11,10 @@ class Reward < ActiveRecord::Base
   scope :redeemed, -> { where('points_total <= 0') }
   scope :received, -> { where('points_total > 0') }
 
+  def self.set_points_pending
+    Reservation.past.map { |res| 
+      res.reward.update_attributes(points_pending:0) if res.reward.present? && res.active && !res.no_show 
+    }
+  end
+
 end
