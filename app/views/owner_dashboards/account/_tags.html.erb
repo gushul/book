@@ -39,15 +39,38 @@
             <div class="row">
               <!-- Price -->
               <div class="col-sm-12 col-lg-4">
-                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Price%'), include_blank: false, label: "Price", :label_method => lambda { |tag| tag.title_format } %>
+                  <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
+                    <option value=""></option>
+                    <% RestaurantTag.where('title LIKE ?', 'Price%').each do |tag| %>
+                        <option value="<%= tag.id %>" <%= "selected='selected'" if tag.id == @restaurant.price_format(1) %>>
+                          <% tag.title.slice(6..tag.title.length).to_i.times do %>
+                            $
+                          <% end %>
+                        </option>
+                    <% end %>
+                  </select>                     
               </div>
               <!-- Rating -->
               <div class="col-sm-12 col-lg-4">
-                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Star%'), include_blank: false, label: "Stars", :label_method => lambda { |tag| tag.title_format } %>
+                 <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
+                    <option value=""></option>
+                    <% RestaurantTag.where('title LIKE ?', 'Star%').each do |tag| %>
+                        <option value="<%= tag.id %>" <%= "selected='selected'" if tag.id == @restaurant.get_star_id %>>
+                          <%= tag.title_format %>
+                        </option>
+                    <% end %>
+                  </select> 
               </div>
               <!-- Parking -->
               <div class="col-sm-12 col-lg-4">
-                <%= f.association :restaurant_tags, :as => :check_boxes, collection: RestaurantTag.where('title LIKE ?', 'Parking%'),include_blank: false, label: "Parking", :label_method => lambda { |tag| tag.title_format } %>
+                  <select class="select optional form-control" id="restaurant_restaurant_tag_ids" name="restaurant[restaurant_tag_ids][]">
+                    <option value=""></option>
+                    <% RestaurantTag.where('title LIKE ?', 'Parking%').each do |tag| %>
+                        <option value="<%= tag.id %>" <%= "selected='selected'" if tag.id == @restaurant.get_parking_id %>>
+                          <%= tag.title_format %>
+                        </option>
+                    <% end %>
+                  </select> 
               </div>
             </div>
           </div> 
