@@ -13,3 +13,5 @@ $.rails.showConfirmDialog = (link) ->
   $modalBody.html("#{message}")
   openModel("destroyInventoryTG")
   $('.model.model-destroyInventoryTG .confirm').on 'click', -> $.rails.confirmed(link)
+
+
