@@ -100,6 +100,7 @@ AuthApp::Application.routes.draw do
     get 'reports'         => "owner_dashboards#reports",         :on => :collection, :as => :reports
     get 'inventories(/:date)' => "owner_dashboards#inventories", :on => :collection, :as => :inventories
     get 'inventory/:id'   => "owner_dashboards#inventory",       :on => :collection, :as => :inventory
+    get 'remake_inventory' => "owner_dashboards#remake_inventory",       :on => :collection, :as => :remake_inventory
   end
 
   resources :user_dashboards, :only => [:index] do 

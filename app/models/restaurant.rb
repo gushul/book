@@ -98,7 +98,7 @@ class Restaurant < ActiveRecord::Base
     self.photos.covers 
   end
 
-  def self.generate_schedule
+  def self.generate_schedule(id = 0)
     @intervals = []
       24.times do |h| 
         4.times do |m| 
@@ -116,8 +116,13 @@ class Restaurant < ActiveRecord::Base
         end
       end
     @intervals << "24:00"
-
-    Restaurant.all.each do |r|
+    
+    if id == 0
+      rests = Restaurant.all
+    else
+      rests = Restaurant.where(id: id)
+    end
+    rests.each do |r|
       # r = Restaurant.first
       # puts r.inventory_template_groups.count
       

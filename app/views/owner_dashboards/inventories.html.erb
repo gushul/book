@@ -16,6 +16,9 @@
               <div id="inventories">
                 <div class="row">
                   <form action="" method="get" role="form" style="font-size: 14px;">
+                   <div class="col-sm-12 col-md-4" id="add-reservation">
+                      <%= link_to '+ Remake Inventory', remake_inventory_owner_dashboards_path(restaurant: current_owner.restaurant.id), class: "btn btn-reservation btn-xs" %>
+                    </div>
                     <!-- Date Picker -->
                     <div class="col-sm-12 col-md-4 pull-right" id="date-picker">
                       <div class="input-group input-group-sm date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">

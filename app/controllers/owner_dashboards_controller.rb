@@ -89,6 +89,8 @@ class OwnerDashboardsController < ApplicationController
   def inventories
     if params[:date].present? 
       @date = Date.strptime(params[:date], '%d-%m-%Y').strftime('%Y-%m-%d')
+    else
+      @date = Date.today.strftime('%Y-%m-%d')
     end
     @inventories = current_owner.restaurant.inventories.by_date(@date)
   end
@@ -99,6 +101,15 @@ class OwnerDashboardsController < ApplicationController
   end
 
   def account
+  end
+
+  def remake_inventory
+    if params[:restaurant].present?
+      res_id = params[:restaurant]
+      Restaurant.find(res_id).inventories.delete_all
+      Restaurant.generate_schedule(res_id)  
+    end
+    redirect_to inventories_owner_dashboards_path, notice: "Inventories updated"
   end
 
 end
