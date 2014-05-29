@@ -10,6 +10,10 @@ Verification
 
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"user":{"email":"test-user@mail.com","password":"secret12","verify_code":"98206"}}' http://localhost:3000/api/verification
 
+Verification - resend code
+
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"user":{"email":"user1@mail.com","password":"secret12"}}' http://localhost:3000/api/verification/resend
+
 Show user's profile
 
     curl -H POST "Accept: application/json" -H "Content-Type: application/json" -d '{"user":{"email":"user1@mail.com","password":"secret12"}}' http://localhost:3000/api/me

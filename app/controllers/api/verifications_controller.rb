@@ -3,8 +3,7 @@ class Api::VerificationsController < Api::BaseController
   
   before_filter :check_user_auth_params
 
-  # POST /verifications
-  # POST /verifications.json
+  # POST /verification
   def create
     @code = params[:user][:verify_code]
 
@@ -20,12 +19,18 @@ class Api::VerificationsController < Api::BaseController
     end
   end
 
+  # POST /verification/resend
+  def resend
+    @user.send_verification_code_via_sms
+    render json: "Done", status: 200
+  end
+
 private
 
   def check_user_auth_params
 
       if params[:user].blank? or params[:user][:email].blank? or
-         params[:user][:password].blank? or params[:user][:verify_code].blank?
+         params[:user][:password].blank? 
         respond_to do |format|
           format.json { render json: "Provide CORRECT login/pass parameters for this action", 
                       status: 403 }

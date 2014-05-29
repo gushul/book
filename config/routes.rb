@@ -25,7 +25,8 @@ AuthApp::Application.routes.draw do
      # :sessions => "api/sessions", 
      :registrations => "api/registrations"
      })
-    post '/verification', to: 'verifications#create'
+    post '/verification',        to: 'verifications#create'
+    post '/verification/resend', to: 'verifications#resend'
     
     # resources :reservations, :only => [:update]
     post "/reservations"        => "reservations#index"
