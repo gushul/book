@@ -15,9 +15,7 @@ AuthApp::Application.routes.draw do
   get 'home/autocomplete_restaurant_name'  
 
   devise_for :owners
-  get  'verification', to: 'verifications#index', as: 'verification'
-  post 'verification', to: 'verifications#create'
-  get  'verification/resend', to: 'verifications#resend', as: 'resend_code'
+
   devise_for :users, controllers: { 
     omniauth_callbacks: "omniauth_callbacks" 
   }
@@ -97,6 +95,10 @@ AuthApp::Application.routes.draw do
   resources :user_dashboards, :only => [:index] do 
     get 'reservations' => "user_dashboards#reservations", :on => :collection, :as => :reservations
     get 'rewards'      => "user_dashboards#rewards",      :on => :collection, :as => :rewards
+
+    get  'verification',        to: 'user_dashboards#verification', :on => :collection, as: :verify
+    post 'verification',        to: 'verifications#create',         :on => :collection
+    get  'verification/resend', to: 'verifications#resend',         :on => :collection, as: :resend_code
   end
 
   resources :inventory_templates do

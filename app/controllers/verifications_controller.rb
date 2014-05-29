@@ -2,12 +2,6 @@
 class VerificationsController < ApplicationController
   before_filter :authenticate_user!
   
-  # GET /verifications
-  # GET /verifications.json
-  def index
-    redirect_to root_url , notice: 'You already verified your account.' if current_user.verified
-  end  
-
   # POST /verifications
   # POST /verifications.json
   def create
@@ -16,12 +10,12 @@ class VerificationsController < ApplicationController
     respond_to do |format|
       if current_user.verify_code.to_i == @code.to_i
         current_user.update_attributes(verified: true)
-        format.html { redirect_to root_url, notice: 'You\'re successfully verified your account.' }
+        format.html { redirect_to user_dashboards_path, notice: 'You\'re successfully verified your account.' }
         # format.json { render json: @restaurant, status: :created, location: @restaurant }
       else
         format.html { 
           flash[:alert] = 'Incorrect code'
-          redirect_to verification_path
+          redirect_to verify_user_dashboards_path
         }
         # format.json { render json: @restaurant.errors, status: :unprocessable_entity }
       end
@@ -31,10 +25,10 @@ class VerificationsController < ApplicationController
   # GET /verifications
   def resend
     message = 'You already verified your account.'
-    route = root_url
+    route = user_dashboards_path
     unless current_user.verified
       current_user.send_verification_code_via_sms
-      route = verification_path
+      route = verify_user_dashboards_path
       message = 'We re-sent code to you phone.'
     end
     redirect_to route, notice: message

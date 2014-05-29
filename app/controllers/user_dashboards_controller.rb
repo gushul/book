@@ -31,4 +31,8 @@ class UserDashboardsController < ApplicationController
     @rewards_received =  rewards.received
   end
 
+  def verification
+    redirect_to user_dashboards_path , notice: 'You already verified your account.' if current_user.verified
+  end
+
 end

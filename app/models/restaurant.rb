@@ -256,7 +256,7 @@ class Restaurant < ActiveRecord::Base
     unless tag.blank?
       return tag.id
     end
-    RestaurantTag.where("title LIKE ?", "Parking:None").first.id
+    RestaurantTag.where("title LIKE ?", "Parking:No").first.id
   end
 
   def price_format(id = 0)

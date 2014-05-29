@@ -1,0 +1,29 @@
+<div id="hh-user" class="topContent container">
+  <div class="row">
+
+    <%= render :partial => "setting_left_tab", :locals => {:active_tab => 'verify' }%>
+   
+   
+    <div class="col-sm-9 col-lg-9">
+        <div class="settings-panel">
+            <div class="header">
+              <h3>Verification</h3>
+            </div>
+            <div class="content">
+                  <h3>Please, enter code, that you received in email</h3>
+                  <%= form_tag("/user_dashboards/verification", method: "post") do %>
+                    <%= text_field_tag(:verify_code) %>
+                    <br/>
+                    <div class="form-actions" style="padding-top: 15px;">
+                      <%= submit_tag "Submit", :class => "btn btn-success" %>
+                      <%= link_to "Send new code", resend_code_user_dashboards_path, :class => "btn btn-default btn-large" %>
+                    </div>
+                  <% end %>
+            </div>
+          </div>
+    </div>
+
+
+
+  </div><!--/row-->
+</div>
