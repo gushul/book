@@ -1,0 +1,27 @@
+<% if flash[:notice] -%>
+  <div id="flash_notice"><%= flash[:notice] %></div>
+<% elsif flash[:alert] -%>
+  <div id="flash_alert"><%= flash[:alert] %></div>
+<% elsif flash[:error] -%>
+  <div id="flash_error"><%= flash[:error] %></div>
+<% end %>
+
+
+<!-- <label>Fill fields with star</label> -->
+<%= simple_form_for :owner, :url => '/admin_owner_create' do |f| %>
+    <%= f.error_notification %>
+
+    <%= f.input :email, label: "Email", :required => true %>
+    <%= f.input :password, :autocomplete => "off", :required => true %>
+    <%= f.input :password_confirmation, :required => true %>
+
+    <%= f.input :owner_name, label: "Name", :required => false, :autofocus => true %>
+    <%= f.input :phone, label: "Phone", :required => false %>
+
+     <%= f.button :submit, "Create" %>
+<% end %>
+
+<br/>
+<br/>
+<%= link_to 'Dashboard', admin_path(:page => "dashboard") %> |
+<%= link_to 'New Restaurant', admin_path(:page => "new_restaurant") %>

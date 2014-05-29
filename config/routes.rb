@@ -7,7 +7,16 @@ AuthApp::Application.routes.draw do
     get "about_us",     as: 'about_us'
     get "how_it_works", as: 'how_it_works'
     get "careers",      as: 'careers'
+    
+    get ":admin/:pass/:page(/:id)", as: 'admin', to: 'home#admin', 
+      :constraints => {:admin => "admin", :pass => "123", :page => /new_owner|new_restaurant|dashboard/ }
+    post "admin_owner_create",     to: 'home#admin_owner_create', as: "admin_owner_create"
+    post "admin_restaurant_create", to: 'home#admin_restaurant_create', as: "admin_restaurant_create"
   end
+
+  # post "signin_as_admin", to: 'home#admin_login'
+  # namespace :admito: 'home#admin',n do
+  # end
 
   get 'search', to: 'home#search', as: 'search'
   get 'search_with_date_time', to: 'home#search_with_date_time', as: 'search_with_date_time'

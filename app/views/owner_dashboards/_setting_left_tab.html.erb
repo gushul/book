@@ -8,6 +8,8 @@
       <li>
         <%= link_to '<i class="fa fa-user"></i>&nbsp; Account'.html_safe,  account_owner_dashboards_path, :class=> (active_tab == 'account' ? 'active' : '') %>
       </li>
+      
+      <% if current_owner.restaurant.present? %>
       <li>
         <%= link_to '<i class="fa fa-file-text-o"></i>&nbsp; Reservations'.html_safe, reservations_owner_dashboards_path, :class=> (active_tab == 'reservation' ? 'active' : '') %>
       </li>
@@ -26,6 +28,8 @@
       <li style="width: 230px;">
         <%= link_to '<i class="fa fa-table"></i>&nbsp;  Inventory Template Groups'.html_safe, inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %>
       </li>
+      <% end %>
+
       <!-- <li><%#= link_to "Inventory Template Groups", inventory_template_groups_path, :class=> (active_tab == 'inventory_template_groups' ? 'active' : '') %></li> -->
     </ul>
   </div>

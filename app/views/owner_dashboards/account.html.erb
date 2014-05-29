@@ -16,18 +16,24 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#myprofile" data-toggle="tab">My Profile</a></li>
-                  <li><a href="#myrestaurant" data-toggle="tab">My Restaurant</a></li>
-                  <li><a href="#tag" data-toggle="tab">Tags</a></li>
-                  <li><a href="#schedule" data-toggle="tab">Schedule</a></li>
-                  <li><a href="#image" data-toggle="tab">Images</a></li>
+                    <li><a href="#myrestaurant" data-toggle="tab">My Restaurant</a></li>
+                  <% if current_owner.restaurant.present? %>
+                    <li><a href="#tag" data-toggle="tab">Tags</a></li>
+                    <li><a href="#schedule" data-toggle="tab">Schedule</a></li>
+                    <li><a href="#image" data-toggle="tab">Images</a></li>
+                  <% end %>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content" id="account-profile">
                   <%= render :partial => "owner_dashboards/account/my_profile" %>
-                  <%= render :partial => "owner_dashboards/account/my_restaurant" %>
-                  <%= render :partial => "owner_dashboards/account/tags" %>
-                  <%= render :partial => "owner_dashboards/account/schedule" %>
-                  <%= render :partial => "owner_dashboards/account/images" %>
+
+                    <%= render :partial => "owner_dashboards/account/my_restaurant" %>
+                  <% if current_owner.restaurant.present? %>
+                    <%= render :partial => "owner_dashboards/account/tags" %>
+                    <%= render :partial => "owner_dashboards/account/schedule" %>
+                    <%= render :partial => "owner_dashboards/account/images" %>
+                  <% end %>
+
                 </div>
 
               </div>

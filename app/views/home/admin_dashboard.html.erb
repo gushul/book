@@ -1,0 +1,18 @@
+<% if flash[:notice] -%>
+  <div id="flash_notice"><%= flash[:notice] %></div>
+<% elsif flash[:alert] -%>
+  <div id="flash_alert"><%= flash[:alert] %></div>
+<% elsif flash[:error] -%>
+  <div id="flash_error"><%= flash[:error] %></div>
+<% end %>
+
+Users registered <%= User.count %>
+<br/>
+<br/>
+Owners registered <%= Owner.count %>
+<br/>
+Restaurans created <%= Restaurant.count %>
+<br/>
+<br/>
+<%= link_to 'New Owner', admin_path(:page => "new_owner") %> |
+<%= link_to 'New Restaurant', admin_path(:page => "new_restaurant") %>
