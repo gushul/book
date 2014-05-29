@@ -89,7 +89,7 @@
                 </li>
                 <% unless current_user.verified %>
                   <li>
-                    <%= link_to "Verify", verify_user_dashboards_path %>
+                    <%= link_to '<i class="glyphicon glyphicon-check"></i>&nbsp; Verify'.html_safe, verify_user_dashboards_path %>
                   </li>
                 <% end %>
                 <li>
