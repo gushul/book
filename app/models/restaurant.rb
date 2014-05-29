@@ -15,7 +15,8 @@ class Restaurant < ActiveRecord::Base
                   :min_in_adv_bookings_close,
                   :avg_turn_time,
                   :conf_in_avg_turn_time,
-                  :max_turn_time
+                  :max_turn_time,
+                  :active
  
   validates :name,  :presence => true
   validates :lng,   :presence => true
@@ -59,6 +60,8 @@ class Restaurant < ActiveRecord::Base
                                 reject_if: :all_blank,
                                 allow_destroy: true   
   belongs_to :owner
+
+  scope :active, -> { where active: true }
     
   scope :by_tags, lambda { |ids|
     ids.collect {|i| joins(:restaurant_tags).where('restaurant_tags.id = ?', i ) }.flatten

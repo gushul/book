@@ -41,6 +41,8 @@
             <%#= f.input :max_turn_time,            label: "Max Turnaround Time" %>
             <%= f.input :res_duration, collection: [:"15", :"30", :"45", :"60", :"90", :"105", :"120"], priority: [ :"15" ], include_blank: false, label: "Max Turnaround Time of each booking" %>
 
+            <%= f.input :active,             label: "Active? (Will it displayed on site)" %>
+
             <div class="form-group">
               <div class="col-sm-12 col-lg-4">
                 <%= f.button :submit, "UPDATE", class: "btn btn-table" %>

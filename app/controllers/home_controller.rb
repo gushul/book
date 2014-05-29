@@ -9,9 +9,9 @@ class HomeController < ApplicationController
     # when will be many restaurants need to limit records and rnd offset 
     # rnd = rand(Restaurant.count-2)
     rnd = rand(0)
-    Restaurant.offset(rnd).limit(50).each {|r| arr << r.id }
+    Restaurant.active.offset(rnd).limit(50).each {|r| arr << r.id }
     # arr = arr.sample(3)
-    arr = arr.sample(Restaurant.count)
+    arr = arr.sample(Restaurant.active.count)
     arr.each {|id| @restaurants <<  Restaurant.find(id) }
   end
 
@@ -34,9 +34,9 @@ class HomeController < ApplicationController
     # when will be many restaurants need to limit records and rnd offset 
     # rnd = rand(Restaurant.count-2)
     rnd = rand(0)
-    Restaurant.offset(rnd).limit(50).each {|r| arr << r.id }
+    Restaurant.active.offset(rnd).limit(50).each {|r| arr << r.id }
     # arr = arr.sample(3)
-    arr = arr.sample(Restaurant.count)
+    arr = arr.sample(Restaurant.active.count)
     arr.each {|id| @restaurants <<  Restaurant.find(id) }
     # @restaurants = @restaurants.page(params[:page]).per(5)
     @restaurants = Kaminari.paginate_array(@restaurants).page(params[:page]).per(5)
@@ -46,12 +46,12 @@ class HomeController < ApplicationController
   def search
     @search_terms = []
     if !params['name'].blank?
-      @search_results_full = Restaurant.where("name like ?", "%#{params['name']}%")
+      @search_results_full = Restaurant.active.where("name like ?", "%#{params['name']}%")
       @search_results = @search_results_full.page(params[:page])
     elsif !params['filter'].blank? && !params["tags"].blank? 
       restaurants_array = JSON.parse(params['filter'])
       restaurants_tags = params["tags"].collect { |i| i.to_i }
-      restaurants = Restaurant.by_ids_and_tags(restaurants_array, restaurants_tags)
+      restaurants = Restaurant.active.by_ids_and_tags(restaurants_array, restaurants_tags)
       @search_results_full = restaurants
       @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     # elsif !params['filter'].blank?
@@ -59,8 +59,8 @@ class HomeController < ApplicationController
     #   restaurants = Restaurant.by_ids(restaurants_array)
     #   @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     else
-      @search_results_full = Restaurant.all
-      @search_results = Restaurant.page(params[:page])
+      @search_results_full = Restaurant.active.all
+      @search_results = Restaurant.active.page(params[:page])
       @search_terms << "All restaurants"
     end
 
@@ -82,8 +82,8 @@ class HomeController < ApplicationController
         # @search_results_full = Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date)
         # @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
       # else
-        @search_results_full = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%")
-        @search_results = Restaurant.where("name like ?", "%#{params['srch-restaurant']}%").page(params[:page])
+        @search_results_full = Restaurant.active.where("name like ?", "%#{params['srch-restaurant']}%")
+        @search_results = Restaurant.active.where("name like ?", "%#{params['srch-restaurant']}%").page(params[:page])
       end
     elsif !params['srch-location'].blank?
       if params['datepicker'].present?
@@ -92,7 +92,7 @@ class HomeController < ApplicationController
         # @search_results =  Restaurant.joins(:inventories).where('name like ? AND inventories.date = ?', "%#{params['srch-restaurant']}%", date).page(params[:page])
       # else
         # query1 = Restaurant.where("name like ? OR address like ?", "%#{params['srch-location']}%", "%#{params['srch-location']}%")
-        query = Restaurant.by_location_or_cuisine("#{params['srch-location']}")
+        query = Restaurant.active.by_location_or_cuisine("#{params['srch-location']}")
         # query2 = Restaurant.by_tag_title("#{params['srch-location']}")
         # merged_select = query1.merge(query2)
         @search_results_full = query
@@ -103,7 +103,7 @@ class HomeController < ApplicationController
       @time = Time.strptime(params['timepicker'], '%H:%M %p').to_s.slice(11..15) 
       @people = params['people'].to_i
       # TODO: availability need to check
-      @search_results_full = Restaurant.by_date_time_people(@date, @time, @people)
+      @search_results_full = Restaurant.active.by_date_time_people(@date, @time, @people)
       @inventories = []
       @search_results_full.each do |r|
         arr = []
@@ -116,12 +116,12 @@ class HomeController < ApplicationController
     elsif !params['filter'].blank? && !params["tags"].blank? 
       restaurants_array = JSON.parse(params['filter'])
       restaurants_tags = params["tags"].collect { |i| i.to_i }
-      restaurants = Restaurant.by_ids_and_tags(restaurants_array, restaurants_tags)
+      restaurants = Restaurant.active.by_ids_and_tags(restaurants_array, restaurants_tags)
       @search_results_full = restaurants
       @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
     else
-      @search_results_full = Restaurant.all
-      @search_results = Restaurant.page(params[:page])
+      @search_results_full = Restaurant.active.all
+      @search_results = Restaurant.active.page(params[:page])
       @search_terms << "All restaurants"
     end
 

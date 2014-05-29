@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140515151141) do
+ActiveRecord::Schema.define(:version => 20140529104545) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -149,8 +149,8 @@ ActiveRecord::Schema.define(:version => 20140515151141) do
     t.text     "misc"
     t.decimal  "lat",                       :precision => 15, :scale => 10
     t.decimal  "lng",                       :precision => 15, :scale => 10
-    t.datetime "created_at",                                                :null => false
-    t.datetime "updated_at",                                                :null => false
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
     t.integer  "owner_id"
     t.integer  "days_in_advance"
     t.integer  "min_booking_time"
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(:version => 20140515151141) do
     t.string   "avg_turn_time"
     t.string   "conf_in_avg_turn_time"
     t.string   "max_turn_time"
+    t.boolean  "active",                                                    :default => true, :null => false
   end
 
   create_table "rewards", :force => true do |t|
