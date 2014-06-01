@@ -72,6 +72,10 @@ Show owner's restaurant
 
 ### Tags
 
+Index tag
+    
+    curl -X GET "Accept: application/json" -H "Content-Type: application/json" -d '' http://localhost:3000/api/owner/tags
+
 Create tag and add it to owners restaurant
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner0@mail.com","password":"secret12"}, "tag":{"title":"Cuisine:Test"}}' http://localhost:3000/api/owner/tags/create

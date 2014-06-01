@@ -74,6 +74,7 @@ AuthApp::Application.routes.draw do
       post "/create_vip"           => "vips#create"
       post "/delete_vip"           => "vips#delete"
 
+      get  "/tags"                 => "tags#index"
       post "/tags/create"          => "tags#create"
       post "/tags/delete"          => "tags#delete"
 

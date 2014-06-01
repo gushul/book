@@ -2,8 +2,19 @@
 class Api::Owner::TagsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
-  before_filter :check_owner_auth_params
+  before_filter :check_owner_auth_params, except: [:index]
   
+  # GET /tags
+  def index
+    tags = []
+    RestaurantTag.all.each do |t|
+      t = t.as_json
+      %w{created_at updated_at}.each {|f| t.delete(f)}
+      tags << t
+    end
+    render json: tags, status: 200
+  end
+
   # POST /tags/create
   def create
     @tag = RestaurantTag.where(:title => params[:tag][:title]).first 
