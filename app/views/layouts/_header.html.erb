@@ -21,7 +21,7 @@
 
       <%= form_tag('/search', method: "get", :class => 'navbar-form navbar-left') do %>
           <div class="input-group input-group-sm">
-            <%= autocomplete_field_tag 'name', '', home_autocomplete_restaurant_name_path, id: 'autocomplete_name_field', :id_element => '#redirect_elem', class: "form-control llitalic", placeholder:"Search by restaurants, location or cuisine", style:"background-color:white;" %>
+            <%= autocomplete_field_tag 'name', '', home_autocomplete_restaurant_name_path, id: 'autocomplete_name_field', :id_element => '#redirect_elem', class: "form-control llitalic", placeholder:"Search for restaurants in Bangkok", style:"background-color:white;" %>
               <div class="input-group-btn">
                 <%= button_tag(type: "submit", class: "btn btn-default") do %>
                   <i class="glyphicon glyphicon-search"></i>                

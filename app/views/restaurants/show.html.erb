@@ -125,9 +125,8 @@
 </div>
 
 <div class="col-sm-12 col-sm-4" style="width: 33.3333%;">
-  <h2 class="rlight">Location :</h2>
-  <!-- <img src="http://placehold.it/400x270"> -->
-  <%= image_tag @google_map, :width => '400', :height => "300" %>
+
+  
   <h2 class="rlight">Book your table for <%= @today ? "today" : "tomorrow" %> </h2>
   <div class="booknow">
     <% id = (user_signed_in? || owner_signed_in?) ? "check" : "login" %>
@@ -152,6 +151,11 @@
 
     <button id='<%=id %>' class="btn action">OTHER TIMES</button>
   </div>
+  
+  <h2 class="rlight">Location :</h2>
+  <!-- <img src="http://placehold.it/400x270"> -->
+  <%= image_tag @google_map, :width => '400', :height => "300" %>
+  
 </div>
 
 <div id="image_popup">
