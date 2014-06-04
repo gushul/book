@@ -175,7 +175,7 @@ class HomeController < ApplicationController
     owner = Owner.new(params[:owner])
 
     respond_to do |format|
-      if @owner.save
+      if owner.save
         format.html { 
           redirect_to admin_path(:admin => "admin", :pass => "123", :page => "new_restaurant", :id => owner.id ), 
           notice: 'Owner was successfully created.'
