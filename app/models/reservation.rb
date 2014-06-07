@@ -63,6 +63,18 @@ class Reservation < ActiveRecord::Base
   scope :by_date, lambda { |date|
      where(:date => date)
   }
+
+  scope :by_month_year, lambda { |month_year = nil|
+    month_year = Date.today.strftime('%m-%Y') unless month_year.present?
+    st = ("01-" + month_year).to_date
+    fn = st.end_of_month
+    where(:date => st..fn)
+  }
+
+  scope :completed, -> { past.where(active: false) }
+  scope :no_show,   -> { where(no_show: false) }
+  scope :cancel,    -> { where( active: false ) }
+  scope :pending,   -> { upcoming.where(active: false) }
   
   scope :owners,     -> { where(:channel => 5..6) }
   scope :exc_owners, -> { where(:channel => 0..4) }

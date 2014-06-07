@@ -84,6 +84,11 @@ class OwnerDashboardsController < ApplicationController
   end
 
   def reports
+    @res = Reservation.by_month_year( params[:date] )
+    @completed = @res.completed
+    @no_show = @res.no_show
+    @cancel = @res.cancel
+    @pending = @res.pending
   end
 
   def inventories

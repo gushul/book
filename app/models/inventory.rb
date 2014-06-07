@@ -12,6 +12,8 @@ class Inventory < ActiveRecord::Base
   validates :quantity_available, :presence => true,
       :numericality => { :greater_than_or_equal_to => 1 }
 
+  belongs_to :restaurant
+
   default_scope :order => :start_time
 
   scope :future, -> { where("date >= ?", DateTime.now.to_date) }
@@ -37,7 +39,12 @@ class Inventory < ActiveRecord::Base
     where(:date => date)
   }
 
-  belongs_to :restaurant
+  scope :in_frame, lambda { |start_period, end_period|
+    # start_period = "2014-06-06 10:00:00"
+    # end_period = "2014-06-30 11:00:00"
+    Inventory.where(:date => start_period.to_date...end_period.to_date,
+                    :start_time => "2000-01-01 #{start_period.to_time.strftime('%H:%M')}:00".to_time..."2000-01-01 #{end_period.to_time.strftime('%H:%M')}:00".to_time)
+  }
 
   def start_time_hour
     start_time.strftime("%H").to_i

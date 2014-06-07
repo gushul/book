@@ -17,15 +17,21 @@
                   <form action="" method="get" role="form">
                     <!-- Date -->
                     <div class="col-sm-12 col-md-4" id="summary">
-                      <p><strong>Date : </strong><small><%= Date.today.strftime('%d %b %Y') %></small></p>
+                      <p><strong>Date : </strong><small><%= params[:date].present? ? ("01-"+params[:date]).to_date.strftime('%b %Y') : Date.today.strftime('%b %Y') %></small></p>
                     </div>
                     <!-- Date Picker -->
                     <div class="col-sm-12 col-md-4 pull-right" id="date-picker">
                       <div class="input-group input-group-sm date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="text" class="form-control" value="dd-mm-yyyy" id="datepicker" name="datepicker" data-date-format="dd-mm-yyyy">
+                        <input type="text" class="form-control" value="<%= params[:date].present? ? ("01-"+params[:date]).to_date.strftime('%m-%Y') : Date.today.strftime('%m-%Y') %>" id="datepicker" name="datepicker" data-date-format="dd-mm-yyyy">
                       </div>
-                      <script type="text/javascript">$('#datepicker').datepicker();</script>
+                      <script type="text/javascript">
+                        $('#datepicker').datepicker({
+                            format: "mm-yyyy",
+                            viewMode: "months", 
+                            minViewMode: "months"
+                        });
+                      </script>
                     </div>
                   </form>
                 </div>
@@ -45,27 +51,36 @@
                     <tbody>
                       <tr>
                         <td>Manual</td>
-                        <td>1 (7%)</td>
-                        <td>3 (20%)</td>
-                        <td>3 (20%)</td>
-                        <td>8 (53%)</td>
-                        <td>15</td>
+                        <% total = "#{@completed.owners.count + @no_show.owners.count + @pending.owners.count + @cancel.owners.count}".to_i %>
+                        <% tt = total %>
+                        <% total = 1 if total == 0 %>
+                        <td><%= @completed.owners.count %> (<%= "#{100*@completed.owners.count/total}%" %>)</td>
+                        <td><%= @no_show.owners.count %> (<%= "#{100*@no_show.owners.count/total}%" %>)</td>
+                        <td><%= @pending.owners.count %> (<%= "#{100*@pending.owners.count/total}%" %>)</td>
+                        <td><%= @cancel.owners.count %> (<%= "#{100*@cancel.owners.count/total}%" %>)</td>
+                        <td><%= tt %> </td>
                       </tr>
                       <tr>
                         <td>Hungry Hub</td>
-                        <td>1 (5%)</td>
-                        <td>0 (0%)</td>
-                        <td>7 (35%)</td>
-                        <td>12 (60%)</td>
-                        <td>20</td>
+                        <% total2 = "#{@completed.exc_owners.count + @no_show.exc_owners.count + @pending.exc_owners.count + @cancel.exc_owners.count}".to_i %>
+                        <% tt2 = total2 %>
+                        <% total2 = 1 if total2 == 0 %>
+                        <td><%= @completed.exc_owners.count %> (<%= "#{100*@completed.exc_owners.count/total2}%" %>)</td>
+                        <td><%= @no_show.exc_owners.count %> (<%= "#{100*@no_show.exc_owners.count/total2}%" %>)</td>
+                        <td><%= @pending.exc_owners.count %> (<%= "#{100*@pending.exc_owners.count/total2}%" %>)</td>
+                        <td><%= @cancel.exc_owners.count %> (<%= "#{100*@cancel.exc_owners.count/total2}%" %>)</td>
+                        <td><%= tt2 %> </td>
                       </tr>
                       <tr class="red">
                         <td><strong>Total</strong></td>
-                        <td>2 (6%)</td>
-                        <td>3 (9%)</td>
-                        <td>10 (29%)</td>
-                        <td>20 (57%)</td>
-                        <td>35</td>
+                        <% total3 = "#{@completed.count + @no_show.count + @pending.count + @cancel.count}".to_i %>
+                        <% tt3 = total3 %>
+                        <% total3 = 1 if total3 == 0 %>
+                        <td><%= "#{@completed.owners.count + @completed.exc_owners.count }" %> (<%= "#{100*@completed.count/total3}%" %>)</td>
+                        <td><%= "#{@no_show.owners.count + @no_show.exc_owners.count}" %> (<%= "#{100*@no_show.count/total3}%" %>)</td>
+                        <td><%= "#{@pending.owners.count + @pending.exc_owners.count}" %> (<%= "#{100*@pending.count/total3}%" %>)</td>
+                        <td><%= "#{@cancel.owners.count + @cancel.exc_owners.count}" %> (<%= "#{100*@cancel.count/total3}%" %>)</td>
+                        <td><%= tt3 %> </td>
                       </tr>
                     </tbody>
                   </table>
@@ -79,3 +94,33 @@
     </div>
   </div><!--/row-->
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('#datepicker').datepicker().on('changeDate', function (ev) {
+        $('#datepicker').change();
+    });
+
+    var wto;
+
+    $('#datepicker').change(function() {
+      clearTimeout(wto);
+      wto = setTimeout(function() {
+        // do stuff when user has been idle for 1 second
+        date = $('#datepicker').val();
+        date = date.replace(/\//g, "-");
+        url = "<%= reports_owner_dashboards_path %>";
+        window.location = url.replace("reports?", "reports/" + date + "?");
+      }, 100);
+    });
+
+    // $('#datepicker').change(function () {
+    //     date = $('#datepicker').val();
+    //     date = date.replace(/\//g, "-");
+    //     url = "<%= reports_owner_dashboards_path %>";
+    //     window.location = url.replace("reports?", "reports/" + date + "?");
+    // });
+
+   });
+</script>

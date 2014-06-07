@@ -37,6 +37,20 @@ class Api::Owner::InventoriesController < ApplicationController
     end
   end
 
+  # POST /inventories/update_in_time_frame
+  def update_in_time_frame
+    @inventories = @owner.restaurant.inventories.in_frame(params[:start_period], params[:end_period])
+    qa = params[:quantity_available] ? params[:quantity_available] : 0
+
+    respond_to do |format|
+      if @inventories.update_all(quantity_available: qa)
+        format.json { render json: "OK", status: 200  }
+      else
+        format.json { render json: "Err", status: :unprocessable_entity }
+      end
+    end
+  end
+
 private
 
   def check_owner_auth_params

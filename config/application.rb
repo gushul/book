@@ -13,6 +13,8 @@ module AuthApp
   class Application < Rails::Application
     config.assets.initialize_on_precompile = false
 
+    config.time_zone = 'Asia/Bangkok'
+
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     
     # Settings in config/environments/* take precedence over those specified here.

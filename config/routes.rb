@@ -51,6 +51,7 @@ AuthApp::Application.routes.draw do
     namespace :owner do
       post "/inventories"          => "inventories#index"
       post "/inventories/update"   => "inventories#update"
+      post "/inventories/update_in_time_frame"   => "inventories#update_in_time_frame"
 
       post "/inventory_template_groups"          => "inventory_template_groups#index"
       post "/inventory_template_groups/create"   => "inventory_template_groups#create"
@@ -99,7 +100,7 @@ AuthApp::Application.routes.draw do
     get 'reservation/:id' => "owner_dashboards#reservation",       :on => :collection, :as => :reservation
     get 'rewards'         => "owner_dashboards#rewards",         :on => :collection, :as => :rewards
     get 'customers'       => "owner_dashboards#customers",       :on => :collection, :as => :customers
-    get 'reports'         => "owner_dashboards#reports",         :on => :collection, :as => :reports
+    get 'reports(/:date)' => "owner_dashboards#reports",         :on => :collection, :as => :reports
     get 'inventories(/:date)' => "owner_dashboards#inventories", :on => :collection, :as => :inventories
     get 'inventory/:id'   => "owner_dashboards#inventory",       :on => :collection, :as => :inventory
     get 'remake_inventory' => "owner_dashboards#remake_inventory",       :on => :collection, :as => :remake_inventory

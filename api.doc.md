@@ -86,6 +86,10 @@ Remove tag from tag-list and owners restaurant
 
 ### Inventories
 
+Update_in_time_frame
+
+    curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}, "start_period": "2014-06-06 10:00:00", "end_period": "2014-06-30 11:00:00", "quantity_available":"1"}' http://localhost:3000/api/owner/inventories/update_in_time_frame
+
 Listing future inventories of owners restaurant
     
     curl -X POST "Accept: application/json" -H "Content-Type: application/json" -d '{"owner":{"email":"owner1@mail.com","password":"secret12"}}' http://localhost:3000/api/owner/inventories
