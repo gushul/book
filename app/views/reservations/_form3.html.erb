@@ -9,16 +9,16 @@
     <tr> 
       <td class="my_bold">Date:</td> 
       <td>
-          <%#= f.input :date, as: :date, start_year: Date.today.year,
-                end_year: Date.today.year+1, 
+          <%#= f.input :date, as: :date, start_year: Time.zone.today.year,
+                end_year: Time.zone.today.year+1, 
                 order: [:day, :month, :year], label: false %>
 
 
 
     <div class="col-sm-3">
     <div class="input-append btn-group">
-      <input id="reservation_date_3i" name="reservation[date(3i)]" type="hidden" value="<%= @reservation.date.present? ? @reservation.date.day : Date.today.day %>">
-      <div id="currectVal13" class="inputSelection rregular pull-left"><%= @reservation.date.present? ? @reservation.date.day : Date.today.day %></div>
+      <input id="reservation_date_3i" name="reservation[date(3i)]" type="hidden" value="<%= @reservation.date.present? ? @reservation.date.day : Time.zone.today.day %>">
+      <div id="currectVal13" class="inputSelection rregular pull-left"><%= @reservation.date.present? ? @reservation.date.day : Time.zone.today.day %></div>
       <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
       <span class="caret"></span>
       </a>
@@ -68,8 +68,8 @@
   
   <div class="col-sm-4">
   <div class="input-append btn-group">
-      <input id="reservation_date_2i" name="reservation[date(2i)]" type="hidden" value="<%= @reservation.date.present? ? @reservation.date.month : Date.today.month %>">
-      <div id="currectVal4" class="inputSelection rregular pull-left"><%= @reservation.date.present? ? @reservation.date.strftime('%B') : Date.today.strftime('%B') %></div>
+      <input id="reservation_date_2i" name="reservation[date(2i)]" type="hidden" value="<%= @reservation.date.present? ? @reservation.date.month : Time.zone.today.month %>">
+      <div id="currectVal4" class="inputSelection rregular pull-left"><%= @reservation.date.present? ? @reservation.date.strftime('%B') : Time.zone.today.strftime('%B') %></div>
       <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
       <span class="caret"></span>
       </a>
@@ -100,8 +100,8 @@
   
   <div class="col-sm-3">
   <div class="input-append btn-group">
-      <input id="reservation_date_1i" name="reservation[date(1i)]" type="hidden" value="<%= @reservation.date.present? ? @reservation.date.year : Date.today.year %>">
-      <div id="currectVal5" class="inputSelection rregular pull-left"><%= @reservation.date.present? ? @reservation.date.year : Date.today.year %></div>
+      <input id="reservation_date_1i" name="reservation[date(1i)]" type="hidden" value="<%= @reservation.date.present? ? @reservation.date.year : Time.zone.today.year %>">
+      <div id="currectVal5" class="inputSelection rregular pull-left"><%= @reservation.date.present? ? @reservation.date.year : Time.zone.today.year %></div>
       <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
       <span class="caret"></span>
       </a>

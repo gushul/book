@@ -32,7 +32,7 @@
                     <div class="col-sm-12 col-md-4 pull-right" id="date-picker">
                       <div class="input-group input-group-sm date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="text" class="form-control" value="<%= @date.present? ? params[:date] : Date.today.strftime('%d-%m-%Y') %>" id="datepicker" name="datepicker" data-date-format="dd-mm-yyyy">
+                        <input type="text" class="form-control" value="<%= @date.present? ? params[:date] : Time.zone.today.strftime('%d-%m-%Y') %>" id="datepicker" name="datepicker" data-date-format="dd-mm-yyyy">
                       </div>
                       <script type="text/javascript">$('#datepicker').datepicker();</script>
                     </div>
@@ -62,7 +62,7 @@
                 </div>
                 <% else %>
                   <div style="padding-bottom:95px;">
-                    No reservations during <%= @date.present? ? Date.strptime(params[:date], '%d-%m-%Y').strftime('%d %b %Y') : Date.today.strftime('%d %b %Y') %>
+                    No reservations during <%= @date.present? ? Date.strptime(params[:date], '%d-%m-%Y').strftime('%d %b %Y') : Time.zone.today.strftime('%d %b %Y') %>
                   </div>
                 <% end %>
 

@@ -95,7 +95,7 @@ class OwnerDashboardsController < ApplicationController
     if params[:date].present? 
       @date = Date.strptime(params[:date], '%d-%m-%Y').strftime('%Y-%m-%d')
     else
-      @date = Date.today.strftime('%Y-%m-%d')
+      @date = Time.zone.today.strftime('%Y-%m-%d')
     end
     @inventories = current_owner.restaurant.inventories.by_date(@date)
   end

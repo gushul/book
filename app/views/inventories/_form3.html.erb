@@ -2,8 +2,8 @@
   <table  border="0" style="text-align:left;"> 
     <tr> 
       <td class="my_bold">Date:</td> 
-      <td><%= f.input :date, as: :date, start_year: Date.today.year,
-                end_year: Date.today.year+1, 
+      <td><%= f.input :date, as: :date, start_year: Time.zone.today.year,
+                end_year: Time.zone.today.year+1, 
                 order: [:day, :month, :year], label: false %></td> 
     </tr>
     <tr> 

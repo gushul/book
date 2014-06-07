@@ -14,6 +14,8 @@ module AuthApp
     config.assets.initialize_on_precompile = false
 
     config.time_zone = 'Bangkok'
+    # config.time_zone = 'London' 
+    config.active_record.default_timezone = :local
 
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     

@@ -16,9 +16,9 @@ class Inventory < ActiveRecord::Base
 
   default_scope :order => :start_time
 
-  scope :future, -> { where("date >= ?", DateTime.now.to_date) }
+  scope :future, -> { where("date >= ?", Time.zone.now.to_date) }
   
-  scope :available, lambda { |date = DateTime.now.to_date, time = Time.now.to_s.slice(11..15) |
+  scope :available, lambda { |date = Time.zone.now.in_time_zone.to_date, time = Time.zone.now.to_s.slice(11..15) |
     where('date = ? AND inventories.start_time >= ?', date, "2000-01-01 #{time}:00" ) 
   }
  
@@ -35,7 +35,7 @@ class Inventory < ActiveRecord::Base
     where('start_time LIKE ?', "%#{time}:00") 
   }
 
-  scope :by_date, lambda { |date = Date.today | 
+  scope :by_date, lambda { |date = Time.zone.today | 
     where(:date => date)
   }
 

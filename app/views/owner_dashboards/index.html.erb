@@ -52,7 +52,7 @@
                 </table>
               </div>
               
-              <p><small><i class="fa fa-calendar"></i>&nbsp; <%= Date.today.strftime('%d %b %Y') %> &nbsp; <i class="fa fa-clock-o"></i>&nbsp; <%= Time.now.strftime('%H:%M:%S')  %></small></p>
+              <p><small><i class="fa fa-calendar"></i>&nbsp; <%= Time.zone.today.strftime('%d %b %Y') %> &nbsp; <i class="fa fa-clock-o"></i>&nbsp; <%= Time.zone.now.strftime('%H:%M:%S')  %></small></p>
               <hr>
               <div class="row">
                 <div class="col-sm-12 col-lg-4">

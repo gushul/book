@@ -45,19 +45,19 @@ class Reservation < ActiveRecord::Base
 
   scope :active, -> { where active: true }
 
-  scope :today,       -> { where(:date => Date.today) }
-  scope :yesterday,   -> { where(:date => Date.yesterday..Date.today) }
-  scope :next_7_days, -> { where(:date => Date.tomorrow..(Date.today + 7.days)) }
+  scope :today,       -> { where(:date => Time.zone.today) }
+  scope :yesterday,   -> { where(:date => (Time.zone.today - 1.day)..Time.zone.today) }
+  scope :next_7_days, -> { where(:date => (Time.zone.today + 1.day)..(Time.zone.today + 7.days)) }
   
   scope :past,     -> { 
-    ids = Reservation.where('date = ? AND start_time >= ?',  Date.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
+    ids = Reservation.where('date = ? AND start_time >= ?',  Time.zone.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
     ids = 0 if ids.empty?
-    select = where('date <= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
+    select = where('date <= ? AND id not in (?)',  Time.zone.today.strftime('%Y-%m-%d'), ids ) 
   }
   scope :upcoming, -> { 
-    ids = Reservation.where('date = ? AND start_time <= ?',  Date.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
+    ids = Reservation.where('date = ? AND start_time <= ?',  Time.zone.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)
     ids = 0 if ids.empty?
-    select = where('date >= ? AND id not in (?)',  Date.today.strftime('%Y-%m-%d'), ids ) 
+    select = where('date >= ? AND id not in (?)',  Time.zone.today.strftime('%Y-%m-%d'), ids ) 
   }
 
   scope :by_date, lambda { |date|
@@ -65,7 +65,7 @@ class Reservation < ActiveRecord::Base
   }
 
   scope :by_month_year, lambda { |month_year = nil|
-    month_year = Date.today.strftime('%m-%Y') unless month_year.present?
+    month_year = Time.zone.today.strftime('%m-%Y') unless month_year.present?
     st = ("01-" + month_year).to_date
     fn = st.end_of_month
     where(:date => st..fn)
@@ -121,8 +121,8 @@ class Reservation < ActiveRecord::Base
 
   def status
     return "Cancelled" unless self.active
-    if Date.today <= self.date 
-      if ( (Date.today == self.date) && (Time.now.strftime('%H:%M') <= self.start_time_format) ) || Date.today < self.date
+    if Time.zone.today <= self.date 
+      if ( (Time.zone.today == self.date) && (Time.now.strftime('%H:%M') <= self.start_time_format) ) || Time.zone.today < self.date
         return "Upcoming"
       end
     end

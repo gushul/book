@@ -46,7 +46,7 @@ class RestaurantsController < ApplicationController
       @times = @restaurant.inventories.available.limit(3).map{|inv| inv.start_time.to_s.slice(11..15)}
     else
       @today = false
-      @times = @restaurant.inventories.available(Date.tomorrow, "00:00").limit(3).map{|inv| inv.start_time.to_s.slice(11..15)}
+      @times = @restaurant.inventories.available((Time.zone.today + 1.day), "00:00").limit(3).map{|inv| inv.start_time.to_s.slice(11..15)}
     end
 
     respond_to do |format|

@@ -2,8 +2,8 @@
 
   <!-- <div style="width:200px"> -->
   <%#= f.association :restaurant, label: "Restaurant" %>
-  <%= f.input :date, :disabled => true, as: :date, start_year: Date.today.year,
-              end_year: Date.today.year+1, 
+  <%= f.input :date, :disabled => true, as: :date, start_year: Time.zone.today.year,
+              end_year: Time.zone.today.year+1, 
               order: [:day, :month, :year], label: "Date" %>
   <%= f.input :start_time, :disabled => true, :minute_step => 15, label: "Start Time" %>
   <%= f.input :end_time, :disabled => true, :minute_step => 15, label: "End Time" %>

@@ -127,9 +127,9 @@ class Restaurant < ActiveRecord::Base
       # puts r.inventory_template_groups.count
       
       # count of needed days
-      # inv_cnt_have = r.inventories.where("date >= ?", Date.today).count
+      # inv_cnt_have = r.inventories.where("date >= ?", Time.zone.today).count
       created_count = 0
-      inv_cnt_have = r.inventories.where("date >= ?", Date.today).group(:date).length
+      inv_cnt_have = r.inventories.where("date >= ?", Time.zone.today).group(:date).length
       cnt = r.days_in_advance - inv_cnt_have
       
       puts "*************"
@@ -139,8 +139,8 @@ class Restaurant < ActiveRecord::Base
       # puts "*************"
 
       if cnt >= 0 
-        # end_date = Date.today + r.days_in_advance.days
-        end_date = DateTime.now.to_date + r.days_in_advance.days
+        # end_date = Time.zone.today + r.days_in_advance.days
+        end_date = Time.zone.now.to_date + r.days_in_advance.days
         start_date = end_date - cnt
         period = 1
         dates = start_date.step(end_date, period).map.each_cons(1).to_a

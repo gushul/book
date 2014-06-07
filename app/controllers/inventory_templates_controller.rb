@@ -27,7 +27,7 @@ class InventoryTemplatesController < ApplicationController
     @reservations = current_owner.restaurant.reservations
 
     # @reservations_by_date = @reservations.group_by(&:date)
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @date = params[:date] ? Date.parse(params[:date]) : Time.zone.today
 
     # DateTime.parse('2000-01-01 11:00:00 UTC').to_time
     # @selectable_time = [["2000-01-01 00:00:00 UTC","00:00"], ["2000-01-01 00:15:00 UTC", "00:15"] ]

@@ -161,8 +161,8 @@ puts "*** Inventories created ***"
 # InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 16:30:00", end_time: "2000-01-01 16:45:00", quantity_available: 10 )
 # InventoryTemplate.create( inventory_template_group_id: itg_id, start_time: "2000-01-01 16:45:00", end_time: "2000-01-01 17:00:00", quantity_available: 10 )
 
-# Inventory.create(date: DateTime.now.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00", restaurant_id: Restaurant.first.id)
-# Inventory.create(date: DateTime.now.tomorrow.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00",restaurant_id: Restaurant.first.id)
+# Inventory.create(date: Time.zone.now.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00", restaurant_id: Restaurant.first.id)
+# Inventory.create(date: Time.zone.now.tomorrow.to_date, quantity_available: 10, start_time: "2000-01-01 10:00:00", end_time: "2000-01-01 17:00:00",restaurant_id: Restaurant.first.id)
 
 User.delete_all
 User.create(email: "user1@mail.com", password: "secret12", username: "sample user 1", phone: "0213456789")
@@ -176,7 +176,7 @@ Reservation.delete_all
   # Restaurant.all.each do |restaurant| 
   # Reservation.create( user_id: u.id, 
   #                     restaurant_id: Restaurant.first.id, 
-  #                     date: DateTime.now.to_date, 
+  #                     date: Time.zone.now.to_date, 
   #                     start_time: "2000-01-01 13:30:00", 
   #                     end_time: "2000-01-01 15:00:00", 
   #                     party_size: 10, 
@@ -187,60 +187,60 @@ u1 = User.first
 u2 = User.last
 Reservation.create( user_id: u1.id, 
                     restaurant_id: Restaurant.first.id, 
-                    date: DateTime.now.to_date, 
+                    date: Time.zone.now.to_date, 
                     start_time: "2000-01-01 11:00:00", 
                     end_time: "2000-01-01 12:30:00", 
                     party_size: 12, active: true )
 Reservation.create( user_id: u1.id, 
                     restaurant_id: Restaurant.first.id, 
-                    date: DateTime.now.tomorrow.to_date, 
+                    date: Time.zone.now.tomorrow.to_date, 
                     start_time: "2000-01-01 11:00:00", 
                     end_time: "2000-01-01 12:30:00", 
                     party_size: 12, active: true )
 Reservation.create( user_id: u1.id, 
                     restaurant_id: Restaurant.last.id, 
-                    date: DateTime.now.to_date, 
+                    date: Time.zone.now.to_date, 
                     start_time: "2000-01-01 11:00:00", 
                     end_time: "2000-01-01 12:30:00", 
                     party_size: 12, active: false )
 Reservation.create( user_id: u1.id, 
                     restaurant_id: Restaurant.last.id, 
-                    date: DateTime.now.tomorrow.to_date, 
+                    date: Time.zone.now.tomorrow.to_date, 
                     start_time: "2000-01-01 11:00:00", 
                     end_time: "2000-01-01 12:30:00", 
                     party_size: 12, active: false )
 # u2
 Reservation.create( user_id: u2.id, 
                     restaurant_id: Restaurant.first.id, 
-                    date: DateTime.now.to_date, 
+                    date: Time.zone.now.to_date, 
                     start_time: "2000-01-01 09:00:00", 
                     end_time: "2000-01-01 10:30:00", 
                     party_size: 12, active: true )
 Reservation.create( user_id: u2.id, 
                     restaurant_id: Restaurant.first.id, 
-                    date: DateTime.now.tomorrow.to_date, 
+                    date: Time.zone.now.tomorrow.to_date, 
                     start_time: "2000-01-01 09:00:00", 
                     end_time: "2000-01-01 10:30:00", 
                     party_size: 12, active: false )
 Reservation.create( user_id: u2.id, 
                     restaurant_id: Restaurant.last.id, 
-                    date: DateTime.now.to_date, 
+                    date: Time.zone.now.to_date, 
                     start_time: "2000-01-01 09:00:00", 
                     end_time: "2000-01-01 10:30:00", 
                     party_size: 12, active: true )
 Reservation.create( user_id: u2.id, 
                     restaurant_id: Restaurant.last.id, 
-                    date: DateTime.now.tomorrow.to_date, 
+                    date: Time.zone.now.tomorrow.to_date, 
                     start_time: "2000-01-01 09:00:00", 
                     end_time: "2000-01-01 10:30:00", 
                     party_size: 12, active: false )
 # Manual reservations (owner's)
-Reservation.create(restaurant_id: Restaurant.first.id, date: DateTime.now.to_date, start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 15:00:00", party_size: 2, active: false, name: "Sample-Name1", email: "mail_1@mail.com", phone: "+646654646", owner_id: Restaurant.first.owner.id)
-Reservation.create(restaurant_id: Restaurant.last.id,  date: DateTime.now.tomorrow.to_date, start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 15:00:00", party_size: 2, active: true, name: "Sample-Name2", email: "mail_2@mail.com", phone: "+646622246", owner_id: Restaurant.last.owner.id)
+Reservation.create(restaurant_id: Restaurant.first.id, date: Time.zone.now.to_date, start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 15:00:00", party_size: 2, active: false, name: "Sample-Name1", email: "mail_1@mail.com", phone: "+646654646", owner_id: Restaurant.first.owner.id)
+Reservation.create(restaurant_id: Restaurant.last.id,  date: Time.zone.now.tomorrow.to_date, start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 15:00:00", party_size: 2, active: true, name: "Sample-Name2", email: "mail_2@mail.com", phone: "+646622246", owner_id: Restaurant.last.owner.id)
 # ==================================================================
 puts "*** Reservations created ***"
 
-# Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.first.id, date: DateTime.now.tomorrow.to_date, start_time: "2000-01-01 11:00:00", end_time: "2000-01-01 12:30:00", party_size: 10, active: false )
+# Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.first.id, date: Time.zone.now.tomorrow.to_date, start_time: "2000-01-01 11:00:00", end_time: "2000-01-01 12:30:00", party_size: 10, active: false )
 # Reservation.create(user_id: User.first.id, restaurant_id: Restaurant.last.id, date: "2013-11-01", start_time: "2000-01-01 16:00:00", end_time: "2000-01-01 16:45:00", party_size: 4, active: true )
 # Reservation.create(user_id: User.last.id, restaurant_id: Restaurant.last.id, date: "2013-11-02", start_time: "2000-01-01 14:00:00", end_time: "2000-01-01 14:30:00", party_size: 3, active: true )
 # Reservation.create(user_id: User.last.id, restaurant_id: Restaurant.last.id, date: "2013-11-12", start_time: "2000-01-01 15:00:00", end_time: "2000-01-01 15:30:00", party_size: 1, active: true )

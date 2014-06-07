@@ -10,7 +10,7 @@ class InventoriesController < ApplicationController
   def index  
     # @inventories = Inventory.order("id desc").page(params[:page])
     # @inventories = current_owner.restaurant.inventories.order("id desc").page(params[:page])
-    @date = params[:date] ? Date.strptime(params[:date], '%m/%d/%Y') : Date.today
+    @date = params[:date] ? Date.strptime(params[:date], '%m/%d/%Y') : Time.zone.today
     @inventories = current_owner.restaurant.inventories.by_date(@date).order("id desc").page(params[:page])
 
     @inventories1 = current_owner.restaurant.inventories.by_min_and_date("00", @date)
