@@ -84,7 +84,7 @@ class OwnerDashboardsController < ApplicationController
   end
 
   def reports
-    @res = Reservation.by_month_year( params[:date] )
+    @res =  current_owner.restaurant.reservations.by_month_year( params[:date] )
     @completed = @res.completed
     @no_show = @res.no_show
     @cancel = @res.cancel
