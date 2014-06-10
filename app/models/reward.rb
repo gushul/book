@@ -9,7 +9,7 @@ class Reward < ActiveRecord::Base
   belongs_to :restaurant  
 
   scope :redeemed, -> { where('points_total <= 0') }
-  scope :received, -> { where('points_total > 0') }
+  scope :received, -> { where('points_total > 0 AND points_pending=0') }
 
   def self.set_points_pending
     Reservation.past.map { |res| 
