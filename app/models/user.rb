@@ -44,7 +44,12 @@ class User < ActiveRecord::Base
   end 
 
   def get_credits
-    self.rewards.map(&:points_total).compact.reduce(0, :+)
+#    self.rewards.map(&:points_total).compact.reduce(0, :+)
+    rewards_points = 0
+    self.rewards.each do |r|
+	    rewards_points = rewards_points + r.points_total - r.points_pending
+    end
+    return rewards_points
   end
 
   def is_vip?(restaurant)

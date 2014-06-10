@@ -32,7 +32,7 @@
                           </span>
                         </td>
                         <td class="td-gray numeric">
-                          <%= link_to "#{current_user.rewards.count}", rewards_user_dashboards_path %>
+                          <%= link_to "#{current_user.rewards.select{|r| r.points_total < 0 }.length}", rewards_user_dashboards_path %>
                         </td>
                         <td class="td-gray-light numeric">
                           <span class="red">
