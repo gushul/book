@@ -48,6 +48,7 @@ class Reservation < ActiveRecord::Base
   scope :today,       -> { where(:date => Time.zone.today) }
   scope :yesterday,   -> { where(:date => (Time.zone.today - 1.day)..Time.zone.today) }
   scope :next_7_days, -> { where(:date => (Time.zone.today + 1.day)..(Time.zone.today + 7.days)) }
+  scope :all_visits, -> { where('active = 1 AND arrived = 1') }
   
   scope :past,     -> { 
     ids = Reservation.where('date = ? AND start_time >= ?',  Time.zone.today.strftime('%Y-%m-%d'), "2000-01-01 #{Time.now.strftime('%H:%M')}:00" ).map(&:id)

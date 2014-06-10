@@ -36,7 +36,8 @@
                         </td>
                         <td class="td-gray-light numeric">
                           <span class="red">
-                            <%= @visits %>
+			  <%= current_user.reservations.all_visits.length %>
+<!--                            <%= @visits %>-->
                           </span>
                         </td>
                       </tr>
