@@ -145,10 +145,28 @@ class Restaurant < ActiveRecord::Base
         period = 1
         dates = start_date.step(end_date, period).map.each_cons(1).to_a
 
+
         dates.each do |d|
           unless r.inventory_template_groups.blank?
+
             r.inventory_template_groups.each do |itg|
-              it = itg.inventory_templates
+              it = []
+              if d[0].wday == 0 && r.sun == itg.id then #sun
+                it = itg.inventory_templates
+              elsif d[0].wday == 1 && r.mon == itg.id then #mon
+                it = itg.inventory_templates
+              elsif d[0].wday == 2 && r.tue == itg.id then #tue
+                it = itg.inventory_templates
+              elsif d[0].wday == 3 && r.wed == itg.id then #wed
+                it = itg.inventory_templates
+              elsif d[0].wday == 4 && r.thu == itg.id then #thu
+                it = itg.inventory_templates
+              elsif d[0].wday == 5 && r.fri == itg.id then #fri
+                it = itg.inventory_templates
+              elsif d[0].wday == 6 && r.sat == itg.id then #sat
+                it = itg.inventory_templates
+              end
+#              it = itg.inventory_templates
               it.each do |inv|
                 Inventory.create(date: d.to_s, 
                                  quantity_available: inv.quantity_available, 
@@ -157,7 +175,9 @@ class Restaurant < ActiveRecord::Base
                                  restaurant_id: r.id)
                 created_count += 1
               end
+
             end
+
           end
         end
       end
