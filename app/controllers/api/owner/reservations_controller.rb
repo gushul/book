@@ -12,23 +12,7 @@ class Api::Owner::ReservationsController < ApplicationController
     @reservations.each do |r|
       ro = r
       r = r.as_json
-      # r[:quality] = rand(10)
-      user = User.where(id: r[:user_id]).first
-      if user.present?
-        if user.reservations.blank?
-          r[:quality] = 100
-        else
-          r[:quality] = ( user.reservations.map(&:active).flatten.count(true) - user.reservations.map(&:no_show).flatten.count(true) ) / user.reservations.map(&:active).flatten.count(true)
-        end
-      else
-        # non registered user
-        res = Reservation.where(email: r[:email], phone: r[:phone], name: r[:name] )
-        if res.blank?
-          r[:quality] = 100
-        else
-          r[:quality] = ( res.map(&:active).flatten.count(true) - res.map(&:no_show).flatten.count(true) ) / res.map(&:active).flatten.count(true)
-        end
-      end
+      r[:quality] = ro.quality
       r[:start_time] = ro.start_time_format
       r[:end_time] = ro.end_time_format
       # %w{user_id}.each {|k| r.delete(k)}
