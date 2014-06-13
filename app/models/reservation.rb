@@ -142,7 +142,7 @@ class Reservation < ActiveRecord::Base
   end
   
   def send_reminder_via_sms
-    Thread.new do
+#    Thread.new do
       require 'net/https'
       require 'open-uri'
       # uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+6600000000&to=+#{self.phone}&text=#{self.verify_code}")
@@ -158,17 +158,17 @@ class Reservation < ActiveRecord::Base
 #      http.use_ssl = true
 #      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       http.get(uri.request_uri)
-    end
+#    end
   end
 
   def self.generete_sms_reminders
     d = (Time.zone.now+1.hour).to_datetime.to_date
     s = Time.new(2000,1,1,(Time.zone.now + 1.hour).to_datetime.hour,(Time.zone.now + 1.hour).to_datetime.minute,0)
     res = Reservation.find_all_by_date_and_start_time(d,s).each do |r|
-
-        r.send_reminder_via_sms
-
+      r.send_reminder_via_sms
+      puts "sent sms for id:#{r.id}"
     end
+    puts "done sending out reminders"
   end
 
 
