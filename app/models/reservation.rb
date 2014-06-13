@@ -164,9 +164,10 @@ class Reservation < ActiveRecord::Base
   def self.generete_sms_reminders
     d = (Time.zone.now+1.hour).to_datetime.to_date
     s = Time.new(2000,1,1,(Time.zone.now + 1.hour).to_datetime.hour,(Time.zone.now + 1.hour).to_datetime.minute,0)
-    res = Reservation.find_by_date_and_start_time(d,s)
-    res.each do |r|
-      r.send_reminder_via_sms
+    res = Reservation.find_all_by_date_and_start_time(d,s).each do |r|
+
+        r.send_reminder_via_sms
+
     end
   end
 
