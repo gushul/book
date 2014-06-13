@@ -140,6 +140,26 @@ class Reservation < ActiveRecord::Base
       return (( self.user.reservations.map(&:active).flatten.count(true) - self.user.reservations.map(&:no_show).flatten.count(true).to_f ) / self.user.reservations.map(&:active).flatten.count(true)*100).to_i
     end
   end
+  
+  def send_reminder_via_sms
+    Thread.new do
+      require 'net/https'
+      require 'open-uri'
+      # uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+6600000000&to=+#{self.phone}&text=#{self.verify_code}")
+      # uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+66875928489&to=+66#{self.phone.reverse.chop.reverse}&text=Welcome+to+Hungry+Hub.+Your+verification+code+is+#{self.verify_code}.+Please+verify+this+number+on+our+webpage+or+in+our+mobile+application.")
+			if self.user.nil? then
+        phone = self.phone
+      else
+        phone = self.user.phone
+      end
+      msg = URI.encode("restaurant reservation reminder for a party of #{self.party_size} at #{self.restaurant.name} on #{self.date.to_formatted_s(:rfc822)} starting at #{self.start_time.to_formatted_s(:time)}. See you soon.")
+      uri = URI.parse("http://api.rushsms.com:8080/?username=rus-hungryhub&password=94GrsVw3&type=0&delivery=1&mobile=66#{phone.reverse.chop.reverse}&sender=Hungry+Hub&message=#{msg}")
+      http = Net::HTTP.new(uri.host, uri.port)
+#      http.use_ssl = true
+#      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.get(uri.request_uri)
+    end
+  end
 
 private
 
