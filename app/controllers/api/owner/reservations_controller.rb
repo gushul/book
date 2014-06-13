@@ -47,6 +47,11 @@ class Api::Owner::ReservationsController < ApplicationController
   # POST /reservations/create
   def create
     @reservation = Reservation.new(params[:reservation])
+		
+		@reservation.date = @reservation.date+7.hour
+		@reservation.start_time = @reservation.start_time+7.hour
+		@reservation.end_time = @reservation.end_time+7.hour
+		
     @reservation.owner_id = @owner.id
 
     respond_to do |format|
