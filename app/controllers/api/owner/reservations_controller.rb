@@ -57,6 +57,7 @@ class Api::Owner::ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.save 
         reservation = @reservation.as_json
+				reservation[:date] = @reservation.date.utc
         reservation[:start_time]  = @reservation.start_time_format
         reservation[:end_time]    = @reservation.end_time_format
         format.json { render json: reservation, status: 200 }
