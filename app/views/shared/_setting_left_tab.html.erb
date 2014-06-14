@@ -3,7 +3,7 @@
     <ul>
       <li><%= link_to "Dashboard", owner_dashboards_path, :class=> (active_tab == 'dashboard' ? 'active' : '') %></li>
       <li><%= link_to "My Restaurant", edit_restaurant_path(current_owner.restaurant), :class=> (active_tab == 'my_restaurant' ? 'active' : '') %></li>
-      <li><%= link_to "Customers", customers_index_owner_dashboards_path, :class => (active_tab == 'customers' ? 'active' : '') %></li>
+      <li><%= link_to "Customers", customers_owner_dashboards_path, :class => (active_tab == 'customers' ? 'active' : '') %></li>
       <li><%= link_to "Reservation", reservations_path, :class=> (active_tab == 'reservation' ? 'active' : '') %></li>
       <li><%= link_to "Inventories", inventories_path, :class=> (active_tab == 'inventories' ? 'active' : '') %></li>
       <!-- <li><%#= link_to "Inventory Template", inventory_templates_path, :class=> (active_tab == 'inventory_templates' ? 'active' : '') %></li> -->
