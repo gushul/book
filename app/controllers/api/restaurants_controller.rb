@@ -14,10 +14,12 @@ class Api::RestaurantsController < Api::BaseController
     end
     @restaurants_json = []
     @restaurants.each do |r|
-      r = r.as_json
-      # %w{mon tue wed thu fri sat sun 
-      %w{owner_id updated_at created_at}.each {|k| r.delete(k)}
-      @restaurants_json << r
+      if r.active then
+        r = r.as_json
+        # %w{mon tue wed thu fri sat sun 
+        %w{owner_id updated_at created_at}.each {|k| r.delete(k)}
+        @restaurants_json << r
+      end
     end
     render json: @restaurants_json 
   end
