@@ -35,4 +35,29 @@ module InventoryTemplatesHelper
     int
   end
 
+  def get_color(num)
+    color = ''
+    case num 
+    when 0  
+      color = "#d9534f" 
+    when 1  
+      color = "#428bca" 
+    when 2  
+      color = "#5cb85c" 
+    when 3  
+      color = "#f0ad4e" 
+    when 4  
+      color = "#563d7c" 
+    when 5  
+      color = "#5bc0de" 
+    when 6  
+      color = "violet" 
+    when 7  
+      color = "#999" 
+    else  
+      color = "black" 
+    end  
+    return color
+  end
+
 end

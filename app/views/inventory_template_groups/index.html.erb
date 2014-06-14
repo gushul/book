@@ -28,10 +28,15 @@
                   <th></th>
                 </tr>
               </thead>
-              <% @inventory_template_groups.each do |itg| %>
+              <% hc = {} %>
+              <% @inventory_template_groups.each_with_index do |itg ,ind| %>
                 <tr>
                   <!-- <td><%#= itg.restaurant.name %></td> -->
-                  <td><%= itg.name %></td>
+                  <td>
+                    <div style='width: 20px;  height: 20px; background: <%= get_color(ind) %>; -moz-border-radius: 0px; -webkit-border-radius: 10px; border-radius: 10px; float: left; margin-right: 10px;'></div>
+                    <% hc[itg.id] = get_color(ind) %>
+                    <%= itg.name %>
+                  </td>
                   <td><%= itg.primary %></td>
                   <td>
                     <div class="pull-right">
@@ -51,6 +56,8 @@
             <%= paginate @inventory_template_groups, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
           </div>
           <br />
+         
+
           
 
 
@@ -72,6 +79,7 @@
   </div>
 </div>
 
+<br/>
 
 
 
@@ -93,7 +101,10 @@
       <td>
         <% @inventory_templates1.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true  %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+              <%= link_to it.quantity_available, it, remote: true, style: "color:white;"  %>
+            </div>
           <% end %>
         <% end %>
       </td>
@@ -105,7 +116,10 @@
       <td>
         <% @inventory_templates2.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true  %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+            <%= link_to it.quantity_available, it, remote: true , style: "color:white;"  %>
+            </div>
           <% end %>
         <% end %>
       </td>
@@ -117,7 +131,10 @@
       <td>
         <% @inventory_templates3.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true  %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+            <%= link_to it.quantity_available, it, remote: true , style: "color:white;"  %>
+            </div>
           <% end %>
         <% end %>
       </td>
@@ -129,7 +146,10 @@
       <td>
         <% @inventory_templates4.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true  %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+            <%= link_to it.quantity_available, it, remote: true , style: "color:white;"  %>
+            </div>
           <% end %>
         <% end %>
       </td>
@@ -156,7 +176,10 @@
       <td>
         <% @inventory_templates1.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true  %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+            <%= link_to it.quantity_available, it, remote: true , style: "color:white;"  %>
+            </div>
           <% end %>
         <% end %>
       </td>
@@ -169,7 +192,10 @@
       <td>
         <% @inventory_templates2.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true  %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+            <%= link_to it.quantity_available, it, remote: true  , style: "color:white;" %>
+            </div>
           <% end %>
         <% end %>
       </td>
@@ -182,7 +208,10 @@
       <td>
         <% @inventory_templates3.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true  %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+            <%= link_to it.quantity_available, it, remote: true, style: "color:white;"   %>
+            </div>
           <% end %>
         <% end %>
       </td>
@@ -195,7 +224,10 @@
       <td>
         <% @inventory_templates4.each_with_index do |it, ind| %>
           <% if it.start_time_hour == i %>
-            <%= link_to it.quantity_available, it, remote: true %>
+            <% color = hc[it.inventory_template_group.id]  %>
+            <div class="" style="display: block; background-color: <%= color %>; border: 3px solid <%= color %>; padding-left:2px; margin-right:5px; float: left;">
+            <%= link_to it.quantity_available, it, remote: true, style: "color:white;"  %>
+            </div>
           <% end %>
         <% end %>
       </td>
