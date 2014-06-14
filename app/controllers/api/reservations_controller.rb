@@ -32,7 +32,7 @@ class Api::ReservationsController < Api::BaseController
     @reservation.user_id = @user.id
     @reservation.active = true
 
-    restaurant = Restaurant.find(@reservation.restaurant_id)
+    restaurant = Restaurant.where(id: @reservation.restaurant_id).first
     date = @reservation.date
     time = @reservation.start_time
     people = @reservation.party_size
