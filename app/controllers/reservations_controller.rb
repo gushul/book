@@ -78,10 +78,9 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(params[:reservation])
 
-		@reservation.date = @reservation.date
-		@reservation.start_time = @reservation.start_time
-		@reservation.end_time = @reservation.end_time
-		
+    # fix for production
+    @reservation.date = Date.strptime(params[:reservation][:date], '%m-%d-%Y')
+    
     if user_signed_in?
       @reservation.user_id = current_user.id
       @reservation.channel = 1
