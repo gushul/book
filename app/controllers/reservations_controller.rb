@@ -78,9 +78,9 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(params[:reservation])
 
-		@reservation.date = @reservation.date+7.hour
-		@reservation.start_time = @reservation.start_time+7.hour
-		@reservation.end_time = @reservation.end_time+7.hour
+		@reservation.date = @reservation.date
+		@reservation.start_time = @reservation.start_time
+		@reservation.end_time = @reservation.end_time
 		
     if user_signed_in?
       @reservation.user_id = current_user.id
