@@ -104,7 +104,7 @@ class InventoryTemplateGroupsController < ApplicationController
             @intervals = Reservation::PERIODS
             @intervals.each do |interval| 
               quan = params[:inventory_template_group][:quantity_available]["#{@intervals.index(interval)}".to_s]
-              unless interval == "24:00" or quan.to_i == 0
+              unless interval == "24:00" # or quan.to_i == 0
                 @inventory_template = InventoryTemplate.where(inventory_template_group_id: @inventory_template_group.id).by_time(interval).first
                 if @inventory_template.blank?
                   @inventory_template = InventoryTemplate.new(inventory_template_group_id: @inventory_template_group.id)
@@ -112,8 +112,14 @@ class InventoryTemplateGroupsController < ApplicationController
                   @inventory_template.end_time = @intervals[@intervals.index(interval)+1]
                 end
                 @inventory_template.quantity_available = quan
-                @inventory_template.save
-              end 
+
+                if quan.to_i == 0
+                  @inventory_template.destroy
+                else
+                  @inventory_template.save
+                end
+
+              end
             end 
         end 
 
