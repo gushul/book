@@ -134,7 +134,8 @@ class Reservation < ActiveRecord::Base
     if self.user_id.nil?
       puts "manual reservation"
       res = Reservation.where(phone: self.phone)
-      return (( res.map(&:active).flatten.count(true) - res.map(&:no_show).flatten.count(true).to_f ) / res.map(&:active).flatten.count(true)*100).to_i
+#      return (( res.map(&:active).flatten.count(true) - res.map(&:no_show).flatten.count(true).to_f ) / res.map(&:active).flatten.count(true)*100).to_i
+      return 100
     else
       puts "found userid"
       return (( self.user.reservations.map(&:active).flatten.count(true) - self.user.reservations.map(&:no_show).flatten.count(true).to_f ) / self.user.reservations.map(&:active).flatten.count(true)*100).to_i
