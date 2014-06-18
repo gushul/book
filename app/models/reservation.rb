@@ -262,8 +262,10 @@ private
       Reward.create( user_id: user_id, 
                      reservation_id: id, 
                      restaurant_id: restaurant_id,
-                     points_total: 5*party_size, 
-                     points_pending: 5*party_size,    
+                     points_total: 10, 
+                     points_pending: 10,    
+#                     points_total: 5*party_size, 
+#                     points_pending: 5*party_size,    
                      description: "")
     end
     # UserMailer.booking_create(current_user, @reservation).deliver
@@ -274,8 +276,8 @@ private
     if user_id.present?
       reward = Reward.where(:reservation_id => id).first
       if reward.present?
-        reward.update_attributes( points_total: 5*party_size, 
-                                  points_pending: 5*party_size,
+        reward.update_attributes( points_total: 10, 
+                                  points_pending: 10,
                                   restaurant_id: restaurant_id )
       end
     end
