@@ -49,8 +49,10 @@ class HomeController < ApplicationController
       @search_results_full = Restaurant.active.where("name like ?", "%#{params['name']}%")
       @search_results = @search_results_full.page(params[:page])
     elsif !params['filter'].blank? && !params["tags"].blank? 
-      restaurants_array = JSON.parse(params['filter'])
+      # restaurants_array = JSON.parse(params['filter'])
+      restaurants_array = Restaurant.where(active: true).pluck(:id)
       restaurants_tags = params["tags"].collect { |i| i.to_i }
+
       restaurants = Restaurant.active.by_ids_and_tags(restaurants_array, restaurants_tags)
       @search_results_full = restaurants
       @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
