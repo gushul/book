@@ -20,6 +20,7 @@ AuthApp::Application.routes.draw do
   # end
 
   get 'search', to: 'home#search', as: 'search'
+  post 'filter', to: 'home#filter_search', as: 'filter'
   get 'search_with_date_time', to: 'home#search_with_date_time', as: 'search_with_date_time'
   get 'check_availability', to: 'home#check_availability', as: 'check_availability'
   get 'home/autocomplete_restaurant_name'  

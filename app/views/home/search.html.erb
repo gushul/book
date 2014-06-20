@@ -62,9 +62,11 @@
       <h2 class="rlight">Location :</h2>
       <img src='<%= @image_tag_string %>'>
       <h2 class="rlight">Filter Options :</h2>
+
+      <!-- Filter Options   -->
       <div class="filter">
 
-        <%= form_tag("/search", method: "get") do %>
+        <%= form_tag('/search',id: "filter") do %>
 
           <div class="star">
             <h4 class="rmedium">Star Rating :</h4>
@@ -115,12 +117,25 @@
           </div>
 
           <input type="hidden" name="filter" value="<%= @search_results_full.map {|r| r.id} %>">
-          <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-search"></i></button>
+          <button type="button" class="btn btn-success filter-res"><i class="glyphicon glyphicon-search"></i></button>
           <%#= submit_tag "Search", :class => 'btn btn-success btn-large' %>
 
         <% end %>
 
       </div>
+      <!-- Filter Options   -->
+
     </div>
   </div><!--/row-->
 </div><!-- /content -->
+
+
+<script type="text/javascript">
+  $(".filter-res").click(function(){
+      $.post( "/filter", $("#filter").serialize(), function( data ) {
+          $(".topContent").html(data)
+          $("body").scrollTop(0);
+          return false;
+      });
+  });
+</script>

@@ -1,0 +1,140 @@
+
+  <div class="row">
+    <div class="col-sm-8 col-lg-8">
+      <h2 class="rbold">Search Results</h2>
+      <h3 class="rlight">We've found <%= @search_results_full.size %> restaurants for you.</h3>
+      <div class="list result">
+        <ul class="media-list">
+
+          <% @search_results.each_with_index do |restaurant, index| %>
+              <li class="media">
+                <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
+                  <%# if restaurant.photos.first.present? %>
+                  <%#= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                  <% if restaurant.photos.first.present? %>
+                      <% if restaurant.cover_photos.present? %>
+                          <%= image_tag restaurant.cover_photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% else %>
+                          <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% end %>
+                  <%else %>
+                      <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
+                  <% end %>
+                </a>
+                <div class="media-body">
+                  <div class="col-sm-12 col-lg-9">
+                    <h4 class="media-heading">
+                      <%= link_to restaurant.name, restaurant_path(restaurant) %>
+                    </h4>
+                    <p><%= restaurant.misc %></p>
+                    <p>
+                      <% unless restaurant.star_format == 0 %>
+                          <% restaurant.star_format.times do |s| %>
+                              <i class="glyphicon glyphicon-star pink"></i>
+                          <% end %>
+                      <% else %>
+                          Not received any star rank
+                      <% end %>
+                      <% unless restaurant.price_format == 0 %>
+                          <% restaurant.price_format.times do |s| %>
+                              <i class="glyphicon glyphicon-usd"></i>
+                          <% end %>
+                      <% else %>
+                          No yet assigned any price rank
+                      <% end %>
+                    </p>
+                    <p><i class="glyphicon glyphicon-tag"></i> <%= restaurant.cuisines_format %></p>
+                  </div>
+                  <div class="col-sm-12 col-lg-3">
+                    <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary ", :method => :get %>
+                  </div>
+                </div>
+              </li>
+          <% end %>
+
+        </ul>
+        <div class="navigation">
+          <%= paginate @search_results, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <h2 class="rlight">Location :</h2>
+      <img src='<%= @image_tag_string %>'>
+      <h2 class="rlight">Filter Options :</h2>
+
+      <!-- Filter Options   -->
+      <div class="filter">
+
+        <%= form_tag('/search', id: "filter") do %>
+
+            <div class="star">
+              <h4 class="rmedium">Star Rating :</h4>
+              <% RestaurantTag.where("title LIKE ?", "Star:%").each do |star| %>
+                  <% num = star.title.slice(5..star.title.length) %>
+                  <% if num.to_f == num.to_i %>
+                      <div>
+                        <%= check_box_tag 'tags[]', star.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(star.id) %>
+                        <% num.to_i.times do |s| %>
+                            <i class="glyphicon glyphicon-star pink"></i>
+                        <% end %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
+
+            <hr/>
+            <div class="price">
+              <h4 class="rmedium">Price :</h4>
+              <% RestaurantTag.where("title LIKE ?", "Price:%").each do |price| %>
+                  <% if price.title.slice(6..price.title.length).size > 1 && price.title.slice(6..price.title.length).size < 5 %>
+                      <div>
+                        <%= check_box_tag 'tags[]', price.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(price.id)  %>
+                        <% price.title.slice(6..price.title.length).size.times do |s|  %>
+                            <i class="glyphicon glyphicon-usd"></i>
+                        <% end %>
+                        <% if price.title.slice(6..price.title.length).size == 2 %>
+                            (500 baht and under)
+                        <% elsif price.title.slice(6..price.title.length).size == 3 %>
+                            (501 -1,000 baht)
+                        <% elsif price.title.slice(6..price.title.length).size == 4 %>
+                            (1,000 baht and over)
+                        <% end %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
+
+            <hr/>
+            <div class="credit">
+              <h4 class="rmedium">Credit Card :</h4>
+              <% RestaurantTag.where("title LIKE ?", "Payment:%").each do |pay| %>
+                  <div>
+                    <%= check_box_tag 'tags[]', pay.id, params["tags"].blank? ? false : params["tags"].collect { |i| i.to_i }.include?(pay.id) %>
+                    <%= h pay.title.slice(8..pay.title.length) -%>
+                  </div>
+              <% end %>
+            </div>
+
+            <input type="hidden" name="filter" value="<%= @search_results_full.map {|r| r.id} %>">
+            <button type="button" class="btn btn-success filter-res"><i class="glyphicon glyphicon-search"></i></button>
+            <%#= submit_tag "Search", :class => 'btn btn-success btn-large' %>
+
+        <% end %>
+
+      </div>
+      <!-- Filter Options   -->
+
+    </div>
+  </div><!--/row-->
+
+  <script type="text/javascript">
+      $(".filter-res").click(function(){
+          $.post( "/filter", $("#filter").serialize(), function( data ) {
+              $(".topContent").html(data)
+              $("body").scrollTop(0);
+              return false;
+          });
+
+      });
+  </script>

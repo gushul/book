@@ -74,6 +74,29 @@ class HomeController < ApplicationController
       @image_tag_string << '&sensor=false'
     end
   end
+
+  def filter_search
+    if !params['filter'].blank? && !params["tags"].blank?
+      restaurants_array = Restaurant.where(active: true).pluck(:id)
+      restaurants_tags = params["tags"].collect { |i| i.to_i }
+
+      restaurants = Restaurant.active.by_ids_and_tags(restaurants_array, restaurants_tags)
+      @search_results_full = restaurants
+      @search_results = Kaminari.paginate_array(restaurants).page(params[:page])
+    else
+      @search_results_full = Restaurant.active.all
+      @search_results = Restaurant.active.page(params[:page])
+      @search_terms << "All restaurants"
+    end
+
+    unless @search_results.blank?
+      @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=550x550"
+      @search_results.each do |restaurant|
+        @image_tag_string << "&markers=icon:http://i42.tinypic.com/rj2txf.png%7C#{restaurant.lat}%2C#{restaurant.lng}"
+      end
+      @image_tag_string << '&sensor=false'
+    end
+  end
   
   def search_with_date_time
     @search_terms = []
