@@ -76,6 +76,8 @@ class HomeController < ApplicationController
   end
 
   def filter_search
+
+
     if !params['filter'].blank? && !params["tags"].blank?
       restaurants_array = Restaurant.where(active: true).pluck(:id)
       restaurants_tags = params["tags"].collect { |i| i.to_i }
@@ -96,6 +98,8 @@ class HomeController < ApplicationController
       end
       @image_tag_string << '&sensor=false'
     end
+
+    render :layout => false
   end
   
   def search_with_date_time
