@@ -437,14 +437,7 @@
     
   <hr/>
   <h3 class="rmedium">Images</h3>
-    <%# unless @restaurant.photos.blank? %>
-      <%# @restaurant.photos.each do |pic| %>
-        <%# unless pic ==  %>
-          <%#= image_tag pic.picture.url(:v100x100) %>
-          <!-- img.input :_destroy, :label => "Remove", :as => :boolean %> -->
-        <%# end %> 
-      <%# end %>
-    <%# end %>
+   
 
   <!-- TODO: refactoring needed -->
   <%= f.simple_fields_for :photos, @restaurant.photos do |img|  %>

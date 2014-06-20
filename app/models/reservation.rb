@@ -129,6 +129,49 @@ class Reservation < ActiveRecord::Base
     end
     return "Past" 
   end
+	
+  def quality
+    if self.user_id.nil?
+      puts "manual reservation"
+      res = Reservation.where(phone: self.phone)
+#      return (( res.map(&:active).flatten.count(true) - res.map(&:no_show).flatten.count(true).to_f ) / res.map(&:active).flatten.count(true)*100).to_i
+      return 100
+    else
+      puts "found userid"
+      return (( self.user.reservations.map(&:active).flatten.count(true) - self.user.reservations.map(&:no_show).flatten.count(true).to_f ) / self.user.reservations.map(&:active).flatten.count(true)*100).to_i
+    end
+  end
+  
+  def send_reminder_via_sms
+#    Thread.new do
+      require 'net/https'
+      require 'open-uri'
+      # uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+6600000000&to=+#{self.phone}&text=#{self.verify_code}")
+      # uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+66875928489&to=+66#{self.phone.reverse.chop.reverse}&text=Welcome+to+Hungry+Hub.+Your+verification+code+is+#{self.verify_code}.+Please+verify+this+number+on+our+webpage+or+in+our+mobile+application.")
+			if self.user.nil? then
+        phone = self.phone
+      else
+        phone = self.user.phone
+      end
+      msg = URI.encode("restaurant reservation reminder for a party of #{self.party_size} at #{self.restaurant.name} on #{self.date.to_formatted_s(:rfc822)} starting at #{self.start_time.to_formatted_s(:time)}. See you soon.")
+      uri = URI.parse("http://api.rushsms.com:8080/?username=rus-hungryhub&password=94GrsVw3&type=0&delivery=1&mobile=66#{phone.reverse.chop.reverse}&sender=Hungry+Hub&message=#{msg}")
+      http = Net::HTTP.new(uri.host, uri.port)
+#      http.use_ssl = true
+#      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.get(uri.request_uri)
+#    end
+  end
+
+  def self.generete_sms_reminders
+    d = (Time.zone.now+1.hour).to_datetime.to_date
+    s = Time.new(2000,1,1,(Time.zone.now + 1.hour).to_datetime.hour,(Time.zone.now + 1.hour).to_datetime.minute,0)
+    res = Reservation.find_all_by_date_and_start_time(d,s).each do |r|
+      r.send_reminder_via_sms
+      puts "sent sms for id:#{r.id}"
+    end
+    puts "done sending out reminders"
+  end
+
 
 private
 
@@ -219,8 +262,10 @@ private
       Reward.create( user_id: user_id, 
                      reservation_id: id, 
                      restaurant_id: restaurant_id,
-                     points_total: 5*party_size, 
-                     points_pending: 5*party_size,    
+                     points_total: 10, 
+                     points_pending: 10,    
+#                     points_total: 5*party_size, 
+#                     points_pending: 5*party_size,    
                      description: "")
     end
     # UserMailer.booking_create(current_user, @reservation).deliver
@@ -231,8 +276,8 @@ private
     if user_id.present?
       reward = Reward.where(:reservation_id => id).first
       if reward.present?
-        reward.update_attributes( points_total: 5*party_size, 
-                                  points_pending: 5*party_size,
+        reward.update_attributes( points_total: 10, 
+                                  points_pending: 10,
                                   restaurant_id: restaurant_id )
       end
     end

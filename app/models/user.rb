@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
 #    self.rewards.map(&:points_total).compact.reduce(0, :+)
     rewards_points = 0
     self.rewards.each do |r|
-	    rewards_points = rewards_points + r.points_total - r.points_pending
+	    rewards_points = rewards_points + r.points_total.to_i - r.points_pending.to_i
     end
     return rewards_points
   end

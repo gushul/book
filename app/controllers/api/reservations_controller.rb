@@ -24,10 +24,15 @@ class Api::ReservationsController < Api::BaseController
   # POST /reservations/create
   def create
     @reservation = Reservation.new(params[:reservation])
+
+#    @reservation.date = @reservation.date+7.hour
+#    @reservation.start_time = @reservation.start_time+7.hour
+#    @reservation.end_time = @reservation.end_time+7.hour
+		
     @reservation.user_id = @user.id
     @reservation.active = true
 
-    restaurant = Restaurant.find(@reservation.restaurant_id)
+    restaurant = Restaurant.where(id: @reservation.restaurant_id).first
     date = @reservation.date
     time = @reservation.start_time
     people = @reservation.party_size
@@ -44,6 +49,7 @@ class Api::ReservationsController < Api::BaseController
     respond_to do |format|
       if check && @reservation.save 
         reservation = @reservation.as_json
+#        reservation[:date] = @reservation.date.utc
         reservation[:start_time]  = @reservation.start_time_format
         reservation[:end_time]    = @reservation.end_time_format
         format.json { render json: reservation, status: 200 }

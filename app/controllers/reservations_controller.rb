@@ -77,6 +77,10 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     @reservation = Reservation.new(params[:reservation])
+
+    # fix for production
+    @reservation.date = Date.strptime(params[:reservation][:date], '%m-%d-%Y')
+    
     if user_signed_in?
       @reservation.user_id = current_user.id
       @reservation.channel = 1

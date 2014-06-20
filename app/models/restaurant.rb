@@ -31,10 +31,10 @@ class Restaurant < ActiveRecord::Base
   #               :numericality => { 
   #                 :greater_than_or_equal_to => 15, 
   #                 :less_than_or_equal_to    => 720 }
-  validates :res_duration,     #:presence    => true, 
-                :numericality => { 
-                  :greater_than_or_equal_to => 15, 
-                  :less_than_or_equal_to    => 720 }
+  # validates :res_duration,     #:presence    => true, 
+  #               :numericality => { 
+  #                 :greater_than_or_equal_to => 15, 
+  #                 :less_than_or_equal_to    => 720 }
 
   validates :largest_table,    :presence    => true, 
                 :numericality => { 

@@ -1,5 +1,4 @@
 # encoding: utf-8
-# require 'file_size_validator'
 class Photo < ActiveRecord::Base
 
   attr_accessible :title, :picture, :is_cover, :restaurant_id
@@ -13,7 +12,9 @@ class Photo < ActiveRecord::Base
   #   :maximum => 10.megabytes.to_i
   # }
 
+  before_validation :default_value
   before_save :cover_controll
+  after_destroy :cover_controll_2
   
   default_scope order('created_at DESC')
   # scope :by_date, -> {order('created_at DESC')}
@@ -57,11 +58,25 @@ class Photo < ActiveRecord::Base
 
 private
 
+  def default_value
+    if Photo.where(restaurant_id: restaurant_id).present? 
+      self.is_cover ||= false
+    else
+      self.is_cover ||= true
+    end
+  end
+
   def cover_controll
-    if Restaurant.find(self.restaurant_id).photos.empty? && !is_cover?
+    if Photo.where(restaurant_id: restaurant_id).present?  && is_cover?
+      Photo.update_all(is_cover: false)
       self.is_cover = true
-    elsif is_cover? && !Restaurant.find(self.restaurant_id).photos.empty?
-      Photo.update_all :is_cover => false
+    end
+  end
+
+  def cover_controll_2
+    if Photo.where(restaurant_id: restaurant_id).covers.blank?
+      photo = Photo.where(restaurant_id: restaurant_id).first
+      photo.update_attributes(is_cover: true) if photo.present?
     end
   end
   
