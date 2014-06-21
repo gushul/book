@@ -18,7 +18,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants_all
   def index_all
     @search_results_full = Restaurant.active.all
-    @search_results = Restaurant.active.page(params[:page])
+    @search_results = Restaurant.active.name_order_asc.page(params[:page])
 
     unless @search_results.blank?
       @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=550x550"

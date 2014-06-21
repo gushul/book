@@ -9,6 +9,7 @@
 
             <%= f.input :name, label: "Name: <i style='font-weight:normal;'>#{@restaurant.name}</i>".html_safe %>
             <%= f.input :address, label: "Address", as: :text, input_html: { rows: "4", class: "text_area_for_misc"} %>
+            <%= f.input :th_address, label: "Address (Th)", as: :text, input_html: { rows: "4", class: "text_area_for_misc"} %>
             <%= f.input :phone, label: "Phone: <i style='font-weight:normal;'>#{@restaurant.phone}</i>".html_safe  %>
             
             <div class="row">

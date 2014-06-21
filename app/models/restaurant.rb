@@ -61,7 +61,12 @@ class Restaurant < ActiveRecord::Base
                                 allow_destroy: true   
   belongs_to :owner
 
+  scope :a_new,     -> { joins(:restaurant_tags).where('restaurant_tags.title LIKE ?', "Admin:New" )  }
+  scope :a_recom,   -> { joins(:restaurant_tags).where('restaurant_tags.title LIKE ?', "Admin:Recommended" )  }
+  scope :a_popular, -> { joins(:restaurant_tags).where('restaurant_tags.title LIKE ?', "Admin:MostPopular" )  }
+
   scope :active, -> { where active: true }
+  scope :name_order_asc, -> { order('name ASC') }
     
   scope :by_tags, lambda { |ids|
     ids.collect {|i| joins(:restaurant_tags).where('restaurant_tags.id = ?', i ) }.flatten

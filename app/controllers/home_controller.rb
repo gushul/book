@@ -29,17 +29,22 @@ class HomeController < ApplicationController
     end
 
     @restaurants = []
-    @restaurant = Restaurant.new
-    arr = []
-    # when will be many restaurants need to limit records and rnd offset 
-    # rnd = rand(Restaurant.count-2)
-    rnd = rand(0)
-    Restaurant.active.offset(rnd).limit(50).each {|r| arr << r.id }
-    # arr = arr.sample(3)
-    arr = arr.sample(Restaurant.active.count)
-    arr.each {|id| @restaurants <<  Restaurant.find(id) }
-    # @restaurants = @restaurants.page(params[:page]).per(5)
-    @restaurants = Kaminari.paginate_array(@restaurants).page(params[:page]).per(5)
+    # @restaurant = Restaurant.new
+    # arr = []
+    # # when will be many restaurants need to limit records and rnd offset 
+    # # rnd = rand(Restaurant.count-2)
+    # rnd = rand(0)
+    # Restaurant.active.offset(rnd).limit(50).each {|r| arr << r.id }
+    # # arr = arr.sample(3)
+    # arr = arr.sample(Restaurant.active.count)
+    # arr.each {|id| @restaurants <<  Restaurant.find(id) }
+    # # @restaurants = @restaurants.page(params[:page]).per(5)
+    # @restaurants = Kaminari.paginate_array(@restaurants).page(params[:page]).per(5)
+
+    @restaurants_new = Restaurant.a_new.limit(5).name_order_asc
+    @restaurants_popular = Restaurant.a_popular.limit(5).name_order_asc
+    @restaurants_recommended = Restaurant.a_recom.limit(5).name_order_asc
+
   end
 
   # GET /search/:search_term

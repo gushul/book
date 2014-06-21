@@ -195,7 +195,7 @@
         
           <div id="new" class="tab-pane fade in active">
             <ul class="media-list">
-              <% @restaurants.each_with_index do |restaurant, index| %>
+              <% @restaurants_new.each_with_index do |restaurant, index| %>
               
                 <li class="media">
                   <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
@@ -249,14 +249,14 @@
               <% end %>
             </ul>
             <div class="navigation">
-              <%= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+              <%#= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
             </div>
           </div>
           
           <!-- /.NEW -->
           <div id="popular" class="tab-pane fade">
             <ul class="media-list">
-              <% @restaurants.each_with_index do |restaurant, index| %>
+              <% @restaurants_popular.each_with_index do |restaurant, index| %>
               <li class="media">
                 <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
                     <% if restaurant.photos.first.present? %>
@@ -276,7 +276,7 @@
                     <h4 class="media-heading">
                       <%= link_to restaurant.name, restaurant_path(restaurant) %>
                     </h4>
-                    <p><%= restaurant.misc %></p>
+                    <p><%= restaurant.address %></p>
                     <br>
                     <p>
                       <% unless restaurant.star_format == 0 %>
@@ -309,14 +309,14 @@
               <% end %>
             </ul>
             <div class="navigation">
-              <%= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+              <%#= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
             </div>
           </div>
           
           <!-- /.MOST POPULAR -->
           <div id="reco" class="tab-pane fade">
             <ul class="media-list">
-               <% @restaurants.each_with_index do |restaurant, index| %>
+               <% @restaurants_recommended.each_with_index do |restaurant, index| %>
                 <li class="media">
                   <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
                     <% if restaurant.photos.first.present? %>
@@ -335,7 +335,7 @@
                       <h4 class="media-heading">
                         <%= link_to restaurant.name, restaurant_path(restaurant) %>
                       </h4>
-                      <p><%= restaurant.misc %></p>
+                      <p><%= restaurant.address %></p>
                       <br>
                       <p>
                         <% unless restaurant.star_format == 0 %>
@@ -369,7 +369,7 @@
               <% end %>
             </ul>
             <div class="navigation">
-              <%= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+              <%#= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
             </div>
           </div>
           <!-- /.RECOMMENDATION -->
