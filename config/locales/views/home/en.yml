@@ -1,0 +1,8 @@
+# encoding: utf-8
+# localization file for Eng
+
+en:
+  home:
+    index:
+      make_free_reservation: Make a free restaurant reservation in Bangkok
+      by_restaurant_name: BY RESTAURANT NAME

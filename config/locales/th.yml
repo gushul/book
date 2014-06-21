@@ -2,7 +2,17 @@
 # localization file for Thai
 
 th:
-  brand_text: "Hungry Hub on TAI"
+  static_pages:
+    brand_text: "Hungry Hub on TAI"
+    home: "Homepage"
+    restaurants: "RESTAURANTS TH"
+    reservations: "Reservations"
+    inventories: "Inventories"
+    inventory_templates: "Inventory templates"
+    rewards: "My rewards"
+    cuisines: "Cuisines"
+    price: "Price"
+
 
   restaurant: 
     name: "Name in tai"

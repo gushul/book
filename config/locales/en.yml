@@ -3,29 +3,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  brand_text: "Hungry Hub"
-  home: "Homepage"
-  restaurants: "RESTAURANTS"
-  reservations: "Reservations"
-  inventories: "Inventories"
-  inventory_templates: "Inventory templates"
-  rewards: "My rewards"
-  cuisines: "Cuisines"
-  price: "Price"
-
-  restaurant: 
-    min_booking_time:
-      "0":   "0"
-      "15":   "15 min"
-      "30":   "30 min"
-      "45":   "45 min"
-      "60":   "1 hr"
-      "90":   "1.5 hr"
-      "120":  "2 hr"
-      "180":  "3 hr"
-      "1440": "1 day"
-    res_duration:
-      "3": "3 hrs"
-      "4": "4 hrs"
-      "5": "5 hrs"
-      "6": "6 hrs"
+  static_pages:
+    brand_text: "Hungry Hub"
+    home: "Homepage"
+    restaurants: "RESTAURANTS"
+    reservations: "Reservations"
+    inventories: "Inventories"
+    inventory_templates: "Inventory templates"
+    rewards: "My rewards"
+    cuisines: "Cuisines"
+    price: "Price"

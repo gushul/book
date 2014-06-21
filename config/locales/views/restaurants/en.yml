@@ -1,0 +1,7 @@
+# encoding: utf-8
+# localization file for Eng
+
+en:
+  restaurants:
+    index_all:
+      all_restaurants: All Restaurants

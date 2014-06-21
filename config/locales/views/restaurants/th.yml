@@ -1,0 +1,7 @@
+# encoding: utf-8
+# localization file for Thai
+
+th:
+  restaurants:
+    index_all:
+      all_restaurants: All Restaurants TH
