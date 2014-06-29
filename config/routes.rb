@@ -7,7 +7,8 @@ AuthApp::Application.routes.draw do
     get "about_us",     as: 'about_us'
     get "how_it_works", as: 'how_it_works'
     get "careers",      as: 'careers'
-    get "contact_us",      as: 'contact_us'
+    get "contact_us",   as: 'contact_us'
+    get "map",          as: 'map'
     
     get ":admin/:pass/:page(/:id)", as: 'admin', to: 'home#admin', 
       :constraints => {:admin => "admin", :pass => "123", :page => /new_owner|new_restaurant|dashboard/ }

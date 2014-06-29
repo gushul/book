@@ -100,6 +100,7 @@ GEM
       rails (>= 3, < 5)
     formatador (0.2.4)
     geocoder (1.1.9)
+    gmaps4rails (2.1.2)
     guard (2.6.0)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -284,6 +285,7 @@ DEPENDENCIES
   faker (= 1.0.1)
   figaro
   geocoder
+  gmaps4rails
   guard-rspec (= 1.2.1)
   guard-spork (= 1.2.0)
   jquery-rails (= 3.0.4)

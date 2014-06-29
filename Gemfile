@@ -13,6 +13,7 @@ gem 'rmagick', '2.13.2'
 gem 'carrierwave'
 gem 'figaro'
 gem "geocoder"
+gem 'gmaps4rails'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 # gem 'acts-as-taggable-on'

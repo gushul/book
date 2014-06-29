@@ -194,6 +194,20 @@ class HomeController < ApplicationController
   def about_us
   end
 
+  def map
+    restaurants = Restaurant.active.all
+    @hash = Gmaps4rails.build_markers(restaurants) do |res, marker|
+      marker.lat res.lat
+      marker.lng res.lng
+      marker.json({:id => res.id })
+      marker.picture({
+       "url" => "http://i42.tinypic.com/rj2txf.png",
+       "width" =>  32,
+       "height" => 32})
+      marker.infowindow render_to_string(:partial => "/restaurants/gmap_template.html.erb", :locals => { :restaurant => res} )
+    end
+  end
+
   def admin
     if params[:page] == "new_owner"
       page = "admin_new_owner"
