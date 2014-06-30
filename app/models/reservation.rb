@@ -137,8 +137,12 @@ class Reservation < ActiveRecord::Base
 #      return (( res.map(&:active).flatten.count(true) - res.map(&:no_show).flatten.count(true).to_f ) / res.map(&:active).flatten.count(true)*100).to_i
       return 100
     else
-      puts "found userid"
-      return (( self.user.reservations.map(&:active).flatten.count(true) - self.user.reservations.map(&:no_show).flatten.count(true).to_f ) / self.user.reservations.map(&:active).flatten.count(true)*100).to_i
+      puts "found userid #{self.id}"
+      if self.user.reservations.map(&:active).flatten.count(true) == 0
+        return 100
+      else
+        return (( self.user.reservations.map(&:active).flatten.count(true) - self.user.reservations.map(&:no_show).flatten.count(true).to_f ) / self.user.reservations.map(&:active).flatten.count(true)*100).to_i
+      end
     end
   end
   
