@@ -8,7 +8,8 @@ class Api::Owner::CustomerInformationsController < ApplicationController
   def index
     @owner = Owner.where(:email => params[:owner][:email] ).first 
 
-    @owners = @owner.restaurant.reservations.where("name <> ?", "")
+#    @owners = @owner.restaurant.reservations.where("name <> ?", "")
+    @owners = @owner.restaurant.reservations.where("user_id IS NULL", "")
     @users  = @owner.restaurant.reservations.map {|res| res.user }.uniq
 
     @info_json = []
