@@ -15,8 +15,10 @@ class OwnerDashboardsController < ApplicationController
   
   def customers
 #    @owners = current_owner.restaurant.reservations.active.where("name <> ?", "")
-    @owners = current_owner.restaurant.reservations.active.where("user_id IS NULL", "")
-    @users  = current_owner.restaurant.reservations.active.map {|res| res.user }.uniq
+#    @owners = current_owner.restaurant.reservations.active.where("user_id IS NULL", "")
+#    @users  = current_owner.restaurant.reservations.active.map {|res| res.user }.uniq
+    @owners = current_owner.restaurant.reservations.where("user_id IS NULL", "")
+    @users  = current_owner.restaurant.reservations.map {|res| res.user }.uniq
 
     @info_json = []
     @users.each do |r|
