@@ -5,7 +5,7 @@ th:
   static_pages:
     brand_text: "Hungry Hub on TAI"
     home: "Homepage"
-    restaurants: "RESTAURANTS TH"
+    restaurants: "ร้านอาหาร"
     reservations: "Reservations"
     inventories: "Inventories"
     inventory_templates: "Inventory templates"

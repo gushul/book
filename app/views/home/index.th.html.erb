@@ -1,0 +1,429 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=172752929594532";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<div class="topContent position-relative">
+  <div id="myCarousel">
+    <!-- CAROUSEL -->
+    <div data-ride="carousel" class="carousel slide" id="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li class="active" data-slide-to="0" data-target="#carousel"></li>
+        <li data-slide-to="1" data-target="#carousel" class=""></li>
+        <li data-slide-to="2" data-target="#carousel" class=""></li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <section class="carousel-inner">
+        <div class="item active"><%= image_tag("/assets/carousel-1.png") %></div>
+        <div class="item"><%= image_tag("/assets/carousel-2.jpg") %></div>
+        <div class="item"><%= image_tag("/assets/carousel-3.png") %></div>
+        <div class="item"><%= image_tag("/assets/carousel-4.png") %></div>
+      </section><!-- /.carousel inner -->
+
+      <!-- Controls -->
+      <a data-slide="prev" href="#carousel" class="left carousel-control">
+        <span class="icon-prev"></span>
+      </a>
+      <a data-slide="next" href="#carousel" class="right carousel-control">
+        <span class="icon-next"></span>
+      </a>
+    </div>
+    <!-- /.carousel -->
+  </div>
+  <div class="container margin-bottom0">
+    <div id="advanceSearchBox" class="clearfix position-absolute black-trans90 radius10">
+      <div class="clearfix">
+        <div class="col-md-12 column">
+          <div class="reservation-container">
+            <div class="title white">
+              <h2 class="rbold"><%= t('home.index.make_free_reservation') %></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a class="h5 rblack" data-toggle="tab" href="#byLocation">จาก สถานที่ และ ประเภทอาหาร</a></li>
+        <li><a class="h5 rblack" data-toggle="tab" href="#byName"><%= t('home.index.by_restaurant_name') %></a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="byLocation" class="tab-pane fade in active">
+
+          <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
+            <div class="input-group input-group-sm">
+              <input type="text" id="srch-term" name="srch-location" placeholder="ค้นหา จาก สถานที่ในกรุงเทพ" class="form-control ritalic">
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+            </div>
+            <div class="advanceSearch">
+              <div class="date"><i class="glyphicon glyphicon-calendar"></i>
+                <input type="text" class="rregular" name="datepicker" id="datepicker">
+                <i class="glyphicon glyphicon-chevron-down"></i>
+              </div>
+              <div class="time"><i class="glyphicon glyphicon-time"></i>
+                <input type="text" class="rregular" name="timepicker" id="timepicker">
+                <i class="glyphicon glyphicon-chevron-down"></i>
+              </div>
+
+              <div class="people"><i class="glyphicon glyphicon-user"></i>
+              <div class="input-append btn-group">
+                <input class="rregular" name="people" id="people" type="hidden" value="2">
+                <div id="currectVal" class="inputSelection rregular"></div>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu" id="selection">
+                  <li><a title="1"> 1</a></li>
+                  <li><a title="2"> 2</a></li>
+                  <li><a title="3"> 3</a></li>
+                  <li><a title="4"> 4</a></li>
+                  <li><a title="5"> 5</a></li>
+                  <li><a title="6"> 6</a></li>
+                  <li><a title="7"> 7</a></li>
+                  <li><a title="8"> 8</a></li>
+                  <li><a title="9"> 9</a></li>
+                  <li><a title="10"> 10</a></li>
+                </ul>
+                <script type="text/javascript">
+                  $("#currectVal").html(2);
+
+                  $('#selection > li a').click(function(){
+                    var selectVal = $(this).attr("title");
+                    $("#people").attr("value",selectVal);
+                    $("#currectVal").html($(this).html());
+                  });
+                </script>
+              </div>
+              </div>
+
+            </div>
+
+            <div class="info white">
+              <%= link_to all_restaurants_path do %>
+                <h6 class="rregular">ร้านอาหารทั้งหมดในกรุงเทพ</h6>
+                <i class="glyphicon glyphicon-circle-arrow-right"></i>
+              <% end %>
+            </div>
+            <div><input type="submit" value="ค้นหาโต๊ะ" class="btn btn-default lblack"></div>
+          </form>
+
+        </div>
+        <div id="byName" class="tab-pane fade">
+
+          <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
+            <div class="input-group input-group-sm">
+              <input type="text" id="srch-term" name="srch-restaurant" placeholder="ค้นหาร้านอาหารในกรุงเทพ" class="form-control">
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+            </div>
+            <div class="advanceSearch">
+              <div class="date"><i class="glyphicon glyphicon-calendar"></i>
+                <input type="text" name="datepicker" id="datepicker2">
+                <i class="glyphicon glyphicon-chevron-down"></i>
+              </div>
+              <div class="time"><i class="glyphicon glyphicon-time"></i>
+                <input type="text" name="timepicker" id="timepicker2">
+                <i class="glyphicon glyphicon-chevron-down"></i>
+              </div>
+              <div class="people"><i class="glyphicon glyphicon-user"></i>
+              <div class="input-append btn-group">
+                <input class="rregular" name="people" id="people" type="hidden" value="2">
+                <div id="currectVal2" class="inputSelection rregular"></div>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu" id="selection">
+                  <li><a title="1"> 1</a></li>
+                  <li><a title="2"> 2</a></li>
+                  <li><a title="3"> 3</a></li>
+                  <li><a title="4"> 4</a></li>
+                  <li><a title="5"> 5</a></li>
+                  <li><a title="6"> 6</a></li>
+                  <li><a title="7"> 7</a></li>
+                  <li><a title="8"> 8</a></li>
+                  <li><a title="9"> 9</a></li>
+                  <li><a title="10"> 10</a></li>
+                </ul>
+                <script type="text/javascript">
+                  $("#currectVal2").html(2);
+
+                  $('#selection > li a').click(function(){
+                    var selectVal = $(this).attr("title");
+                    $("#people").attr("value",selectVal);
+                    $("#currectVal2").html($(this).html());
+                  });
+                </script>
+              </div>
+              </div>
+            </div>
+            <div class="info white">
+              <%= link_to all_restaurants_path do %>
+                <h6>ร้านอาหารทั้งหมดในกรุงเทพ</h6><i class="glyphicon glyphicon-circle-arrow-right"></i>
+              <% end %>
+            </div>
+            <div><input type="submit" value="ค้นหาโต๊ะ" class="btn btn-default"></div>
+          </form>
+
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-lg-8">
+      <h2 class="rlight">ร้านอาหารในอนาคต</h2>
+      <!-- NAV TABS -->
+      <div id="mytabs">             
+        <ul class="nav nav-tabs">
+          <li class="active"><a class="rblack" data-toggle="tab" href="#new">ใหม่</a></li>
+          <li><a class="rblack" data-toggle="tab" href="#popular">ร้านยอดนิยม</a></li>
+          <li><a class="rblack" data-toggle="tab" href="#reco">คำแนะนำของเรา</a></li>
+        </ul>
+      </div>
+        
+      <!-- TAB PANES -->
+      <div id="mytab-content">            
+        <div class="tab-content">
+        
+          <div id="new" class="tab-pane fade in active">
+            <ul class="media-list">
+              <% @restaurants_new.each_with_index do |restaurant, index| %>
+              
+                <li class="media">
+                  <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
+                    <% if restaurant.photos.first.present? %>
+                     <% if restaurant.cover_photos.present? %>
+                        <%= image_tag restaurant.cover_photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% else %>
+                        <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% end %>
+                      <%#= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs"  %>
+                    <% else %>
+                      <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
+                    <% end %>
+                  </a>
+                  <div class="media-body">
+                    <div class="col-sm-12 col-lg-9">
+                      <h4 class="media-heading">
+                        <%= link_to restaurant.name, restaurant_path(restaurant) %>
+                      </h4>
+                      <p><%= restaurant.address %></p><br>
+                      <p>
+                        <% unless restaurant.star_format == 0 %>
+                          <% restaurant.star_format.times do |s| %>
+                            <i class="glyphicon glyphicon-star pink"></i>
+                          <% end %>
+                          <% if restaurant.star_format_f - restaurant.star_format > 0  %>
+                            <i class="glyphicon glyphicon-star pink" style="width:4px;"></i>
+                            <i style="position: relative; display: inline-block; background: rgb(245, 245, 245); width: 10px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                          <% end %>
+                        <% else %>
+                          Not received any star rank
+                        <% end %>                      
+                      </p>
+                      <p>
+                        <% unless restaurant.price_format == 0 %>
+                          <% restaurant.price_format.times do |s| %>
+                            <i class="glyphicon glyphicon-usd"></i>
+                          <% end %>
+                        <% else %>
+                          No yet assigned any price rank
+                        <% end %>
+                      </p><br>
+                      <p><i class="glyphicon glyphicon-tag"></i> <%= restaurant.cuisines_format %></p>
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                      <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary ", :method => :get %>
+                    </div>
+                  </div>
+                </li><!-- News 1 -->
+                <hr>
+              <% end %>
+            </ul>
+            <div class="navigation">
+              <%#= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+            </div>
+          </div>
+          
+          <!-- /.NEW -->
+          <div id="popular" class="tab-pane fade">
+            <ul class="media-list">
+              <% @restaurants_popular.each_with_index do |restaurant, index| %>
+              <li class="media">
+                <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
+                    <% if restaurant.photos.first.present? %>
+                      <% if restaurant.cover_photos.present? %>
+                        <%= image_tag restaurant.cover_photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% else %>
+                        <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% end %>
+                      <%#= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs"%>
+                    <% else %>
+                      <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
+                    <% end %>
+                </a>
+                  
+                <div class="media-body">
+                  <div class="col-sm-12 col-lg-9">
+                    <h4 class="media-heading">
+                      <%= link_to restaurant.name, restaurant_path(restaurant) %>
+                    </h4>
+                    <p><%= restaurant.address %></p>
+                    <br>
+                    <p>
+                      <% unless restaurant.star_format == 0 %>
+                        <% restaurant.star_format.times do |s| %>
+                          <i class="glyphicon glyphicon-star pink"></i>
+                        <% end %>
+                      <% else %>
+                        Not received any star rank
+                      <% end %>
+                    </p>
+                    <p><% unless restaurant.price_format == 0 %>
+                        <% restaurant.price_format.times do |s| %>
+                          <i class="glyphicon glyphicon-usd"></i>
+                        <% end %>
+                      <% else %>
+                        No yet assigned any price rank
+                      <% end %>
+                    </p><br>
+                    <p>
+                      <i class="glyphicon glyphicon-tag"></i> 
+                      <%= restaurant.cuisines_format %>
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-lg-3">
+                    <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary", :method => :get %></a>
+                  </div>
+                </div>
+              </li><!-- News 2 -->
+              <hr>
+              <% end %>
+            </ul>
+            <div class="navigation">
+              <%#= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+            </div>
+          </div>
+          
+          <!-- /.MOST POPULAR -->
+          <div id="reco" class="tab-pane fade">
+            <ul class="media-list">
+               <% @restaurants_recommended.each_with_index do |restaurant, index| %>
+                <li class="media">
+                  <a href="<%= restaurant_path(restaurant)%>" class="pull-left">
+                    <% if restaurant.photos.first.present? %>
+                      <% if restaurant.cover_photos.present? %>
+                        <%= image_tag restaurant.cover_photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% else %>
+                        <%= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                      <% end %>
+                      <%#= image_tag restaurant.photos.first.picture.url(:v280x160), :size => "244x144", :class => "media-object img-responsive hidden-xs" %>
+                    <% else %>
+                      <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
+                    <% end %>
+                  </a>
+                  <div class="media-body">
+                    <div class="col-sm-12 col-lg-9">
+                      <h4 class="media-heading">
+                        <%= link_to restaurant.name, restaurant_path(restaurant) %>
+                      </h4>
+                      <p><%= restaurant.address %></p>
+                      <br>
+                      <p>
+                        <% unless restaurant.star_format == 0 %>
+                          <% restaurant.star_format.times do |s| %>
+                            <i class="glyphicon glyphicon-star pink"></i>
+                          <% end %>
+                        <% else %>
+                          Not received any star rank
+                        <% end %>
+                      </p>
+                      <p>
+                         <% unless restaurant.price_format == 0 %>
+                          <% restaurant.price_format.times do |s| %>
+                            <i class="glyphicon glyphicon-usd"></i>
+                          <% end %>
+                        <% else %>
+                          No yet assigned any price rank
+                        <% end %>
+                      </p><br>
+                      <p>
+                        <i class="glyphicon glyphicon-tag"></i> 
+                        <%= restaurant.cuisines_format %>
+                      </p>
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                      <%= button_to 'BOOK NOW', restaurant, :class => "btn btn-primary", :method => :get %>
+                    </div>
+                  </div>
+                </li><!-- News 3 -->
+                <hr>
+              <% end %>
+            </ul>
+            <div class="navigation">
+              <%#= paginate @restaurants, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-small pagination-centered" %>
+            </div>
+          </div>
+          <!-- /.RECOMMENDATION -->
+        </div>
+      </div>
+      <!-- /.tab-content -->
+    </div>
+    <!-- /.col-lg-7 -->
+    <!-- main col right -->
+    <div class="col-sm-12 col-sm-4" style="width: 33.3333%;">
+      <h3 class="rregular">็ีHungry Hub  คืออะไร ?</h3>
+
+      <!-- <iframe width="360" height="280" src="http://www.youtube.com/watch?v=OcJpiSh3ubQ" frameborder="0" allowfullscreen></iframe> -->
+      <iframe width="350" height="280" src="//www.youtube.com/embed/OcJpiSh3ubQ?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+
+      <!-- <img style="margin-top:40px;" src="mobile_app_banner.png"> -->
+      <div style="padding-top:50px;"></div>
+      <%= image_tag "/assets/time_to_pop_in.png", :size => "360x280" %>
+      <div style="padding-top:50px;"></div>
+      <%= image_tag "/assets/mobile_app_banner.png", :size => "360x88" %>
+      <!-- <img style="margin-top:40px;" src="http://placehold.it/360x280"> -->
+      <div class="fb-like-box" style="margin-top:40px;" data-href="http://www.facebook.com/HungryHub" data-width="360" data-height="280" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+    </div>
+  </div><!--/row-->
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#timepicker').timepicker();
+    $('#datepicker').datepicker();
+    
+    $('#timepicker2').timepicker();
+    $('#datepicker2').datepicker();
+
+    var d = new Date();
+    var curr_date = d.getDate();
+    // Default Date to be set as today until 6pm of current date and after that it should be set as tomorrow
+    if (d.getHours() > 18 ) {
+      curr_date = curr_date + 1;
+    }
+
+    if (curr_date < 10) {
+      curr_date = 0 + "" + curr_date
+    }
+    var curr_month = d.getMonth() + 1; //Months are zero based
+    if (curr_month < 10) {
+      curr_month = 0 + "" + curr_month
+    }
+    var curr_year = d.getFullYear();
+    $('#datepicker').val(curr_month + "/" + curr_date + "/" + curr_year);
+    $('#datepicker2').val(curr_month + "/" + curr_date + "/" + curr_year);
+
+    // Default Time should be set as 7pm
+    $('#timepicker').val("7:00 PM");
+    $('#timepicker2').val("7:00 PM");
+  });
+</script>
+

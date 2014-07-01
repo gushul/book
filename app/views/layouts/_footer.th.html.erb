@@ -1,0 +1,91 @@
+ <!-- footer -->
+ <div class="col-md-12 column footer">
+  <div class="container">
+    <nav class="navbar  padding-left-10 padding-right-10 padding-bottom-1 padding-top-1 " role="navigation">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span></button> 
+      </div>
+              
+      <div class="collapse navbar-collapse color-white" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <%= link_to "หน้าแรก", root_path %>
+          </li>
+          <li>
+            <%= link_to "เกี่ยวกับเรา", about_us_path %>
+          </li>
+          <li>
+            <%= link_to "การใช้งาน", how_it_works_path %>
+          </li>
+<!--          <li>
+            <%= link_to "Features", "#" %>
+          </li>-->
+          <li>
+            <%= link_to "ติดต่อ", contact_us_path %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="row clearfix bottom">
+      <div class="pull-left">
+      <span class="label label-default">@2013-14 All rights Reserved</span> 
+      </div>
+      <div class="text">
+        <span class="label">Appservation Co, Ltd. 185/17-18 Charansanitwongse 12, Bangkok Thailand<br></span>
+      </div>
+      <div class="pull-right">
+        <div class="icon icon-tw">
+        <a href="http://www.twitter.com/hungryhub" target="_blank"></a>
+        </div>
+        <div class="icon icon-fb">
+        <a href="http://www.facebook.com/hungryhub" target="_blank"></a>
+        </div>
+        <div class="icon icon-rss">
+        <a href="#" target="_blank"></a>
+        </div>
+        <div class="icon icon-in">
+        <a href="#" target="_blank"></a>
+        </div>
+      <div class="language">
+        <%= lang_link "EN", root_url(set_locale: "en") %> /
+        <%= lang_link "TH", root_url(set_locale: "th") %>
+      </div>
+      </div>
+    </div> 
+  </div>
+
+  <div class="row clearfix bottom">
+    <div class="pull-left">
+      
+    </div>
+    <div class="pull-right">
+      <a href="#" class="go-top">Go to Top</a> 
+    </div>
+  </div>
+
+</div><!-- /footer -->
+
+<!-- JavaScript -->
+<script>
+  $(document).ready(function() {
+    // Show or hide the sticky footer button
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.go-top').fadeIn(200);
+      } else {
+      $('.go-top').fadeOut(200);
+      }
+    });
+
+    // Animate the scroll to top
+    $('.go-top').click(function(event) {
+      event.preventDefault();
+
+      $('html, body').animate({scrollTop: 0}, 300);
+    })
+  });
+</script>
