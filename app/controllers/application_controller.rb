@@ -1,6 +1,7 @@
 # encoding: utf-8
 class ApplicationController < ActionController::Base
   before_filter :set_i18n_locale_from_params
+  before_filter :redirect_for_mobiles
   protect_from_forgery
   
   def after_sign_in_path_for(resource)
@@ -11,6 +12,14 @@ class ApplicationController < ActionController::Base
   # rescue_from Exception, :with => :error_render_method
 
 protected
+
+  def redirect_for_mobiles
+    if request.env['HTTP_USER_AGENT'].downcase.match(/android/)
+      redirect_to "https://play.google.com/store/apps/"
+    elsif request.env['HTTP_USER_AGENT'].downcase.match(/iphone|ipad|ipod/)
+      redirect_to "https://itunes.apple.com/us/app/hungry-hub/id879303325"
+    end
+  end
 
   def error_render_method
     respond_to do |type|
