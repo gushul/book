@@ -12,6 +12,7 @@ class Reservation < ActiveRecord::Base
                   :special_request,
                   :channel
  
+  validates_uniqueness_of :created_at, scope: [:user_id, :owner_id]
   # validates :user_id,       :presence => true
   # validates user/owner id presence
   validates :restaurant_id, :presence => true
