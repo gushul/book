@@ -54,15 +54,18 @@
                 <p style="margin:0 10px;">
                 <span class="rbold">Address : </span>
                   <%= @restaurant.address %>
-                </p>
-
                 <br/>
-                <p style="margin:0 10px;">
                 <span class="rbold">Address (Thai version) : </span>
                   <%= @restaurant.th_address %>
                 </p>
 
                 <br/>
+                
+                <p style="margin:0 10px;">
+                  <%= @restaurant.misc.html_safe if !@restaurant.misc.nil? %>
+                </p>
+                
+                
                 <br/>
                 <div class="col-sm-6 col-lg-6">
                   <p><span class="rbold">Price : </span>
@@ -70,17 +73,14 @@
                       <i class="glyphicon glyphicon-usd" style="width: 0.5em;"></i>
                     <% end %>
                     <span style="padding-left:10px;"><%= @restaurant.price_desc%></span>
-                  </p>
                   <br/>
-                  <p><span class="rbold">Location : </span> 
+                  <span class="rbold">Location : </span> 
                     <%= raw(@restaurant.get_text_tags_by_group("Location").join(', ')) %>
-                  </p>
                   <br/>
-                  <p><span class="rbold">Website : </span>
+                  <span class="rbold">Website : </span>
                     <%= @restaurant.website %>
-                  </p>
                   <br/>
-                  <p><span class="rbold">Telephone : </span> 
+                  <span class="rbold">Telephone : </span> 
                     <%= @restaurant.phone %>
                   </p>
                   <br/>
@@ -88,17 +88,14 @@
                 <div class="col-sm-6 col-lg-6">
                   <p><span class="rbold">Parking : </span>
                     <%= raw(@restaurant.get_text_tags_by_group("Parking").join(', ')) %>
-                  </p>
                   <br/>
-                  <p><span class="rbold">Drinking : </span>   
+                  <span class="rbold">Drinking : </span>   
                     <%= raw(@restaurant.get_text_tags_by_group("Drinking").join(', ')) %>
-                  </p>
                   <br/>
-                  <p><span class="rbold">Payment : </span>
+                  <span class="rbold">Payment : </span>
                     <%= raw(@restaurant.get_text_tags_by_group("Payment").join(', ')) %>
-                  </p>
                   <br/>
-                  <p><span class="rbold">Misc : </span> 
+                  <span class="rbold">Misc : </span> 
                     <%= raw(@restaurant.get_text_tags_by_group("Misc").join(', ')) %>
                   </p>
                 </div>
