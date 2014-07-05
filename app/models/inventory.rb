@@ -42,7 +42,7 @@ class Inventory < ActiveRecord::Base
   scope :in_frame, lambda { |start_period, end_period|
     # start_period = "2014-06-06 10:00:00"
     # end_period = "2014-06-30 11:00:00"
-    Inventory.where(:date => start_period.to_date...end_period.to_date,
+    Inventory.where(:date => start_period.to_date...end_period.to_date+1.day,
                     :start_time => "2000-01-01 #{start_period.to_time.strftime('%H:%M')}:00".to_time..."2000-01-01 #{end_period.to_time.strftime('%H:%M')}:00".to_time)
   }
 
