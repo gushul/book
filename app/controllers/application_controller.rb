@@ -14,11 +14,11 @@ class ApplicationController < ActionController::Base
 protected
 
   def redirect_for_mobiles
-    if request.env['HTTP_USER_AGENT'].downcase.match(/android/)
-      redirect_to "https://play.google.com/store/apps/"
-    elsif request.env['HTTP_USER_AGENT'].downcase.match(/iphone|ipad|ipod/)
-      redirect_to "https://itunes.apple.com/us/app/hungry-hub/id879303325"
-    end
+#    if request.env['HTTP_USER_AGENT'].downcase.match(/android/)
+#      redirect_to "https://play.google.com/store/apps/"
+#    elsif request.env['HTTP_USER_AGENT'].downcase.match(/iphone|ipad|ipod/)
+#      redirect_to "https://itunes.apple.com/us/app/hungry-hub/id879303325"
+#    end
   end
 
   def error_render_method
