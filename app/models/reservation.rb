@@ -273,8 +273,8 @@ private
 #                     points_pending: 5*party_size,    
                      description: "")
     end
-    # UserMailer.booking_create(current_user, @reservation).deliver
-    # OwnerMailer.booking_create(@reservation).deliver
+    UserMailer.booking_create(current_user, @reservation).deliver
+    OwnerMailer.booking_create(@reservation).deliver
   end
 
   def update_reward
@@ -286,8 +286,8 @@ private
                                   restaurant_id: restaurant_id )
       end
     end
-    # UserMailer.booking_update(current_user, @reservation).deliver
-    # OwnerMailer.booking_update(@reservation).deliver
+    UserMailer.booking_update(current_user, @reservation).deliver
+    OwnerMailer.booking_update(@reservation).deliver
   end
 
   def delete_reward
@@ -295,8 +295,8 @@ private
       reward = Reward.where(:reservation_id => id).first
       reward.destroy
     end
-    # UserMailer.booking_removed(current_user, @reservation).deliver
-    # OwnerMailer.booking_removed(@reservation).deliver
+    UserMailer.booking_removed(current_user, @reservation).deliver
+    OwnerMailer.booking_removed(@reservation).deliver
   end
   
 end

@@ -1,4 +1,5 @@
 class OwnerMailer < ActionMailer::Base
+  # include Resque::Mailer
   add_template_helper(ReservationsHelper)
   default :from => "no-reply@hungryhub.com"
 
