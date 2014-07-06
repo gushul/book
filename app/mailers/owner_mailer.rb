@@ -1,6 +1,6 @@
 class OwnerMailer < ActionMailer::Base
   add_template_helper(ReservationsHelper)
-  default :from => "notifications@restaurant-booking.com"
+  default :from => "no-reply@hungryhub.com"
 
   def booking_create(reservation)
     @reservation = reservation

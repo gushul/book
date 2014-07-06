@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   add_template_helper(ReservationsHelper)
-  default :from => "notifications@hungryhub.com"
+  default :from => "no-reply@hungryhub.com"
 
   def booking_create(user, reservation)
     @user = user
