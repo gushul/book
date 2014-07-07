@@ -6,7 +6,7 @@
   <body>
     <h1>Updated reservation to your <%= @reservation.restaurant.name %> restaurant.</h1>
     <p>
-      Person <%= @reservation.user.username %><br/>
+      Person <%= @reservation.user.username if !@reservation.user.nil? %> <%= @reservation.name %><br/>
       Date <%= @reservation.date %><br/>
       Start time <%= mtime(@reservation.start_time) %><br/>
       End time <%= mtime(@reservation.end_time) %><br/>
@@ -16,5 +16,3 @@
     <p>Thanks for using our service!</p>
   </body>
 </html>
-
-

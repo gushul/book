@@ -14,21 +14,30 @@ AuthApp::Application.configure do
   config.action_controller.perform_caching = false
  
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'hungryhub.com/' }
+  # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.delivery_method = :sendmail
-  # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.smtp_settings ={ 
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "example.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.sendgrid.net",
+  #   :port => 25,
+  #   domain: "obscure-escarpment-1671.herokuapp.com/",
+  #   :user_name => ENV["SENDGRID_USERNAME"],
+  #   :password  => ENV["SENDGRID_PASSWORD"],
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   :authentication => :plain,
+  #   :enable_starttls_auto => true
+  # }
+  config.action_mailer.smtp_settings = {
+    :address        => "smtp.sendgrid.net",
+    :port           => 587,
+    :domain         => "matt@hellohunter.com",
+    :authentication => :plain,
+    :user_name      => "matt@hellohunter.com",
+    :password       => "fl4m36"
   }
 
   # Print deprecation notices to the Rails logger
