@@ -30,10 +30,10 @@
                       <td class="td-gray">Covers</td>
                     </tr>
                     <tr>
-                      <td class="td-gray-light numeric"><%= @res_today.present? ? @res_today.count : 0 %></td>
-                      <td class="td-gray numeric"><%= @res_today.present? ? @res_today.map(&:party_size).compact.reduce(0, :+)  : 0%></td>
                       <td class="td-gray-light numeric"><%= @res_yesterday.present? ?  @res_yesterday.count : 0%></td>
                       <td class="td-gray numeric"><%= @res_yesterday.present? ? @res_yesterday.map(&:party_size).compact.reduce(0, :+) : 0  %></td>
+                      <td class="td-gray-light numeric"><%= @res_today.present? ? @res_today.count : 0 %></td>
+                      <td class="td-gray numeric"><%= @res_today.present? ? @res_today.map(&:party_size).compact.reduce(0, :+)  : 0%></td>
                       <td class="td-gray-light numeric"><%= @res_next_7_days.present? ? @res_next_7_days.count : 0%></td>
                       <td class="td-gray numeric"><%= @res_next_7_days.present? ? @res_next_7_days.map(&:party_size).compact.reduce(0, :+) : 0 %></td>
                     </tr>
@@ -52,7 +52,7 @@
                 </table>
               </div>
               
-              <p><small><i class="fa fa-calendar"></i>&nbsp; <%= Time.zone.today.strftime('%d %b %Y') %> &nbsp; <i class="fa fa-clock-o"></i>&nbsp; <%= Time.zone.now.strftime('%H:%M:%S')  %></small></p>
+              <p><small><i class="fa fa-calendar"></i>&nbsp; <%= (Time.zone.today.+7.hour).strftime('%d %b %Y') %> &nbsp; <i class="fa fa-clock-o"></i>&nbsp; <%= (Time.zone.now.+7.hour).strftime('%H:%M:%S')  %></small></p>
               <hr>
               <div class="row">
                 <div class="col-sm-12 col-lg-4">

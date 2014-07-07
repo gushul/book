@@ -46,9 +46,9 @@ class Reservation < ActiveRecord::Base
 
   scope :active, -> { where active: true }
 
-  scope :today,       -> { where(:date => Time.zone.today) }
-  scope :yesterday,   -> { where(:date => (Time.zone.today - 1.day)..Time.zone.today) }
-  scope :next_7_days, -> { where(:date => (Time.zone.today + 1.day)..(Time.zone.today + 7.days)) }
+  scope :today,       -> { where(:date => (Time.zone.today + 7.hour).to_date) }
+  scope :yesterday,   -> { where(:date => (Time.zone.today - 1.day + 7.hour).to_date) }
+  scope :next_7_days, -> { where(:date => (Time.zone.today + 1.day + 7.hour).to_date..(Time.zone.today + 7.days + 7.hour).to_date) }
   scope :all_visits, -> { where('active = 1 AND arrived = 1') }
   
   scope :past,     -> { 

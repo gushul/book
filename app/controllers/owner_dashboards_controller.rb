@@ -3,7 +3,7 @@ class OwnerDashboardsController < ApplicationController
   
   def index
     if current_owner.restaurant.present?
-      res = current_owner.restaurant.reservations.active
+      res = current_owner.restaurant.reservations
       @res_today = res.today
       @res_yesterday = res.yesterday
       @res_next_7_days = res.next_7_days

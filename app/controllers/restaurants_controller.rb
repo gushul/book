@@ -49,6 +49,8 @@ class RestaurantsController < ApplicationController
       @times = @restaurant.inventories.available((Time.zone.today + 1.day), "00:00").limit(3).map{|inv| inv.start_time.to_s.slice(11..15)}
     end
 
+    @times = ["18:30","19:00","19:30"]
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @restaurant }
