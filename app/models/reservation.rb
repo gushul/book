@@ -286,8 +286,8 @@ private
                                   restaurant_id: restaurant_id )
       end
     end
-    UserMailer.booking_update(self.user, self).deliver if user_id.present?
-    OwnerMailer.booking_update(self).deliver
+#    UserMailer.booking_update(self.user, self).deliver if user_id.present?
+#    OwnerMailer.booking_update(self).deliver
   end
 
   def delete_reward
