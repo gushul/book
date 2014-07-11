@@ -36,8 +36,11 @@ gem 'whenever'
 gem 'delayed_job_active_record'
 # gem 'thinking-sphinx'
 # gem 'ts-delayed-delta', '~> 2.0.0'
-# gem 'resque' # or a compatible alternative / fork
-# gem 'resque_mailer'
+
+# emails async delivery
+gem 'resque' # or a compatible alternative / fork
+gem 'resque_mailer'
+gem 'resque-scheduler'
 
 gem 'execjs'
 gem 'therubyracer'

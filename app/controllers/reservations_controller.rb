@@ -117,8 +117,8 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
         
-        # UserMailer.booking_update(current_user, @reservation).deliver
-        # OwnerMailer.booking_update(@reservation).deliver
+        # UserMailer.booking_update(current_user.id, @reservation.id).deliver
+        # OwnerMailer.booking_update(@reservation.id).deliver
 
         format.html { redirect_to :back ,
                       notice: 'Reservation was successfully updated.'
