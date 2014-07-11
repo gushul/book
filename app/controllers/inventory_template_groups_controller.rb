@@ -140,6 +140,7 @@ class InventoryTemplateGroupsController < ApplicationController
     @inventory_template_group.destroy
 
     respond_to do |format|
+      # format.js
       format.html { redirect_to(:back) } #redirect_to inventory_template_groups_url }
       format.json { head :no_content }
     end

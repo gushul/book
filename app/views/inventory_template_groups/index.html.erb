@@ -43,7 +43,7 @@
                     <%= link_to '<i class="glyphicon glyphicon-search action" id="viewInventory"></i>'.html_safe, itg, remote: true  %>
                     <%= link_to '<i class="glyphicon glyphicon-edit action" id="editInventory"></i>'.html_safe, edit_inventory_template_group_path(itg), remote: true  %>
                     <%#= link_to 'FULL EDIT <i class="glyphicon glyphicon-edit action" id="editInventory"></i>'.html_safe, edit_inventory_template_group_path(itg) %>
-                    <%= link_to '<i class="glyphicon glyphicon-remove action" id="deleteInventory"></i>'.html_safe, itg, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <%= link_to '<i class="glyphicon glyphicon-remove action" id="deleteInventory"></i>'.html_safe, itg, method: :delete, data: { confirm: 'Are you sure?', header: "Delete Inventory Template Group: #{itg.name}" } %>
                     </div>
                   </td>
                 </tr>
@@ -247,5 +247,6 @@
 
 
 <%= render "modal" %>
-<%= render "inventories/destroy_popup" %>
+<%#= render "inventories/destroy_popup" %>
+<%= render "owner_dashboards/destroy_popup" %>
 <%= render "inventory_templates/modal" %>

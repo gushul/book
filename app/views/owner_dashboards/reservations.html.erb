@@ -17,7 +17,8 @@
                   <form action="" method="get" role="form">
                     <!-- New Reservation -->
                     <div class="col-sm-12 col-md-4" id="add-reservation">
-                      <%= link_to '+ New Reservation', reservation_owner_dashboards_path(id: "new"), class: "btn btn-reservation btn-xs" %>
+                      <%#= link_to '+ New Reservation', reservation_owner_dashboards_path(id: "new"), class: "btn btn-reservation btn-xs" %>
+                      <%= link_to '+ New Reservation', new_reservation_path, remote: true, class: "btn btn-reservation btn-xs" %>
                     </div>
                     <!-- Summary -->
                     <div class="col-sm-12 col-md-4" id="summary">
@@ -74,6 +75,9 @@
     </div>
   </div><!--/row-->
 </div>
+
+<%= render "reservations/modal" %>
+<%= render "owner_dashboards/destroy_popup" %>
 
 <script type="text/javascript">
   $(document).ready(function(){

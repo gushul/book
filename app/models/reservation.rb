@@ -36,6 +36,9 @@ class Reservation < ActiveRecord::Base
   after_update   :update_reward
   before_destroy :delete_reward
 
+  # temporary from 11 Jul
+  before_save   :active_eq_true
+
   belongs_to :user
   belongs_to :owner
   belongs_to :restaurant
@@ -84,6 +87,10 @@ class Reservation < ActiveRecord::Base
   # def start_time 
   #   self[:start_time].strftime('%H:%M') unless self[:start_time].blank?
   # end
+
+  def active_eq_true
+    self.active = true 
+  end 
 
   def start_time_format
     self[:start_time].strftime('%H:%M') unless self[:start_time].blank?

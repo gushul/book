@@ -79,8 +79,10 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(params[:reservation])
 
     # fix for production
-    @reservation.date = Date.strptime(params[:reservation][:date], '%m-%d-%Y')
-    
+    if Rails.env == 'production'
+      @reservation.date = Date.strptime(params[:reservation][:date], '%m-%d-%Y') 
+    end
+
     if user_signed_in?
       @reservation.user_id = current_user.id
       @reservation.channel = 1
@@ -92,7 +94,8 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to reservations_path,
+        path = current_owner.present? ? reservations_owner_dashboards_path : reservations_user_dashboards_path
+        format.html { redirect_to path,
                      notice: 'Reservation was successfully created.' }
       else
         format.html { render action: "new" }

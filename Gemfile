@@ -7,7 +7,7 @@ gem 'atomic', '1.1.12'
 
 gem 'active_enum'
 gem 'simple_form', '2.1.0'
-gem 'best_in_place'
+# gem 'best_in_place'
 # gem 'haml'
 gem 'rmagick', '2.13.2'
 gem 'carrierwave'

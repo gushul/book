@@ -15,7 +15,6 @@
 //= require jquery.ui.autocomplete
 //= require twitter/bootstrap
 //= require autocomplete-rails
-//= require best_in_place
 //= require_tree .
 //= require underscore-min
 //= require gmaps_google

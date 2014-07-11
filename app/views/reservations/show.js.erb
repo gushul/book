@@ -1,7 +1,9 @@
-$modal = $('.model .model-viewReservation'),
 $modalBody = $('.model .content'),
 $modalHeading = $('.model .header .lbold');
+$modalButSubmit = $('.model.model-viewReservation .btn.btn-primary');
+$modalButSubmit.eq(0).val("UPDATE");
 // $modalHeading.html("<%= @reservation.email %>");
-$modalHeading.html("View Reservation");
+$modalHeading.html("Edit Reservation");
 $modalBody.html("<%= escape_javascript(render @reservation) %>");
-$modal.modal();
+// $modal.modal();
+openModel("viewReservation");

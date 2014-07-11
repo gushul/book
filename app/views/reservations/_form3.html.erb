@@ -373,8 +373,10 @@
 
   <div class="actions ">
     <div>
-      <%= f.submit class: "btn btn-primary pull-right" %>
+      <%= f.submit class: "btn btn-primary pull-right", style: "margin-top:5px; border-radius: 5px;" %>
     </div>
   </div>
 <% end %>
-<button class="btn btn-primary pull-right" onclick="closeModel('viewReservation');">CANCEL</button>
+<div class="pull-right">
+  <button class="btn btn-primary hover_btn_fix" onclick="closeModel('viewReservation');" style="margin-top:0px; ">CANCEL</button>
+</div>  

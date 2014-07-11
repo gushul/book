@@ -110,9 +110,10 @@
                     <%# end %> 
                   </td> -->
                   <td>
-                    <%= content_tag :div, :class => 'bip_reservation_party_size' do %>
-                      <%= best_in_place reservation, :party_size %>
-                    <% end %>
+                    <%#= content_tag :div, :class => 'bip_reservation_party_size' do %>
+                      <%#= best_in_place reservation, :party_size %>
+                    <%# end %>
+                    <%= reservation.party_size %>
                   </td>
                   <!-- <td>
                   <%# if owner_signed_in? %>

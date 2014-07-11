@@ -1,7 +1,6 @@
-$(document).ready(function() {
-  /* Activating Best In Place */
+/*$(document).ready(function() {
   jQuery(".best_in_place").best_in_place();
-});
+});*/
 
 jQuery(function() {
   // $('#reservation_date').datepicker({

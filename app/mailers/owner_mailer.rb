@@ -5,19 +5,19 @@ class OwnerMailer < ActionMailer::Base
 
   def booking_create(reservation_id)
     @reservation = Reservation.find(reservation_id)
-    mail( to: reservation.restaurant.owner.email, 
+    mail( to: @reservation.restaurant.owner.email, 
           subject: "Reservation added (#{@reservation.restaurant.name} restaurant)")
   end
 
   def booking_update(reservation_id)
     @reservation = Reservation.find(reservation_id)
-    mail( to: reservation.restaurant.owner.email,  
+    mail( to: @reservation.restaurant.owner.email,  
           subject: "Reservation updated (#{@reservation.restaurant.name} restaurant)")
   end
 
   def booking_removed(reservation_id)
     @reservation = Reservation.find(reservation_id)
-    mail( to: reservation.restaurant.owner.email,  
+    mail( to: @reservation.restaurant.owner.email,  
           subject: "Reservation deleted (#{@reservation.restaurant.name} restaurant)")
   end
 
