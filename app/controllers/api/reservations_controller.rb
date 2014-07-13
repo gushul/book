@@ -33,6 +33,9 @@ class Api::ReservationsController < Api::BaseController
     @reservation.active = true
 
     restaurant = Restaurant.where(id: @reservation.restaurant_id).first
+    
+    @reservation.end_time = @reservation.start_time+restaurant.res_duration.minutes
+    
     date = @reservation.date
     time = @reservation.start_time
     people = @reservation.party_size
