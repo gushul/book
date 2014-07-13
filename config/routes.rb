@@ -40,6 +40,8 @@ AuthApp::Application.routes.draw do
     post '/verification',        to: 'verifications#create'
     post '/verification/resend', to: 'verifications#resend'
     
+    post "/reset_password" => "users#reset_password"
+
     # resources :reservations, :only => [:update]
     post "/reservations"        => "reservations#index"
     post "/reservations/create" => "reservations#create"

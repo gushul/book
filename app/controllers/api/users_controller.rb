@@ -16,6 +16,17 @@ class Api::UsersController < Api::BaseController
     end
   end
 
+  def reset_password
+    respond_to do |format|
+      if @user.present?
+        @user.send_reset_password_instructions
+        format.json { render json: t('devise.confirmations.send_instructions').to_json, status: 200 }
+      else
+        format.json { render json: "Err", status: 400 }
+      end
+    end
+  end
+
 
   private
 

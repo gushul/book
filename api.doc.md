@@ -18,6 +18,10 @@ Show user's profile
 
     curl -H POST "Accept: application/json" -H "Content-Type: application/json" -d '{"user":{"email":"user1@mail.com","password":"secret12"}}' http://localhost:3000/api/me
 
+Send reset password email
+
+    curl -H POST "Accept: application/json" -H "Content-Type: application/json" -d '{"user":{"email":"sr_5@inbox.com","password":"secret121"}}' http://localhost:3000/api/reset_password
+
 ### Reservations
                           
 Listing an User’s reservation (user's reservation history)
