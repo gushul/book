@@ -25,6 +25,7 @@ gem 'mysql2'
 gem 'thin'
 
 gem 'devise', '3.1.0'
+gem "devise-async", '0.8'
 gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook' 
