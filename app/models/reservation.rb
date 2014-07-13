@@ -37,7 +37,7 @@ class Reservation < ActiveRecord::Base
   before_destroy :delete_reward
 
   # temporary from 11 Jul
-  before_save   :active_eq_true
+#  before_save   :active_eq_true
 
   belongs_to :user
   belongs_to :owner
