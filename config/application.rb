@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'devise'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -39,7 +40,7 @@ module AuthApp
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = :th
+    # config.i18n.default_locale = :th
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
