@@ -24,10 +24,11 @@ class UserMailer < ActionMailer::Base
           subject: "Reservation deleted (#{@reservation.restaurant.name} restaurant)")
   end
 
-  def registration_confirmation(email, code)
+  def registration_confirmation(email, code, username)
     @code = code
+    @username = username
     mail( to: email, 
-          subject: "Your verification code")
+          subject: "Welcome to Hungry Hub")
   end
 
 end
