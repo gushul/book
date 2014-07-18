@@ -60,19 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def send_verification_code_via_sms
-    Thread.new do
-      require 'net/https'
-      require 'open-uri'
-      # uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+6600000000&to=+#{self.phone}&text=#{self.verify_code}")
-      # uri = URI.parse("https://www.siptraffic.com/myaccount/sendsms.php?username=matthewfong&password=psyagbha&from=+66875928489&to=+66#{self.phone.reverse.chop.reverse}&text=Welcome+to+Hungry+Hub.+Your+verification+code+is+#{self.verify_code}.+Please+verify+this+number+on+our+webpage+or+in+our+mobile+application.")
-#      uri = URI.parse("http://api.rushsms.com:8080/?username=rus-hungryhub&password=94GrsVw3&type=0&delivery=1&mobile=66#{self.phone.reverse.chop.reverse}&sender=Hungry+Hub&message=Welcome+to+Hungry+Hub.+Your+verification+code+is+#{self.verify_code}.+Please+verify+this+number+on+our+webpage+or+in+our+mobile+application.")
-      msg = URI.encode("Welcome to Hungry Hub. Your verification code is <#{self.verify_code}>. Please verify this number on our webpage (www.hungryhub.com) or in our mobile application (iOS and Android). Hungry Hub")
-      uri = URI.parse("http://api.rushsms.com:8080/?username=div-hungryhub&password=hBger932&type=0&delivery=1&mobile=66#{self.phone.reverse.chop.reverse}&sender=Hungry+Hub&message=#{msg}")
-      http = Net::HTTP.new(uri.host, uri.port)
-#      http.use_ssl = true
-#      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      http.get(uri.request_uri)
-    end
+    Resque.enqueue(SmsJob, self.verify_code, self.phone.reverse.chop.reverse)
   end
 
 private
