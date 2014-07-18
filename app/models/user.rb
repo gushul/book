@@ -78,11 +78,11 @@ class User < ActiveRecord::Base
 private
 
   def send_verification_code_via_email
-    Thread.new do
-      unless ['development'].include?(Rails.env)
+#    Thread.new do
+#      unless ['development'].include?(Rails.env)
         UserMailer.registration_confirmation(self.email, self.verify_code, self.username).deliver
-      end
-    end
+#      end
+#    end
   end
 
   def set_verify_code
