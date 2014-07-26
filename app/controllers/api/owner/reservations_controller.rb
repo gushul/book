@@ -3,7 +3,7 @@ class Api::Owner::ReservationsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
   before_filter :check_owner_auth_params
-  before_filter :check_reservations_params, only: [:create, :update]
+  before_filter :check_reservations_params, only: [:create] #, :update]
 
   # POST /reservations.json
   def index

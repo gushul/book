@@ -3,7 +3,7 @@ class Api::ReservationsController < Api::BaseController
   skip_before_filter  :verify_authenticity_token
 
   before_filter :check_user_auth_params
-  before_filter :check_reservations_params, only: [:create, :update]
+  before_filter :check_reservations_params, only: [:create] #, :update]
 
   # POST /reservations
   def index

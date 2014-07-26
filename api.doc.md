@@ -34,7 +34,7 @@ Listing an Owner’s reservation
       
 Create reservation as User
 
-    curl -X POST -H "Content-Type: application/json" -d '{"user":{"email":"user1@mail.com","password":"secret12"}, "reservation":{"restaurant_id":26, "date": "2013-11-26 18:00:00", "start_time": "2013-08-17 18:00:00", "end_time": "2013-08-17 18:30:00", "party_size":5, "active": "false" } }' http://localhost:3000/api/reservations/create
+    curl -X POST -H "Content-Type: application/json" -d '{"user":{"email":"user1@mail.com","password":"secret12"}, "reservation":{"restaurant_id":340, "date": "2014-06-05 18:00:00", "start_time": "2013-08-17 18:00:00", "end_time": "2013-08-17 18:30:00", "party_size":5, "active": "false" } }' http://localhost:3000/api/reservations/create
 
 Create reservation as Owner
 
@@ -42,7 +42,7 @@ Create reservation as Owner
 
 Update reservation as User
 
-    curl -X POST -H "Content-Type: application/json" -d '{"user":{"email":"user1@mail.com","password":"secret12"}, "reservation":{"id": 56, "restaurant_id":26, "date": "2013-11-26 20:00:00", "start_time": "2013-10-20 10:00:00", "end_time": "2013-10-20 12:00:00", "party_size":3, "active": "false"} }' http://localhost:3000/api/reservations/update
+    curl -X POST -H "Content-Type: application/json" -d '{"user":{"email":"user1@mail.com","password":"secret12"}, "reservation":{"id": 104, "special_request":"3444"} }' http://localhost:3000/api/reservations/update
 
 Update reservation as Owner
 
