@@ -13,7 +13,7 @@ class Api::RestaurantsController < Api::BaseController
       end
 
       if params[:ver].to_i == 2
-        r[:images] = r.get_hashed_images_names
+        r[:images] = r.get_hashed_mobile_images
       end
 
     end
@@ -42,7 +42,7 @@ class Api::RestaurantsController < Api::BaseController
       end
 
       if params[:ver].to_i == 2
-        @restaurant[:images] = @restaurant.get_hashed_images_names
+        @restaurant[:images] = @restaurant.get_hashed_mobile_images
       end
 
       @restaurant = @restaurant.as_json

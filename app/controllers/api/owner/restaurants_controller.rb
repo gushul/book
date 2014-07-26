@@ -8,7 +8,7 @@ class Api::Owner::RestaurantsController < ApplicationController
   def show
     @restaurant = @owner.restaurant
     if params[:ver].to_i == 2
-      @restaurant[:images] = @restaurant.get_hashed_images_names
+      @restaurant[:images] = @restaurant.get_hashed_mobile_images
     end
     respond_to do |format|
       if @restaurant.present?

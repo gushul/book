@@ -103,7 +103,7 @@ class Restaurant < ActiveRecord::Base
     self.photos.covers 
   end
 
-  def get_hashed_images_names
+  def get_hashed_images
     im_h = {}
     cover_pic = self.photos.covers.first
     no_cover_pics = self.photos.no_covers
@@ -120,6 +120,16 @@ class Restaurant < ActiveRecord::Base
       im_h["#{ind}"] = h
     end
     return im_h
+  end
+
+  def get_hashed_mobile_images
+    im_h = {}
+    files = Dir.glob("#{Rails.root}/public/#{self.id}-*-mobile.jpg") # **/*")
+    files.each_with_index do |p, ind|
+      im_h["#{ind}"] = p[(p.rindex(/\//) + 1)..-1]
+    end
+    im_h["mobile_images"] = files.count
+    im_h
   end
 
   def self.generate_schedule(id = 0)
