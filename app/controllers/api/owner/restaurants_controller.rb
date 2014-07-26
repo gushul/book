@@ -8,21 +8,7 @@ class Api::Owner::RestaurantsController < ApplicationController
   def show
     @restaurant = @owner.restaurant
     if params[:ver].to_i == 2
-      cover_pic = @restaurant.photos.covers.first
-      no_cover_pics = @restaurant.photos.no_covers
-      @restaurant[:images] = {}
-      if cover_pic.present?
-        h = Hash["v100x100" => cover_pic.picture.url(:v100x100)]
-        h.merge!("v280x160" => cover_pic.picture.url(:v280x160))
-        h.merge!("v600x480" => cover_pic.picture.url(:v600x480))
-        @restaurant[:images][:cover] = h 
-      end
-      no_cover_pics.each_with_index do |p, ind|
-        h = Hash["v100x100" => p.picture.url(:v100x100)]
-        h.merge!("v280x160" => p.picture.url(:v280x160))
-        h.merge!("v600x480" => p.picture.url(:v600x480))
-        @restaurant[:images]["#{ind}"] = h
-      end
+      @restaurant[:images] = @restaurant.get_hashed_images_names
     end
     respond_to do |format|
       if @restaurant.present?

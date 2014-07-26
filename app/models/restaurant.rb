@@ -103,6 +103,25 @@ class Restaurant < ActiveRecord::Base
     self.photos.covers 
   end
 
+  def get_hashed_images_names
+    im_h = {}
+    cover_pic = self.photos.covers.first
+    no_cover_pics = self.photos.no_covers
+    if cover_pic.present?
+      h = Hash["v100x100" => cover_pic.picture.url(:v100x100)]
+      h.merge!("v280x160" => cover_pic.picture.url(:v280x160))
+      h.merge!("v600x480" => cover_pic.picture.url(:v600x480))
+      im_h[:cover] = h 
+    end
+    no_cover_pics.each_with_index do |p, ind|
+      h = Hash["v100x100" => p.picture.url(:v100x100)]
+      h.merge!("v280x160" => p.picture.url(:v280x160))
+      h.merge!("v600x480" => p.picture.url(:v600x480))
+      im_h["#{ind}"] = h
+    end
+    return im_h
+  end
+
   def self.generate_schedule(id = 0)
     @intervals = []
       24.times do |h| 
