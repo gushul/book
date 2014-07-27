@@ -22,7 +22,7 @@ class Reservation < ActiveRecord::Base
   validates :party_size,    :presence => true
 
   validate  :unreg_user_validation            
-  validate  :start_end_time
+  # validate  :start_end_time
   validate  :restaurant_id_validation            
   # validate  :date_validation, :if => :is_restaurant_id_real?
   # validate  :party_size_available_validation

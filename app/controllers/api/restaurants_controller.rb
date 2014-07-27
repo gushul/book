@@ -11,7 +11,13 @@ class Api::RestaurantsController < Api::BaseController
       r.restaurant_tags.each do |t|
         r[:tags] << t.title
       end
+
+      if params[:ver].to_i == 2
+        r[:images] = r.get_hashed_mobile_images
+      end
+
     end
+
     @restaurants_json = []
     @restaurants.each do |r|
 #      if r.active then
@@ -34,9 +40,14 @@ class Api::RestaurantsController < Api::BaseController
       @restaurant.restaurant_tags.each do |t|
         @restaurant[:tags] << t.title
       end
+
+      if params[:ver].to_i == 2
+        @restaurant[:images] = @restaurant.get_hashed_mobile_images
+      end
+
       @restaurant = @restaurant.as_json
-        # %w{mon tue wed thu fri sat sun 
-       %w{owner_id updated_at created_at}.each {|k| @restaurant.delete(k)}
+      # %w{mon tue wed thu fri sat sun 
+      %w{owner_id updated_at created_at}.each {|k| @restaurant.delete(k)}
     rescue 
       @restaurant = "{\"id\":[\"Invalid Restaurant ID\"]}"
 #      render json: @restaurant, status: :unprocessable_entity
