@@ -160,6 +160,125 @@
               </div>
             </div>
           </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                  Cuisine Types :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="cuisine_type in cuisineTypes | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedCuisines[cuisine_type.tag_value]">
+                  <span>{{cuisine_type.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                  Locations :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="location in restaurantLocations | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedLocations[location.tag_value]">
+                  <span>{{location.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                  Meals :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="meal in mealTypes | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedMeals[meal.tag_value]">
+                  <span>{{meal.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                  Parking :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="parking in parkingType | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedParking[parking.tag_value]">
+                  <span>{{parking.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
+                  Drinking :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseEight" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="drinking in drinkingTypes | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedDrinking[drinking.tag_value]">
+                  <span>{{drinking.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
+                  Misc Types :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseNine" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="misc in miscTypes | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedMisc[misc.tag_value]">
+                  <span>{{misc.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
+                  Admin Type :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTen" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="admin in adminTypes | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedAdmin[admin.tag_value]">
+                  <span>{{admin.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

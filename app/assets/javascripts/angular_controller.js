@@ -69,6 +69,84 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       });
     };
     $scope.getPayment();
+    $scope.getCuisine=function(){
+      $http({
+      method : 'get',
+      url : '/api/restaurant_tags?tag=Cuisine'
+      }).success(function(data, status) {
+        $scope.cuisineTypes=data.restaurant_tags;
+      }).error(function(data, status) {
+        console.log("error")
+      });
+    };
+    $scope.getCuisine();
+    $scope.getLocation=function(){
+      $http({
+      method : 'get',
+      url : '/api/restaurant_tags?tag=Location'
+      }).success(function(data, status) {
+        $scope.restaurantLocations=data.restaurant_tags;
+      }).error(function(data, status) {
+        console.log("error")
+      });
+    };
+    $scope.getLocation();
+    $scope.getmealTypes=function(){
+      $http({
+      method : 'get',
+      url : '/api/restaurant_tags?tag=Meals'
+      }).success(function(data, status) {
+        $scope.mealTypes=data.restaurant_tags;
+      }).error(function(data, status) {
+        console.log("error")
+      });
+    };
+    $scope.getmealTypes();
+    $scope.getParking=function(){
+      $http({
+      method : 'get',
+      url : '/api/restaurant_tags?tag=Parking'
+      }).success(function(data, status) {
+        $scope.parkingType=data.restaurant_tags;
+      }).error(function(data, status) {
+        console.log("error")
+      });
+    };
+    $scope.getParking();
+    $scope.getDrinking=function(){
+      $http({
+      method : 'get',
+      url : '/api/restaurant_tags?tag=Drinking'
+      }).success(function(data, status) {
+        $scope.drinkingTypes=data.restaurant_tags;
+      }).error(function(data, status) {
+        console.log("error")
+      });
+    };
+    $scope.getDrinking();
+    $scope.getMisc=function(){
+      $http({
+      method : 'get',
+      url : '/api/restaurant_tags?tag=Misc'
+      }).success(function(data, status) {
+        $scope.miscTypes=data.restaurant_tags;
+      }).error(function(data, status) {
+        console.log("error")
+      });
+    };
+    $scope.getMisc();
+    $scope.getAdmin=function(){
+      $http({
+      method : 'get',
+      url : '/api/restaurant_tags?tag=Admin'
+      }).success(function(data, status) {
+        $scope.adminTypes=data.restaurant_tags;
+        console.log($scope.adminTypes);
+      }).error(function(data, status) {
+        console.log("error")
+      });
+    };
+    $scope.getAdmin();
 
     $scope.converToInt = function(value){
       return  parseInt(value, 10); ;
@@ -99,12 +177,26 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
     $scope.selectedStars = {};
     $scope.selectedPrices = {};
     $scope.selectedPayments = {};
+    $scope.selectedCuisines = {};
+    $scope.selectedLocations={};
+    $scope.selectedMeals={};
+    $scope.selectedParking={};
+    $scope.selectedDrinking={};
+    $scope.selectedMisc={};
+    $scope.selectedAdmin={};
     $scope.$watch(function () {
         return {
             restaurants: $scope.restaurants,
             selectedStars: $scope.selectedStars,
             selectedPrices: $scope.selectedPrices,
-            selectedPayments: $scope.selectedPayments
+            selectedPayments: $scope.selectedPayments,
+            selectedCuisines: $scope.selectedCuisines,
+            selectedLocations: $scope.selectedLocations,
+            selectedMeals: $scope.selectedMeals,
+            selectedParking: $scope.selectedParking,
+            selectedDrinking: $scope.selectedDrinking,
+            selectedMisc: $scope.selectedMisc,
+            selectedAdmin: $scope.selectedAdmin
         }
     }, function (value) {
       var selected;
@@ -175,8 +267,176 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       }
       if (!selected) {
         filterAfterPayment = filterAfterPrice;
-      }        
-      $scope.filtered=filterAfterPayment;     
+      }  
+      $scope.groupByCuisineType = uniqueItems($scope.restaurants, 'Cuisine');
+      var filterAfterCuisines = []; 
+      selected = false;
+      for (var j in filterAfterPayment) {
+        var p = filterAfterPayment[j];
+        for (var i in $scope.selectedCuisines) {
+          var isValueSet=false;       
+          if ($scope.selectedCuisines[i]) {
+            selected = true;
+            angular.forEach(p.tags, function(tag) {
+              if( tag.indexOf("Cuisine:"+i) >= 0 )
+              { 
+                filterAfterCuisines.push(p);
+              }
+            });
+            if(isValueSet) {
+              break;
+            }
+          }
+        }    
+      }
+      if (!selected) {
+        filterAfterCuisines = filterAfterPayment;
+      } 
+      $scope.groupByLocation = uniqueItems($scope.restaurants, 'Location');
+      var filterAfterLocations = []; 
+      selected = false;
+      for (var j in filterAfterCuisines) {
+        var p = filterAfterCuisines[j];
+        for (var i in $scope.selectedLocations) {
+          var isValueSet=false;       
+          if ($scope.selectedLocations[i]) {
+            selected = true;
+            angular.forEach(p.tags, function(tag) {
+              if( tag.indexOf("Location:"+i) >= 0 )
+              { 
+                filterAfterLocations.push(p);
+              }
+            });
+            if(isValueSet) {
+              break;
+            }
+          }
+        }    
+      }
+      if (!selected) {
+        filterAfterLocations = filterAfterCuisines;
+      }
+      $scope.groupByMeals = uniqueItems($scope.restaurants, 'Meal');
+      var filterAfterMeals = []; 
+      selected = false;
+      for (var j in filterAfterLocations) {
+        var p = filterAfterLocations[j];
+        for (var i in $scope.selectedMeals) {
+          var isValueSet=false;       
+          if ($scope.selectedMeals[i]) {
+            selected = true;
+            angular.forEach(p.tags, function(tag) {
+              if( tag.indexOf("Meals:"+i) >= 0 )
+              { 
+                filterAfterMeals.push(p);
+              }
+            });
+            if(isValueSet) {
+              break;
+            }
+          }
+        }    
+      }
+      if (!selected) {
+        filterAfterMeals = filterAfterLocations;
+      }
+      $scope.groupByParking = uniqueItems($scope.restaurants, 'Parking');
+      var filterAfterParking = []; 
+      selected = false;
+      for (var j in filterAfterMeals) {
+        var p = filterAfterMeals[j];
+        for (var i in $scope.selectedParking) {
+          var isValueSet=false;       
+          if ($scope.selectedParking[i]) {
+            selected = true;
+            angular.forEach(p.tags, function(tag) {
+              if( tag.indexOf("Parking:"+i) >= 0 )
+              { 
+                filterAfterParking.push(p);
+              }
+            });
+            if(isValueSet) {
+              break;
+            }
+          }
+        }    
+      }
+      if (!selected) {
+        filterAfterParking = filterAfterMeals;
+      }      
+      $scope.groupByDrinking = uniqueItems($scope.restaurants, 'Drinking');
+      var filterAfterDrinking= []; 
+      selected = false;
+      for (var j in filterAfterParking) {
+        var p = filterAfterParking[j];
+        for (var i in $scope.selectedDrinking) {
+          var isValueSet=false;       
+          if ($scope.selectedDrinking[i]) {
+            selected = true;
+            angular.forEach(p.tags, function(tag) {
+              if( tag.indexOf("Drinking:"+i) >= 0 )
+              { 
+                filterAfterDrinking.push(p);
+              }
+            });
+            if(isValueSet) {
+              break;
+            }
+          }
+        }    
+      }
+      if (!selected) {
+        filterAfterDrinking = filterAfterParking;
+      }
+      $scope.groupByMisc = uniqueItems($scope.restaurants, 'Misc');
+      var filterAfterMisc= []; 
+      selected = false;
+      for (var j in filterAfterDrinking) {
+        var p = filterAfterDrinking[j];
+        for (var i in $scope.selectedMisc) {
+          var isValueSet=false;       
+          if ($scope.selectedMisc[i]) {
+            selected = true;
+            angular.forEach(p.tags, function(tag) {
+              if( tag.indexOf("Misc:"+i) >= 0 )
+              { 
+                filterAfterMisc.push(p);
+              }
+            });
+            if(isValueSet) {
+              break;
+            }
+          }
+        }    
+      }
+      if (!selected) {
+        filterAfterMisc = filterAfterDrinking;
+      }  
+      $scope.groupByAdmin = uniqueItems($scope.restaurants, 'Admin');
+      var filterAfterAdmin= []; 
+      selected = false;
+      for (var j in filterAfterMisc) {
+        var p = filterAfterMisc[j];
+        for (var i in $scope.selectedAdmin) {
+          var isValueSet=false;       
+          if ($scope.selectedAdmin[i]) {
+            selected = true;
+            angular.forEach(p.tags, function(tag) {
+              if( tag.indexOf("Admin:"+i) >= 0 )
+              { 
+                filterAfterAdmin.push(p);
+              }
+            });
+            if(isValueSet) {
+              break;
+            }
+          }
+        }    
+      }
+      if (!selected) {
+        filterAfterAdmin = filterAfterMisc;
+      } 
+      $scope.filtered=filterAfterAdmin;     
     }, true);
     
     
