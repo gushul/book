@@ -86,7 +86,7 @@ class Api::ReservationsController < Api::BaseController
         format.json { 
     			#render json: @reservation.errors, 
     			#status: :unprocessable_entity 
-          errors = @reservation.errors.present ? @reservation.errors.map{|k,v| "#{k}: #{v}"}.join('; ') : ""
+          errors = @reservation.errors.present? ? @reservation.errors.map{|k,v| "#{k}: #{v}"}.join('; ') : ""
     			render text: "ERR:#{errors}", status: 400
 			  }
       end
