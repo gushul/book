@@ -133,7 +133,7 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.generate_schedule(id = 0)
-    @intervals = []
+    @intervals  = []
       24.times do |h| 
         4.times do |m| 
             if h<10 and m!=0
