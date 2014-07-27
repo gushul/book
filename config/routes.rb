@@ -50,7 +50,10 @@ AuthApp::Application.routes.draw do
     post "/me" => "users#show"
 
     resources :rewards #, :only => [:create]
-    resources :restaurants
+    resources :restaurants do 
+      get 'list_restaurants' => "restaurants#list_restaurants", :on => :collection, :as => :list_restaurants
+    end
+    resources :restaurant_tags
 
     namespace :owner do
       post "/inventories"          => "inventories#index"
@@ -135,6 +138,7 @@ AuthApp::Application.routes.draw do
   resources :rewards
   resources :restaurants do
     get 'all' => "restaurants#index_all", :on => :collection, :as => :all
+    get 'list_restaurants' => "restaurants#list_restaurants", :on => :collection, :as => :list_restaurants
   end
   get 'restaurants/:id/:datepicker/:timepicker/:people/:status' => 'restaurants#show', :as => 'book_restaurant'
    

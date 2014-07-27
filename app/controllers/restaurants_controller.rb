@@ -1,7 +1,7 @@
 # encoding: utf-8
 class RestaurantsController < ApplicationController
   before_filter :authenticate_owner!, 
-                except: [:index, :index_all, :show]
+                except: [:index, :index_all, :show, :list_restaurants]
 
   # GET /restaurants
   # GET /restaurants.json
@@ -109,6 +109,10 @@ class RestaurantsController < ApplicationController
         format.json { render json: @restaurant.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def list_restaurants
+
   end
 
   # DELETE /restaurants/1

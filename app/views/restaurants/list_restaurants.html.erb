@@ -1,0 +1,169 @@
+<div ng-controller="ListRestaurantsController" class="topContent container">
+  
+  <div id="data_loading" ng-show="restaurants.length==0">
+    <div id="load_div">
+      <div data-role="page" data-theme="b" id="loading" >
+        <style>
+        #mydiv {
+          height: 400px;
+          position: relative;
+          background-color: InactiveCaption; /* for demonstration */
+      }
+        .ajax-loader {
+          position: absolute;
+          left: 45%;
+          top: 22%;
+          margin-left: -32px; /* -1 * image width / 2 */
+          margin-top: -32px;  /* -1 * image height / 2 */
+          display: block;     
+        }
+        </style>
+        <div data-role="content" id="mydiv" >
+          <img src="/assets/hh-logo.png" class="ajax-loader" />
+          <h3 class="ajax-loader" style="top:99%;">Loading Data be patient.</h3>
+        </div>
+        <div class="clr" id="mydiv"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="restaurants.length > 0">
+    <div class="col-sm-8 col-lg-8">
+      <h2 class="rbold">All Restaurants</h2>
+      <h3 ng-show="filtered.length==0 && restaurants.length > 0">We haven't found any restaurants for you with these filters</h3>
+      <h3 ng-show="restaurants.length == 0">Loading Data ... Please be patient</h3>
+      <div class="list result">
+        <ul class="media-list" ng-repeat="restaurant in filtered | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit| orderBy : ['name'] ">
+          <li class="media" ng-show="restaurant.active">
+            <a href="restaurants" class="pull-left">
+              <div ng-show="restaurant.restaurant_cover_photo">
+                <img src="{{restaurant.restaurant_cover_photo}}" height="144" width="244" />
+              </div>
+              <div ng-hide="restaurant.restaurant_cover_photo">
+                <img src="http://www.placehold.it/244x144" class="media-object img-responsive hidden-xs">
+              </div>
+            </a>
+            <div class="media-body">
+              <div class="col-sm-12 col-lg-9">
+                <h4 class="media-heading">
+                  <%= link_to "{{restaurant.name}}" , "/restaurants/{{restaurant.id}}" %>
+                </h4>
+                <p>{{restaurant.address}}</p>
+                <p>
+                  <span ng-repeat="i in getNumber(restaurant.star_int)">
+                    <i class="glyphicon glyphicon-star pink"></i>
+                  </span>
+                  <span ng-show="(restaurant.star_float | number:0 )" >
+                    <span ng-show=" restaurant.star_float - restaurant.star_int > 0 ">
+                      <i class="glyphicon glyphicon-star pink" style="width:4px;"></i>
+                      <i style="position: relative; display: inline-block; background: rgb(245, 245, 245); width: 10px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                    </span>
+                  </span>
+                  <span ng-hide="restaurant.star_float > 0 ">
+                    {{restaurant.cuisines_format}}
+                  </span>
+                  <span style="padding-left:20px"/>
+                  <span ng-show="restaurant.price">
+                    <span ng-repeat="i in getNumber(restaurant.price)">
+                      <i class="glyphicon glyphicon-usd"></i>
+                    </span>
+                  </span>
+                  <span ng-hide="restaurant.price">
+                    No yet assigned any price rank
+                  </span>
+                </p>
+                <p><i class="glyphicon glyphicon-tag"></i> {{restaurant.cuisines_format}}
+                </p>
+              </div>
+              <div class="col-sm-12 col-lg-3">
+                <%= button_to 'BOOK NOW', "/restaurants/{{restaurant.id}}", :class => "btn btn-primary ", :method => :get %>
+              </div>
+            </div>
+          </li><!-- News 1 -->    
+        </ul>
+          <pagination data-boundary-links="true" data-num-pages="noOfPages" data-current-page="currentPage" max-size="maxSize" class="pagination-centered pagination-small" data-previous-text="&laquo;" data-next-text="&raquo;" on-select-page="changePage(page)"></pagination>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <h2 ng-show="filtered.length > 0" class="rlight">Location :</h2>
+      <img ng-src="{{imageTagString}}" ng-show="filtered.length > 0"> 
+      <h2 class="rlight">Filter Options :</h2>
+      <div class="panel-group filter" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                  Star Rating :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <div ng-repeat="star in stars | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedStars[star.tag_value]">
+                  <span ng-repeat="i in getNumber(converToInt(star.tag_value))">
+                    <i class="glyphicon glyphicon-star pink"></i>
+                  </span>
+                  <span ng-show="getFloatContain(star.tag_value)">
+                    <i class="glyphicon glyphicon-star pink" style="width:4px;"></i>
+                    <i style="position: relative; display: inline-block; background: rgb(245, 245, 245); width: 10px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                  Price :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="price in prices | orderBy : ['tag_value']"  ng-show="converToInt(price.tag_value) > 0">
+                  <input type="checkbox" ng-model="selectedPrices[price.tag_value]">
+                  <span ng-repeat="i in getNumber(converToInt(price.tag_value))">
+                    <i class="glyphicon glyphicon-usd"></i>
+                  </span>
+                  <span ng-show="converToInt(price.tag_value) == 1">
+                    (under 250 baht)
+                  </span>
+                  <span ng-show="converToInt(price.tag_value) == 2">
+                    (251 - 500 baht )
+                  </span>
+                  <span ng-show="converToInt(price.tag_value) == 3">
+                    (501 - 1,000 baht)
+                  </span>
+                  <span ng-show="converToInt(price.tag_value) == 4">
+                    (1,000 baht and over)
+                  </sap>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                  Credit Card :
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div ng-repeat="payment_method in payment_methods | orderBy : ['tag_value']">
+                  <input type="checkbox" ng-model="selectedPayments[payment_method.tag_value]">
+                  <span>{{payment_method.tag_value}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

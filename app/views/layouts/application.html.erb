@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="RestaurantBooking">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
   <meta charset="utf-8">
@@ -7,7 +7,10 @@
   <meta name="generator" content="Yosaki" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="apple-itunes-app" content="app-id=879303325">
-
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-sanitize.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script> 
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"></script>
   <title>HungryHub</title>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -38,7 +41,6 @@
           <div id="flash_error"><%= flash[:error] %></div>
           <% end %>
         <!-- </div> -->
-
         <%= yield %>
       </div>
       <%= render :partial => "layouts/footer" %>

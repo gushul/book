@@ -78,3 +78,4 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   # gem 'jquery-ui-rails', '4.0.5'
 end
+gem "active_model_serializers"
