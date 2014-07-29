@@ -25,7 +25,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurants/list_restaurants',
     }).success(function(data, status) {
-      $scope.activeRestaurants=filterFilter(data.restaurants, {active:true});
+      $scope.activeRestaurants=filterFilter(data, {active:true});
       $scope.restaurants=$filter('orderBy')($scope.activeRestaurants,'name');
       // $scope.restaurants=data.restaurants
     }).error(function(data, status) {
@@ -40,7 +40,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Star'
       }).success(function(data, status) {
-        $scope.stars=data.restaurant_tags;
+        $scope.stars=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -51,7 +51,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Price'
       }).success(function(data, status) {
-        $scope.prices=data.restaurant_tags;
+        $scope.prices=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -63,7 +63,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Payment'
       }).success(function(data, status) {
-        $scope.payment_methods=data.restaurant_tags;
+        $scope.payment_methods=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -74,7 +74,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Cuisine'
       }).success(function(data, status) {
-        $scope.cuisineTypes=data.restaurant_tags;
+        $scope.cuisineTypes=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -85,7 +85,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Location'
       }).success(function(data, status) {
-        $scope.restaurantLocations=data.restaurant_tags;
+        $scope.restaurantLocations=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -96,7 +96,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Meals'
       }).success(function(data, status) {
-        $scope.mealTypes=data.restaurant_tags;
+        $scope.mealTypes=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -107,7 +107,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Parking'
       }).success(function(data, status) {
-        $scope.parkingType=data.restaurant_tags;
+        $scope.parkingType=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -118,7 +118,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Drinking'
       }).success(function(data, status) {
-        $scope.drinkingTypes=data.restaurant_tags;
+        $scope.drinkingTypes=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -129,7 +129,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Misc'
       }).success(function(data, status) {
-        $scope.miscTypes=data.restaurant_tags;
+        $scope.miscTypes=data;
       }).error(function(data, status) {
         console.log("error")
       });
@@ -140,7 +140,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       method : 'get',
       url : '/api/restaurant_tags?tag=Admin'
       }).success(function(data, status) {
-        $scope.adminTypes=data.restaurant_tags;
+        $scope.adminTypes=data;
         console.log($scope.adminTypes);
       }).error(function(data, status) {
         console.log("error")
