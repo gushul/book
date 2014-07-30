@@ -23,6 +23,7 @@ class Api::ReservationsController < Api::BaseController
 
   # POST /reservations/create
   def create
+    params[:reservation][:end_time] = params[:reservation][:start_time]
     @reservation = Reservation.new(params[:reservation])
 
 #    @reservation.date = @reservation.date+7.hour
