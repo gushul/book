@@ -5,6 +5,13 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
     "</ul>\n" +
     "");
 }]);
+angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
+    .controller('CarouselController', ['$scope', '$timeout', '$transition', '$q', function        ($scope, $timeout, $transition, $q) {
+}]).directive('carousel', [function() {
+    return {
+
+    }
+}]);
 
   module=angular.module('RestaurantBooking', ['ui.bootstrap']);
   
