@@ -15,7 +15,7 @@ class Api::RegistrationsController < ApplicationController
       return
     else
       warden.custom_failure!
-      render json: {errors: user.errors.full_messages}, status: 422 unless user.errors.blank?   
+      render text: "ERR:#{user.errors.full_messages.to_s}", status: 422 unless user.errors.blank?     
     end
   end
 
