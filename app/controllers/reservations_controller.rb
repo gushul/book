@@ -79,9 +79,9 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(params[:reservation])
 
     # fix for production
-#    if Rails.env == 'production'
-#      @reservation.date = Date.strptime(params[:reservation][:date], '%m-%d-%Y') 
-#    end
+    if Rails.env == 'production'
+      @reservation.date = Date.strptime(params[:reservation][:date], '%m-%d-%Y') 
+    end
 
     if user_signed_in?
       @reservation.user_id = current_user.id
