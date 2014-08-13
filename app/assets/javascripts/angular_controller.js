@@ -6,7 +6,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
     "");
 }]);
 
-  module=angular.module('RestaurantBooking', []);
+  module=angular.module('RestaurantBooking', ['ui.bootstrap']);
   
   module.filter('startFrom', function() {
     return function(input, start) {
