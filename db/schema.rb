@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140529104545) do
+ActiveRecord::Schema.define(:version => 20140820195214) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20140529104545) do
     t.string   "conf_in_avg_turn_time"
     t.string   "max_turn_time"
     t.boolean  "active",                                                    :default => true, :null => false
+    t.text     "th_misc"
   end
 
   create_table "rewards", :force => true do |t|

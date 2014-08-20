@@ -2,7 +2,7 @@
 class Restaurant < ActiveRecord::Base
   paginates_per 10
   
-  attr_accessible :lat, :lng, :misc, 
+  attr_accessible :lat, :lng, :misc, :th_misc,
                   :name, :owner_id,
                   :restaurant_tags_attributes,
                   :days_in_advance, :min_booking_time, :res_duration,
