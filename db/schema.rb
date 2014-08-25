@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140820195214) do
+ActiveRecord::Schema.define(:version => 20140825122208) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20140820195214) do
     t.integer  "verify_code"
     t.boolean  "verified",               :default => false, :null => false
     t.string   "name"
+    t.string   "r_code"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
