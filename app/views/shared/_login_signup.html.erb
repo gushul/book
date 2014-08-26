@@ -52,6 +52,9 @@
         <div class="password">
           <%= f.password_field :password_confirmation, :class=> "rregular", :placeholder=>"Confirm Password" %>
         </div>
+        <div class="name">
+          <%= f.text_field :r_code, :class=> "rregular", :placeholder=>"referral Code (Optional)" %>
+        </div>
         <div class="submit">
           <%= f.submit 'Sign up', :class=> "btn lblack" %>
         </div>

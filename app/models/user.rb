@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :provider, :uid, :name,
-                  :username, :phone, :verify_code, :verified
+                  :username, :phone, :verify_code, :verified, :r_code
 
   validates :phone, :presence => true, :uniqueness => true
   validate  :phone_number_validation, :if => "phone?"  
