@@ -415,13 +415,20 @@ class Restaurant < ActiveRecord::Base
   def get_inventory_availability(restaurant,start_time,end_time)
     starting_time,ending_time=start_time.strftime('%Y-%m-%d'),end_time.strftime('%Y-%m-%d')
     reservations=restaurant.reservations.where(date: start_time..end_time)
-    inventories=restaurant.inventories.where(date: starting_time..ending_time)
+    inventories=restaurant.inventories.where(date: start_time..end_time)
     availability=[]
     (start_time..end_time).each do |date|
       day_sting="|"
       time_iterate(date, date+1.day, 15.minutes) do |t|
+        # start_d=t.strftime('%Y-%m-%d')
+        # p start_t=t.strftime('%H:%M:%S')
+        # end_t=(t+15.minutes).strftime('%H:%M:%S')
+        # start_t=Date.strptime(t,'%H:%M:%S')
         reservations_count= reservations.select {|f| f if (f.start_time <= t && f.end_time > t)}.size
-        day_sting+=reservations_count.to_s+"|"
+        inventory_count= inventories.select {|f| f if (f.start_time <= t && f.end_time >= t)}[0].quantity_available rescue 0
+
+        # p inventory_count= inventories.where('start_time <= ? AND end_time >= ? AND date = ?',start_t,end_t,start_d)
+        day_sting+=(inventory_count-reservations_count).to_s+"|"
       end
       availability << day_sting
     end
