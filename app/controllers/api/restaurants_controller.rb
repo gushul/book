@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Api::RestaurantsController < Api::BaseController
   
+  before_filter :set_restaurant, only: [:get_restaurant_availability]
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
@@ -89,5 +90,18 @@ class Api::RestaurantsController < Api::BaseController
     end
     render json: @restaurants_json 
   end
-    
+
+  def get_restaurant_availability
+    date=params[:date] ? Date.strptime(params[:date], '%Y-%m-%d') : Time.zone.today
+    availability=Restaurant.new.get_inventory_availability(@restaurant,date-3.days,date+3.days)
+    render json: availability
+  end
+
+  private
+
+  def set_restaurant
+    @restaurant=Restaurant.where(id: params[:restaurant_id]).first
+    render json: {errors: ["Restaurant not found"]}, status: 404 and return if @restaurant.blank?
+  end
+  
 end

@@ -412,6 +412,28 @@ class Restaurant < ActiveRecord::Base
     0
   end
 
+  def get_inventory_availability(restaurant,start_time,end_time)
+    starting_time,ending_time=start_time.strftime('%Y-%m-%d'),end_time.strftime('%Y-%m-%d')
+    reservations=restaurant.reservations.where(date: start_time..end_time)
+    inventories=restaurant.inventories.where(date: starting_time..ending_time)
+    availability=[]
+    (start_time..end_time).each do |date|
+      day_sting="|"
+      time_iterate(date, date+1.day, 15.minutes) do |t|
+        reservations_count= reservations.select {|f| f if (f.start_time <= t && f.end_time > t)}.size
+        day_sting+=reservations_count.to_s+"|"
+      end
+      availability << day_sting
+    end
+    availability
+  end
+
+  def time_iterate(start_time, end_time, step, &block)
+    begin
+      yield(start_time)
+    end while (start_time += step) <= end_time
+  end
+
 # private
 
 #   def cover_controll

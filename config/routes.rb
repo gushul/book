@@ -52,6 +52,7 @@ AuthApp::Application.routes.draw do
     resources :rewards #, :only => [:create]
     resources :restaurants do 
       get 'list_restaurants' => "restaurants#list_restaurants", :on => :collection, :as => :list_restaurants
+      get 'get_restaurant_availability' => "restaurants#get_restaurant_availability", :on => :collection, :as => :get_restaurant_availability
     end
     resources :restaurant_tags
 
