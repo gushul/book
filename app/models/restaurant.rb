@@ -419,15 +419,13 @@ class Restaurant < ActiveRecord::Base
     availability=[]
     (start_time..end_time).each do |date|
       day_sting="|"
-      time_iterate(date, date+1.day, 15.minutes) do |t|
-        # start_d=t.strftime('%Y-%m-%d')
-        # p start_t=t.strftime('%H:%M:%S')
-        # end_t=(t+15.minutes).strftime('%H:%M:%S')
-        # start_t=Date.strptime(t,'%H:%M:%S')
-        reservations_count= reservations.select {|f| f if (f.start_time <= t && f.end_time > t)}.size
-        inventory_count= inventories.select {|f| f if (f.start_time <= t && f.end_time >= t)}[0].quantity_available rescue 0
-
-        # p inventory_count= inventories.where('start_time <= ? AND end_time >= ? AND date = ?',start_t,end_t,start_d)
+      time_iterate(date, date+1.day-15.minutes, 15.minutes) do |t|
+        start_d=t.strftime('%Y-%m-%d')
+        start_t=t.strftime('%H:%M')
+        end_t=(t+15.minutes).strftime('%H:%M')        
+        res=reservations.select {|f| f if (f.start_time <= "2000-01-01 #{start_t}:00" && f.end_time >= "2000-01-01 #{end_t}:00" && f.date = start_d)} rescue nil
+        reservations_count=res.inject(0){|sum,e| sum += e.party_size } rescue 0
+        inventory_count= inventories.select {|f| f if (f.start_time <= "2000-01-01 #{start_t}:00" && f.end_time >= "2000-01-01 #{end_t}:00" && f.date = start_d)}[0].quantity_available rescue 0
         day_sting+=(inventory_count-reservations_count).to_s+"|"
       end
       availability << day_sting
