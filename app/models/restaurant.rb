@@ -416,8 +416,9 @@ class Restaurant < ActiveRecord::Base
     starting_time,ending_time=start_time.strftime('%Y-%m-%d'),end_time.strftime('%Y-%m-%d')
     reservations=restaurant.reservations.where(date: start_time..end_time)
     inventories=restaurant.inventories.where(date: start_time..end_time)
-    availability=[]
+
     (start_time..end_time).each do |date|
+      availability=[]
       day_sting="|"
       time_iterate(date, date+1.day-15.minutes, 15.minutes) do |t|
         start_d=t.strftime('%Y-%m-%d')
