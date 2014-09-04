@@ -1,0 +1,217 @@
+<div class="topContent container">
+  <div class="row">
+    <div class="col-sm-8 col-lg-8">
+      <h2 class="rbold"><%= @restaurant.name%></h2>
+      <div class="slideshow">
+        <% if true #@restaurant.photos.first.blank? %>
+          <%= image_tag @image_tag_string, :width => '100%', :height => "auto" %>
+        <% else %>
+          <%= image_tag @restaurant.photos.first.picture.url, :width => '100%', :height => "auto" %>
+        <% end %>
+        <div class="thumbnails">
+          <% unless @restaurant.photos.blank? %>
+            <% @restaurant.photos.each do |pic| %>
+              <div class="thumbnail">
+                <a id="image" class="dropdown-toggle lblack image_large" href="#" data-toggle="dropdown" image_url='<%= pic.picture.url(:v600x480) %>'>
+                  <%= image_tag pic.picture.url(:v100x100) %>
+                </a>
+                
+              </div>
+            <% end %>
+          <% else %>
+            <!-- None -->
+          <% end %>
+        </div>
+      </div>
+      <div id="mytabs" style="clear:both;">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#information" data-toggle="tab" class="rblack">INFORMATION</a></li>
+          <li><a href="#reviews" data-toggle="tab" class="rblack">DINER REVIEWS</a></li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="information">
+          <div class="storyContent">
+            <div class="header">
+              <% unless @restaurant.star_format == 0 %>
+                <% @restaurant.star_format.times do |s| %>
+                  <i class="glyphicon glyphicon-star pink"></i>
+                <% end %>
+                <% if @restaurant.star_format_f - @restaurant.star_format > 0  %>
+                  <i class="glyphicon glyphicon-star pink" style="width:4px;"></i>
+                  <i style="position: relative; display: inline-block; background: white; width: 10px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                <% end %>
+              <% else %>
+                Not received any star rank
+              <% end %>
+              <i class="glyphicon glyphicon-tag"></i> 
+               <!-- style="margin-left:50px;" -->
+              <%= @restaurant.cuisines_format %>
+            </div>
+            <div class="content">
+              <div class="body" style="height: 330px;">
+
+                <p style="margin:0 10px;">
+                <span class="rbold">Address : </span>
+                  <%= @restaurant.address %>
+                <br/>
+                <span class="rbold">Address (Thai version) : </span>
+                  <%= @restaurant.th_address %>
+                </p>
+
+                <br/>
+                
+                <p style="margin:0 10px;">
+                  <%= @restaurant.th_misc.html_safe if !@restaurant.th_misc.nil? %>
+                </p>
+                
+                
+                <br/>
+                <div class="col-sm-6 col-lg-6">
+                  <p><span class="rbold">Price : </span>
+                    <% @restaurant.price_format.times do |s| %>
+                      <i class="glyphicon glyphicon-usd" style="width: 0.5em;"></i>
+                    <% end %>
+                    <span style="padding-left:10px;"><%= @restaurant.price_desc%></span>
+                  <br/>
+                  <span class="rbold">Location : </span> 
+                    <%= raw(@restaurant.get_text_tags_by_group("Location").join(', ')) %>
+                  <br/>
+                  <span class="rbold">Website : </span>
+                    <%= @restaurant.website %>
+                  <br/>
+                  <span class="rbold">Telephone : </span> 
+                    <%= @restaurant.phone %>
+                  </p>
+                  <br/>
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                  <p><span class="rbold">Parking : </span>
+                    <%= raw(@restaurant.get_text_tags_by_group("Parking").join(', ')) %>
+                  <br/>
+                  <span class="rbold">Drinking : </span>   
+                    <%= raw(@restaurant.get_text_tags_by_group("Drinking").join(', ')) %>
+                  <br/>
+                  <span class="rbold">Payment : </span>
+                    <%= raw(@restaurant.get_text_tags_by_group("Payment").join(', ')) %>
+                  <br/>
+                  <span class="rbold">Misc : </span> 
+                    <%= raw(@restaurant.get_text_tags_by_group("Misc").join(', ')) %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade in" id="reviews">
+          <div class="comment">
+            <textarea placeholder="Write a review"></textarea>
+            <button class="btn">REVIEW</button>
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+      <div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-12 col-sm-4" style="width: 33.3333%;">
+
+  
+  <h2 class="rlight">Book your table for <%= @today ? "today" : "tomorrow" %> </h2>
+  <div class="booknow">
+    <% id = (user_signed_in? || owner_signed_in?) ? "check" : "login" %>
+    
+    <% if @times[0].present? %>
+      <button id='<%=id %>' class="btn action time1">
+        <%= @times[0] %>
+      </button>
+    <% end %>
+
+    <% if @times[1].present? %>
+      <button id='<%=id %>' class="btn action time2">
+        <%= @times[1] %>
+      </button>
+    <% end %>
+
+    <% if @times[2].present? %>
+      <button id='<%=id %>' class="btn action time3">
+        <%= @times[2] %>
+      </button>
+    <% end %>
+
+    <button id='<%=id %>' class="btn action">OTHER TIMES</button>
+  </div>
+  
+  <h2 class="rlight">Location :</h2>
+  <!-- <img src="http://placehold.it/400x270"> -->
+  <%= image_tag @google_map, :width => '400', :height => "300" %>
+  
+</div>
+
+<div id="image_popup">
+  <%= render :partial => '/shared/image_large' %>
+</div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    // $("#check").click();
+  });
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+    // setup span field wth restaurant name
+    $('h4.rbold .pink').html('<%= @restaurant.name %>')
+
+    // setup number of people
+    $('.selectpicker').val('<%= params[:people].present? ? params[:people] : "2" %>')
+
+    // setup hidden helper field
+    $('.restaurant_id').val('<%= @restaurant.id %>')
+
+    openModel('check');
+    // setup error "this time/date/people not available"
+    if ("<%= params[:status] %>" == "false"){
+      $('.error:last').show()
+    }
+    if ("<%= params[:status] %>" == "true"){
+      closeModel('check');
+      openModel('reservation');
+    }
+
+    function tConvert (time) {
+      // Check correct time format and split into components
+      time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+      if (time.length > 1) { // If time format correct
+        time = time.slice (1);  // Remove full string match value
+        time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join (''); // return adjusted time or original string
+    }
+
+    $(".time1").on("click", function(event){ 
+      val = $(this).html().trim();
+      $('#timepicker').val(tConvert(val));
+    });
+    $(".time2").on("click", function(event){ 
+      val = $(this).html().trim();
+      $('#timepicker').val(tConvert(val));
+    });
+    $(".time3").on("click", function(event){ 
+      val = $(this).html().trim();
+      $('#timepicker').val(tConvert(val));
+    });
+
+  });
+</script>
