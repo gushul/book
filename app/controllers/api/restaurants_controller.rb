@@ -78,6 +78,24 @@ class Api::RestaurantsController < Api::BaseController
       r.restaurant_tags.each do |t|
         r[:tags] << t.title
       end
+      if(params[:date] && params[:quantity] && params[:time])
+        inventory=Inventory.where('date = ? AND start_time = ? AND restaurant_id= ?',params[:date],params[:time]+":00",r.id).first.quantity_available rescue 0
+        end_time=''
+        if(params[:time][3..4].to_i+15==60)
+          end_time=((params[:time][0..1].to_i)+1).to_s+":00"
+        else
+          end_time=params[:time][0..2]+((params[:time][3..4].to_i)+15).to_s
+        end
+        reservations=Reservation.where('date = ? AND start_time <= ? AND end_time >= ? AND restaurant_id = ?', params[:date],params[:time]+":00",end_time+":00",r.id).pluck(:party_size)
+        reservations_count=reservations.inject(0){|sum,e| sum += e } rescue 0
+        if(params[:quantity].to_i < (inventory-reservations_count))
+          r[:available]=true
+        else
+          r[:available]=false
+        end
+      else
+        r[:available]=true
+      end
     end
     @restaurants_json = []
     @restaurants.each do |r|
