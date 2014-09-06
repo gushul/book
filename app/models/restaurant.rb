@@ -418,15 +418,20 @@ class Restaurant < ActiveRecord::Base
     inventories=restaurant.inventories.where(date: start_time..end_time)
     availability=[]
     (start_time..end_time).each do |date|
-      availability=[]
       day_sting="|"
       time_iterate(date, date+1.day-15.minutes, 15.minutes) do |t|
         start_d=t.strftime('%Y-%m-%d')
         start_t=t.strftime('%H:%M')
-        end_t=(t+15.minutes).strftime('%H:%M')        
-        res=reservations.select {|f| f if (f.start_time <= "2000-01-01 #{start_t}:00" && f.end_time >= "2000-01-01 #{end_t}:00" && f.date = start_d)} rescue nil
-        reservations_count=res.inject(0){|sum,e| sum += e.party_size } rescue 0
-        inventory_count= inventories.select {|f| f if (f.start_time <= "2000-01-01 #{start_t}:00" && f.end_time >= "2000-01-01 #{end_t}:00" && f.date = start_d)}[0].quantity_available rescue 0
+        end_t=(t+15.minutes).strftime('%H:%M')
+        inventory_count,reservations_count=0,0        
+        # res=reservations.select {|f| f if (f.start_time <= "2000-01-01 #{start_t}:00" && f.end_time >= "2000-01-01 #{end_t}:00" && f.date = start_d)} rescue nil
+        res=reservations.where('date = ? AND start_time <= ? AND end_time >= ?', start_d,start_t+":00",end_t+":00").pluck(:party_size) unless start_t=='23:45'
+        res=reservations.select {|f| f if (f.start_time <= "2000-01-01 #{start_t}:00" && f.end_time >= "2000-01-02 #{end_t}:00" && f.date = start_d)} if start_t=='23:45'
+        reservations_count=res.inject(0){|sum,e| sum += e } rescue 0 unless start_t=='23:45'
+        reservations_count=res.inject(0){|sum,e| sum += e.party_size } rescue 0 if start_t=='23:45'
+         # inventory_count= inventories.select {|f| f if (f.start_time = "2000-01-01 #{start_t}:00" && f.end_time = "2000-01-01 #{end_t}:00" && f.date = start_d)}[0].quantity_available rescue 0
+        inventory_count= inventories.where('date = ? AND start_time = ?',start_d,start_t+":00").first.quantity_available rescue 0
+        # raise reservations_count.inspect if start_t=='23:45'
         day_sting+=(inventory_count-reservations_count).to_s+"|"
       end
       availability << day_sting
