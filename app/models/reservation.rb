@@ -127,10 +127,6 @@ class Reservation < ActiveRecord::Base
   def full_datetime
     "#{start_time_format} on #{date.strftime('%A')}, #{date_format_ext}" # 18:00 on Friday, 20th December 2013 
   end
-  
-  def print_source
-    return self.channel
-  end
 
   def status
     return "Cancelled" unless self.active
