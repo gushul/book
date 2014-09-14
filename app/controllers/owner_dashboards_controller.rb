@@ -35,7 +35,11 @@ class OwnerDashboardsController < ApplicationController
         end
         res = current_owner.restaurant.reservations.active.where(user_id: r[:id])
         info[:total_visit] = res.count
-        info[:last_visit] = res.last.date
+        if !res.last.nil? then
+          info[:last_visit] = res.last.date
+        else
+          info[:last_visit] = nil
+        end
         @info_json << info
       end
     end

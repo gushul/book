@@ -280,8 +280,8 @@ private
 #                     points_pending: 5*party_size,    
                      description: "")
     end
-    UserMailer.booking_create(self.user.id, self.id).deliver if user_id.present?
-    OwnerMailer.booking_create(self.id).deliver
+    UserMailer.booking_create(self.user.id, self.id).deliver if user_id.present? && Rails.env.production?
+    OwnerMailer.booking_create(self.id).deliver if Rails.env.production?
   end
 
   def update_reward
