@@ -589,6 +589,10 @@
 {
 	margin:0
 }
+
+.restaurant-opacity{
+		opacity: 0.3;
+}
 .media-body .btn
 {
 	float:right;

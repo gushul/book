@@ -35,6 +35,59 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
       return new Array(num);   
     }
 
+    $scope.checkavailability=function(){
+      // console.log($("#timepicker").val());
+      date=$("#datepicker").val();
+      year=date.substring(6,10);
+      month=date.substring(0,2)
+      day=date.substring(3,5);
+      var fullDate=year+"-"+month+"-"+day
+      var fullTime = $('#timepicker').val();
+      var time=($("#timepicker").val()).substring(0,5)
+      var meridian=fullTime.substring(fullTime.length-2,fullTime.length);
+      if(meridian=='AM'){
+        if(time.substring(0, time.indexOf(':'))=='12'){
+          time='00:'+time.substring(3,5)
+        }
+        else{
+          hr = parseInt(time.substr(0, time.indexOf(':')));
+          min = parseInt(time.substr(time.indexOf(':') + 1, time.length));
+          if (hr <= 9) {
+            hr = "0" + hr.toString();
+          } else {
+            hr = hr.toString();
+          }
+          if (min <= 9) {
+            min = "0" + min.toString();
+          } else {
+            min = min.toString();
+          }
+          time=hr+":"+min
+        }
+        console.log(time);
+      }
+      else if (meridian=='PM'){
+        // console.log(time.substring(0,2));
+        hour=parseInt(time.substring(0, time.indexOf(':')));
+        if(hour!=12){
+          time=(12+hour)+":"+time.substring(time.indexOf(':') + 1, time.length)
+        }
+        console.log(time);
+      }
+      var quantity=$("#people").val();
+      $http({
+      method : 'get',
+      url : '/api/restaurants/list_restaurants?date='+fullDate+"&time="+time+"&quantity="+quantity,
+      }).success(function(data, status) {
+        $scope.activeRestaurants=filterFilter(data, {active:true});
+        $scope.restaurants=$filter('orderBy')($scope.activeRestaurants,'name');
+        // $scope.restaurants=data.restaurants
+      }).error(function(data, status) {
+        console.log("error")
+      }); 
+
+    }
+
     $scope.getStarRating=function(){
       $http({
       method : 'get',

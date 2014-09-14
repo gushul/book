@@ -34,7 +34,7 @@
       <h3 ng-show="restaurants.length == 0">Loading Data ... Please be patient</h3>
       <div class="list result">
         <ul class="media-list" ng-repeat="restaurant in filtered | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit| orderBy : ['name'] ">
-          <li class="media" ng-show="restaurant.active">
+          <li class="media " ng-show="restaurant.active" ng-class="{'restaurant-opacity': restaurant.available == false}">
             <a href="restaurants" class="pull-left">
               <div ng-show="restaurant.restaurant_cover_photo">
                 <img src="{{restaurant.restaurant_cover_photo}}" height="144" width="244" />
@@ -86,6 +86,62 @@
     </div>
 
     <div class="col-sm-4">
+        <div class="date" style="margin-top:20px;">
+          <div class="title">Selected Date:</div>
+          <div class="text">
+            <i class="glyphicon glyphicon-calendar"></i>
+            <input type="text" id="datepicker" name="datepicker" class="rregular">
+            <i class="glyphicon glyphicon-chevron-down"></i>
+            
+            <!-- <script type="text/javascript">
+              $('#datepicker').datepicker();
+            </script> -->
+          </div>
+        </div>
+        <div class="time">
+          <div class="title">Requested Time:</div>
+          <div class="text">
+            <i class="glyphicon glyphicon-time"></i>
+            <input type="text" id="timepicker" name="timepicker" class="rregular" value="<%= params["timepicker"].blank? ? "" : params["timepicker"] %>">
+            <i class="glyphicon glyphicon-chevron-down"></i>
+             <!--  <script type="text/javascript">
+               $('#timepicker').timepicker();
+             </script> -->
+          </div>
+        </div>
+        <div class="people">
+          <div class="title">Amount:</div>
+            <div class="text"><i class="glyphicon glyphicon-user"></i>
+              <div class="input-append btn-group">
+                <input class="rregular" name="people" id="people" type="hidden" value="2">
+                <div id="currectVal3" class="inputSelection rregular"></div>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu" id="selection">
+                  <li><a title="1"> 1</a></li>
+                  <li><a title="2"> 2</a></li>
+                  <li><a title="3"> 3</a></li>
+                  <li><a title="4"> 4</a></li>
+                  <li><a title="5"> 5</a></li>
+                  <li><a title="6"> 6</a></li>
+                  <li><a title="7"> 7</a></li>
+                  <li><a title="8"> 8</a></li>
+                  <li><a title="9"> 9</a></li>
+                  <li><a title="10"> 10</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <input type="button" value="Get Availability" class="btn btn-primary" ng-click="checkavailability()">
+        
+
+
+
+
+
+
+
       <h2 ng-show="filtered.length > 0" class="rlight">Location :</h2>
       <img ng-src="{{imageTagString}}" ng-show="filtered.length > 0"> 
       <h2 class="rlight">Filter Options :</h2>
