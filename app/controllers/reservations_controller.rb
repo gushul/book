@@ -1,10 +1,10 @@
   # encoding: utf-8
 class ReservationsController < ApplicationController
   before_filter :check_who_editing,  
-                except: [:index, :show, :new, :create, :my]
-  before_filter :check_for_unreg_users
+                except: [:index, :show, :new, :create, :my, :external_booking]
+  before_filter :check_for_unreg_users, except: :external_booking
   before_filter :intervals_construct,  
-                only: [:new, :create, :edit, :update]
+                only: [:new, :create, :edit, :update,:external_booking]
 
   # GET /reservations
   # GET /reservations.json
@@ -103,6 +103,18 @@ class ReservationsController < ApplicationController
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
 
+    end
+  end
+
+  def external_booking   
+   @reservation = Reservation.new(name: params[:name] , email: params[:email], phone: params[:phone], party_size: params[:quantity], start_time: params[:start_time] , end_time: params[:end_time], restaurant_id: params[:restaurant_id].to_i, date: params[:date])
+    if Rails.env == 'production'
+      @reservation.date = Date.strptime(params[:date], '%m-%d-%Y') 
+    end    
+    if @reservation.save
+      redirect_to params[:success_url]
+    else
+      redirect_to params[:failure_url]
     end
   end
 

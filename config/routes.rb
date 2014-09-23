@@ -142,5 +142,5 @@ AuthApp::Application.routes.draw do
     get 'list_restaurants' => "restaurants#list_restaurants", :on => :collection, :as => :list_restaurants
   end
   get 'restaurants/:id/:datepicker/:timepicker/:people/:status' => 'restaurants#show', :as => 'book_restaurant'
-   
+  post '/external_booking' => 'reservations#external_booking' 
 end
