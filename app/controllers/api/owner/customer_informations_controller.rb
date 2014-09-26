@@ -29,12 +29,23 @@ class Api::Owner::CustomerInformationsController < ApplicationController
       end
     end
 
-    @owners.each do |r|
+    a = []
+    @owners_new = []
+    @owners.each do |res|
+      if !a.include?(res.phone) then
+        @owners_new << res
+        a << res.phone
+      end
+    end
+    
+    
+    @owners_new.each do |r|
       info = {}
       info[:name]  = r[:name]
       info[:phone] = r[:phone]
       info[:email] = r[:email]
       if Vip.where(:name => info[:name]).where(:phone => info[:phone]).where(:restaurant_id => @owner.restaurant.id).first.present?
+#      if Vip.where(:phone => info[:phone]).where(:restaurant_id => @owner.restaurant.id).first.present?
         info[:vip] = true
       else
         info[:vip] = false
