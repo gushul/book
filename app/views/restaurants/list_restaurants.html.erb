@@ -35,7 +35,7 @@
       <div class="list result">
         <ul class="media-list" ng-repeat="restaurant in filtered | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit| orderBy : ['name'] ">
           <li class="media " ng-show="restaurant.active" ng-class="{'restaurant-opacity': restaurant.available == false}">
-            <a href="restaurants" class="pull-left">
+            <a href="/restaurants/{{restaurant.id}}" class="pull-left">
               <div ng-show="restaurant.restaurant_cover_photo">
                 <img src="{{restaurant.restaurant_cover_photo}}" height="144" width="244" />
               </div>
