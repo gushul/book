@@ -47,7 +47,14 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
     date1=$scope.getUrlParameter("date");
     time1=$scope.getUrlParameter("time");
     quantity1=$scope.getUrlParameter("quantity");
-    var url='/api/restaurants/list_restaurants?date='+date1+"&time="+time1+"&quantity="+quantity1
+    if(date1 !=undefined && time1!=undefined && quantity1 !=undefined ){
+      var url='/api/restaurants/list_restaurants?date='+date1+"&time="+time1+"&quantity="+quantity1
+      $("#datepicker").val($scope.getUrlParameter("date_format"));
+      $("#timepicker").val($scope.getUrlParameter("time_format"));
+      $("#currectVal3").val(quantity1);
+    }
+    else
+      var url='/api/restaurants/list_restaurants'
     // $scope.restaurants={}
     $http({
       method : 'get',
