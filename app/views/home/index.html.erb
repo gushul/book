@@ -54,12 +54,13 @@
       <div class="tab-content">
         <div id="byLocation" class="tab-pane fade in active">
 
-          <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
+          <form class="navbar-form navbar-left">
             <div class="input-group input-group-sm">
-              <input type="text" id="srch-term" name="srch-location" placeholder="Search by location in Bangkok" class="form-control ritalic">
-              <div class="input-group-btn">
+              <!-- <input type="text" id="srch-term" name="srch-location" placeholder="Search by location in Bangkok" class="form-control ritalic"> -->
+                <%= select("Cuisine","title", RestaurantTag.where("title LIKE ?", "Cuisine:%").each.map {|hash| [hash['title'][8..hash['title'].length], hash['title'][8..hash['title'].length]]},{class: "form-control"})  %>
+<!--               <div class="input-group-btn">
                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-              </div>
+              </div> -->
             </div>
             <div class="advanceSearch">
               <div class="date"><i class="glyphicon glyphicon-calendar"></i>
@@ -110,7 +111,7 @@
                 <i class="glyphicon glyphicon-circle-arrow-right"></i>
               <% end %>
             </div>
-            <div><input type="submit" value="FIND TABLE" class="btn btn-default lblack"></div>
+            <div><input type="button" id="cuisine_type" value="FIND TABLE" class="btn btn-default lblack"></div>
           </form>
 
         </div>
@@ -118,10 +119,13 @@
 
           <form method="get" action="<%= search_with_date_time_path%>" class="navbar-form navbar-left">
             <div class="input-group input-group-sm">
-              <input type="text" id="srch-term" name="srch-restaurant" placeholder="Search for restaurants in Bangkok" class="form-control">
-              <div class="input-group-btn">
+              <!-- <input type="text" id="srch-term" name="srch-restaurant" placeholder="Search for restaurants in Bangkok" class="form-control"> -->
+
+              <%= select("Restaurant","title", RestaurantTag.where("title LIKE ?", "Location:%").each.map {|hash| [hash['title'][9..hash['title'].length], hash['title'][9..hash['title'].length]]},{class: 'people'})   %>
+
+<!--               <div class="input-group-btn">
                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-              </div>
+              </div> -->
             </div>
             <div class="advanceSearch">
               <div class="date"><i class="glyphicon glyphicon-calendar"></i>
@@ -168,7 +172,7 @@
                 <h6>See all Bangkok restaurants</h6><i class="glyphicon glyphicon-circle-arrow-right"></i>
               <% end %>
             </div>
-            <div><input type="submit" value="FIND TABLE" class="btn btn-default"></div>
+            <div><input type="button" id="restaurant_type" value="FIND TABLE" class="btn btn-default"></div>
           </form>
 
         </div>
@@ -401,6 +405,12 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
+    $('#Cuisine_title').addClass('form-control');
+    $('#cuisine_type').addClass('restaurant-list-search');
+    $('#Cuisine_title').css("width","440px");
+    $('#Restaurant_title').addClass('form-control');
+    $('#restaurant_type').addClass('restaurant-list-search');
+    $('#Restaurant_title').css("width","440px");
     $('#timepicker').timepicker();
     $('#datepicker').datepicker();
     
@@ -428,6 +438,88 @@
     // Default Time should be set as 7pm
     $('#timepicker').val("7:00 PM");
     $('#timepicker2').val("7:00 PM");
+    $('#cuisine_type').on('click',function(){
+      date=$("#datepicker").val();
+      var cuisine_type=$("#Cuisine_title").val();
+      year=date.substring(6,10);
+      month=date.substring(0,2)
+      day=date.substring(3,5);
+      var fullDate=year+"-"+month+"-"+day
+      var fullTime = $('#timepicker').val();
+      var time=($("#timepicker").val()).substring(0,5)
+      var meridian=fullTime.substring(fullTime.length-2,fullTime.length);
+      if(meridian=='AM'){
+        if(time.substring(0, time.indexOf(':'))=='12'){
+          time='00:'+time.substring(3,5)
+        }
+        else{
+          hr = parseInt(time.substr(0, time.indexOf(':')));
+          min = parseInt(time.substr(time.indexOf(':') + 1, time.length));
+          if (hr <= 9) {
+            hr = "0" + hr.toString();
+          } else {
+            hr = hr.toString();
+          }
+          if (min <= 9) {
+            min = "0" + min.toString();
+          } else {
+            min = min.toString();
+          }
+          time=hr+":"+min
+        }
+      }
+      else if (meridian=='PM'){
+        // console.log(time.substring(0,2));
+        hour=parseInt(time.substring(0, time.indexOf(':')));
+        if(hour!=12){
+          time=(12+hour)+":"+time.substring(time.indexOf(':') + 1, time.length)
+        }
+      }
+      location.href="restaurants/list_restaurants?date="+fullDate+"&time="+time+"&quantity="+$('#people').val()+"&cuisine_type="+cuisine_type;
+    });  
+
+
+    $('#restaurant_type').on('click',function(){
+      date=$("#datepicker2").val();
+      var rest_location=$("#Restaurant_title").val();
+      year=date.substring(6,10);
+      month=date.substring(0,2)
+      day=date.substring(3,5);
+      var fullDate=year+"-"+month+"-"+day
+      var fullTime = $('#timepicker2').val();
+      var time=($("#timepicker2").val()).substring(0,5)
+      var meridian=fullTime.substring(fullTime.length-2,fullTime.length);
+      if(meridian=='AM'){
+        if(time.substring(0, time.indexOf(':'))=='12'){
+          time='00:'+time.substring(3,5)
+        }
+        else{
+          hr = parseInt(time.substr(0, time.indexOf(':')));
+          min = parseInt(time.substr(time.indexOf(':') + 1, time.length));
+          if (hr <= 9) {
+            hr = "0" + hr.toString();
+          } else {
+            hr = hr.toString();
+          }
+          if (min <= 9) {
+            min = "0" + min.toString();
+          } else {
+            min = min.toString();
+          }
+          time=hr+":"+min
+        }
+      }
+      else if (meridian=='PM'){
+        // console.log(time.substring(0,2));
+        hour=parseInt(time.substring(0, time.indexOf(':')));
+        if(hour!=12){
+          time=(12+hour)+":"+time.substring(time.indexOf(':') + 1, time.length)
+        }
+      }
+      location.href="restaurants/list_restaurants?date="+fullDate+"&time="+time+"&quantity="+$('#people').val()+"&rest_location="+rest_location;
+    }); 
+    
+    
   });
 </script>
 

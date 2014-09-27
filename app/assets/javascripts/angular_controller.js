@@ -20,13 +20,50 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
 
   module.controller('ListRestaurantsController',function($scope, $routeParams, $http,$filter, $location, filterFilter) {
     $scope.restaurants=[];
+    $scope.selectedStars = {};
+    $scope.selectedPrices = {};
+    $scope.selectedPayments = {};
+    $scope.selectedCuisines = {};
+    $scope.selectedLocations={};
+    $scope.selectedMeals={};
+    $scope.selectedParking={};
+    $scope.selectedDrinking={};
+    $scope.selectedMisc={};
+    $scope.selectedAdmin={};
+
+    $scope.getUrlParameter=function(sParam){
+      var sPageURL = window.location.search.substring(1);
+      var sURLVariables = sPageURL.split('&');
+      for (var i = 0; i < sURLVariables.length; i++) 
+      {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+          return sParameterName[1];
+        }
+      }
+    }
+
+    date1=$scope.getUrlParameter("date");
+    time1=$scope.getUrlParameter("time");
+    quantity1=$scope.getUrlParameter("quantity");
+    var url='/api/restaurants/list_restaurants?date='+date1+"&time="+time1+"&quantity="+quantity1
     // $scope.restaurants={}
     $http({
       method : 'get',
-      url : '/api/restaurants/list_restaurants',
+      url : url,
     }).success(function(data, status) {
       $scope.activeRestaurants=filterFilter(data, {active:true});
       $scope.restaurants=$filter('orderBy')($scope.activeRestaurants,'name');
+      if($scope.getUrlParameter("cuisine_type") != undefined){
+        console.log("cuisine_type");
+        $scope.selectedCuisines[$scope.getUrlParameter("cuisine_type")]=true
+      }
+      else if($scope.getUrlParameter("rest_location") != undefined){
+        console.log("restaurant Location")
+        $scope.selectedLocations[$scope.getUrlParameter("rest_location")]=true
+      }
+      // $scope.selectedCuisines[$scope.getUrlParameter("cuisine_type")]=true
       // $scope.restaurants=data.restaurants
     }).error(function(data, status) {
       console.log("error")
@@ -227,16 +264,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
     });
 
 
-    $scope.selectedStars = {};
-    $scope.selectedPrices = {};
-    $scope.selectedPayments = {};
-    $scope.selectedCuisines = {};
-    $scope.selectedLocations={};
-    $scope.selectedMeals={};
-    $scope.selectedParking={};
-    $scope.selectedDrinking={};
-    $scope.selectedMisc={};
-    $scope.selectedAdmin={};
+
     $scope.$watch(function () {
         return {
             restaurants: $scope.restaurants,
@@ -259,7 +287,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
           return el[prop] == value;
         };
       };
-      
+      console.log($scope.selectedCuisines);
       $scope.groupByStar = uniqueItems($scope.restaurants, 'star_float');
       var filterAfterStar = [];        
       selected = false;
@@ -525,6 +553,7 @@ var uniqueItems = function (data, key) {
   }
   return result;
 };
+
 
 
 

@@ -340,6 +340,15 @@
 {
 	margin:10px 0
 }
+
+.restaurant-list-search {
+  background: #ff6760;
+  color: #fff;
+  border: none;
+  float: right;
+  margin-top: 10px;
+}
+
 	#advanceSearchBox .nav-pills>li>a
 {
 	margin:10px 15px 20px 0;
