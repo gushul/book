@@ -1,7 +1,8 @@
 # encoding: utf-8
 class Api::UsersController < Api::BaseController
   
-  before_filter :check_user_auth_params
+
+  before_filter :check_user_auth_params, except: [:reset_password]
 
   # POST /me
   def show
@@ -17,6 +18,7 @@ class Api::UsersController < Api::BaseController
   end
 
   def reset_password
+    @user=User.where("email = ?", params[:user][:email] ).first
     respond_to do |format|
       if @user.present?
         @user.send_reset_password_instructions
