@@ -7,6 +7,7 @@ class Api::Owner::ReservationsController < ApplicationController
 
   # POST /reservations.json
   def index
+    puts params[:owner][:device_id]
     @reservations = @owner.restaurant.reservations
     @reservations_json = []
     @reservations.each do |r|
@@ -113,7 +114,8 @@ private
       error   = true
       message = "Provide CORRECT login/pass parameters for this action"
       status  = 403
-    elsif params[:owner].length > 2
+#    elsif params[:owner].length > 2  # increased to 3 to support device id
+    elsif params[:owner].length > 3
       error   = true
       message = "Provide ONLY needed parameters for this action"
       status  = 400
