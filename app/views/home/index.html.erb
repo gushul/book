@@ -513,7 +513,7 @@
         // console.log(time.substring(0,2));
         hour=parseInt(time.substring(0, time.indexOf(':')));
         if(hour!=12){
-          time=(12+hour)+":"+time.substring(time.indexOf(':') + 1, time.length)
+          time=(12+hour)+":"+time.substring(time.indexOf(':') + 1, time.length-1)
         }
       }
       location.href="restaurants/list_restaurants?date="+fullDate+"&time="+time+"&quantity="+$('#people').val()+"&rest_location="+rest_location;
