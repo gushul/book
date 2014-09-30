@@ -293,6 +293,14 @@ private
                                   restaurant_id: restaurant_id )
       end
     end
+    puts "started update_reward ..."
+    if self.active == false && Rails.env.production? then
+      email = ''
+      email = self.email if !self.email.nil?
+      email = self.user.email if user_id.present?
+      puts "MATT SENT #{self.id} #{email}"
+      OwnerMailer.booking_cancel(self.id,email).deliver
+    end
 #    UserMailer.booking_update(self.user.id, self.id).deliver if user_id.present?
 #    OwnerMailer.booking_update(self.id).deliver
   end

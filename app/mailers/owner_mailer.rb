@@ -20,5 +20,11 @@ class OwnerMailer < ActionMailer::Base
     mail( to: @reservation.restaurant.owner.email,  
           subject: "Reservation deleted (#{@reservation.restaurant.name} restaurant)")
   end
+  
+  def booking_cancel(reservation_id,email)
+    @reservation = Reservation.find(reservation_id)
+    mail( to: @reservation.restaurant.owner.email, cc: email,  
+          subject: "Reservation Canceled (#{@reservation.restaurant.name} restaurant)")
+  end
 
 end
