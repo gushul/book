@@ -5,6 +5,8 @@ class Api::RegistrationsController < ApplicationController
 
   # POST /registrations.json
   def create
+    params[:user].delete :fb_access_token
+    params[:user].delete :fb_uid
     user = User.new(params[:user])
     if user.save
       user = user.as_json(auth_token: user.authentication_token, email: user.email)
