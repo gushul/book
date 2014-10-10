@@ -35,7 +35,8 @@ private
           format.json { render json: "Provide CORRECT login/pass parameters for this action", 
                       status: 403 }
         end
-      elsif params[:user].length > 3
+#      elsif params[:user].length > 3
+      elsif params[:user].length > 4
         respond_to do |format|
           format.json { render json: "Provide ONLY needed parameters for this action", 
                       status: 400 }

@@ -104,7 +104,8 @@ private
       error   = true
       message = "ERR:Incorrect Login/Password for Action"
       status  = 403
-    elsif params[:user].length > 2
+#    elsif params[:user].length > 2
+    elsif params[:user].length > 4
       error   = true
       message = "ERR:Invalid Request"
       status  = 400
