@@ -48,7 +48,12 @@ class Api::UsersController < Api::BaseController
         end
       else 
         @user = User.where("email = ?", params[:user][:email] ).first
-        if @user.nil? or !@user.valid_password?(params[:user][:password])
+        if @user.nil?
+          respond_to do |format|
+            format.json { render json: "No such user", 
+                      status: 403 }
+          end
+        elsif !@user.valid_password?(params[:user][:password])
           respond_to do |format|
             format.json { render json: "Incorect login/pass", 
                       status: 403 }
