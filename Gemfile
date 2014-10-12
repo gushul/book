@@ -45,6 +45,7 @@ gem 'resque-scheduler'
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'gcm'
 
 group :production do
   gem 'pg', '~> 0.14.1'
