@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user_id)
     @reservation = Reservation.find(reservation_id)
     mail( to: @user.email,  cc: 'support@hungryhub.com',
-          subject: "New Hungry Hub Reservation: (#{@reservation.restaurant.name})")
+          subject: "Your Reservation Confirmation at #{@reservation.restaurant.name}")
   end
 
   def booking_update(user_id, reservation_id)

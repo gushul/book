@@ -4,17 +4,35 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>New reservation from your account <%= @user.username %> (Phone: <%= @user.phone %>).</h1>
-    <p>
-      You have successfully booked a place in "<%= @reservation.restaurant.name %>" restaurant.<br/>
-      Date <%= @reservation.date %><br/>
-      Start time <%= mtime(@reservation.start_time) %><br/>
-      End time <%= mtime(@reservation.end_time) %><br/>
-      Party size<%= @reservation.party_size %><br/>
-      Active <%= @reservation.active %>
-    </p>
-    <p>Thanks for using our service!</p>
+
+Dear <%= @user.username %>,<br/>
+<br/>
+Your table is waiting at <%= @reservation.restaurant.name %>.<br/>
+<br/>
+-- Your Reservations Details --<br/>
+Diner's Name: <%= @user.username %><br/>
+Date: <%= @reservation.date %><br/>
+Time: <%= mtime(@reservation.start_time) %><br/>
+Party Size: <%= @reservation.party_size %><br/>
+Special Request: <%= @reservation.special_request %><br/>
+Confirmation No: <%= @reservation.id %><br/>
+<br/>
+<b><ins><%= @reservation.restaurant.name %></ins></b><br/>
+<%= @reservation.restaurant.address %><br/>
+<%= @reservation.restaurant.phone %><br/>
+<br/>
+<a href="http://www.hungryhub.com/restaurants/<%= @reservation.restaurant.id %>">Restaurants Map & Details</a><br/>
+<br/>
+Please note that your table will be held for 15 minutes. Should you change your plans, please call us on <%= @reservation.restaurant.phone %> to let us know.<br/>
+<br/>
+--- A Message from Hungry Hub ---<br/>
+<br/>
+Enjoy your meal at <%= @reservation.restaurant.name %>.! Don’t forget to mention Hungry Hub when you arrive at the restaurant to collect your 10 Hungry Points!<br/>
+<br/>
+Thank you for your reservation,<br/>
+<%= @reservation.restaurant.name %>.<br/>
+<br/>
+Powered by Hungry Hub<br/>
+
   </body>
 </html>
-
-

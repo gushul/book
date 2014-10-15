@@ -280,7 +280,10 @@ private
 #                     points_pending: 5*party_size,    
                      description: "")
     end
-    UserMailer.booking_create(self.user.id, self.id).deliver if user_id.present? && Rails.env.production?
+    if user_id.present?
+      UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
+      Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:New HungryHub Reservation on #{self.date} @ #{self.start_time} for #{party_size} people") if !self.restaurant.owner.device_id.nil?
+    end
     OwnerMailer.booking_create(self.id).deliver if Rails.env.production?
   end
 
