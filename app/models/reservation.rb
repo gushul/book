@@ -282,7 +282,7 @@ private
     end
     if user_id.present?
       UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
-      Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:New HungryHub Reservation on #{self.date} @ #{self.start_time} for #{party_size} people") if !self.restaurant.owner.device_id.nil?
+      Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:New HungryHub Reservation on #{self.date} @ #{self.start_time} for #{self.party_size} people") if !self.restaurant.owner.device_id.nil?
     end
     OwnerMailer.booking_create(self.id).deliver if Rails.env.production?
   end
@@ -303,6 +303,7 @@ private
       email = self.user.email if user_id.present?
       puts "MATT SENT #{self.id} #{email}"
       OwnerMailer.booking_cancel(self.id,email).deliver
+      Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:HungryHub Reservation Cancelled on #{self.date} @ #{self.start_time} for #{self.party_size} people") if !self.restaurant.owner.device_id.nil? && user_id.present?
     end
 #    UserMailer.booking_update(self.user.id, self.id).deliver if user_id.present?
 #    OwnerMailer.booking_update(self.id).deliver
