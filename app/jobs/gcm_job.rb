@@ -1,6 +1,6 @@
 class GcmJob
   @queue = :gcm
-
+  #Resque.enqueue(GcmJob, device_id, 'msg')
   def self.perform(device_id, message)
     require 'gcm'
 		gcm = GCM.new("AIzaSyCuLrwmoxy0wOsBxYCClE7c6odAV_k3OZ8")

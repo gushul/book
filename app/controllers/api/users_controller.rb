@@ -41,7 +41,7 @@ class Api::UsersController < Api::BaseController
                       status: 403 }
         end
 #      elsif params[:user].length > 3
-      elsif params[:user].length > 4
+      elsif params[:user].length > 5
         respond_to do |format|
           format.json { render json: "Provide ONLY needed parameters for this action", 
                       status: 400 }

@@ -8,6 +8,8 @@ class Api::Owner::ReservationsController < ApplicationController
   # POST /reservations.json
   def index
     puts params[:owner][:device_id]
+    @owner.device_id = params[:owner][:device_id] if !params[:owner][:device_id].nil?
+    @owner.save if !params[:owner][:device_id].nil?
     @reservations = @owner.restaurant.reservations
     @reservations_json = []
     @reservations.each do |r|
