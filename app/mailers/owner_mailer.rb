@@ -28,5 +28,11 @@ class OwnerMailer < ActionMailer::Base
     mail( to: @reservation.restaurant.owner.email, 
           subject: "Reservation Canceled (#{@reservation.restaurant.name} restaurant)")
   end
+  
+  def booking_special_request(reservation_id)
+    @reservation = Reservation.find(reservation_id)
+    mail( to: @reservation.restaurant.owner.email, 
+          subject: "UPDATED Special Request (#{@reservation.restaurant.name} restaurant)")
+  end
 
 end
