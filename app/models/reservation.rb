@@ -283,7 +283,7 @@ private
     if user_id.present?
       UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
       Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:New HungryHub Reservation on #{self.date} @ #{self.start_time} for #{self.party_size} people") if !self.restaurant.owner.device_id.nil?
-      Resque.enqueue(SmsJob, "Your table has been RESERVED at #{self.restaurant.name} on #{self.date} at #{self.start_time} for #{self.party_size} people. Thank you & enjoy your meal! -Hungry Hub Team", self.user.phone.reverse.chop.reverse)
+      Resque.enqueue(SmsJob, "Your table has been RESERVED at #{self.restaurant.name} on #{self.date} at #{self.start_time.strftime("%R")} for #{self.party_size} people. Thank you, enjoy your meal! -Hungry Hub Team", self.user.phone.reverse.chop.reverse)
     end
     OwnerMailer.booking_create(self.id).deliver if Rails.env.production?
   end
