@@ -46,6 +46,8 @@ AuthApp::Application.routes.draw do
     post "/reservations"        => "reservations#index"
     post "/reservations/create" => "reservations#create"
     post "/reservations/update" => "reservations#update"
+#    post "/rewards"        => "rewards#index"
+    post "/rewards/create" => "rewards#create"
     
     post "/me" => "users#show"
 

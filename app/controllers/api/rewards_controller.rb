@@ -14,8 +14,20 @@ class Api::RewardsController < Api::BaseController
 #      render json: "Incorect login/pass", status: :unprocessable_entity
       render json: 'ERR:Incorrect Login/Password', status: 400
     else
-      @rewards = u.rewards
-      render json: @rewards
+      puts params[:reward]
+      puts params[:reward][:points_total]
+      if params[:reward][:points_total].nil? 
+        @rewards = u.rewards
+        render json: @rewards
+      elsif params[:reward][:points_total].to_i < 0
+        @reward = Reward.new(params[:reward])
+        @reward.user = u
+        @reward.description = 'Reward Redeem'
+        @reward.save
+        render json: @reward
+      else
+        render json: 'ERR:Cannot Create Positive Points', status: 400
+      end
     end
   end
 
