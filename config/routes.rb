@@ -10,7 +10,7 @@ AuthApp::Application.routes.draw do
     get "contact_us",   as: 'contact_us'
     get "map",          as: 'map'
     
-    get ":admin/:page(/:id)", as: 'admin', to: 'home#admin', 
+    get ":admin/:page(/:id)", as: 'admin', to: 'admin#index', 
       :constraints => {:admin => "admin", :page => /new_owner|new_restaurant|dashboard/ }
     post "admin_owner_create",     to: 'home#admin_owner_create', as: "admin_owner_create"
     post "admin_restaurant_create", to: 'home#admin_restaurant_create', as: "admin_restaurant_create"

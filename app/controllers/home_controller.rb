@@ -1,8 +1,6 @@
 # encoding: utf-8
 class HomeController < ApplicationController
   autocomplete :restaurant, :name, :full => true#, :extra_data => [:slogan]
-  http_basic_authenticate_with name: "admin", password: "123", only: :admin
-
 
   def landing
     @home = true
@@ -207,53 +205,6 @@ class HomeController < ApplicationController
        "width" =>  32,
        "height" => 32})
       marker.infowindow render_to_string(:partial => "/restaurants/gmap_template.html.erb", :locals => { :restaurant => res} )
-    end
-  end
-
-  def admin
-    if params[:page] == "new_owner"
-      page = "admin_new_owner"
-    elsif params[:page] == "new_restaurant"
-      page = "admin_new_restaurant"
-    else
-      page = "admin_dashboard"
-    end
-    render page, layout: false      
-  end
-
-  def admin_owner_create
-    owner = Owner.new(params[:owner])
-
-    respond_to do |format|
-      if owner.save
-        format.html { 
-          redirect_to admin_path(:admin => "admin", :pass => "123", :page => "new_restaurant", :id => owner.id ), 
-          notice: 'Owner was successfully created.'
-           }
-      else
-        format.html { 
-          redirect_to admin_path(:admin => "admin", :pass => "123", :page => "new_owner"), 
-          notice: "#{owner.errors.messages}"
-        }
-      end
-    end
-  end
-
-  def admin_restaurant_create
-    restaurant = Restaurant.new(params[:restaurant])
-
-    respond_to do |format|
-      if restaurant.save
-        format.html { 
-          redirect_to admin_path(:admin => "admin", :pass => "123", :page => "dashboard" ), 
-          notice: 'Restaurant was successfully created.'
-           }
-      else
-        format.html { 
-          redirect_to admin_path(:admin => "admin", :pass => "123", :page => "new_restaurant"), 
-          notice: "#{restaurant.errors.messages}"
-        }
-      end
     end
   end
 
