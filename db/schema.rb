@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141117140354) do
+ActiveRecord::Schema.define(:version => 20141202221455) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20141117140354) do
     t.text     "special_request"
     t.integer  "channel",         :default => 0
     t.boolean  "ack",             :default => false
+    t.text     "note"
   end
 
   add_index "reservations", ["restaurant_id"], :name => "index_reservations_on_restaurant_id"
