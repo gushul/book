@@ -1,6 +1,8 @@
 # encoding: utf-8
 class HomeController < ApplicationController
   autocomplete :restaurant, :name, :full => true#, :extra_data => [:slogan]
+  http_basic_authenticate_with name: "admin", password: "123", only: :admin
+
 
   def landing
     @home = true
