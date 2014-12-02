@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 require 'spec_helper'
-require 'debugger';
 
 describe Api::ReservationsController do
   
@@ -19,7 +18,6 @@ describe Api::ReservationsController do
   end
 
   it 'create reservation' do
-    debugger
     post :create, 
          :user => {:email => "user1@mail.com", :password => "secret12" }, 
          :reservation => {:restaurant_id => "1", 
