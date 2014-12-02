@@ -1,8 +1,13 @@
 class AdminController < ApplicationController
   before_filter :authenticate
+  layout :false
 
   def index
-    render params[:page], layout: false      
+    render params[:page]     
+  end
+
+  def new_reservation
+    @reservation = Reservation.new
   end
 
   def admin_owner_create
