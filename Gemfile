@@ -52,15 +52,16 @@ group :production do
 end
 
 group :development, :test do
+  gem 'debugger'
   gem 'sqlite3'
   gem 'rack-livereload'
   gem 'awesome_print'
   gem 'pry-rails'
   # gem 'ruby_parser'
   gem 'factory_girl'
-  gem 'rspec-rails', '2.11.0'
-  gem 'guard-rspec', '1.2.1'
-  gem 'guard-spork', '1.2.0'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'guard-rspec', '> 1.2.1'
+  gem 'guard-spork', '> 1.2.0'
   gem 'spork', '0.9.2'
 end
 
