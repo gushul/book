@@ -24,6 +24,11 @@ class AdminController < ApplicationController
     render 'admin/reservations/edit'
   end
 
+  def reservation_delete
+    Reservation.find(params[:id]).destroy
+    redirect_to admin_reservations_path
+  end
+
   def admin_owner_create
     owner = Owner.new(params[:owner])
 
