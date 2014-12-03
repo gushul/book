@@ -1,0 +1,9 @@
+= simple_form_for @reservation do |f|
+  = f.input :restaurant_id,collection: @restaurants, as: :select, default: @reservation.restaurant_id
+  = f.input :date
+  = f.input :start_time
+  = f.input :end_time
+  = f.input :party_size
+  = f.input :special_request
+  = f.input :note
+  = f.submit

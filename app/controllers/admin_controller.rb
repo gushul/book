@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   before_filter :authenticate
-  layout :false
+  layout 'admin'
 
   def index
     render params[:page]     

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <meta charset="utf-8">
+  <title>Hungry Hub</title>
+  <meta name="generator" content="Yosaki" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-itunes-app" content="app-id=879303325">
+
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+</head> 
+<body> 
+             
+<!-- main right col -->
+<div id="admin-content">
+  
+  <!-- <div class="flash_container"> -->
+    <% if flash[:notice] -%>
+    <div id="flash_notice"><%= flash[:notice] %></div>
+    <% elsif flash[:alert] -%>
+    <div id="flash_alert"><%= flash[:alert] %></div>
+    <% elsif flash[:error] -%>
+    <div id="flash_error"><%= flash[:error] %></div>
+    <% end %>
+  <!-- </div> -->
+  <%= yield %>
+</div>
+
+</body>
+</html>
