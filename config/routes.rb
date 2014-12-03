@@ -12,7 +12,8 @@ AuthApp::Application.routes.draw do
     
     get ":admin/:page(/:id)", as: 'admin', to: 'admin#index', 
       :constraints => {:admin => "admin", :page => /new_owner|new_restaurant|dashboard/ }
-    get "admin/new_reservation" => 'admin#new_reservation'
+    get 'admin/reservations' => 'admin#reservation_index', as: :admin_reservations
+    get "admin/reservations/new" => 'admin#reservation_create', as: :admin_new_reservation
     post "admin_owner_create",     to: 'home#admin_owner_create', as: "admin_owner_create"
     post "admin_restaurant_create", to: 'home#admin_restaurant_create', as: "admin_restaurant_create"
   end

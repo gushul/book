@@ -6,8 +6,16 @@ class AdminController < ApplicationController
     render params[:page]     
   end
 
-  def new_reservation
+  def reservation_index
+    @reservations = Reservation.all
+    render 'admin/reservations/index'
+  end
+
+  def reservation_create
     @reservation = Reservation.new
+    @restaurants = Restaurant.all
+
+    render 'admin/reservations/create'
   end
 
   def admin_owner_create
