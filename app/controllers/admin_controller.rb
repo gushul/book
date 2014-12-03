@@ -18,6 +18,12 @@ class AdminController < ApplicationController
     render 'admin/reservations/create'
   end
 
+  def reservation_edit
+    @reservation = Reservation.find(params[:id])
+    @restaurants = Restaurant.all
+    render 'admin/reservations/edit'
+  end
+
   def admin_owner_create
     owner = Owner.new(params[:owner])
 

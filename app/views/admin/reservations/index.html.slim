@@ -1,1 +1,12 @@
-show.html.slim
+.admin-reservation-index
+  table
+    thead
+      tr
+        th = 'Id'
+        th = 'Date'
+        th = 'Restaurant'
+        th = 'Customer name'
+        th = 'Start time'
+        th = 'End time'
+    tbody
+      = render partial: 'admin/reservations/reservation', collection: @reservations, as: :reservation
