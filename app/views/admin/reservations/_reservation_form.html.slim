@@ -1,4 +1,4 @@
-= simple_form_for @reservation do |f|
+= simple_form_for @reservation, url: admin_update_reservation_path(id: params[:id]) do |f|
   = f.input :restaurant_id,collection: @restaurants, as: :select, default: @reservation.restaurant_id
   = f.input :date
   = f.input :start_time

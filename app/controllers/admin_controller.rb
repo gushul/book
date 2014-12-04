@@ -7,7 +7,7 @@ class AdminController < ApplicationController
   end
 
   def reservation_index
-    @reservations = Reservation.all
+    fetch_reservations
     render 'admin/reservations/index'
   end
 
@@ -27,6 +27,22 @@ class AdminController < ApplicationController
   def reservation_delete
     Reservation.find(params[:id]).destroy
     redirect_to admin_reservations_path
+  end
+
+  def reservation_update
+    # Rails 3 does not have update_columns, so we use this to avoid validations
+    reservation = Reservation.find(params[:id])
+    
+    if reservation.update_attributes!(params[:reservation])
+      flash[:notice] = 'Reservation updated successfully'
+
+      redirect_to admin_reservations_path
+      return
+    else
+      flash[:error] = "Couldn't update reservation"
+      render :reservation_edit
+      return
+    end
   end
 
   def admin_owner_create
@@ -71,5 +87,11 @@ class AdminController < ApplicationController
       username == "user2" && password == "1234" ||
       username == "user3" && password == "1234"
     end
+  end
+
+  private
+
+  def fetch_reservations
+    @reservations = Reservation.all
   end
 end

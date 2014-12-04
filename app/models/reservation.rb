@@ -9,10 +9,10 @@ class Reservation < ActiveRecord::Base
                   :user_id, :owner_id, :restaurant_id,
                   :name, :email, :phone,
                   :no_show, :arrived, :table,
-                  :special_request,
+                  :special_request, :note,
                   :channel
  
-  validates_uniqueness_of :created_at, scope: [:user_id, :owner_id]
+  validates_uniqueness_of :created_at, scope: [:user_id, :owner_id], on: :create
   # validates :user_id,       :presence => true
   # validates user/owner id presence
   validates :restaurant_id, :presence => true

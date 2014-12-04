@@ -15,6 +15,7 @@ AuthApp::Application.routes.draw do
     get 'admin/reservations' => 'admin#reservation_index', as: :admin_reservations
     get "admin/reservations/new" => 'admin#reservation_create', as: :admin_new_reservation
     get "admin/reservations/edit/:id" => 'admin#reservation_edit', as: :admin_edit_reservation
+    put "admin/reservations/update/:id" => 'admin#reservation_update', as: :admin_update_reservation
     get "admin/reservations/delete/:id" => 'admin#reservation_delete', as: :admin_delete_reservation
     post "admin_owner_create",     to: 'home#admin_owner_create', as: "admin_owner_create"
     post "admin_restaurant_create", to: 'home#admin_restaurant_create', as: "admin_restaurant_create"
