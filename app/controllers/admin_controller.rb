@@ -73,6 +73,6 @@ class AdminController < ApplicationController
   private
 
   def fetch_reservations
-    @reservations = Reservation.all
+    @reservations = Reservation.all.reverse
   end
 end

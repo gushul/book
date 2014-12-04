@@ -1,4 +1,4 @@
-= f.input :restaurant_id,collection: @restaurants, as: :select, default: @reservation.restaurant_id
+= f.input :restaurant_id,collection: @restaurants, as: :select, default: @reservation.restaurant_id, prompt: "Choose a Restaurant"
 = f.input :date
 = f.input :start_time
 = f.input :end_time
