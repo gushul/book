@@ -11,11 +11,28 @@ class AdminController < ApplicationController
     render 'admin/reservations/index'
   end
 
-  def reservation_create
+  def reservation_new
     @reservation = Reservation.new
     @restaurants = Restaurant.all
 
-    render 'admin/reservations/create'
+    render 'admin/reservations/new'
+  end
+
+  def reservation_create
+    @reservation = Reservation.new(params[:reservation])
+
+    if @reservation.valid?
+      @reservation.save!
+      flash[:notice] = "Reservation has been created!"
+    else
+      flash[:error] = 'Something went wrong while creating reservation'
+      @restaurants = Restaurant.all
+      render 'admin/reservations/new'
+      return
+    end
+
+    redirect_to admin_reservations_path
+
   end
 
   def reservation_edit
