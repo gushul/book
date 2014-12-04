@@ -44,6 +44,7 @@ class AdminController < ApplicationController
   def reservation_delete
     Reservation.find(params[:id]).destroy
     redirect_to admin_reservations_path
+    flash[:notice] = 'Reservation deleted'
   end
 
   def reservation_update

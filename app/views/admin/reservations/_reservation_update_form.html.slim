@@ -1,2 +1,3 @@
+= link_to 'Reservations', admin_reservations_path
 = simple_form_for @reservation, url: admin_update_reservation_path(id: params[:id]) do |f|
   = render partial: 'admin/reservations/form_fields', locals: {f: f}
