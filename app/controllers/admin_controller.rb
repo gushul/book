@@ -63,8 +63,10 @@ class AdminController < ApplicationController
     end
   end
 
+  protected
+  
   def authenticate
-    authenticate_with_http_basic do |username, password|
+    authenticate_or_request_with_http_basic do |username, password|
       username == "user1" && password == "1234" ||
       username == "user2" && password == "1234" ||
       username == "user3" && password == "1234"
