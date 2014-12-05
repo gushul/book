@@ -49,6 +49,7 @@ class Reservation < ActiveRecord::Base
 
   scope :active, -> { where active: true }
 
+  scope :created_today,  -> { where('created_at >= ?', Time.zone.now.beginning_of_day)}
   scope :today,       -> { where(:date => (Time.zone.today + 7.hour).to_date) }
   scope :yesterday,   -> { where(:date => (Time.zone.today - 1.day + 7.hour).to_date) }
   scope :next_7_days, -> { where(:date => (Time.zone.today + 1.day + 7.hour).to_date..(Time.zone.today + 7.days + 7.hour).to_date) }
