@@ -1,3 +1,4 @@
 = link_to 'Reservations', admin_reservations_path
 = simple_form_for @reservation, url: admin_create_reservation_path do |f|
+  =f.input :channel, as: :hidden, input_html: {value: ChannelType['admin_web']}
   = render partial: 'admin/reservations/form_fields', locals: {f: f}
