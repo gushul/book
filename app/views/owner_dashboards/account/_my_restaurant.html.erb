@@ -13,7 +13,7 @@
             <%= f.input :address, label: "Address", as: :text, input_html: { rows: "4", class: "text_area_for_misc"} %>
             <%= f.input :th_address, label: "Address (Th)", as: :text, input_html: { rows: "4", class: "text_area_for_misc"} %>
             <%= f.input :phone, label: "Phone: <i style='font-weight:normal;'>#{@restaurant.phone}</i>".html_safe  %>
-            
+            <%= f.input :website, label: "Website", input_html: { rows: "25", class: "text_area_for_misc"} %>
             <div class="row">
               <label>GPS Coordinates</label><br>
               <div class="col-sm-12 col-lg-6" style="padding-right: 15px; padding-left: 0px;">
