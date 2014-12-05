@@ -84,6 +84,8 @@ class Reservation < ActiveRecord::Base
   
   scope :owners,     -> { where(:channel => 5..6) }
   scope :exc_owners, -> { where(:channel => 0..4) }
+
+  scope :manuly_created, -> {where('user_id IS NULL')}
   
   # def start_time 
   #   self[:start_time].strftime('%H:%M') unless self[:start_time].blank?
