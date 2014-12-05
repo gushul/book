@@ -43,6 +43,9 @@ GEM
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
     builder (3.0.4)
+    byebug (3.2.0)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
     cancan (1.6.10)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -62,8 +65,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    columnize (0.8.9)
     daemons (1.1.9)
     database_cleaner (1.2.0)
+    debugger-linecache (1.2.0)
     delayed_job (4.0.0)
       activesupport (>= 3.0, < 4.1)
     delayed_job_active_record (4.0.0)
@@ -311,6 +316,7 @@ DEPENDENCIES
   awesome_print
   bootstrap-kaminari-views
   bootstrap-sass-rails (= 3.0.2.1)
+  byebug
   cancan
   carrierwave
   coffee-rails (~> 3.2.1)

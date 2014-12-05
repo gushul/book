@@ -76,6 +76,6 @@ class AdminController < ApplicationController
   private
 
   def fetch_reservations
-    @reservations = Reservation.page(params[:page]).per(10)
+    @reservations = Reservation.order('created_at DESC').page(params[:page]).per(10)
   end
 end
