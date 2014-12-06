@@ -1,0 +1,9 @@
+= form_tag(admin_apple_send_path, method: 'post', remote: true)
+  = label_tag 'Token'
+  = text_field_tag :token, nil,size: 80
+  br
+  br
+  = label_tag 'Message'
+  = text_area_tag :message, 'some message', cols: 78, rows: 5
+  br
+  = submit_tag 'Send message'

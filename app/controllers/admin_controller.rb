@@ -6,6 +6,14 @@ class AdminController < ApplicationController
     render params[:page]     
   end
 
+  def apple_push_index
+   render 'admin/apple/index'
+  end
+
+  def apple_push_send
+    render nothing: true
+  end
+
   def reservation_index
     fetch_reservations
     render 'admin/reservations/index'
