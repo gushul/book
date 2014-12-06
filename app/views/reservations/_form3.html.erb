@@ -225,96 +225,7 @@
 
       </td>
     </tr>
-    <tr> 
-      <td class="my_bold">End Time:</td> 
-      <td class="my_bold">
 
-      <!-- <div class="col-sm-4">
-        <div class="input-append btn-group">
-            <input id="reservation_end_time_4i" name="reservation[end_time(4i)]" type="hidden" value="<%= @reservation.end_time.present? ? @reservation.end_time.strftime('%H') : "19" %>">
-            <div id="currectVal6" class="inputSelection rregular pull-left"><%= @reservation.end_time.present? ? @reservation.end_time.strftime('%H') : "19" %></div>
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" id="selection6">
-              <li><a title="00"> 00</a></li>
-              <li><a title="01"> 01</a></li>
-              <li><a title="02"> 02</a></li>
-              <li><a title="03"> 03</a></li>
-              <li><a title="04"> 04</a></li>
-              <li><a title="05"> 05</a></li>
-              <li><a title="06"> 06</a></li>
-              <li><a title="07"> 07</a></li>
-              <li><a title="08"> 08</a></li>
-              <li><a title="09"> 09</a></li>
-              <li><a title="10"> 10</a></li>
-              <li><a title="11"> 11</a></li>
-              <li><a title="12"> 12</a></li>
-              <li><a title="13"> 13</a></li>
-              <li><a title="14"> 14</a></li>
-              <li><a title="15"> 15</a></li>
-              <li><a title="16"> 16</a></li>
-              <li><a title="17"> 17</a></li>
-              <li><a title="18"> 18</a></li>
-              <li><a title="19"> 19</a></li>
-              <li><a title="20"> 20</a></li>
-              <li><a title="21"> 21</a></li>
-              <li><a title="22"> 22</a></li>
-              <li><a title="23"> 23</a></li>
-            </ul>
-            <script type="text/javascript">
-              $('#selection6 > li a').click(function(){
-                var selectVal = $(this).attr("title");
-                $("#s1").attr("value",selectVal);
-                $("#reservation_end_time_4i").attr("value",selectVal);
-                $("#currectVal6").html($(this).html());
-              });
-            </script>
-        </div>
-        </div>
-        
-        <div class="col-sm-4">
-        <div class="input-append btn-group">
-            <input id="reservation_end_time_5i" name="reservation[end_time(5i)]" type="hidden" value="<%= @reservation.end_time.present? ? @reservation.end_time.strftime('%M') : "00" %>">
-            <div id="currectVal7" class="inputSelection rregular pull-left"><%= @reservation.end_time.present? ? @reservation.end_time.strftime('%M') : "00" %></div>
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" id="selection7">
-              <li><a title="00"> 00</a></li>
-              <!-- <li><a title="05"> 05</a></li> -->
-              <!-- <li><a title="10"> 10</a></li> -->
-              <!-- <li><a title="15"> 15</a></li> -->
-              <!-- <li><a title="20"> 20</a></li> -->
-              <!-- <li><a title="25"> 25</a></li> -->
-              <!-- <li><a title="30"> 30</a></li> -->
-              <!-- <li><a title="35"> 35</a></li> -->
-              <!-- <li><a title="40"> 40</a></li> -->
-              <!-- <li><a title="45"> 45</a></li> -->
-              <!-- <li><a title="50"> 50</a></li> -->
-              <!-- <li><a title="55"> 55</a></li> -->
-<!--             </ul>
-            <script type="text/javascript">
-              $('#selection7 > li a').click(function(){
-                var selectVal = $(this).attr("title");
-                $("#s2").attr("value",selectVal);
-                $("#reservation_end_time_5i").attr("value",selectVal);
-                $("#currectVal7").html($(this).html());
-              });
-            </script>
-        </div>
-        </div>  -->
-      
-        <div id="end-time-picker">
-          <div class="input-group rregular">
-            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-            <input type="text" class="form-control" id="timepicker" name="timepicker" value="" >
-          </div>
-          <script type="text/javascript">$('#timepicker').timepicker({showMeridian: false});</script>
-        </div>
-      </td> 
-    </tr>
-    <tr> 
       <td class="my_bold">Party Size:</td> 
       <td>
         <div style="width:350px">
@@ -381,18 +292,18 @@
         </div></td> 
       </tr>
       <tr> 
-        <td class="my_bold">Email:</td> 
-        <td><div style="width:350px">
-          <%= f.input :email, label: "Email", :required => :true, label: false %>
-        </div></td> 
-      </tr>
-      <tr> 
         <td class="my_bold">Phone:</td> 
         <td><div style="width:350px">
           <%= f.input :phone, label: "Phone", :required => :true, label: false %>
         </div></td> 
       </tr>
     <% end %>
+    <tr> 
+      <td class="my_bold">Table number:</td> 
+      <td><div style="width:350px">
+        <%= f.input :table,as: :string, label: "Table number", :required => :false, label: false %>
+      </div></td> 
+    </tr>
     <tr> 
       <td class="my_bold">Special Request:</td> 
       <td><div style="width:350px">
