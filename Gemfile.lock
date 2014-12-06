@@ -66,6 +66,8 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     columnize (0.8.9)
+    commander (4.2.1)
+      highline (~> 1.6.11)
     daemons (1.1.9)
     database_cleaner (1.2.0)
     debugger-linecache (1.2.0)
@@ -119,8 +121,12 @@ GEM
       guard (~> 2.0, <= 2.9.0)
       spork (>= 0.8.4)
     hashie (2.0.5)
+    highline (1.6.21)
     hike (1.2.3)
     hitimes (1.2.2)
+    houston (2.2.1)
+      commander (~> 4.1)
+      json
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -334,6 +340,7 @@ DEPENDENCIES
   gmaps4rails
   guard-rspec (> 1.2.1)
   guard-spork (> 1.2.0)
+  houston
   jquery-rails (= 3.0.4)
   jquery-ui-rails (= 4.0.5)
   kaminari
