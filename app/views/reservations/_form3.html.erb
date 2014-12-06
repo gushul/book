@@ -14,7 +14,7 @@
     <% end %>
 
     <tr> 
-      <td class="my_bold">Date:</td> 
+      <td class="my_bold">Date<span class ='red'>*</span>:</td> 
       <td class="my_bold">
         <div id="date-picker" class="rregular">
           <div class="input-group date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
@@ -134,7 +134,7 @@
       </td> 
     </tr>
     <tr> 
-      <td class="my_bold">Start Time:</td> 
+      <td class="my_bold">Start Time<span class ='red'>*</span>:</td> 
       <td class="my_bold">
         <div class="rregular">
           <!-- <label>Start Time</label> -->
@@ -226,7 +226,7 @@
       </td>
     </tr>
 
-      <td class="my_bold">Party Size:</td> 
+      <td class="my_bold">Party Size<span class ='red'>*</span>:</td> 
       <td>
         <div style="width:350px">
           <input id="reservation_party_size" class="string required form-control" name="reservation[party_size]"  required="required" value="<%= @reservation.party_size.present? ? @reservation.party_size : "2" %>">
@@ -286,13 +286,13 @@
     </tr>
     <% unless user_signed_in? %>
       <tr> 
-        <td class="my_bold">Name:</td> 
+        <td class="my_bold">Name<span class ='red'>*</span>:</td> 
         <td><div style="width:350px">
           <%= f.input :name,  label: "Name",  :required => :true, label: false %>
         </div></td> 
       </tr>
       <tr> 
-        <td class="my_bold">Phone:</td> 
+        <td class="my_bold">Phone<span class ='red'>*</span>:</td> 
         <td><div style="width:350px">
           <%= f.input :phone, label: "Phone", :required => :true, label: false %>
         </div></td> 
@@ -301,13 +301,33 @@
     <tr> 
       <td class="my_bold">Table number:</td> 
       <td><div style="width:350px">
-        <%= f.input :table,as: :string, label: "Table number", :required => :false, label: false %>
+        <%= f.input :table,as: :string, label: false %>
       </div></td> 
     </tr>
     <tr> 
       <td class="my_bold">Special Request:</td> 
       <td><div style="width:350px">
         <%= f.input :special_request, as: :text, input_html: { rows: "2", class: "text_area_for_misc"}, label: false %>
+      </div></td> 
+    </tr>
+    <tr> 
+      <td class="my_bold">Active:</td> 
+      <td><div style="width:350px">
+        <%= f.input :active, label: false %>
+      </div></td> 
+    </tr>
+
+    <tr> 
+      <td class="my_bold">Arrived:</td> 
+      <td><div style="width:350px">
+        <%= f.input :arrived, label: false %>
+      </div></td> 
+    </tr>
+
+    <tr> 
+      <td class="my_bold">No-show:</td> 
+      <td><div style="width:350px">
+        <%= f.input :no_show, label: false %>
       </div></td> 
     </tr>
   </table>
@@ -340,7 +360,6 @@
         day = parseInt(date.substring(0, 2));
         mon = parseInt(date.substring(3, 5));
         year = parseInt(date.substring(6, 10));
-        alert(year);
         $("#reservation_date_3i").val(day);
         $("#reservation_date_2i").val(mon);
         $("#reservation_date_1i").val(year);

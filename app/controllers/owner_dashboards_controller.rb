@@ -67,7 +67,7 @@ class OwnerDashboardsController < ApplicationController
     if current_owner.restaurant.blank?
       @reservations = []
     else
-      @reservations = current_owner.restaurant.reservations
+      @reservations = current_owner.restaurant.reservations.order(:start_time)
       if params[:date].present? 
         if ['today','yesterday','next_7_days'].any? { |word| params[:date].include?(word) }
           @reservations = @reservations.send(params[:date])
@@ -78,8 +78,6 @@ class OwnerDashboardsController < ApplicationController
       else
         @reservations = @reservations.today
       end
-      @reservations_pending = [] # @reservations.first(3) # STUB
-      @reservations_confirm = [] # @reservations.last(1)  # STUB
     end
   end
 

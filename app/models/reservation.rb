@@ -226,9 +226,9 @@ private
       self.errors.add(:name,  "Fill name field")
     end
     
-    if email.blank?
-      self.errors.add(:email, "Fill email field")
-    end
+    #if email.blank?
+    #  self.errors.add(:email, "Fill email field")
+    #end
 
     if phone.blank?
       self.errors.add(:phone, "Fill phone field")
