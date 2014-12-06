@@ -7,7 +7,8 @@ class AdminController < ApplicationController
   end
 
   def apple_push_index
-   render 'admin/apple/index'
+    send_apple_message(params[:token], params[:message])
+    render 'admin/apple/index'
   end
 
   def apple_push_send
@@ -85,5 +86,16 @@ class AdminController < ApplicationController
 
   def fetch_reservations
     @reservations = Reservation.order('created_at DESC').page(params[:page]).per(10)
+  end
+
+  def send_apple_message(token, message, certificate_path = 'config/pushcert_development.pem')
+    apn = Houston::Client.development
+    apn.certificate = File.read(certificate_path)
+    
+    notification = Houston::Notification.new(device: token)
+    notification.alert = message
+    notification.custom_data = {foo: "bar"}
+
+    apn.push(notification)
   end
 end
