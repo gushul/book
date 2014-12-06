@@ -7,11 +7,11 @@ class AdminController < ApplicationController
   end
 
   def apple_push_index
-    send_apple_message(params[:token], params[:message])
     render 'admin/apple/index'
   end
 
   def apple_push_send
+    send_apple_message(params[:token], params[:message])
     render nothing: true
   end
 
@@ -88,7 +88,7 @@ class AdminController < ApplicationController
     @reservations = Reservation.order('created_at DESC').page(params[:page]).per(10)
   end
 
-  def send_apple_message(token, message, certificate_path = 'config/pushcert_development.pem')
+  def send_apple_message(token, message, certificate_path = 'config/apple_push_dev.pem')
     apn = Houston::Client.development
     apn.certificate = File.read(certificate_path)
     
