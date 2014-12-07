@@ -6,6 +6,11 @@ class Api::UsersController < Api::BaseController
 
   # POST /me
   def show
+    if params[:user][:device_id] || params[:user][:apple_device_id]
+      @user.device_id = params[:user][:device_id] if !params[:user][:device_id].nil?
+      @user.apple_device_id = params[:user][:apple_device_id] if !params[:user][:apple_device_id].nil?
+      @user.save!
+    end
     @user_json = @user.as_json
     %w{created_at updated_at provider uid verify_code}.each {|k| @user_json.delete(k)}
     respond_to do |format|
@@ -33,6 +38,7 @@ class Api::UsersController < Api::BaseController
   private
 
   def check_user_auth_params
+
 
       if params[:user].blank? or params[:user][:email].blank? or
          params[:user][:password].blank?
