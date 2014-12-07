@@ -24,6 +24,8 @@ class Api::ReservationsController < Api::BaseController
   # POST /reservations/create
   def create
     params[:reservation][:end_time] = params[:reservation][:start_time]
+    params[:reservation][:channel] = 8 if params[:reservation][:channel].nil?
+
     @reservation = Reservation.new(params[:reservation])
 
 #    @reservation.date = @reservation.date+7.hour
@@ -49,6 +51,8 @@ class Api::ReservationsController < Api::BaseController
 
     p check
     p available
+
+    byebug
 
     respond_to do |format|
       if check && @reservation.save 
