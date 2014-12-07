@@ -6,9 +6,7 @@ class Api::Owner::ReservationsController < ApplicationController
   before_filter :check_reservations_params, only: [:create] #, :update]
 
   # POST /reservations.json
-  def index
-    puts params[:owner][:device_id]
-    
+  def index    
     if params[:owner][:device_id] || params[:owner][:apple_device_id]
       @owner.device_id = params[:owner][:device_id] if !params[:owner][:device_id].nil?
       @owner.apple_device_id = params[:owner][:apple_device_id] if !params[:owner][:apple_device_id].nil?

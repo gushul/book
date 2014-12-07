@@ -274,6 +274,7 @@ private
   end
 
   def create_reward
+    owner = self.restaurant.owner
     if user_id.present?
       Reward.create( user_id: user_id, 
                      reservation_id: id, 
@@ -283,12 +284,18 @@ private
 #                     points_total: 5*party_size, 
 #                     points_pending: 5*party_size,    
                      description: "")
-    end
-    if user_id.present?
       UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
-      Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:New HungryHub Reservation on #{self.date} @ #{self.start_time} for #{self.party_size} people") if !self.restaurant.owner.device_id.nil?
       Resque.enqueue(SmsJob, "Your table has been RESERVED at #{self.restaurant.name} on #{self.date} at #{self.start_time.strftime("%R")} for #{self.party_size} people. Thank you, enjoy your meal! -Hungry Hub Team", self.user.phone.reverse.chop.reverse)
     end
+    
+    if owner.apple_device_id
+      Resque.enqueue(ApnJob, owner.apple_device_id, "New HungryHub Reservation on #{self.date} @ #{self.start_time} for #{self.party_size} people")
+    end
+    
+    if owner.device_id
+      Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:New HungryHub Reservation on #{self.date} @ #{self.start_time} for #{self.party_size} people")
+    end
+
     OwnerMailer.booking_create(self.id).deliver if Rails.env.production?
   end
 
@@ -303,12 +310,16 @@ private
     end
     puts "started update_reward ..."
     if self.active == false && Rails.env.production? then
+      owner = self.restaurant.owner
       email = ''
       email = self.email if !self.email.nil?
       email = self.user.email if user_id.present?
       puts "MATT SENT #{self.id} #{email}"
       OwnerMailer.booking_cancel(self.id,email).deliver
-      Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:HungryHub Reservation Cancelled on #{self.date} @ #{self.start_time} for #{self.party_size} people") if !self.restaurant.owner.device_id.nil? && user_id.present?
+      Resque.enqueue(GcmJob, owner.device_id, "msg:HungryHub Reservation Cancelled on #{self.date} @ #{self.start_time} for #{self.party_size} people") if !owner.device_id.nil? && user_id.present?
+      if owner.apple_device_id && user_id.present?
+        Resque.enqueue(ApnJob, owner.apple_device_id, "HungryHub Reservation Cancelled on #{self.date} @ #{self.start_time} for #{self.party_size} people")
+      end
     end
     OwnerMailer.booking_special_request(self.id).deliver if Rails.env.production? && !self.special_request.nil? && self.active == true
 #    UserMailer.booking_update(self.user.id, self.id).deliver if user_id.present?
