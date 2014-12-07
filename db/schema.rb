@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141202221455) do
+ActiveRecord::Schema.define(:version => 20141207170929) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20141202221455) do
     t.string   "owner_name"
     t.string   "phone"
     t.string   "device_id"
+    t.string   "apple_device_id"
   end
 
   add_index "owners", ["email"], :name => "index_owners_on_email", :unique => true
