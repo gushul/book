@@ -66,7 +66,7 @@ class Api::ReservationsController < Api::BaseController
         # render text: "ERR:#{@reservation.errors.to_s}", status: 400
         p @reservation.errors
         # p @reservation.save!
-				render text: "#{available}", status: 400
+				render text: "ERR:#{available}", status: 400
 			}
       end
     end
