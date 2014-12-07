@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141207170929) do
+ActiveRecord::Schema.define(:version => 20141207182150) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -221,6 +221,7 @@ ActiveRecord::Schema.define(:version => 20141207170929) do
     t.string   "android_device_id"
     t.string   "fb_uid"
     t.string   "fb_access_token"
+    t.string   "apple_device_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
