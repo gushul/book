@@ -52,8 +52,6 @@ class Api::ReservationsController < Api::BaseController
     p check
     p available
 
-    byebug
-
     respond_to do |format|
       if check && @reservation.save 
         reservation = @reservation.as_json
