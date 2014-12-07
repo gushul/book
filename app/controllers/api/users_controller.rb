@@ -6,8 +6,8 @@ class Api::UsersController < Api::BaseController
 
   # POST /me
   def show
-    if params[:user][:device_id] || params[:user][:apple_device_id]
-      @user.device_id = params[:user][:device_id] if !params[:user][:device_id].nil?
+    if params[:user][:android_device_id] || params[:user][:apple_device_id]
+      @user.android_device_id = params[:user][:android_device_id] if !params[:user][:android_device_id].nil?
       @user.apple_device_id = params[:user][:apple_device_id] if !params[:user][:apple_device_id].nil?
       @user.save!
     end
