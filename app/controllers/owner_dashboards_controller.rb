@@ -9,7 +9,8 @@ class OwnerDashboardsController < ApplicationController
       @res_next_7_days = res.next_7_days
 
       @res_manual = res.created_today.manualy_created
-      @res_normal = res.exc_owners.created_today.user_created
+      @res_normal = res.created_today.user_created
+      @res_total = res.created_today
     end
   end
   

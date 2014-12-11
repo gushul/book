@@ -58,7 +58,7 @@
                 <div class="col-sm-12 col-lg-4">
                   <p>
                     <strong>Today Booking :</strong><br>
-                    <%= @res_today.present? ?  @res_today.count : 0 %> / <%= @res_today.present? ? @res_today.map(&:party_size).compact.reduce(0, :+) : 0 %> 
+                    <%= @res_total.present? ?  @res_total.count : 0 %> / <%= @res_total.present? ? @res_total.map(&:party_size).compact.reduce(0, :+) : 0 %> 
                     <small>(reservations / covers)</small>
                   </p>
                 </div>
