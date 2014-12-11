@@ -292,9 +292,16 @@
         </div></td> 
       </tr>
       <tr> 
+        <td class="my_bold">Email<span class ='red'>*</span>:</td> 
+        <td><div style="width:350px">
+           <%= f.input :email, label: false, disabled: !@reservation.user_id.nil?, input_html: {value: "Dummy@hungryhub.com"} %>
+        </div></td> 
+      </tr>
+      <tr> 
         <td class="my_bold">Phone<span class ='red'>*</span>:</td> 
         <td><div style="width:350px">
-          <%= f.input :phone, label: "Phone", :required => :true, label: false %>
+          <% byebug %>
+          <%= f.input :phone, label: "Phone", :required => :true, disabled: !@reservation.user_id.nil?, label: false %>
         </div></td> 
       </tr>
     <% end %>
@@ -311,23 +318,9 @@
       </div></td> 
     </tr>
     <tr> 
-      <td class="my_bold">Active:</td> 
+      <td class="my_bold"></td> 
       <td><div style="width:350px">
-        <%= f.input :active, label: false %>
-      </div></td> 
-    </tr>
-
-    <tr> 
-      <td class="my_bold">Arrived:</td> 
-      <td><div style="width:350px">
-        <%= f.input :arrived, label: false %>
-      </div></td> 
-    </tr>
-
-    <tr> 
-      <td class="my_bold">No-show:</td> 
-      <td><div style="width:350px">
-        <%= f.input :no_show, label: false %>
+        <%= f.input :active, as: :hidden, label: false, input_html: {value: true} %>
       </div></td> 
     </tr>
   </table>

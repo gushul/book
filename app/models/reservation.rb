@@ -188,6 +188,9 @@ class Reservation < ActiveRecord::Base
     puts "done sending out reminders"
   end
 
+  def is_created_manualy?
+    self.user_id.nil?
+  end
 
 private
 
