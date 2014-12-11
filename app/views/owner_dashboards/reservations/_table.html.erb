@@ -37,7 +37,7 @@
           <td><%= reservation.quality %></td>
           <td><% if reservation.special_request != nil && reservation.special_request != '' then %><a href="#"><i class="fa fa-info"></i></a><% end %></td>
           <td><%= reservation.table %></td>
-          <td><%= ChannelType[reservation.channel] %></td>
+          <td><%= show_source(reservation) %></td>
           <td>
             <%= link_to '<i class="fa fa-search" id="viewReservation"></i>'.html_safe, reservation, remote: true %>
             <%= link_to '<i class="fa fa-edit" id="viewReservation"></i>'.html_safe, edit_reservation_path(reservation), remote: true %>

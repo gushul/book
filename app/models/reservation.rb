@@ -132,14 +132,28 @@ class Reservation < ActiveRecord::Base
     "#{start_time_format} on #{date.strftime('%A')}, #{date_format_ext}" # 18:00 on Friday, 20th December 2013 
   end
 
+#  def status
+#    return "Cancelled" unless self.active
+#    if Time.zone.today <= self.date 
+#      if ( (Time.zone.today == self.date) && (Time.now.strftime('%H:%M') <= self.start_time_format) ) || Time.zone.today < self.date
+#        return "Upcoming"
+#      end
+#    end
+#    return "Past" 
+#  end
+
   def status
-    return "Cancelled" unless self.active
-    if Time.zone.today <= self.date 
-      if ( (Time.zone.today == self.date) && (Time.now.strftime('%H:%M') <= self.start_time_format) ) || Time.zone.today < self.date
-        return "Upcoming"
-      end
+    if self.active && !self.no_show && !self.arrived
+      'Pending'
+    elsif !self.active
+      'Canceled'
+    elsif self.active && self.no_show && !self.arrived
+      'No show'
+    elsif self.active && !self.no_show && self.arrived
+      'Arrived'
     end
-    return "Past" 
+      
+      
   end
 	
   def quality
