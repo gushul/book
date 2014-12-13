@@ -300,7 +300,6 @@
       <tr> 
         <td class="my_bold">Phone<span class ='red'>*</span>:</td> 
         <td><div style="width:350px">
-          <% byebug %>
           <%= f.input :phone, label: "Phone", :required => :true, disabled: !@reservation.user_id.nil?, label: false %>
         </div></td> 
       </tr>
