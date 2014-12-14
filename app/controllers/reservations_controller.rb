@@ -125,6 +125,8 @@ class ReservationsController < ApplicationController
     if user_signed_in?
       @reservation.user_id = current_user.id
    elsif owner_signed_in?
+      reservation_status = params[:reservation].delete(:status)
+      set_reservation_status(reservation_status)
       @reservation.owner_id = current_owner.id
       @reservation.restaurant = current_owner.restaurant
     end
@@ -181,6 +183,21 @@ class ReservationsController < ApplicationController
   end
 
 private 
+
+  def set_reservation_status(reservation_status)
+    case reservation_status
+    when 'Pending'
+      @reservation.mark_as_pending!
+    when 'Arrived'
+      @reservation.mark_as_arrived!
+    when 'Canceled'
+      @reservation.mark_as_canceled!
+    when 'No show'
+      @reservation.mark_as_no_show!
+    else
+      raise 'Invalid reservation status'
+    end  
+  end
 
   def intervals_construct
     @intervals = []

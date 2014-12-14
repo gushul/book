@@ -317,9 +317,9 @@
       </div></td> 
     </tr>
     <tr> 
-      <td class="my_bold"></td> 
+      <td class="my_bold">Status </td> 
       <td><div style="width:350px">
-        <%= f.input :active, as: :hidden, label: false, input_html: {value: true} %>
+        <%= f.input :status,collection: reservation_statuses, label: false, include_blank: false %>
       </div></td> 
     </tr>
   </table>

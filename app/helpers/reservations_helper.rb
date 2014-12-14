@@ -12,6 +12,10 @@ module ReservationsHelper
     bool == true ? "active" : "inactive"
   end
 
+  def reservation_statuses
+    ['Pending','Arrived', 'Canceled', 'No show']
+  end
+
   def vip_or_not(user, name, phone, restaurant)
     if user.present?
       if Vip.where(:user_id => user.id).where(:restaurant_id => restaurant.id).first.present?

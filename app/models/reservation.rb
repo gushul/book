@@ -142,6 +142,34 @@ class Reservation < ActiveRecord::Base
 #    return "Past" 
 #  end
 
+  def mark_as_canceled!
+    self.active = 0
+    self.no_show = 0
+    self.arrived = 0
+    self.save!
+  end
+
+  def mark_as_pending!
+    self.active = 1
+    self.no_show = 0
+    self.arrived = 0
+    self.save!
+  end
+
+  def mark_as_arrived!
+    self.active = 1
+    self.no_show = 0
+    self.arrived = 1
+    self.save!
+  end
+
+  def mark_as_no_show!
+    self.active = 1
+    self.no_show = 1
+    self.arrived = 0
+    self.save!
+  end
+
   def status
     if self.active && !self.no_show && !self.arrived
       'Pending'
