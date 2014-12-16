@@ -13,5 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
-//= require twitter/bootstrap
+//= require bootstrap-sprockets
 //= require autocomplete-rails
