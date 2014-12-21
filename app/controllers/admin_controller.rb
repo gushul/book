@@ -85,7 +85,7 @@ class AdminController < ApplicationController
   private
 
   def fetch_reservations
-    @reservations = Reservation.order('created_at DESC').page(params[:page]).per(10)
+    @reservations = Reservation.order('created_at DESC').page(params[:page]).per(100)
   end
 
   def send_apple_message(token, message, certificate_path = 'config/apple_push_dev.pem')

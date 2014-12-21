@@ -5,5 +5,6 @@ tr.reservation
   td = reservation.user.present? ? reservation.user.username : reservation.name
   td = reservation.start_time.to_s(:time)
   td = reservation.end_time.try(:to_s,:time)
+  td = reservation.user.present? ? 'HungryHub' : 'Manual'
   td = link_to 'edit', admin_edit_reservation_path(id: reservation.id)
   td = link_to 'delete', admin_delete_reservation_path(id: reservation.id), :data => {:confirm => 'Are you sure you want to delete?'}
