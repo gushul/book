@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   has_many :reservations, :dependent => :destroy
   has_many :rewards,      :dependent => :destroy
+  has_many :favs,      :dependent => :destroy
   has_many :vips,         :dependent => :destroy
   has_many :nicknames,    :dependent => :destroy
 

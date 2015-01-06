@@ -56,10 +56,15 @@ AuthApp::Application.routes.draw do
     post "/reservations/update" => "reservations#update"
 #    post "/rewards"        => "rewards#index"
     post "/rewards/create" => "rewards#create"
+
+    post "/favs"        => "favs#index"
+    post "/favs/create" => "favs#create"
+    post "/favs/delete"          => "favs#delete"
     
     post "/me" => "users#show"
 
     resources :rewards #, :only => [:create]
+#    resources :favs #, :only => [:create]
     resources :restaurants do 
       get 'list_restaurants' => "restaurants#list_restaurants", :on => :collection, :as => :list_restaurants
       get 'get_restaurant_availability' => "restaurants#get_restaurant_availability", :on => :collection, :as => :get_restaurant_availability
@@ -147,6 +152,7 @@ AuthApp::Application.routes.draw do
   end
     
   resources :rewards
+#  resources :favs
   resources :restaurants do
     get 'all' => "restaurants#index_all", :on => :collection, :as => :all
     get 'list_restaurants' => "restaurants#list_restaurants", :on => :collection, :as => :list_restaurants
