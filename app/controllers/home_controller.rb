@@ -41,9 +41,9 @@ class HomeController < ApplicationController
     # # @restaurants = @restaurants.page(params[:page]).per(5)
     # @restaurants = Kaminari.paginate_array(@restaurants).page(params[:page]).per(5)
 
-    @restaurants_new = Restaurant.a_new.limit(5).name_order_asc
-    @restaurants_popular = Restaurant.a_popular.limit(5).name_order_asc
-    @restaurants_recommended = Restaurant.a_recom.limit(5).name_order_asc
+    @restaurants_new = Restaurant.a_new.limit(6).name_order_asc
+    @restaurants_popular = Restaurant.a_popular.limit(6).name_order_asc
+    @restaurants_recommended = Restaurant.a_recom.limit(6).name_order_asc
 
   end
 
