@@ -20,6 +20,8 @@ AuthApp::Application.routes.draw do
     get "admin/reservations/delete/:id" => 'admin#reservation_delete', as: :admin_delete_reservation
     get "admin/apple/" => 'admin#apple_push_index', as: :admin_apple
     post "admin/apple/send" => 'admin#apple_push_send', as: :admin_apple_send
+    get "admin/android/" => 'admin#android_push_index', as: :admin_android
+    post "admin/android/send" => 'admin#android_push_send', as: :admin_android_send
     post "admin_owner_create",     to: 'home#admin_owner_create', as: "admin_owner_create"
     post "admin_restaurant_create", to: 'home#admin_restaurant_create', as: "admin_restaurant_create"
   end

@@ -11,8 +11,29 @@ class AdminController < ApplicationController
   end
 
   def apple_push_send
-    send_apple_message(params[:token], params[:message])
-    render nothing: true
+#    send_apple_message(params[:token], params[:message])
+    @users = User.where("users.apple_device_id IS NOT NULL")
+    @users.each do |u|
+      puts u.email
+      Resque.enqueue(ApnJob, u.apple_device_id, "msg:#{params[:message]}")
+    end
+    flash[:notice] = 'Apple message sent'
+    render 'admin/apple/index'
+#    render nothing: true
+  end
+  
+  def android_push_index
+    render 'admin/android/index'
+  end
+
+  def android_push_send
+#    send_apple_message(params[:token], params[:message])
+    @users = User.where("users.android_device_id IS NOT NULL")
+    @users.each do |u|
+      Resque.enqueue(GcmJob, u.android_device_id, "msg:#{params[:message]}")
+    end
+    flash[:notice] = 'Android message sent'
+    render 'admin/android/index'
   end
 
   def reservation_index
