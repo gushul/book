@@ -35,13 +35,17 @@ class Api::FavsController < Api::BaseController
       render json: 'ERR:Incorrect Login/Password', status: 400
     else
       puts params[:fav][:id]
-      @fav = Fav.find(params[:fav][:id])
-      if @fav.user == u then
+      @fav = Fav.find_by_id(params[:fav][:id])
+      if @fav.nil? then
+        puts "no such fav"
+        render json: 'ERR:no such fav', status: 400
+      elsif @fav.user == u then
         @fav.delete
+        render json: 'OK', status: 200
       else
         puts "possible illegal delete"
+        render json: 'ERR:illegal delete', status: 400
       end
-      render json: 'OK', status: 200
     end
 
   end
