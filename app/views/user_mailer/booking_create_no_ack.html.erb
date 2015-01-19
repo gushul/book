@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+Dear <%= @user.username %>,<br/>
+<br/>
+Thanks for making a booking via Hungry Hub for <%= @reservation.restaurant.name %> on <%= @reservation.date %> at <%= mtime(@reservation.start_time) %> for <%= @reservation.party_size %> people. Please give us a moment to check the availability with the restaurant and we will get back to you ASAP. In the mean time, if you have any questions or concerns, feel free to email us at support@hungryhub.com and we will reply immediately.
+<br/>
+-- Reservations Details --<br/>
+Diner's Name: <%= @user.username %><br/>
+Date: <%= @reservation.date %><br/>
+Time: <%= mtime(@reservation.start_time) %><br/>
+Party Size: <%= @reservation.party_size %><br/>
+Special Request: <%= @reservation.special_request %><br/>
+Confirmation No: PENDING/<%= @reservation.id %><br/>
+<br/>
+<b><ins><%= @reservation.restaurant.name %></ins></b><br/>
+<%= @reservation.restaurant.address %><br/>
+<%= @reservation.restaurant.phone %><br/>
+<br/>
+<a href="http://www.hungryhub.com/restaurants/<%= @reservation.restaurant.id %>">Restaurants Map & Details</a><br/>
+<br/>
+Powered by Hungry Hub<br/>
+
+  </body>
+</html>
