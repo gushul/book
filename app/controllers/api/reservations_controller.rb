@@ -23,10 +23,20 @@ class Api::ReservationsController < Api::BaseController
 
   # POST /reservations/create
   def create
+    puts params[:reservation][:ack]
+    puts params[:reservation][:ack].nil?
     params[:reservation][:end_time] = params[:reservation][:start_time]
     params[:reservation][:channel] = 8 if params[:reservation][:channel].nil?
 
     @reservation = Reservation.new(params[:reservation])
+    
+    restaurant = Restaurant.where(id: @reservation.restaurant_id).first
+    
+    if @reservation.ack == false
+      if params[:reservation][:ack].nil? && restaurant.instant_confirm
+        @reservation.ack = true
+      end
+    end
 
 #    @reservation.date = @reservation.date+7.hour
 #    @reservation.start_time = @reservation.start_time+7.hour
@@ -35,8 +45,6 @@ class Api::ReservationsController < Api::BaseController
     @reservation.user_id = @user.id
     @reservation.active = true
 
-    restaurant = Restaurant.where(id: @reservation.restaurant_id).first
-    
     @reservation.end_time = @reservation.start_time+restaurant.res_duration.minutes
     
     date = @reservation.date
