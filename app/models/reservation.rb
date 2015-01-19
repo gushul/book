@@ -331,25 +331,26 @@ private
                      
       if self.ack
         UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
-        Resque.enqueue(SmsJob, "Your table has been RESERVED at #{self.restaurant.name} on #{self.date} at #{self.start_time.strftime("%R")} for #{self.party_size} people. Thank you, enjoy your meal! -Hungry Hub Team", self.user.phone.reverse.chop.reverse)
-        if self.user.apple_device_id
-          Resque.enqueue(ApnJob, owner.apple_device_id,"Your table has been RESERVED at #{self.restaurant.name} on #{self.date} at #{self.start_time.strftime("%R")} for #{self.party_size} people. Thank you, enjoy your meal! -Hungry Hub Team")
-        end    
-      
-        if self.user.android_device_id
-          Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:Your table has been RESERVED at #{self.restaurant.name} on #{self.date} at #{self.start_time.strftime("%R")} for #{self.party_size} people. Thank you, enjoy your meal! -Hungry Hub Team")
-        end
+        confirmed_msg = "Your table has been RESERVED at #{self.restaurant.name} on #{self.date} at #{self.start_time.strftime("%R")} for #{self.party_size} people. Thank you, enjoy your meal! -Hungry Hub Team"
+        Resque.enqueue(SmsJob, confirmed_msg, self.user.phone.reverse.chop.reverse)
+
+        user = self.user
+#        puts confirmed_msg
+#        puts user.android_device_id
+        Resque.enqueue(GcmJob, user.android_device_id, "msg:#{confirmed_msg}") if user.android_device_id
+        Resque.enqueue(ApnJob, user.apple_device_id, "msg:#{confirmed_msg}") if user.apple_device_id
+        
       else
         puts "NON-instant confirmation"
         UserMailer.booking_create_no_ack(self.user.id, self.id).deliver if Rails.env.production?
-        Resque.enqueue(SmsJob, "Thanks for making a booking via Hungry Hub. The Hungry Hub team will do our best to get a table for you and contact you back ASAP.", self.user.phone.reverse.chop.reverse)
-        if self.user.apple_device_id
-          Resque.enqueue(ApnJob, owner.apple_device_id,"Thanks for making a booking via Hungry Hub. The Hungry Hub team will do our best to get a table for you and contact you back ASAP.")
-        end    
-      
-        if self.user.android_device_id
-          Resque.enqueue(GcmJob, self.restaurant.owner.device_id, "msg:Thanks for making a booking via Hungry Hub. The Hungry Hub team will do our best to get a table for you and contact you back ASAP.")
-        end
+        pending_msg = "Thanks for making a booking via Hungry Hub. The Hungry Hub team will do our best to get a table for you and contact you back ASAP."
+        Resque.enqueue(SmsJob, pending_msg, self.user.phone.reverse.chop.reverse)
+        
+        user = self.user
+#        puts confirmed_msg
+#        puts user.android_device_id
+        Resque.enqueue(GcmJob, user.android_device_id, "msg:#{pending_msg}") if user.android_device_id
+        Resque.enqueue(ApnJob, user.apple_device_id, "msg:#{pending_msg}") if user.apple_device_id
         
       end
     end
@@ -399,18 +400,17 @@ private
       user = self.user
       if self.ack
         if user
-          confirmation_message = "msg:Your table has been RESERVED at #{self.restaurant.name} on #{self.date} @ #{self.start_time} for #{self.party_size} people."
+          confirmation_message = "msg:Your table has been RESERVED at #{self.restaurant.name} on #{self.date} @ #{self.start_time.strftime("%R")} for #{self.party_size} people."
           Resque.enqueue(GcmJob, user.android_device_id, confirmation_message) if user.android_device_id
           Resque.enqueue(ApnJob, user.apple_device_id, confirmation_message) if user.apple_device_id
         end
       end  
     end
-
     if self.changes.keys.include?("active")
       user = self.user
       unless self.active
         if user
-          cancelation_message = "msg:Your reservation at #{self.restaurant.name} on #{self.date} @ #{self.start_time} for #{self.party_size} people has been CANCELLED."
+          cancelation_message = "msg:Your reservation at #{self.restaurant.name} on #{self.date} @ #{self.start_time.strftime("%R")} for #{self.party_size} people has been CANCELLED."
           Resque.enqueue(GcmJob, user.android_device_id, cancelation_message) if user.android_device_id
           Resque.enqueue(ApnJob, user.apple_device_id, cancelation_message) if user.apple_device_id
         end
