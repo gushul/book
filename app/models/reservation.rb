@@ -341,7 +341,7 @@ private
         end
       else
         puts "NON-instant confirmation"
-        UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
+        UserMailer.booking_create_no_ack(self.user.id, self.id).deliver if Rails.env.production?
         Resque.enqueue(SmsJob, "Thanks for making a booking via Hungry Hub. The Hungry Hub team will do our best to get a table for you and contact you back ASAP.", self.user.phone.reverse.chop.reverse)
         if self.user.apple_device_id
           Resque.enqueue(ApnJob, owner.apple_device_id,"Thanks for making a booking via Hungry Hub. The Hungry Hub team will do our best to get a table for you and contact you back ASAP.")
