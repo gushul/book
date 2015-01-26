@@ -8,4 +8,5 @@ class ChannelType < ActiveEnum::Base
   value :id => 6, :name => :owner_web
   value :id => 7, :name => :admin_web
   value :id => 8, :name => :mobile
+  value :id => 50, :name => :guru
 end

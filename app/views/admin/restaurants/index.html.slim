@@ -1,0 +1,21 @@
+.admin-restaurant-index
+  table
+    tr
+      td= link_to 'Dashboard', 'dashboard'
+
+  br
+  = paginate @restaurants
+  table
+    thead
+      tr
+        th = 'Id'
+        th = 'Name'
+        th = 'Phone Number'
+        th = 'days_in_advance'
+        th = 'min_booking_time'
+        th = 'res_duration'
+        th = 'largest_table'
+        th = 'Active Status'
+        th = 'Instant Confirmation'
+    tbody
+      = render partial: 'admin/restaurants/restaurant', collection: @restaurants, as: :restaurant

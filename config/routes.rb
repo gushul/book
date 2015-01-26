@@ -18,6 +18,8 @@ AuthApp::Application.routes.draw do
     get "admin/reservations/edit/:id" => 'admin#reservation_edit', as: :admin_edit_reservation
     put "admin/reservations/update/:id" => 'admin#reservation_update', as: :admin_update_reservation
     get "admin/reservations/delete/:id" => 'admin#reservation_delete', as: :admin_delete_reservation
+    get 'admin/restaurants' => 'admin#restaurant_index', as: :admin_restaurants
+    get 'admin/users' => 'admin#user_index', as: :admin_users
     get "admin/apple/" => 'admin#apple_push_index', as: :admin_apple
     post "admin/apple/send" => 'admin#apple_push_send', as: :admin_apple_send
     get "admin/android/" => 'admin#android_push_index', as: :admin_android
@@ -110,6 +112,14 @@ AuthApp::Application.routes.draw do
       post "/reservations/update"  => "reservations#update"
       post "/reservations/delete"  => "reservations#delete"
     end
+    
+    namespace :guru do
+      post "/reservations"         => "reservations#index"
+      post "/reservations/create"  => "reservations#create"
+      post "/reservations/update"  => "reservations#update"
+    end
+    
+
   end 
 
   resources :inventories do 

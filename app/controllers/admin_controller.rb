@@ -36,6 +36,16 @@ class AdminController < ApplicationController
     render 'admin/android/index'
   end
 
+  def restaurant_index
+    fetch_restaurants
+    render 'admin/restaurants/index'
+  end
+  
+  def user_index
+    fetch_users
+    render 'admin/users/index'
+  end
+
   def reservation_index
     fetch_reservations
     render 'admin/reservations/index'
@@ -106,7 +116,15 @@ class AdminController < ApplicationController
   private
 
   def fetch_reservations
-    @reservations = Reservation.order('created_at DESC').page(params[:page]).per(1000)
+    @reservations = Reservation.order('id DESC').page(params[:page]).per(1000)
+  end
+  
+  def fetch_users
+    @users = User.order('id DESC').page(params[:page]).per(1000)
+  end
+  
+  def fetch_restaurants
+    @restaurants = Restaurant.order('created_at DESC').page(params[:page]).per(1000)
   end
 
   def send_apple_message(token, message, certificate_path = 'config/apple_push_dev.pem')

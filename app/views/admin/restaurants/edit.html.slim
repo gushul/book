@@ -1,0 +1,7 @@
+.admin
+  .edit.reservation-form
+    = render 'admin/reservations/reservation_update_form'
+
+  p Name: #{@reservation.user.present? ? @reservation.user.username : @reservation.name}
+  p Phone: #{@reservation.user.present? ? @reservation.user.phone : @reservation.phone}
+  p Email: #{@reservation.user.present? ? @reservation.user.email : @reservation.email}
