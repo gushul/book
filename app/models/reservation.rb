@@ -218,6 +218,36 @@ class Reservation < ActiveRecord::Base
       http.get(uri.request_uri)
 #    end
   end
+  
+  
+  def send_thank_you_via_sms_manual
+    thank_you_msg = "Thank you for dining at #{self.restaurant.name}. You can now book a table via Hungry Hub app on your next visit. smarturl.it/hungryhub"
+    Resque.enqueue(SmsJob, thank_you_msg, self.phone.reverse.chop.reverse)
+  end
+  def send_thank_you_via_email_hungryhub
+    UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
+    puts "matt, I sent out an email"
+  end
+  
+  def self.generete_thank_you()
+    d = (Time.zone.now+4.hour).to_datetime.to_date # +7 -3 (3 hours after)
+    s = Time.new(2000,1,1,(Time.zone.now + 4.hour).to_datetime.hour,(Time.zone.now + 4.hour).to_datetime.minute,0)
+    puts d
+    puts s
+    res = Reservation.find_all_by_date_and_start_time(d,s).each do |r|
+      if r.user.nil?
+        puts "sent ty for manual #{r.phone} #{r.name} #{r.email}"
+        r.send_thank_you_via_sms_manual
+      else
+        r.send_thank_you_via_email_hungryhub
+        puts "sent ty for hungryhub #{r.user.email} #{r.user.username} #{r.restaurant.name}"
+      end
+#      r.send_reminder_via_sms
+      puts "sent ty for id:#{r.id}"
+    end
+    puts "done sending out tys"
+  end
+  
 
   def self.generete_sms_reminders
     d = (Time.zone.now+1.hour).to_datetime.to_date

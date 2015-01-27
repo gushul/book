@@ -124,7 +124,7 @@ class AdminController < ApplicationController
   end
   
   def fetch_restaurants
-    @restaurants = Restaurant.order('created_at DESC').page(params[:page]).per(1000)
+    @restaurants = Restaurant.order('id DESC').page(params[:page]).per(1000)
   end
 
   def send_apple_message(token, message, certificate_path = 'config/apple_push_dev.pem')

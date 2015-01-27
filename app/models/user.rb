@@ -62,7 +62,10 @@ class User < ActiveRecord::Base
 
   def send_verification_code_via_sms
 #    Resque.enqueue(SmsJob, self.verify_code.to_s.rjust(5, '0'), self.phone.reverse.chop.reverse)
-    Resque.enqueue(SmsJob, "Welcome to Hungry Hub. Your verification code is #{self.verify_code.to_s.rjust(5, '0')}. Please verify this number on Hungry Hub website or mobile app. -Hungry Hub", self.phone.reverse.chop.reverse)
+#    Resque.enqueue(SmsJob, "Welcome to Hungry Hub. Your verification code is #{self.verify_code.to_s.rjust(5, '0')}. Please verify this number on Hungry Hub website or mobile app. -Hungry Hub", self.phone.reverse.chop.reverse)
+    Resque.enqueue(SmsJob, "Welcome to Hungry Hub. You are just 3 clicks away from making your first table booking. Enjoy Hungry Hubbing. :)", self.phone.reverse.chop.reverse)
+    self.verified = true
+    self.save
   end
 
 private

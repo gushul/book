@@ -16,7 +16,11 @@
 
             <%= f.input :name, label: "Name: <i style='font-weight:normal;'>#{@restaurant.name}</i>".html_safe %>
             <%= f.input :address, label: "Address", as: :text, input_html: { rows: "4", class: "text_area_for_misc"} %>
+            <%= f.input :th_address, label: "Th Address: <i style='font-weight:normal;'>#{@restaurant.th_address}</i>".html_safe  %>
             <%= f.input :phone, label: "Phone: <i style='font-weight:normal;'>#{@restaurant.phone}</i>".html_safe  %>
+            <%= f.input :misc, label: "Misc: <i style='font-weight:normal;'>#{@restaurant.misc}</i>".html_safe  %>
+            <%= f.input :th_misc, label: "Th Misc: <i style='font-weight:normal;'>#{@restaurant.th_misc}</i>".html_safe  %>
+            <%= f.input :website, label: "Website: <i style='font-weight:normal;'>#{@restaurant.website}</i>".html_safe  %>
             
             <div class="row">
               <label>GPS Coordinates</label><br>
