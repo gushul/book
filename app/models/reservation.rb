@@ -225,7 +225,7 @@ class Reservation < ActiveRecord::Base
     Resque.enqueue(SmsJob, thank_you_msg, self.phone.reverse.chop.reverse)
   end
   def send_thank_you_via_email_hungryhub
-    UserMailer.booking_create(self.user.id, self.id).deliver if Rails.env.production?
+    UserMailer.booking_thank_you(self.user.id, self.id).deliver if Rails.env.production?
     puts "matt, I sent out an email"
   end
   
