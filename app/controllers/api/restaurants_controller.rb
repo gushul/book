@@ -2,6 +2,9 @@
 class Api::RestaurantsController < Api::BaseController
   
   before_filter :set_restaurant, only: [:get_restaurant_availability]
+#  caches_action :index,:expires_in => 10.minutes
+#  caches_page :index
+  skip_before_filter :set_no_cache, :only => [:index]
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
@@ -28,6 +31,10 @@ class Api::RestaurantsController < Api::BaseController
         @restaurants_json << r
 #      end
     end
+#    expires_in 24.hours, :public => true, 'max-stale' => 5.hours
+    expires_in 24.hours, :public => true
+    response.headers["Expires"] = 24.hours.from_now.httpdate
+#    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
     render json: @restaurants_json 
   end
 
