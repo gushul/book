@@ -42,15 +42,56 @@ class Api::Owner::InventoriesController < ApplicationController
 
   # POST /inventories/update_in_time_frame
   def update_in_time_frame
-    @inventories = @owner.restaurant.inventories.in_frame(params[:start_period], params[:end_period])
     qa = params[:quantity_available] ? params[:quantity_available] : 0
+    start_period = params[:start_period]
+    end_period = params[:end_period]
+    
+    puts "start_period: #{start_period.to_date} #{start_period}"
+    puts "end_period: #{end_period.to_date} #{end_period}"
+    
+    
+    if start_period.to_date == end_period.to_date then
+      i = Inventory.where(:date => start_period.to_date, :restaurant_id => @owner.restaurant.id,
+                    :start_time => "2000-01-01 #{start_period.to_time.strftime('%H:%M')}:00".to_time..."2000-01-01 #{end_period.to_time.strftime('%H:%M')}:00".to_time)
+    else
+      i = []
+      start_day = Inventory.where(:date => start_period.to_date, :restaurant_id => @owner.restaurant.id,
+                    :start_time => "2000-01-01 #{start_period.to_time.strftime('%H:%M')}:00".to_time..."2000-01-01 23:45".to_time)
+      puts "start_day: #{start_day.count}"
+      
+      end_day = Inventory.where(:date => end_period.to_date, :restaurant_id => @owner.restaurant.id,
+                    :start_time => "2000-01-01 00:00".to_time..."2000-01-01 #{end_period.to_time.strftime('%H:%M')}:00".to_time)
+      puts "end_day: #{end_day.count}"
+      
+      middle_day = Inventory.where(:date => start_period.to_date+1.day...end_period.to_date, :restaurant_id => @owner.restaurant.id)
+      puts "middle_day: #{middle_day.count}"
+
+      i << middle_day << end_day << start_day
+      i = i.flatten
+
+#      render json: "OK", status: 200
+
+#      @inventories = i.flatten
+#      @inventories = nil
+    end
+    
+    
+    i.each do |b|
+      b.quantity_available = qa
+      b.save
+    end
+    
+#    puts @inventories.count
+          
+#    @inventories = @owner.restaurant.inventories.in_frame(params[:start_period], params[:end_period])
+
 
     respond_to do |format|
-      if @inventories.update_all(quantity_available: qa)
-        format.json { render json: "OK", status: 200  }
-      else
-        format.json { render json: "ERR", status: :unprocessable_entity }
-      end
+#      if @inventories.update_all(quantity_available: qa)
+        format.json { render json: "OK:#{i.count}", status: 200  }
+#      else
+#        format.json { render json: "ERR", status: :unprocessable_entity }
+#      end
     end
   end
 

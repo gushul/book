@@ -13,11 +13,17 @@ class Api::RestaurantsController < Api::BaseController
       r[:latest_time]   = r.latest_time 
       r[:tags] = []
       r.restaurant_tags.each do |t|
-        r[:tags] << t.title
+        if params[:ver].to_i == 3
+          r[:tags] << t.id
+        else
+          r[:tags] << t.title
+        end
       end
 
       if params[:ver].to_i == 2
         r[:images] = r.get_hashed_mobile_images
+      elsif params[:ver].to_i == 3
+        r[:image_count] = r.get_hashed_mobile_images_three
       end
 
     end

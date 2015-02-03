@@ -131,6 +131,13 @@ class Restaurant < ActiveRecord::Base
     im_h["mobile_images"] = files.count
     im_h
   end
+  
+  def get_hashed_mobile_images_three
+    im_h = {}
+    files = Dir.glob("#{Rails.root}/public/#{self.id}-*-mobile.jpg") # **/*")
+    im_h = files.count
+    im_h
+  end
 
   def self.generate_schedule(id = 0)
     @intervals  = []
