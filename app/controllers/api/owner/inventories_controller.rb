@@ -88,7 +88,7 @@ class Api::Owner::InventoriesController < ApplicationController
 
     respond_to do |format|
 #      if @inventories.update_all(quantity_available: qa)
-        format.json { render json: "OK:#{i.count}", status: 200  }
+        format.json { render json: { status: "OK", count: i.count}, status: 200 }
 #      else
 #        format.json { render json: "ERR", status: :unprocessable_entity }
 #      end
