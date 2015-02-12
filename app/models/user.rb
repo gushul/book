@@ -66,7 +66,25 @@ class User < ActiveRecord::Base
     Resque.enqueue(SmsJob, "Welcome to Hungry Hub. You are just 3 clicks away from making your first table booking. Enjoy Hungry Hubbing. :)", self.phone.reverse.chop.reverse)
     self.verified = true
     self.save
+    self.create_my_r_code
   end
+  
+  def create_my_r_code
+    my_r_code = "#{self.username.gsub(/[^a-z]/i, '').first(5).upcase}#{rand(0..9)}"
+    while !User.find_by_my_r_code("my_r_code").nil? do
+      my_r_code = "#{self.username.gsub(/[^a-z]/i, '').first(5).upcase}#{rand(0..9)}"
+    end
+    self.my_r_code = my_r_code
+    self.save
+  end
+  
+  def self.create_all_my_r_codes
+    User.all.each do |u|
+      u.create_my_r_code
+    end
+  end
+
+
 
 private
 
@@ -81,6 +99,7 @@ private
   def set_verify_code
      self.verify_code = rand(10 ** 5).to_i
   end
+
 
   def phone_number_validation
     unless check_phone_number
