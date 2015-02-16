@@ -111,6 +111,9 @@ AuthApp::Application.routes.draw do
       post "/reservations/create"  => "reservations#create"
       post "/reservations/update"  => "reservations#update"
       post "/reservations/delete"  => "reservations#delete"
+      
+      post "/rewards"         => "rewards#index"
+      post "/rewards/update"  => "rewards#update"
     end
     
     namespace :guru do

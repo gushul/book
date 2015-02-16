@@ -2,7 +2,7 @@
 class Reward < ActiveRecord::Base
   attr_accessible :user_id, :reservation_id, :restaurant_id,
                   :points_pending, :points_total, 
-                  :description
+                  :description, :redeemed
 
   belongs_to :user
   belongs_to :reservation  
