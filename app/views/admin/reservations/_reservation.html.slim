@@ -4,11 +4,12 @@ tr.reservation
   td = reservation.restaurant.name
   td = reservation.user.present? ? reservation.user.username : reservation.name
   td = reservation.start_time.to_s(:time)
-  td = reservation.end_time.try(:to_s,:time)
+  td = reservation.party_size
+  td = reservation.channel
   td = reservation.user.present? ? 'HungryHub' : 'Manual'
   td = reservation.restaurant.instant_confirm
   td = reservation.ack
   td = reservation.active
-  td = truncate(reservation.note, :length => 30)
+  td = truncate(reservation.special_request, :length => 30)
   td = link_to 'edit', admin_edit_reservation_path(id: reservation.id)
   td = link_to 'delete', admin_delete_reservation_path(id: reservation.id), :data => {:confirm => 'Are you sure you want to delete?'}
